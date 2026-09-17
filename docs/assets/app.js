@@ -570,134 +570,25 @@ function bindGlobalFlash() {
 }
 
 function bindBook() {
-  const book = document.querySelector("[data-book]");
-  if (!book) return;
-  const folios = [...book.querySelectorAll("[data-folio]")];
-  const keys = folios.map((f) => f.getAttribute("data-folio"));
-  let i = 0;
-  let primed = false;
-  let leavingTimer = 0;
-
-  function paintChrome() {
-    const key = keys[i];
-    book.querySelectorAll("[data-folio-go]").forEach((b) => {
-      b.classList.toggle("is-active", b.getAttribute("data-folio-go") === key);
+  const root = document.querySelector("[data-week]");
+  if (!root) return;
+  const tocLinks = [...document.querySelectorAll(".toc a[href^='#']")];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      tocLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
     });
-    const running = book.querySelector("[data-running]");
-    const title = folios[i].getAttribute("data-folio-title") || key;
-    if (running) running.textContent = title;
-    const counter = book.querySelector("[data-folio-n]");
-    if (counter) counter.textContent = i + 1 + " / " + folios.length;
-    const prevBtn = book.querySelector("[data-folio-prev]");
-    if (prevBtn) {
-      prevBtn.textContent = i === 0 ? book.getAttribute("data-prev-label") || "Anterior" : "Anterior";
-    }
-    book.querySelectorAll("[data-folio-next]").forEach((b) => {
-      if (b.classList.contains("page-turn")) return;
-      b.textContent = i === folios.length - 1 ? book.getAttribute("data-next-label") || "Siguiente" : "Siguiente";
-    });
-  }
+  }, { rootMargin: "-35% 0px -50% 0px" });
+  root.querySelectorAll("section[id], .lecture [id]").forEach((sec) => observer.observe(sec));
 
-  function show(next, dir) {
-    if (next < 0) {
-      const href = book.getAttribute("data-prev-chapter");
-      if (href) goTo(href, -1);
-      return;
-    }
-    if (next >= folios.length) {
-      const href = book.getAttribute("data-next-chapter");
-      if (href) goTo(href, 1);
-      return;
-    }
-    if (next === i && primed) return;
-    const from = folios[i];
-    const to = folios[next];
-    i = next;
-    if (primed) {
-      Sfx.play("page", dir);
-      book.querySelector(".book-paper")?.classList.remove("is-turning");
-      void book.querySelector(".book-paper")?.offsetWidth;
-      book.querySelector(".book-paper")?.classList.add("is-turning");
-    }
-    window.clearTimeout(leavingTimer);
-    folios.forEach((f) => {
-      if (f !== to && f !== from) {
-        f.hidden = true;
-        f.classList.remove("is-on", "is-leaving", "from-next", "from-prev");
-      }
-    });
-    to.hidden = false;
-    to.classList.remove("is-leaving");
-    if (primed && from && from !== to) {
-      from.classList.remove("is-on");
-      from.classList.add("is-leaving");
-      to.classList.add("is-on", dir > 0 ? "from-next" : "from-prev");
-      leavingTimer = window.setTimeout(() => {
-        from.hidden = true;
-        from.classList.remove("is-leaving", "from-next", "from-prev");
-      }, 360);
-    } else {
-      to.classList.add("is-on");
-      if (from && from !== to) {
-        from.hidden = true;
-        from.classList.remove("is-on");
-      }
-    }
-    primed = true;
-    paintChrome();
-    const hash = keys[i] === "portada" ? "" : "#" + keys[i];
-    const file = location.pathname.split("/").pop() || "index.html";
-    history.replaceState(null, "", file + hash);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  const hash = (location.hash || "").replace("#", "");
-  const start = keys.indexOf(hash);
-  show(start >= 0 ? start : 0, 1);
-
-  book.querySelector("[data-folio-prev]")?.addEventListener("click", () => show(i - 1, -1));
-  book.querySelectorAll("[data-folio-next]").forEach((b) => {
-    b.addEventListener("click", () => show(i + 1, 1));
-  });
-  book.querySelectorAll("[data-folio-go]").forEach((b) => {
-    b.addEventListener("click", () => {
-      const idx = keys.indexOf(b.getAttribute("data-folio-go"));
-      if (idx >= 0) show(idx, idx > i ? 1 : -1);
-    });
-  });
-
-  document.addEventListener("keydown", (ev) => {
-    if (isTypingTarget(ev.target)) return;
-    const overlay = document.getElementById("indice");
-    if (overlay && !overlay.hidden) return;
-    if (ev.key === "ArrowRight") {
-      ev.preventDefault();
-      show(i + 1, 1);
-    }
-    if (ev.key === "ArrowLeft") {
-      ev.preventDefault();
-      show(i - 1, -1);
-    }
-  });
-
-  let x0 = null;
-  book.addEventListener("touchstart", (ev) => {
-    x0 = ev.changedTouches[0].clientX;
-  }, { passive: true });
-  book.addEventListener("touchend", (ev) => {
-    if (x0 == null) return;
-    const dx = ev.changedTouches[0].clientX - x0;
-    x0 = null;
-    if (Math.abs(dx) < 56) return;
-    if (dx < 0) show(i + 1, 1);
-    else show(i - 1, -1);
-  });
-
-  window.addEventListener("hashchange", () => {
-    const h = (location.hash || "").replace("#", "") || "portada";
-    const idx = keys.indexOf(h);
-    if (idx >= 0) show(idx, idx > i ? 1 : -1);
-  });
+  const bar = document.querySelector("[data-read-bar]");
+  const onScroll = () => {
+    if (!bar) return;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + "%";
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 }
 
 function bindSelectFx() {

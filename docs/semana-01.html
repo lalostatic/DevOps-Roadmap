@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Capítulo 1: Git · DevOps Roadmap</title>
+  <title>Semana 1: Git · DevOps Roadmap</title>
   <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
   <meta name="theme-color" content="#0b0f14"/>
-  <meta property="og:title" content="Capítulo 1: Git · DevOps Roadmap"/>
+  <meta property="og:title" content="Semana 1: Git · DevOps Roadmap"/>
   <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="assets/og.jpg"/>
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/app.css"/>
   
 </head>
-<body class="is-book">
+<body class="is-read">
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <div class="wrap">
@@ -750,106 +750,112 @@
 </div>
 
   <main id="contenido">
-<div class="wrap book" data-book data-week="01" data-tasks="6" data-prev-chapter="temario.html" data-next-chapter="semana-02.html" data-prev-label="Volver al índice" data-next-label="Capítulo siguiente">
-  <aside class="book-rail">
-    <p class="n">Capítulo 01</p>
-    <p class="rail-title">Git</p>
-    <p class="tiny">Semana 1 · 6–10 h</p>
-    <nav class="folio-nav" aria-label="Folios de este capítulo"><button type="button" data-folio-go="portada">Portada</button><button type="button" data-folio-go="conferencia">Conferencia</button><button type="button" data-folio-go="cortos">Cortos</button><button type="button" data-folio-go="recorrido">Recorrido</button><button type="button" data-folio-go="pset">Problem set</button><button type="button" data-folio-go="quiz">Recuerdo</button><button type="button" data-folio-go="feynman">Feynman</button><button type="button" data-folio-go="tarjetas">Tarjetas</button><button type="button" data-folio-go="recursos">Recursos</button></nav>
-    <p class="n toc-k">Libro</p>
-    <nav class="chapter-nav" aria-label="Capítulos"><a href="semana-01.html" class="is-active">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a></nav>
+<div class="read-progress" aria-hidden="true"><i data-read-bar></i></div>
+<div class="wrap week-layout" data-week="01" data-tasks="6">
+  <aside class="toc">
+    <p class="n">En esta semana</p>
+    <a href="#resumen">Resumen</a>
+    <a href="#conferencia">Conferencia</a>
+    <a class="toc-sub" href="#la-caja-negra">La caja negra</a><a class="toc-sub" href="#lo-que-debes-saber-hacer">Lo que debes saber hacer</a><a class="toc-sub" href="#comandos-que-si-vas-a-usar">Comandos que sí vas a usar</a><a class="toc-sub" href="#ramas-fusion-y-pull-requests">Ramas, fusión y pull requests</a><a class="toc-sub" href="#errores-comunes">Errores comunes</a>
+    <a href="#cortos">Cortos</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#pset">Problem set</a>
+    <a href="#quiz">Recuerdo</a>
+    <a href="#feynman">Feynman</a>
+    <a href="#tarjetas">Tarjetas</a>
+    <a href="#recursos">Recursos</a>
+    <p class="n toc-k">Curso</p>
+    <a href="semana-01.html" class="is-active">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a>
   </aside>
-  <div class="book-stage">
-    <div class="book-paper">
-      <p class="folio-running"><span data-running>Portada</span><span class="folio-sig">Git</span></p>
-      <div class="book-folios">
-        <article class="folio is-on" data-folio="portada" data-folio-title="Portada" id="resumen">
-          <p class="kicker">Semana 1 · 6–10 h</p>
-          <h1>Git</h1>
-          <p class="lede">Dejar de temerle al historial. Toda tu aplicación y tu infraestructura vivirán en un repositorio.</p>
-          <div class="chip-row"><span class="chip">Comandos base</span><span class="chip">Pull request</span><span class="chip">Ramas</span><span class="chip">Fusión</span></div>
-          <div class="progress-box">
-            <span class="tiny" data-week-pct>0% completado</span>
-          </div>
-          <div class="bar"><i data-week-bar></i></div>
-          <p class="why">En DevOps no hay magia fuera del repositorio. El código de la app, los pipelines, los manifiestos y Terraform son archivos. Si no controlas el cambio, no controlas la producción.</p>
-          <p class="tiny folio-hint">Hojear con las flechas · toca la esquina o Siguiente</p>
-        </article>
-        <article class="folio" data-folio="conferencia" data-folio-title="Conferencia" id="conferencia" hidden>
-          <h2>Conferencia</h2>
-          <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-          <div class="lecture"><h2 id="la-caja-negra">La caja negra</h2><p>Git no es GitHub. Git es un motor local de instantáneas. GitHub, GitLab y similares son plazas públicas donde esas instantáneas se revisan, se discuten y se despliegan. Primero entiende el motor; después la plaza.</p><p>Cada commit es una foto del proyecto en un instante, con un autor, un mensaje y un padre. Una rama es solo un puntero móvil a un commit. Fusionar es hacer que dos historias vuelvan a ser una.</p><div class="callout"><strong>Abstracción CS50</strong><span>Trata Git como una máquina de tiempo con nombres. clone copia el universo. branch crea una línea de tiempo paralela. merge las reconcilia. pull request es el ritual social para no fusionar a ciegas.</span></div><h2 id="lo-que-debes-saber-hacer">Lo que debes saber hacer</h2><ul><li>Clonar, ver el estado, agregar, confirmar y enviar cambios.</li><li>Crear ramas con propósito: una idea, una rama.</li><li>Abrir una solicitud de cambio (pull request) y responder revisión.</li><li>Fusionar, rebasear con cuidado y resolver conflictos sin pánico.</li><li>Entender que la infraestructura también es código versionado.</li></ul><h2 id="comandos-que-si-vas-a-usar">Comandos que sí vas a usar</h2><pre><code>git clone &lt;url&gt;
+  <article class="sheet">
+    <section class="page-head" id="resumen">
+      <p class="kicker">Semana 1 · 6–10 h</p>
+      <h1>Git</h1>
+      <p class="lede">Dejar de temerle al historial. Toda tu aplicación y tu infraestructura vivirán en un repositorio.</p>
+      <div class="chip-row"><span class="chip">Comandos base</span><span class="chip">Pull request</span><span class="chip">Ramas</span><span class="chip">Fusión</span></div>
+      <div class="progress-box">
+        <span class="tiny" data-week-pct>0% completado</span>
+      </div>
+      <div class="bar"><i data-week-bar></i></div>
+      <p class="why">En DevOps no hay magia fuera del repositorio. El código de la app, los pipelines, los manifiestos y Terraform son archivos. Si no controlas el cambio, no controlas la producción.</p>
+    </section>
+
+    <section id="conferencia">
+      <h2>Conferencia</h2>
+      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+      <div class="lecture"><h2 id="la-caja-negra">La caja negra</h2><p>Git no es GitHub. Git es un motor local de instantáneas. GitHub, GitLab y similares son plazas públicas donde esas instantáneas se revisan, se discuten y se despliegan. Primero entiende el motor; después la plaza.</p><p>Cada commit es una foto del proyecto en un instante, con un autor, un mensaje y un padre. Una rama es solo un puntero móvil a un commit. Fusionar es hacer que dos historias vuelvan a ser una.</p><div class="callout"><strong>Abstracción CS50</strong><span>Trata Git como una máquina de tiempo con nombres. clone copia el universo. branch crea una línea de tiempo paralela. merge las reconcilia. pull request es el ritual social para no fusionar a ciegas.</span></div><h2 id="lo-que-debes-saber-hacer">Lo que debes saber hacer</h2><ul><li>Clonar, ver el estado, agregar, confirmar y enviar cambios.</li><li>Crear ramas con propósito: una idea, una rama.</li><li>Abrir una solicitud de cambio (pull request) y responder revisión.</li><li>Fusionar, rebasear con cuidado y resolver conflictos sin pánico.</li><li>Entender que la infraestructura también es código versionado.</li></ul><h2 id="comandos-que-si-vas-a-usar">Comandos que sí vas a usar</h2><pre><code>git clone &lt;url&gt;
 git status
 git add .
 git commit -m &quot;Explica el porqué, no el qué&quot;
 git switch -c feature/dns-ttl
 git push -u origin HEAD
 git log --oneline --graph</code></pre><h2 id="ramas-fusion-y-pull-requests">Ramas, fusión y pull requests</h2><p>Una rama barata te permite experimentar. El pull request no es burocracia: es el momento en que otro cerebro lee tu cambio antes de que toque main. Ahí se discute correctitud, diseño y estilo — la misma rúbrica de este curso.</p><p>Fusionar (merge) conserva la historia de la rama. Rebasear reescribe para que parezca lineal. En equipos, prefiere merge o squash según la convención del repositorio; no improvises en main.</p><h2 id="errores-comunes">Errores comunes</h2><ul><li>Commits gigantes que mezclan formato, lógica y secretos.</li><li>Subir .env, llaves SSH o kubeconfig. Eso no se borra del historial con un commit nuevo.</li><li>Trabajar directo en main y luego pelear con todo el mundo.</li></ul></div>
-        </article>
-        <article class="folio" data-folio="cortos" data-folio-title="Cortos" id="cortos" hidden>
-          <h2>Cortos</h2>
-          <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
-          <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
-          <div class="shorts"><article class="short"><h3>Commit</h3><p>Un commit es un objeto inmutable. Si cambias la historia, creas commits nuevos. Por eso force-push en ramas compartidas duele.</p></article><article class="short"><h3>Rama</h3><p>main, develop o trunk son convenciones, no magia. El servidor no sabe cuál es sagrada hasta que tú proteges la rama.</p></article><article class="short"><h3>Pull request</h3><p>Es una conversación con diff. El botón verde es un despliegue social: alguien apuesta a que esto no rompe producción.</p></article><article class="short"><h3>Conflicto</h3><p>Git te pide que elijas líneas. El conflicto no es un error de Git: es dos verdades sobre el mismo archivo.</p></article></div>
-        </article>
-        <article class="folio" data-folio="recorrido" data-folio-title="Recorrido" id="recorrido" hidden>
-          <h2>Recorrido</h2>
-          <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
-          <ol><li>Instala Git y configura user.name y user.email.</li><li>Crea un repositorio vacío y haz tres commits pequeños con mensajes claros.</li><li>Abre una rama, cambia un archivo, publícala y abre un pull request.</li><li>Fusiona el PR y observa el grafo con git log --graph.</li></ol>
-        </article>
-        <article class="folio" data-folio="pset" data-folio-title="Problem set" id="pset" hidden>
-          <h2>Problem set</h2>
-          <p class="muted">Rúbrica: <strong>correctitud</strong> — El historial se puede leer de atrás hacia adelante. · <strong>diseño</strong> — Cada commit hace una sola cosa. · <strong>estilo</strong> — Mensajes en imperativo, sin ruido, sin secretos.</p>
-          <div class="tabs">
-            <button class="tab is-on" type="button" data-tab="std">Estándar</button>
-            <button class="tab" type="button" data-tab="hacker">Hacker</button>
-          </div>
-          <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Hello, Git</strong><p>Crea un repositorio local llamado bitacora. Documenta en README.md qué es DevOps en cinco líneas. Tres commits, no uno.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Línea de tiempo</strong><p>Crea la rama experimento, cambia el README, vuelve a main y fusiónala. Deja evidencia del grafo.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>La plaza</strong><p>Sube el repo a GitHub o GitLab. Abre un PR aunque seas la única persona. Revísalo en la interfaz.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Higiene</strong><p>Añade un .gitignore para .env, __pycache__/, node_modules/ y *.pem. Confirma que git status queda limpio.</p></span></label></div>
-          <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Arqueología</strong><p>Usa git bisect o git blame en un repo público pequeño para encontrar el commit que introdujo una línea concreta.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Historia peligrosa</strong><p>Aprende git revert frente a git reset. Escribe cuándo usar cada uno. Nunca hagas reset --hard en main compartida.</p></span></label></div>
-        </article>
-        <article class="folio" data-folio="quiz" data-folio-title="Recuerdo" id="quiz" hidden>
-          <h2>Recuerdo activo</h2>
-          <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
-          <div class="quiz"><article class="q-card" data-answer="1"><h3>¿Qué es Git, en una frase?</h3><div class="choices"><button class="choice" type="button">Un hosting de código en la nube</button><button class="choice" type="button">Un sistema de control de versiones distribuido</button><button class="choice" type="button">Un pipeline de CI</button><button class="choice" type="button">Un servidor Linux</button></div><p class="explain" hidden>Git funciona en tu máquina. GitHub es un hosting. CI es otra capa.</p></article><article class="q-card" data-answer="1"><h3>Una rama es, sobre todo:</h3><div class="choices"><button class="choice" type="button">Una copia completa del disco</button><button class="choice" type="button">Un puntero a un commit</button><button class="choice" type="button">Un usuario del equipo</button><button class="choice" type="button">Un contenedor</button></div><p class="explain" hidden>Las ramas son baratas porque son nombres, no duplicados pesados.</p></article><article class="q-card" data-answer="1"><h3>¿Para qué sirve un pull request?</h3><div class="choices"><button class="choice" type="button">Compilar el kernel</button><button class="choice" type="button">Revisar y discutir un cambio antes de fusionarlo</button><button class="choice" type="button">Borrar el historial</button><button class="choice" type="button">Crear un clúster</button></div><p class="explain" hidden>El PR es revisión humana más automatización.</p></article><article class="q-card" data-answer="1"><h3>¿Dónde debe vivir la infraestructura como código?</h3><div class="choices"><button class="choice" type="button">En un wiki</button><button class="choice" type="button">En el mismo tipo de repositorio Git que la aplicación</button><button class="choice" type="button">Solo en la consola del cloud</button><button class="choice" type="button">En un USB</button></div><p class="explain" hidden>Si no está en Git, no es reproducible.</p></article></div>
-        </article>
-        <article class="folio" data-folio="feynman" data-folio-title="Feynman" id="feynman" hidden>
-          <h2>Cerrar y enseñar</h2>
-          <p class="muted">Explícale Git a alguien que nunca ha programado: qué problema resuelve, qué es un commit y por qué no trabajamos todos sobre el mismo archivo a la vez.</p>
-          <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
-          <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
-        </article>
-        <article class="folio" data-folio="tarjetas" data-folio-title="Tarjetas" id="tarjetas" hidden>
-          <h2>Tarjetas espaciadas</h2>
-          <p class="muted">Toca la carta para voltearla. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
-          <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;¿Git es lo mismo que GitHub?&quot;, &quot;a&quot;: &quot;No. Git es el motor local. GitHub/GitLab son plataformas de colaboración.&quot;}, {&quot;q&quot;: &quot;¿Qué es un commit?&quot;, &quot;a&quot;: &quot;Una instantánea inmutable del proyecto, con mensaje, autor y padre.&quot;}, {&quot;q&quot;: &quot;¿Qué es una rama?&quot;, &quot;a&quot;: &quot;Un puntero móvil a un commit.&quot;}, {&quot;q&quot;: &quot;Nombra tres comandos base&quot;, &quot;a&quot;: &quot;clone, add/commit, switch/branch, merge, push/pull.&quot;}, {&quot;q&quot;: &quot;¿Por qué un PR?&quot;, &quot;a&quot;: &quot;Para revisar correctitud, diseño y estilo antes de tocar la rama principal.&quot;}]">
-            <div class="flash-inner">
-              <div class="flash-face flash-front">
-                <p data-q></p>
-                <p class="hint">Toca para voltear · <span data-box></span></p>
-              </div>
-              <div class="flash-face flash-back">
-                <p data-a></p>
-              </div>
-            </div>
-          </div>
-          <div class="rate">
-            <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
-            <button class="btn" type="button" data-rate="ok">La sé</button>
-          </div>
-        </article>
-        <article class="folio" data-folio="recursos" data-folio-title="Recursos" id="recursos" hidden>
-          <h2>Recursos del roadmap</h2>
-          <div class="resources"><a href="https://www.atlassian.com/git" rel="noopener" target="_blank">Atlassian Git tutorials<small>Gratis</small></a><a href="https://learngitbranching.js.org/" rel="noopener" target="_blank">Learn Git Branching<small>Interactivo</small></a><a href="https://git-scm.com/book/en/v2" rel="noopener" target="_blank">Pro Git (libro)<small>Gratis</small></a><a href="https://www.codecademy.com/learn/learn-git" rel="noopener" target="_blank">Codecademy Learn Git<small>Curso</small></a><a href="https://gitimmersion.com/index.html" rel="noopener" target="_blank">Git Immersion<small>Gratis</small></a></div>
-        </article>
+    </section>
+
+    <section id="cortos">
+      <h2>Cortos</h2>
+      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+      <div class="shorts"><article class="short"><h3>Commit</h3><p>Un commit es un objeto inmutable. Si cambias la historia, creas commits nuevos. Por eso force-push en ramas compartidas duele.</p></article><article class="short"><h3>Rama</h3><p>main, develop o trunk son convenciones, no magia. El servidor no sabe cuál es sagrada hasta que tú proteges la rama.</p></article><article class="short"><h3>Pull request</h3><p>Es una conversación con diff. El botón verde es un despliegue social: alguien apuesta a que esto no rompe producción.</p></article><article class="short"><h3>Conflicto</h3><p>Git te pide que elijas líneas. El conflicto no es un error de Git: es dos verdades sobre el mismo archivo.</p></article></div>
+    </section>
+
+    <section id="recorrido">
+      <h2>Recorrido</h2>
+      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+      <ol><li>Instala Git y configura user.name y user.email.</li><li>Crea un repositorio vacío y haz tres commits pequeños con mensajes claros.</li><li>Abre una rama, cambia un archivo, publícala y abre un pull request.</li><li>Fusiona el PR y observa el grafo con git log --graph.</li></ol>
+    </section>
+
+    <section id="pset">
+      <h2>Problem set</h2>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — El historial se puede leer de atrás hacia adelante. · <strong>diseño</strong> — Cada commit hace una sola cosa. · <strong>estilo</strong> — Mensajes en imperativo, sin ruido, sin secretos.</p>
+      <div class="tabs">
+        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+        <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div class="folio-foot">
-        <button class="btn btn-ghost" type="button" data-folio-prev>Anterior</button>
-        <p class="folio-count"><span data-folio-n>1 / 9</span><span class="tiny"> ← → </span></p>
-        <button class="btn" type="button" data-folio-next>Siguiente</button>
+      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Hello, Git</strong><p>Crea un repositorio local llamado bitacora. Documenta en README.md qué es DevOps en cinco líneas. Tres commits, no uno.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Línea de tiempo</strong><p>Crea la rama experimento, cambia el README, vuelve a main y fusiónala. Deja evidencia del grafo.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>La plaza</strong><p>Sube el repo a GitHub o GitLab. Abre un PR aunque seas la única persona. Revísalo en la interfaz.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Higiene</strong><p>Añade un .gitignore para .env, __pycache__/, node_modules/ y *.pem. Confirma que git status queda limpio.</p></span></label></div>
+      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Arqueología</strong><p>Usa git bisect o git blame en un repo público pequeño para encontrar el commit que introdujo una línea concreta.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Historia peligrosa</strong><p>Aprende git revert frente a git reset. Escribe cuándo usar cada uno. Nunca hagas reset --hard en main compartida.</p></span></label></div>
+    </section>
+
+    <section id="quiz">
+      <h2>Recuerdo activo</h2>
+      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+      <div class="quiz"><article class="q-card" data-answer="1"><h3>¿Qué es Git, en una frase?</h3><div class="choices"><button class="choice" type="button">Un hosting de código en la nube</button><button class="choice" type="button">Un sistema de control de versiones distribuido</button><button class="choice" type="button">Un pipeline de CI</button><button class="choice" type="button">Un servidor Linux</button></div><p class="explain" hidden>Git funciona en tu máquina. GitHub es un hosting. CI es otra capa.</p></article><article class="q-card" data-answer="1"><h3>Una rama es, sobre todo:</h3><div class="choices"><button class="choice" type="button">Una copia completa del disco</button><button class="choice" type="button">Un puntero a un commit</button><button class="choice" type="button">Un usuario del equipo</button><button class="choice" type="button">Un contenedor</button></div><p class="explain" hidden>Las ramas son baratas porque son nombres, no duplicados pesados.</p></article><article class="q-card" data-answer="1"><h3>¿Para qué sirve un pull request?</h3><div class="choices"><button class="choice" type="button">Compilar el kernel</button><button class="choice" type="button">Revisar y discutir un cambio antes de fusionarlo</button><button class="choice" type="button">Borrar el historial</button><button class="choice" type="button">Crear un clúster</button></div><p class="explain" hidden>El PR es revisión humana más automatización.</p></article><article class="q-card" data-answer="1"><h3>¿Dónde debe vivir la infraestructura como código?</h3><div class="choices"><button class="choice" type="button">En un wiki</button><button class="choice" type="button">En el mismo tipo de repositorio Git que la aplicación</button><button class="choice" type="button">Solo en la consola del cloud</button><button class="choice" type="button">En un USB</button></div><p class="explain" hidden>Si no está en Git, no es reproducible.</p></article></div>
+    </section>
+
+    <section id="feynman">
+      <h2>Cerrar y enseñar</h2>
+      <p class="muted">Explícale Git a alguien que nunca ha programado: qué problema resuelve, qué es un commit y por qué no trabajamos todos sobre el mismo archivo a la vez.</p>
+      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+    </section>
+
+    <section id="tarjetas">
+      <h2>Tarjetas espaciadas</h2>
+      <p class="muted">Toca la carta para voltearla. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;¿Git es lo mismo que GitHub?&quot;, &quot;a&quot;: &quot;No. Git es el motor local. GitHub/GitLab son plataformas de colaboración.&quot;}, {&quot;q&quot;: &quot;¿Qué es un commit?&quot;, &quot;a&quot;: &quot;Una instantánea inmutable del proyecto, con mensaje, autor y padre.&quot;}, {&quot;q&quot;: &quot;¿Qué es una rama?&quot;, &quot;a&quot;: &quot;Un puntero móvil a un commit.&quot;}, {&quot;q&quot;: &quot;Nombra tres comandos base&quot;, &quot;a&quot;: &quot;clone, add/commit, switch/branch, merge, push/pull.&quot;}, {&quot;q&quot;: &quot;¿Por qué un PR?&quot;, &quot;a&quot;: &quot;Para revisar correctitud, diseño y estilo antes de tocar la rama principal.&quot;}]">
+        <div class="flash-inner">
+          <div class="flash-face flash-front">
+            <p data-q></p>
+            <p class="hint">Toca para voltear · <span data-box></span></p>
+          </div>
+          <div class="flash-face flash-back">
+            <p data-a></p>
+          </div>
+        </div>
       </div>
-      <button class="page-turn" type="button" data-folio-next aria-label="Pasar página"></button>
-    </div>
-  </div>
+      <div class="rate">
+        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+        <button class="btn" type="button" data-rate="ok">La sé</button>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos del roadmap</h2>
+      <div class="resources"><a href="https://www.atlassian.com/git" rel="noopener" target="_blank">Atlassian Git tutorials<small>Gratis</small></a><a href="https://learngitbranching.js.org/" rel="noopener" target="_blank">Learn Git Branching<small>Interactivo</small></a><a href="https://git-scm.com/book/en/v2" rel="noopener" target="_blank">Pro Git (libro)<small>Gratis</small></a><a href="https://www.codecademy.com/learn/learn-git" rel="noopener" target="_blank">Codecademy Learn Git<small>Curso</small></a><a href="https://gitimmersion.com/index.html" rel="noopener" target="_blank">Git Immersion<small>Gratis</small></a></div>
+    </section>
+
+    <div class="week-nav"><a class="btn btn-ghost" href="temario.html">Índice</a><a class="btn" href="semana-02.html">Siguiente semana</a></div>
+  </article>
 </div>
 </main>
   

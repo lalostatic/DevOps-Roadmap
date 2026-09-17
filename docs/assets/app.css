@@ -1255,7 +1255,27 @@ a.atlas-link:hover {
   max-width: none;
   margin-top: 0;
 }
-.cover-side .comfort { margin-top: 4px; }
+.read-progress {
+  position: sticky;
+  top: 64px;
+  z-index: 9;
+  height: 3px;
+  background: color-mix(in oklab, var(--fg) 8%, transparent);
+}
+.read-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 80ms linear;
+}
+
+.sheet section {
+  padding: 8px 0 32px;
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 9%, transparent);
+}
+.sheet section:last-of-type { border-bottom: 0; }
+.sheet .week-nav { margin-top: 8px; border-bottom: 0; }
 
 .book {
   display: grid;
@@ -1330,19 +1350,18 @@ a.atlas-link:hover {
 .chapter-nav a.is-pressed { transform: scale(0.96); }
 
 .book-stage { min-width: 0; }
-.book-paper {
+.sheet {
   position: relative;
   background: var(--paper);
   color: var(--ink);
   border-radius: 3px 18px 18px 3px;
-  min-height: 68vh;
-  padding: 28px 36px 22px 44px;
-  overflow: hidden;
+  padding: 32px 36px 40px 44px;
+  overflow: visible;
   box-shadow:
     0 22px 48px color-mix(in oklab, #000 38%, transparent),
     inset 10px 0 16px -12px color-mix(in oklab, #000 22%, transparent);
 }
-.book-paper::before {
+.sheet::before {
   content: "";
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -1400,48 +1419,36 @@ a.atlas-link:hover {
 }
 
 .folio { color: var(--ink); }
-.book-paper.is-turning::after {
-  content: "";
-  position: absolute;
-  inset: 0 0 0 7px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--paper) 55%, #fff) 45%, transparent);
-  animation: paperSweep 420ms var(--ease);
-}
-@keyframes paperSweep {
-  from { transform: translateX(-30%); opacity: 0.7; }
-  to { transform: translateX(40%); opacity: 0; }
-}
-.book-paper h1,
-.book-paper h2,
-.book-paper h3 { color: var(--ink); }
-.book-paper .lede,
-.book-paper .muted,
-.book-paper .tiny,
-.book-paper .why {
+.sheet h1,
+.sheet h2,
+.sheet h3 { color: var(--ink); }
+.sheet .lede,
+.sheet .muted,
+.sheet .tiny,
+.sheet .why {
   color: color-mix(in oklab, var(--ink) 58%, transparent);
 }
-.book-paper .why { margin-top: 18px; max-width: var(--read); }
-.book-paper .folio-hint { margin-top: 28px; }
-.book-paper .chip {
+.sheet .why { margin-top: 18px; max-width: var(--read); }
+.sheet .folio-hint { margin-top: 28px; }
+.sheet .chip {
   background: color-mix(in oklab, var(--ink) 6%, var(--paper));
   color: var(--ink);
   border-color: color-mix(in oklab, var(--ink) 14%, transparent);
 }
-.book-paper .bar { background: color-mix(in oklab, var(--ink) 10%, transparent); }
-.book-paper .callout {
+.sheet .bar { background: color-mix(in oklab, var(--ink) 10%, transparent); }
+.sheet .callout {
   background: color-mix(in oklab, var(--accent) 9%, var(--paper));
   border-color: color-mix(in oklab, var(--accent) 32%, transparent);
 }
-.book-paper .callout strong { color: var(--accent); }
-.book-paper .short,
-.book-paper .q-card {
+.sheet .callout strong { color: var(--accent); }
+.sheet .short,
+.sheet .q-card {
   background: color-mix(in oklab, var(--ink) 4%, var(--paper));
   border-color: color-mix(in oklab, var(--ink) 12%, transparent);
 }
-.book-paper .short p,
-.book-paper .q-card h3 { color: var(--ink); }
-.book-paper .choice {
+.sheet .short p,
+.sheet .q-card h3 { color: var(--ink); }
+.sheet .choice {
   background: var(--paper);
   color: var(--ink);
   border-color: color-mix(in oklab, var(--ink) 16%, transparent);
@@ -1449,7 +1456,7 @@ a.atlas-link:hover {
   padding-left: 18px;
   transition: transform var(--motion-quick) var(--ease), border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease);
 }
-.book-paper .choice::before {
+.sheet .choice::before {
   content: "";
   position: absolute;
   left: 0; top: 8px; bottom: 8px;
@@ -1460,75 +1467,44 @@ a.atlas-link:hover {
   transform-origin: center top;
   transition: transform var(--motion-fast) var(--ease);
 }
-.book-paper .choice:hover::before,
-.book-paper .choice.is-ok::before,
-.book-paper .choice.is-pressed::before { transform: scaleY(1); }
-.book-paper .choice.is-pressed { transform: scale(0.96); }
-.book-paper .tab {
+.sheet .choice:hover::before,
+.sheet .choice.is-ok::before,
+.sheet .choice.is-pressed::before { transform: scaleY(1); }
+.sheet .choice.is-pressed { transform: scale(0.96); }
+.sheet .tab {
   color: var(--ink);
   border-color: color-mix(in oklab, var(--ink) 22%, transparent);
 }
-.book-paper .tab.is-on {
+.sheet .tab.is-on {
   background: var(--ink);
   color: var(--paper);
   border-color: transparent;
 }
-.book-paper .btn-ghost {
+.sheet .btn-ghost {
   color: var(--ink);
   border-color: color-mix(in oklab, var(--ink) 22%, transparent);
 }
-.book-paper textarea {
+.sheet textarea {
   background: color-mix(in oklab, var(--ink) 4%, var(--paper));
   color: var(--ink);
   border-color: color-mix(in oklab, var(--ink) 16%, transparent);
 }
-.book-paper .task { border-bottom-color: color-mix(in oklab, var(--ink) 10%, transparent); }
-.book-paper .task p { color: color-mix(in oklab, var(--ink) 55%, transparent); }
-.book-paper .resources a {
+.sheet .task { border-bottom-color: color-mix(in oklab, var(--ink) 10%, transparent); }
+.sheet .task p { color: color-mix(in oklab, var(--ink) 55%, transparent); }
+.sheet .resources a {
   color: var(--ink);
   border-bottom-color: color-mix(in oklab, var(--ink) 10%, transparent);
 }
-.book-paper .resources a:hover { color: var(--accent); }
-.book-paper .lecture > p:first-of-type::first-letter {
+.sheet .resources a:hover { color: var(--accent); }
+.sheet .lecture > p:first-of-type::first-letter {
   font-family: var(--font-display);
-  font-size: 3.1em;
-  float: left;
-  line-height: 0.78;
-  padding: 6px 10px 0 0;
+  font-size: 1.8em;
+  float: none;
+  line-height: inherit;
+  padding: 0;
   color: var(--accent);
   font-weight: 500;
 }
-.folio-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 28px;
-  padding-top: 16px;
-  border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
-}
-.folio-count {
-  margin: 0;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: color-mix(in oklab, var(--ink) 50%, transparent);
-}
-.page-turn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 52px;
-  height: 52px;
-  border: 0;
-  background:
-    linear-gradient(225deg, color-mix(in oklab, var(--ink) 10%, var(--paper)) 50%, transparent 50%);
-  border-radius: 0 18px 0 0;
-  cursor: pointer;
-  transition: filter var(--motion-quick) var(--ease), transform var(--motion-quick) var(--ease);
-}
-.page-turn:hover { filter: brightness(0.96); }
-.page-turn:active { transform: scale(0.96); transform-origin: top right; }
 
 .flash {
   perspective: 900px;
@@ -1560,18 +1536,18 @@ a.atlas-link:hover {
 .flash-back { transform: rotateY(180deg); }
 .flash-face p { margin: 0; font-size: var(--text-lg); max-width: 40ch; color: var(--ink); }
 .flash-face .hint { margin-top: 10px; font-size: var(--text-sm); color: color-mix(in oklab, var(--ink) 48%, transparent); }
-body:not(.is-book) .flash {
+body:not(.is-read) .flash {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 0;
   min-height: 240px;
 }
-body:not(.is-book) .flash-face {
+body:not(.is-read) .flash-face {
   background: var(--bg-elevated);
   border-color: var(--border);
 }
-body:not(.is-book) .flash-face p { color: var(--fg); }
+body:not(.is-read) .flash-face p { color: var(--fg); }
 
 .chip, .atlas-card, .spine-body, .doc-toc a, .comfort button, .tab, .menu-btn {
   transition: transform var(--motion-quick) var(--ease), border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease);
@@ -1609,7 +1585,7 @@ body:not(.is-book) .flash-face p { color: var(--fg); }
   }
   .folio-nav button { flex: none; white-space: nowrap; }
   .chapter-nav { display: none; }
-  .book-paper { padding: 22px 18px 18px 22px; }
+  .sheet { padding: 22px 18px 18px 22px; }
   .folio-foot { flex-wrap: wrap; }
   .page-turn { width: 44px; height: 44px; }
 }
