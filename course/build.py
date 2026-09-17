@@ -348,6 +348,16 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
           <span class="menu-long">Buscar temario</span>
           <kbd>/</kbd>
         </button>
+        <button class="sound-btn" type="button" data-sound-toggle aria-pressed="true" aria-label="Activar o silenciar sonido">
+          <svg class="icon-sound-on" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2.5 6.2v3.6h2.2L8 13V3L4.7 6.2H2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M10.2 5.4a3.2 3.2 0 010 5.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <svg class="icon-sound-off" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2.5 6.2v3.6h2.2L8 13V3L4.7 6.2H2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M10.4 6.2l3.2 3.6M13.6 6.2l-3.2 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   </header>

@@ -748,6 +748,25 @@ kbd {
 .menu-btn .menu-long,
 .menu-btn kbd { display: none; }
 
+.sound-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--fg);
+  display: inline-grid;
+  place-items: center;
+  position: relative;
+  flex: none;
+  transition: transform var(--motion-quick) var(--ease), border-color var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease);
+}
+.sound-btn:hover { color: var(--paper); border-color: var(--paper); }
+.sound-btn.is-pressed { transform: scale(0.96); }
+.sound-btn .icon-sound-off { display: none; }
+.sound-btn.is-muted .icon-sound-on { display: none; }
+.sound-btn.is-muted .icon-sound-off { display: block; }
+
 .toc .n {
   margin: 10px 8px 4px;
   font-family: var(--font-mono);
@@ -1318,6 +1337,7 @@ a.atlas-link:hover {
   border-radius: 3px 18px 18px 3px;
   min-height: 68vh;
   padding: 28px 36px 22px 44px;
+  overflow: hidden;
   box-shadow:
     0 22px 48px color-mix(in oklab, #000 38%, transparent),
     inset 10px 0 16px -12px color-mix(in oklab, #000 22%, transparent);
@@ -1344,26 +1364,53 @@ a.atlas-link:hover {
   color: color-mix(in oklab, var(--ink) 48%, transparent);
 }
 .folio-sig { color: var(--accent); }
-.book-folios { position: relative; min-height: 48vh; }
-.folio { color: var(--ink); }
-.folio.is-on { animation: folioIn var(--motion-fast) var(--ease); }
+.book-folios { position: relative; min-height: 48vh; perspective: 1400px; }
+.folio.is-on { animation: folioIn 420ms var(--ease); }
 .folio.from-prev { animation-name: folioInPrev; }
 .folio.is-leaving {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  animation: folioOut var(--motion-quick) var(--ease) forwards;
+  animation: folioOut 280ms var(--ease) forwards;
 }
 @keyframes folioIn {
-  from { opacity: 0; transform: translateX(16px); filter: blur(2px); }
+  from {
+    opacity: 0;
+    transform: rotateY(-11deg) translateX(22px);
+    transform-origin: left center;
+    filter: blur(2px);
+  }
   to { opacity: 1; transform: none; filter: blur(0); }
 }
 @keyframes folioInPrev {
-  from { opacity: 0; transform: translateX(-16px); filter: blur(2px); }
+  from {
+    opacity: 0;
+    transform: rotateY(11deg) translateX(-22px);
+    transform-origin: right center;
+    filter: blur(2px);
+  }
   to { opacity: 1; transform: none; filter: blur(0); }
 }
 @keyframes folioOut {
-  to { opacity: 0; transform: translateX(-10px); }
+  to {
+    opacity: 0;
+    transform: rotateY(8deg) translateX(-14px);
+    transform-origin: left center;
+  }
+}
+
+.folio { color: var(--ink); }
+.book-paper.is-turning::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 7px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--paper) 55%, #fff) 45%, transparent);
+  animation: paperSweep 420ms var(--ease);
+}
+@keyframes paperSweep {
+  from { transform: translateX(-30%); opacity: 0.7; }
+  to { transform: translateX(40%); opacity: 0; }
 }
 .book-paper h1,
 .book-paper h2,
@@ -1570,6 +1617,21 @@ body:not(.is-book) .flash-face p { color: var(--fg); }
 @media (prefers-reduced-motion: reduce) {
   .cover-book, .folio, .flash-inner { transform: none !important; }
   .folio.is-on, .folio.is-leaving { animation: none !important; }
+  body { animation: none !important; }
 }
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateX(14px); filter: blur(2px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes pageOut {
+  to { opacity: 0; transform: translateX(-16px); filter: blur(2px); }
+}
+@keyframes pageOutBack {
+  to { opacity: 0; transform: translateX(16px); filter: blur(2px); }
+}
+body { animation: pageIn 340ms var(--ease); }
+html.is-leaving body { animation: pageOut 220ms var(--ease) forwards; }
+html.is-leaving-back body { animation: pageOutBack 220ms var(--ease) forwards; }
 
 

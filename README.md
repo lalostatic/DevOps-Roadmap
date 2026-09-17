@@ -31,7 +31,7 @@ La salida queda en `docs/`. No hay dependencias: solo Python 3 de la biblioteca 
 
 ## Método
 
-El curso se lee como un **libro**: portada, índice, prólogo y capítulos. Dentro de cada capítulo se hojear (flechas, esquina o Siguiente).
+El curso se lee como un **libro**: portada, índice, prólogo y capítulos. Dentro de cada capítulo se hojear (flechas, esquina o Siguiente). Hay transiciones al cambiar de página y sonidos suaves de papel, tinta y acierto; el altavoz del encabezado los silencia.
 
 1. Elige comodidad (menos / más cómodo).
 2. Abre el capítulo y pasa folios: conferencia → cortos → recorrido → problem set → recuerdo → Feynman → tarjetas.

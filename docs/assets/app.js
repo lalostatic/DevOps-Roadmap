@@ -1,4 +1,5 @@
 const STORE_KEY = "devops-roadmap-2026";
+const SOUND_KEY = STORE_KEY + "-sound";
 
 const defaultState = () => ({
   comfort: null,
@@ -18,6 +19,184 @@ function loadState() {
 function saveState(state) {
   localStorage.setItem(STORE_KEY, JSON.stringify(state));
   window.dispatchEvent(new Event("progress-change"));
+}
+
+const Sfx = {
+  enabled: localStorage.getItem(SOUND_KEY) !== "off",
+  ctx: null,
+  noise: null,
+  lastTap: 0,
+  ensure() {
+    if (!this.enabled) return null;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!this.ctx) this.ctx = new AC();
+    if (this.ctx.state === "suspended") this.ctx.resume();
+    if (!this.noise && this.ctx) {
+      const n = Math.floor(this.ctx.sampleRate * 0.5);
+      const buf = this.ctx.createBuffer(1, n, this.ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      let last = 0;
+      for (let i = 0; i < n; i++) {
+        last = last * 0.92 + (Math.random() * 2 - 1) * 0.08;
+        d[i] = last + (Math.random() * 2 - 1) * 0.18;
+      }
+      this.noise = buf;
+    }
+    return this.ctx;
+  },
+  master(ctx, t, dur, peak) {
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    g.connect(ctx.destination);
+    return g;
+  },
+  rustle(ctx, opts) {
+    const t = ctx.currentTime;
+    const dur = opts.dur || 0.28;
+    const src = ctx.createBufferSource();
+    src.buffer = this.noise;
+    src.loop = true;
+    const bp = ctx.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.setValueAtTime(opts.from || 1900, t);
+    bp.frequency.exponentialRampToValueAtTime(opts.to || 720, t + dur);
+    bp.Q.value = opts.q || 0.75;
+    const hp = ctx.createBiquadFilter();
+    hp.type = "highpass";
+    hp.frequency.value = 380;
+    const g = this.master(ctx, t, dur, opts.peak || 0.16);
+    src.connect(hp);
+    hp.connect(bp);
+    bp.connect(g);
+    src.start(t);
+    src.stop(t + dur + 0.02);
+  },
+  tone(ctx, freq, type, start, dur, peak) {
+    const o = ctx.createOscillator();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, start);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, start);
+    g.gain.exponentialRampToValueAtTime(peak, start + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+    o.connect(g);
+    g.connect(ctx.destination);
+    o.start(start);
+    o.stop(start + dur + 0.02);
+  },
+  play(name, extra) {
+    if (!this.enabled) return;
+    const ctx = this.ensure();
+    if (!ctx) return;
+    const t = ctx.currentTime;
+    if (name === "page") {
+      this.rustle(ctx, extra < 0
+        ? { from: 1100, to: 1600, dur: 0.3, peak: 0.15, q: 0.65 }
+        : { from: 2100, to: 680, dur: 0.32, peak: 0.17, q: 0.7 });
+      this.tone(ctx, extra < 0 ? 210 : 240, "triangle", t, 0.05, 0.03);
+    } else if (name === "flip") {
+      this.rustle(ctx, { from: 2800, to: 900, dur: 0.18, peak: 0.14, q: 1.1 });
+    } else if (name === "select") {
+      const now = performance.now();
+      if (now - this.lastTap < 70) return;
+      this.lastTap = now;
+      this.tone(ctx, 1480, "sine", t, 0.04, 0.05);
+      this.tone(ctx, 320, "triangle", t, 0.06, 0.028);
+    } else if (name === "ok") {
+      this.tone(ctx, 523.25, "triangle", t, 0.12, 0.07);
+      this.tone(ctx, 659.25, "triangle", t + 0.09, 0.18, 0.06);
+    } else if (name === "bad") {
+      this.tone(ctx, 196, "triangle", t, 0.16, 0.07);
+      this.tone(ctx, 185, "sine", t + 0.02, 0.18, 0.04);
+    } else if (name === "open") {
+      this.rustle(ctx, { from: 400, to: 1400, dur: 0.22, peak: 0.1, q: 0.5 });
+    } else if (name === "close") {
+      this.rustle(ctx, { from: 1400, to: 360, dur: 0.18, peak: 0.09, q: 0.5 });
+    }
+  },
+  setEnabled(on) {
+    this.enabled = on;
+    localStorage.setItem(SOUND_KEY, on ? "on" : "off");
+    document.querySelectorAll("[data-sound-toggle]").forEach((b) => {
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.classList.toggle("is-muted", !on);
+    });
+    if (on) this.play("select");
+  },
+};
+
+function bindSound() {
+  document.querySelectorAll("[data-sound-toggle]").forEach((btn) => {
+    btn.setAttribute("aria-pressed", Sfx.enabled ? "true" : "false");
+    btn.classList.toggle("is-muted", !Sfx.enabled);
+    btn.addEventListener("click", () => Sfx.setEnabled(!Sfx.enabled));
+  });
+  const unlock = () => Sfx.ensure();
+  document.addEventListener("pointerdown", unlock, { once: true });
+  document.addEventListener("keydown", unlock, { once: true });
+}
+
+function pageOrder() {
+  return [
+    "index.html",
+    "temario.html",
+    "metodo.html",
+    ...Array.from({ length: 13 }, (_, i) => `semana-${String(i + 1).padStart(2, "0")}.html`),
+    "repaso.html",
+    "proyecto.html",
+  ];
+}
+
+function navDirFor(href) {
+  const cur = (location.pathname.split("/").pop() || "index.html").split("#")[0];
+  const dest = (href || "").split("/").pop().split("#")[0];
+  const order = pageOrder();
+  const a = order.indexOf(cur);
+  const b = order.indexOf(dest);
+  if (a >= 0 && b >= 0 && b < a) return -1;
+  return 1;
+}
+
+function goTo(href, dir) {
+  if (goTo.busy) return;
+  goTo.busy = true;
+  const d = dir ?? navDirFor(href);
+  Sfx.play("page", d);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    location.href = href;
+    return;
+  }
+  document.documentElement.classList.remove("is-leaving", "is-leaving-back");
+  document.documentElement.classList.add(d < 0 ? "is-leaving-back" : "is-leaving");
+  window.setTimeout(() => {
+    location.href = href;
+  }, 220);
+}
+
+function bindPageTransitions() {
+  document.documentElement.classList.add("is-entered");
+  window.addEventListener("pageshow", () => {
+    document.documentElement.classList.remove("is-leaving", "is-leaving-back");
+  });
+  document.addEventListener("click", (ev) => {
+    if (ev.defaultPrevented) return;
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button) return;
+    const a = ev.target.closest("a[href]");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || href.startsWith("#") || href.startsWith("mailto:")) return;
+    if (a.target === "_blank" || a.hasAttribute("download")) return;
+    if (/^https?:/i.test(href) && !href.includes(location.host)) return;
+    const dest = href.split("#")[0];
+    const here = location.pathname.split("/").pop() || "index.html";
+    if (dest && dest !== here) {
+      ev.preventDefault();
+      goTo(href);
+    }
+  });
 }
 
 function weekState(id) {
@@ -82,6 +261,7 @@ function bindIndex() {
   const openBtn = document.querySelector("[data-index-open]");
   const close = () => {
     if (!overlay) return;
+    if (!overlay.hidden) Sfx.play("close");
     overlay.hidden = true;
     document.body.style.overflow = "";
     if (openBtn) openBtn.setAttribute("aria-expanded", "false");
@@ -91,6 +271,7 @@ function bindIndex() {
     overlay.hidden = false;
     document.body.style.overflow = "hidden";
     if (openBtn) openBtn.setAttribute("aria-expanded", "true");
+    Sfx.play("open");
     const q = overlay.querySelector("[data-index-q]");
     q?.focus({ preventScroll: true });
     applyIndexFilter(overlay);
@@ -122,6 +303,7 @@ function bindIndex() {
     });
     root.querySelectorAll("[data-index-tab]").forEach((btn) => {
       btn.addEventListener("click", () => {
+        Sfx.play("select");
         root.querySelectorAll("[data-index-tab]").forEach((t) => {
           const on = t === btn;
           t.classList.toggle("is-on", on);
@@ -177,6 +359,7 @@ function bindComfort() {
       const next = loadState();
       next.comfort = btn.getAttribute("data-comfort");
       saveState(next);
+      Sfx.play("select");
       document.querySelectorAll("[data-comfort]").forEach((b) => b.classList.toggle("is-on", b === btn));
     });
   });
@@ -277,6 +460,7 @@ function bindQuiz(id) {
         if (qi === total - 1) st.weeks[id].quizDone = true;
         saveState(st);
         paintWeekBar(id);
+        Sfx.play(i === answer ? "ok" : "bad");
       });
     });
   });
@@ -341,6 +525,7 @@ function bindFlash(weekId) {
 
   stage.addEventListener("click", () => {
     stage.classList.toggle("is-flipped");
+    Sfx.play("flip");
   });
 
   document.querySelectorAll("[data-rate]").forEach((btn) => {
@@ -374,6 +559,7 @@ function bindGlobalFlash() {
   }
   stage.addEventListener("click", () => {
     stage.classList.toggle("is-flipped");
+    Sfx.play("flip");
   });
   document.querySelector("[data-next-card]")?.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -415,18 +601,24 @@ function bindBook() {
   function show(next, dir) {
     if (next < 0) {
       const href = book.getAttribute("data-prev-chapter");
-      if (href) location.href = href;
+      if (href) goTo(href, -1);
       return;
     }
     if (next >= folios.length) {
       const href = book.getAttribute("data-next-chapter");
-      if (href) location.href = href;
+      if (href) goTo(href, 1);
       return;
     }
     if (next === i && primed) return;
     const from = folios[i];
     const to = folios[next];
     i = next;
+    if (primed) {
+      Sfx.play("page", dir);
+      book.querySelector(".book-paper")?.classList.remove("is-turning");
+      void book.querySelector(".book-paper")?.offsetWidth;
+      book.querySelector(".book-paper")?.classList.add("is-turning");
+    }
     window.clearTimeout(leavingTimer);
     folios.forEach((f) => {
       if (f !== to && f !== from) {
@@ -443,7 +635,7 @@ function bindBook() {
       leavingTimer = window.setTimeout(() => {
         from.hidden = true;
         from.classList.remove("is-leaving", "from-next", "from-prev");
-      }, 280);
+      }, 360);
     } else {
       to.classList.add("is-on");
       if (from && from !== to) {
@@ -500,6 +692,12 @@ function bindBook() {
     if (dx < 0) show(i + 1, 1);
     else show(i - 1, -1);
   });
+
+  window.addEventListener("hashchange", () => {
+    const h = (location.hash || "").replace("#", "") || "portada";
+    const idx = keys.indexOf(h);
+    if (idx >= 0) show(idx, idx > i ? 1 : -1);
+  });
 }
 
 function bindSelectFx() {
@@ -508,6 +706,9 @@ function bindSelectFx() {
     const el = ev.target.closest(sel);
     if (!el) return;
     el.classList.add("is-pressed");
+    if (el.matches("a[href]") && el.getAttribute("href") && !el.getAttribute("href").startsWith("#")) return;
+    if (el.matches("[data-folio-next], [data-folio-prev], [data-folio-go], [data-sound-toggle], [data-index-open], [data-index-close], .choice, .flash, [data-flash], [data-global-flash]")) return;
+    Sfx.play("select");
   });
   const clear = () => document.querySelectorAll(".is-pressed").forEach((el) => el.classList.remove("is-pressed"));
   document.addEventListener("pointerup", clear);
@@ -524,4 +725,6 @@ bindWeek();
 bindBook();
 bindGlobalFlash();
 bindSelectFx();
+bindSound();
+bindPageTransitions();
 
