@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Semana 4: Redes y seguridad · DevOps Roadmap</title>
+  <title>Capítulo 4: Redes y seguridad · DevOps Roadmap</title>
   <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
   <meta name="theme-color" content="#0b0f14"/>
-  <meta property="og:title" content="Semana 4: Redes y seguridad · DevOps Roadmap"/>
+  <meta property="og:title" content="Capítulo 4: Redes y seguridad · DevOps Roadmap"/>
   <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="assets/og.jpg"/>
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/app.css"/>
   
 </head>
-<body>
+<body class="is-book">
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <div class="wrap">
@@ -27,7 +27,7 @@
   <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
 </svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
       <div class="header-tools">
-        <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+        <nav class="nav" id="nav"><a href="index.html">Portada</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Prólogo</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
         <button class="menu-btn" type="button" data-index-open aria-controls="indice" aria-expanded="false" aria-label="Abrir índice y buscar en el temario">
           <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <svg class="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -63,9 +63,9 @@
       </div>
       <p class="tiny index-count" data-index-count></p>
       <nav class="index-pages index-pages-mobile" aria-label="Páginas">
-      <a href="index.html">Inicio</a>
+      <a href="index.html">Portada</a>
       <a href="temario.html">Índice completo</a>
-      <a href="metodo.html">Método</a>
+      <a href="metodo.html">Prólogo</a>
       <a href="repaso.html">Repaso</a>
       <a href="proyecto.html">Proyecto</a>
       <a href="temario.html#modulos">Módulos</a>
@@ -740,100 +740,99 @@
 </div>
 
   <main id="contenido">
-<div class="wrap week-layout" data-week="04" data-tasks="6">
-  <aside class="toc">
-    <p class="n">En esta semana</p>
-    <a href="#resumen">Resumen</a>
-    <a href="#conferencia">Conferencia</a>
-    <a class="toc-sub" href="#protocolo-un-contrato-de-conversacion">Protocolo: un contrato de conversación</a><a class="toc-sub" href="#lo-que-debes-poder-explicar">Lo que debes poder explicar</a><a class="toc-sub" href="#seguridad-como-habito">Seguridad como hábito</a>
-    <a href="#cortos">Cortos</a>
-    <a href="#recorrido">Recorrido</a>
-    <a href="#pset">Problem set</a>
-    <a href="#quiz">Recuerdo</a>
-    <a href="#feynman">Feynman</a>
-    <a href="#tarjetas">Tarjetas</a>
-    <a href="#recursos">Recursos</a>
-    <p class="n toc-k">Curso</p>
-    <a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html" class="is-active">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a>
+<div class="wrap book" data-book data-week="04" data-tasks="6" data-prev-chapter="semana-03.html" data-next-chapter="semana-05.html" data-prev-label="Capítulo anterior" data-next-label="Capítulo siguiente">
+  <aside class="book-rail">
+    <p class="n">Capítulo 04</p>
+    <p class="rail-title">Redes y seguridad</p>
+    <p class="tiny">Semana 4 · 10–14 h</p>
+    <nav class="folio-nav" aria-label="Folios de este capítulo"><button type="button" data-folio-go="portada">Portada</button><button type="button" data-folio-go="conferencia">Conferencia</button><button type="button" data-folio-go="cortos">Cortos</button><button type="button" data-folio-go="recorrido">Recorrido</button><button type="button" data-folio-go="pset">Problem set</button><button type="button" data-folio-go="quiz">Recuerdo</button><button type="button" data-folio-go="feynman">Feynman</button><button type="button" data-folio-go="tarjetas">Tarjetas</button><button type="button" data-folio-go="recursos">Recursos</button></nav>
+    <p class="n toc-k">Libro</p>
+    <nav class="chapter-nav" aria-label="Capítulos"><a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html" class="is-active">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a></nav>
   </aside>
-  <div>
-    <section class="page-head" id="resumen">
-      <p class="kicker">Semana 4 · 10–14 h</p>
-      <h1>Redes y seguridad</h1>
-      <p class="lede">Dejar de tratar la red como magia. Empaquetar, nombrar, cifrar y filtrar con intención.</p>
-      <div class="chip-row"><span class="chip">Modelo OSI</span><span class="chip">DNS</span><span class="chip">HTTP</span><span class="chip">SSH</span><span class="chip">Herramientas de seguridad</span></div>
-      <div class="progress-box">
-        <span class="tiny" data-week-pct>0% completado</span>
+  <div class="book-stage">
+    <div class="book-paper">
+      <p class="folio-running"><span data-running>Portada</span><span class="folio-sig">Redes y seguridad</span></p>
+      <div class="book-folios">
+        <article class="folio is-on" data-folio="portada" data-folio-title="Portada" id="resumen">
+          <p class="kicker">Semana 4 · 10–14 h</p>
+          <h1>Redes y seguridad</h1>
+          <p class="lede">Dejar de tratar la red como magia. Empaquetar, nombrar, cifrar y filtrar con intención.</p>
+          <div class="chip-row"><span class="chip">Modelo OSI</span><span class="chip">DNS</span><span class="chip">HTTP</span><span class="chip">SSH</span><span class="chip">Herramientas de seguridad</span></div>
+          <div class="progress-box">
+            <span class="tiny" data-week-pct>0% completado</span>
+          </div>
+          <div class="bar"><i data-week-bar></i></div>
+          <p class="why">Cada despliegue es una conversación entre máquinas. Si no entiendes DNS, puertos, TLS y firewalls, vas a depurar a ciegas cuando &#x27;la app no carga&#x27;.</p>
+          <p class="tiny folio-hint">Hojear con las flechas · toca la esquina o Siguiente</p>
+        </article>
+        <article class="folio" data-folio="conferencia" data-folio-title="Conferencia" id="conferencia" hidden>
+          <h2>Conferencia</h2>
+          <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+          <div class="lecture"><h2 id="protocolo-un-contrato-de-conversacion">Protocolo: un contrato de conversación</h2><p>Un protocolo de red es un conjunto de reglas para transmitir datos entre dispositivos distintos. No importa que un lado sea Go y el otro Python: ambos hablan HTTP, DNS o SSH.</p><p>El modelo OSI (7 capas) es un mapa mental, no un aparato. TCP/IP es lo que realmente corre. Tú, en la práctica, vives en: IP, TCP/UDP, TLS, HTTP y DNS.</p><h2 id="lo-que-debes-poder-explicar">Lo que debes poder explicar</h2><ul><li>Qué es una IP, una máscara y un puerto.</li><li>La diferencia entre TCP (confiable) y UDP (rápido y olvida).</li><li>Cómo un nombre (example.com) se convierte en IP (DNS).</li><li>Qué hace SSH y por qué las llaves ganan a las contraseñas.</li><li>Cómo un firewall decide qué entra y qué no.</li></ul><div class="callout"><strong>HTTP no es &#x27;internet&#x27;</strong><span>HTTP es un protocolo de aplicación. Viaja sobre TCP (o QUIC). HTTPS es HTTP sobre TLS. Si mezclas estos términos en una incidente, el equipo pierde tiempo.</span></div><h2 id="seguridad-como-habito">Seguridad como hábito</h2><p>Principio de mínimo privilegio, superficies pequeñas, secretos fuera del código, y no exponer paneles a 0.0.0.0 sin autenticación. DevSecOps no empieza en la semana bonus: empieza cuando abres el primer puerto.</p></div>
+        </article>
+        <article class="folio" data-folio="cortos" data-folio-title="Cortos" id="cortos" hidden>
+          <h2>Cortos</h2>
+          <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+          <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+          <div class="shorts"><article class="short"><h3>DNS</h3><p>Jerarquía de nombres. El resolvers pregunta, los nameservers responden. TTL decide cuánto cacheas.</p></article><article class="short"><h3>Puertos</h3><p>22 SSH, 53 DNS, 80 HTTP, 443 HTTPS. Un puerto cerrado es una puerta sin timbre.</p></article><article class="short"><h3>SSH</h3><p>Shell remoto cifrado. Autenticación por llave. Túneles y port forwarding son superpoderes.</p></article><article class="short"><h3>Firewall</h3><p>Reglas: de dónde, a dónde, qué protocolo. Deny by default es más sano que allow all.</p></article></div>
+        </article>
+        <article class="folio" data-folio="recorrido" data-folio-title="Recorrido" id="recorrido" hidden>
+          <h2>Recorrido</h2>
+          <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+          <ol><li>Resuelve un dominio con dig o nslookup y lee la cadena de registros.</li><li>Abre una conexión HTTP con curl -v y nombra cada fase.</li><li>Genera un par de llaves SSH y entra a tu VM sin contraseña.</li><li>Lista puertos abiertos con ss -tulpn.</li></ol>
+        </article>
+        <article class="folio" data-folio="pset" data-folio-title="Problem set" id="pset" hidden>
+          <h2>Problem set</h2>
+          <p class="muted">Rúbrica: <strong>correctitud</strong> — Puedes diagnosticar DNS vs puerto vs TLS. · <strong>diseño</strong> — Las reglas de firewall son mínimas y justificadas. · <strong>estilo</strong> — No hay secretos en capturas ni en el README.</p>
+          <div class="tabs">
+            <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+            <button class="tab" type="button" data-tab="hacker">Hacker</button>
+          </div>
+          <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Mapa OSI</strong><p>Escribe en una tabla un ejemplo real por cada capa que uses (HTTP, TLS, TCP, IP, Ethernet).</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Diagnóstico</strong><p>Simula &#x27;no resuelve el dominio&#x27; vs &#x27;resuelve pero el puerto 443 está cerrado&#x27;. Documenta cómo lo distingues.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Fortaleza mínima</strong><p>En tu VM, desactiva login SSH por contraseña y deja solo llaves.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>HTTP visible</strong><p>Usa curl -v https://example.com y explica tres encabezados de la respuesta.</p></span></label></div>
+          <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>TLS a mano</strong><p>Explica el apretón de manos TLS como una obra de teatro de 6 actos.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Mini firewall</strong><p>Escribe reglas ufw o iptables que solo permitan 22 y 443 desde tu IP.</p></span></label></div>
+        </article>
+        <article class="folio" data-folio="quiz" data-folio-title="Recuerdo" id="quiz" hidden>
+          <h2>Recuerdo activo</h2>
+          <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+          <div class="quiz"><article class="q-card" data-answer="1"><h3>Un protocolo de red sirve para:</h3><div class="choices"><button class="choice" type="button">Enfriar el CPU</button><button class="choice" type="button">Acordar cómo se transmiten datos entre dispositivos</button><button class="choice" type="button">Dibujar el OSI en la pared</button><button class="choice" type="button">Reemplazar Git</button></div><p class="explain" hidden>Es un contrato, no un producto.</p></article><article class="q-card" data-answer="1"><h3>DNS convierte:</h3><div class="choices"><button class="choice" type="button">JSON en YAML</button><button class="choice" type="button">Nombres de dominio en direcciones IP (y más)</button><button class="choice" type="button">HTTP en SSH</button><button class="choice" type="button">Contenedores en VMs</button></div><p class="explain" hidden>El directorio telefónico de internet.</p></article><article class="q-card" data-answer="1"><h3>SSH debería autenticarse preferentemente con:</h3><div class="choices"><button class="choice" type="button">La contraseña root compartida</button><button class="choice" type="button">Llaves públicas/privadas</button><button class="choice" type="button">FTP</button><button class="choice" type="button">Telnet</button></div><p class="explain" hidden>Las llaves no viajan y se revocan mejor.</p></article><article class="q-card" data-answer="0"><h3>¿Qué debes saber configurar además de DNS y OSI?</h3><div class="choices"><button class="choice" type="button">Firewalls, IPs y puertos</button><button class="choice" type="button">Solo CSS</button><button class="choice" type="button">Solo Jira</button><button class="choice" type="button">Solo Figma</button></div><p class="explain" hidden>El temario pide red operativa, no teoría aislada.</p></article></div>
+        </article>
+        <article class="folio" data-folio="feynman" data-folio-title="Feynman" id="feynman" hidden>
+          <h2>Cerrar y enseñar</h2>
+          <p class="muted">Explícale a un adolescente cómo su teléfono encuentra google.com: nombre, DNS, IP, puerto 443, TLS, HTTP.</p>
+          <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+          <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+        </article>
+        <article class="folio" data-folio="tarjetas" data-folio-title="Tarjetas" id="tarjetas" hidden>
+          <h2>Tarjetas espaciadas</h2>
+          <p class="muted">Toca la carta para voltearla. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+          <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;¿Qué es un protocolo?&quot;, &quot;a&quot;: &quot;Reglas para transmitir datos entre dispositivos distintos.&quot;}, {&quot;q&quot;: &quot;Capas que debes dominar&quot;, &quot;a&quot;: &quot;IP, puertos, TCP/UDP, DNS, HTTP, SSH, firewall.&quot;}, {&quot;q&quot;: &quot;Puerto de HTTPS&quot;, &quot;a&quot;: &quot;443.&quot;}, {&quot;q&quot;: &quot;Herramienta de shell remoto&quot;, &quot;a&quot;: &quot;SSH.&quot;}, {&quot;q&quot;: &quot;Modelo de referencia clásico&quot;, &quot;a&quot;: &quot;OSI, útil como mapa; TCP/IP es lo que corre.&quot;}]">
+            <div class="flash-inner">
+              <div class="flash-face flash-front">
+                <p data-q></p>
+                <p class="hint">Toca para voltear · <span data-box></span></p>
+              </div>
+              <div class="flash-face flash-back">
+                <p data-a></p>
+              </div>
+            </div>
+          </div>
+          <div class="rate">
+            <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+            <button class="btn" type="button" data-rate="ok">La sé</button>
+          </div>
+        </article>
+        <article class="folio" data-folio="recursos" data-folio-title="Recursos" id="recursos" hidden>
+          <h2>Recursos del roadmap</h2>
+          <div class="resources"><a href="https://www.cloudflare.com/en-gb/learning/ddos/glossary/open-systems-interconnection-model-osi/" rel="noopener" target="_blank">OSI Model (Cloudflare)<small>Gratis</small></a><a href="https://howdns.works/" rel="noopener" target="_blank">How DNS works<small>Gratis</small></a><a href="https://howhttps.works/" rel="noopener" target="_blank">How HTTPS works<small>Gratis</small></a><a href="https://www.amazon.com/Computer-Networking-Top-Down-Approach-7th/dp/0133594149" rel="noopener" target="_blank">Computer Networking: A Top-Down Approach<small>Libro</small></a><a href="https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/" rel="noopener" target="_blank">Professor Messer Network+<small>Gratis</small></a></div>
+        </article>
       </div>
-      <div class="bar"><i data-week-bar></i></div>
-      <p style="margin-top:18px">Cada despliegue es una conversación entre máquinas. Si no entiendes DNS, puertos, TLS y firewalls, vas a depurar a ciegas cuando &#x27;la app no carga&#x27;.</p>
-    </section>
-
-    <section id="conferencia">
-      <h2>Conferencia</h2>
-      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="protocolo-un-contrato-de-conversacion">Protocolo: un contrato de conversación</h2><p>Un protocolo de red es un conjunto de reglas para transmitir datos entre dispositivos distintos. No importa que un lado sea Go y el otro Python: ambos hablan HTTP, DNS o SSH.</p><p>El modelo OSI (7 capas) es un mapa mental, no un aparato. TCP/IP es lo que realmente corre. Tú, en la práctica, vives en: IP, TCP/UDP, TLS, HTTP y DNS.</p><h2 id="lo-que-debes-poder-explicar">Lo que debes poder explicar</h2><ul><li>Qué es una IP, una máscara y un puerto.</li><li>La diferencia entre TCP (confiable) y UDP (rápido y olvida).</li><li>Cómo un nombre (example.com) se convierte en IP (DNS).</li><li>Qué hace SSH y por qué las llaves ganan a las contraseñas.</li><li>Cómo un firewall decide qué entra y qué no.</li></ul><div class="callout"><strong>HTTP no es &#x27;internet&#x27;</strong><span>HTTP es un protocolo de aplicación. Viaja sobre TCP (o QUIC). HTTPS es HTTP sobre TLS. Si mezclas estos términos en una incidente, el equipo pierde tiempo.</span></div><h2 id="seguridad-como-habito">Seguridad como hábito</h2><p>Principio de mínimo privilegio, superficies pequeñas, secretos fuera del código, y no exponer paneles a 0.0.0.0 sin autenticación. DevSecOps no empieza en la semana bonus: empieza cuando abres el primer puerto.</p></div>
-    </section>
-
-    <section id="cortos">
-      <h2>Cortos</h2>
-      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
-      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
-      <div class="shorts" style="margin-top:12px"><article class="short"><h3>DNS</h3><p>Jerarquía de nombres. El resolvers pregunta, los nameservers responden. TTL decide cuánto cacheas.</p></article><article class="short"><h3>Puertos</h3><p>22 SSH, 53 DNS, 80 HTTP, 443 HTTPS. Un puerto cerrado es una puerta sin timbre.</p></article><article class="short"><h3>SSH</h3><p>Shell remoto cifrado. Autenticación por llave. Túneles y port forwarding son superpoderes.</p></article><article class="short"><h3>Firewall</h3><p>Reglas: de dónde, a dónde, qué protocolo. Deny by default es más sano que allow all.</p></article></div>
-    </section>
-
-    <section id="recorrido">
-      <h2>Recorrido</h2>
-      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
-      <ol><li>Resuelve un dominio con dig o nslookup y lee la cadena de registros.</li><li>Abre una conexión HTTP con curl -v y nombra cada fase.</li><li>Genera un par de llaves SSH y entra a tu VM sin contraseña.</li><li>Lista puertos abiertos con ss -tulpn.</li></ol>
-    </section>
-
-    <section id="pset">
-      <h2>Problem set</h2>
-      <p class="muted">Rúbrica: <strong>correctitud</strong> — Puedes diagnosticar DNS vs puerto vs TLS. · <strong>diseño</strong> — Las reglas de firewall son mínimas y justificadas. · <strong>estilo</strong> — No hay secretos en capturas ni en el README.</p>
-      <div class="tabs">
-        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
-        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      <div class="folio-foot">
+        <button class="btn btn-ghost" type="button" data-folio-prev>Anterior</button>
+        <p class="folio-count"><span data-folio-n>1 / 9</span><span class="tiny"> ← → </span></p>
+        <button class="btn" type="button" data-folio-next>Siguiente</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Mapa OSI</strong><p>Escribe en una tabla un ejemplo real por cada capa que uses (HTTP, TLS, TCP, IP, Ethernet).</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Diagnóstico</strong><p>Simula &#x27;no resuelve el dominio&#x27; vs &#x27;resuelve pero el puerto 443 está cerrado&#x27;. Documenta cómo lo distingues.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Fortaleza mínima</strong><p>En tu VM, desactiva login SSH por contraseña y deja solo llaves.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>HTTP visible</strong><p>Usa curl -v https://example.com y explica tres encabezados de la respuesta.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>TLS a mano</strong><p>Explica el apretón de manos TLS como una obra de teatro de 6 actos.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Mini firewall</strong><p>Escribe reglas ufw o iptables que solo permitan 22 y 443 desde tu IP.</p></span></label></div>
-    </section>
-
-    <section id="quiz">
-      <h2>Recuerdo activo</h2>
-      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
-      <div class="quiz"><article class="q-card" data-answer="1"><h3>Un protocolo de red sirve para:</h3><div class="choices"><button class="choice" type="button">Enfriar el CPU</button><button class="choice" type="button">Acordar cómo se transmiten datos entre dispositivos</button><button class="choice" type="button">Dibujar el OSI en la pared</button><button class="choice" type="button">Reemplazar Git</button></div><p class="explain" hidden>Es un contrato, no un producto.</p></article><article class="q-card" data-answer="1"><h3>DNS convierte:</h3><div class="choices"><button class="choice" type="button">JSON en YAML</button><button class="choice" type="button">Nombres de dominio en direcciones IP (y más)</button><button class="choice" type="button">HTTP en SSH</button><button class="choice" type="button">Contenedores en VMs</button></div><p class="explain" hidden>El directorio telefónico de internet.</p></article><article class="q-card" data-answer="1"><h3>SSH debería autenticarse preferentemente con:</h3><div class="choices"><button class="choice" type="button">La contraseña root compartida</button><button class="choice" type="button">Llaves públicas/privadas</button><button class="choice" type="button">FTP</button><button class="choice" type="button">Telnet</button></div><p class="explain" hidden>Las llaves no viajan y se revocan mejor.</p></article><article class="q-card" data-answer="0"><h3>¿Qué debes saber configurar además de DNS y OSI?</h3><div class="choices"><button class="choice" type="button">Firewalls, IPs y puertos</button><button class="choice" type="button">Solo CSS</button><button class="choice" type="button">Solo Jira</button><button class="choice" type="button">Solo Figma</button></div><p class="explain" hidden>El temario pide red operativa, no teoría aislada.</p></article></div>
-    </section>
-
-    <section id="feynman">
-      <h2>Cerrar y enseñar</h2>
-      <p class="muted">Explícale a un adolescente cómo su teléfono encuentra google.com: nombre, DNS, IP, puerto 443, TLS, HTTP.</p>
-      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
-      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
-    </section>
-
-    <section id="tarjetas">
-      <h2>Tarjetas espaciadas</h2>
-      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
-      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;¿Qué es un protocolo?&quot;, &quot;a&quot;: &quot;Reglas para transmitir datos entre dispositivos distintos.&quot;}, {&quot;q&quot;: &quot;Capas que debes dominar&quot;, &quot;a&quot;: &quot;IP, puertos, TCP/UDP, DNS, HTTP, SSH, firewall.&quot;}, {&quot;q&quot;: &quot;Puerto de HTTPS&quot;, &quot;a&quot;: &quot;443.&quot;}, {&quot;q&quot;: &quot;Herramienta de shell remoto&quot;, &quot;a&quot;: &quot;SSH.&quot;}, {&quot;q&quot;: &quot;Modelo de referencia clásico&quot;, &quot;a&quot;: &quot;OSI, útil como mapa; TCP/IP es lo que corre.&quot;}]">
-        <div>
-          <p data-q></p>
-          <p data-a hidden></p>
-          <p class="hint">Toca para revelar · <span data-box></span></p>
-        </div>
-      </div>
-      <div class="rate">
-        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
-        <button class="btn" type="button" data-rate="ok">La sé</button>
-      </div>
-    </section>
-
-    <section id="recursos">
-      <h2>Recursos del roadmap</h2>
-      <div class="resources"><a href="https://www.cloudflare.com/en-gb/learning/ddos/glossary/open-systems-interconnection-model-osi/" rel="noopener" target="_blank">OSI Model (Cloudflare)<small>Gratis</small></a><a href="https://howdns.works/" rel="noopener" target="_blank">How DNS works<small>Gratis</small></a><a href="https://howhttps.works/" rel="noopener" target="_blank">How HTTPS works<small>Gratis</small></a><a href="https://www.amazon.com/Computer-Networking-Top-Down-Approach-7th/dp/0133594149" rel="noopener" target="_blank">Computer Networking: A Top-Down Approach<small>Libro</small></a><a href="https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/" rel="noopener" target="_blank">Professor Messer Network+<small>Gratis</small></a></div>
-    </section>
-
-    <div class="week-nav"><a class="btn btn-ghost" href="semana-03.html">Semana anterior</a><a class="btn" href="semana-05.html">Siguiente</a></div>
+      <button class="page-turn" type="button" data-folio-next aria-label="Pasar página"></button>
+    </div>
   </div>
 </div>
 </main>
@@ -845,11 +844,11 @@
         <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan).</p>
       </div>
       <nav class="footer-nav" aria-label="Sitio">
-        <a href="index.html">Inicio</a>
+        <a href="index.html">Portada</a>
         <a href="temario.html">Índice</a>
         <a href="temario.html#herramientas">Herramientas</a>
         <a href="temario.html#glosario">Glosario</a>
-        <a href="metodo.html">Método</a>
+        <a href="metodo.html">Prólogo</a>
         <a href="repaso.html">Repaso</a>
         <a href="proyecto.html">Proyecto</a>
       </nav>

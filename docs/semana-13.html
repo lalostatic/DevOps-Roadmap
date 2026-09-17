@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/app.css"/>
   
 </head>
-<body>
+<body class="is-book">
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <div class="wrap">
@@ -27,7 +27,7 @@
   <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
 </svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
       <div class="header-tools">
-        <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+        <nav class="nav" id="nav"><a href="index.html">Portada</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Prólogo</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
         <button class="menu-btn" type="button" data-index-open aria-controls="indice" aria-expanded="false" aria-label="Abrir índice y buscar en el temario">
           <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <svg class="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -63,9 +63,9 @@
       </div>
       <p class="tiny index-count" data-index-count></p>
       <nav class="index-pages index-pages-mobile" aria-label="Páginas">
-      <a href="index.html">Inicio</a>
+      <a href="index.html">Portada</a>
       <a href="temario.html">Índice completo</a>
-      <a href="metodo.html">Método</a>
+      <a href="metodo.html">Prólogo</a>
       <a href="repaso.html">Repaso</a>
       <a href="proyecto.html">Proyecto</a>
       <a href="temario.html#modulos">Módulos</a>
@@ -740,100 +740,99 @@
 </div>
 
   <main id="contenido">
-<div class="wrap week-layout" data-week="13" data-tasks="6">
-  <aside class="toc">
-    <p class="n">En esta semana</p>
-    <a href="#resumen">Resumen</a>
-    <a href="#conferencia">Conferencia</a>
-    <a class="toc-sub" href="#izquierda-pero-con-juicio">Izquierda, pero con juicio</a>
-    <a href="#cortos">Cortos</a>
-    <a href="#recorrido">Recorrido</a>
-    <a href="#pset">Problem set</a>
-    <a href="#quiz">Recuerdo</a>
-    <a href="#feynman">Feynman</a>
-    <a href="#tarjetas">Tarjetas</a>
-    <a href="#recursos">Recursos</a>
-    <p class="n toc-k">Curso</p>
-    <a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html" class="is-active">B Bonus: DevSecOps</a>
+<div class="wrap book" data-book data-week="13" data-tasks="6" data-prev-chapter="semana-12.html" data-next-chapter="proyecto.html" data-prev-label="Capítulo anterior" data-next-label="Proyecto final">
+  <aside class="book-rail">
+    <p class="n">Capítulo B</p>
+    <p class="rail-title">Bonus: DevSecOps</p>
+    <p class="tiny">Bonus · 6–10 h</p>
+    <nav class="folio-nav" aria-label="Folios de este capítulo"><button type="button" data-folio-go="portada">Portada</button><button type="button" data-folio-go="conferencia">Conferencia</button><button type="button" data-folio-go="cortos">Cortos</button><button type="button" data-folio-go="recorrido">Recorrido</button><button type="button" data-folio-go="pset">Problem set</button><button type="button" data-folio-go="quiz">Recuerdo</button><button type="button" data-folio-go="feynman">Feynman</button><button type="button" data-folio-go="tarjetas">Tarjetas</button><button type="button" data-folio-go="recursos">Recursos</button></nav>
+    <p class="n toc-k">Libro</p>
+    <nav class="chapter-nav" aria-label="Capítulos"><a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html" class="is-active">B Bonus: DevSecOps</a></nav>
   </aside>
-  <div>
-    <section class="page-head" id="resumen">
-      <p class="kicker">Bonus · 6–10 h</p>
-      <h1>Bonus: DevSecOps</h1>
-      <p class="lede">Meter la seguridad en el tubo, no al final como un veto sorpresa.</p>
-      <div class="chip-row"><span class="chip">SAST/DAST</span><span class="chip">Secretos</span><span class="chip">Políticas</span><span class="chip">Supply chain</span></div>
-      <div class="progress-box">
-        <span class="tiny" data-week-pct>0% completado</span>
+  <div class="book-stage">
+    <div class="book-paper">
+      <p class="folio-running"><span data-running>Portada</span><span class="folio-sig">Bonus: DevSecOps</span></p>
+      <div class="book-folios">
+        <article class="folio is-on" data-folio="portada" data-folio-title="Portada" id="resumen">
+          <p class="kicker">Bonus · 6–10 h</p>
+          <h1>Bonus: DevSecOps</h1>
+          <p class="lede">Meter la seguridad en el tubo, no al final como un veto sorpresa.</p>
+          <div class="chip-row"><span class="chip">SAST/DAST</span><span class="chip">Secretos</span><span class="chip">Políticas</span><span class="chip">Supply chain</span></div>
+          <div class="progress-box">
+            <span class="tiny" data-week-pct>0% completado</span>
+          </div>
+          <div class="bar"><i data-week-bar></i></div>
+          <p class="why">El bonus del roadmap original: integrar seguridad en DevOps. Automatizar análisis de código y de apps en ejecución, cuidar secretos y fijar políticas.</p>
+          <p class="tiny folio-hint">Hojear con las flechas · toca la esquina o Siguiente</p>
+        </article>
+        <article class="folio" data-folio="conferencia" data-folio-title="Conferencia" id="conferencia" hidden>
+          <h2>Conferencia</h2>
+          <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+          <div class="lecture"><h2 id="izquierda-pero-con-juicio">Izquierda, pero con juicio</h2><p>Shift-left no significa que desarrollo se vuelva un equipo de pentesting. Significa: secretos fuera, dependencias parcheadas, SAST en el PR, DAST en staging, imágenes firmadas, políticas (OPA, Kyverno) en el clúster.</p><ul><li>SAST: mira el código sin ejecutarlo.</li><li>DAST: ataca la app corriendo.</li><li>SCA: las librerías de terceros también son tu código.</li><li>Secrets management: rotación, no un .env eterno.</li></ul><div class="callout"><strong>El tubo como aduana</strong><span>Un hallazgo crítico detiene el merge. Uno medio abre un ticket. Si todo es bloqueo, el equipo apaga el scanner.</span></div></div>
+        </article>
+        <article class="folio" data-folio="cortos" data-folio-title="Cortos" id="cortos" hidden>
+          <h2>Cortos</h2>
+          <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+          <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+          <div class="shorts"><article class="short"><h3>Secretos</h3><p>Vault, SOPS, secrets del CI, managers de la nube. Nunca el chat.</p></article><article class="short"><h3>SBOM</h3><p>Lista de ingredientes del artefacto. Útil cuando sale el próximo CVE.</p></article><article class="short"><h3>Imagen</h3><p>Escanea (Trivy, Grype). No corras latest ciego.</p></article><article class="short"><h3>Política</h3><p>Como código. El clúster rechaza pods privilegiados.</p></article></div>
+        </article>
+        <article class="folio" data-folio="recorrido" data-folio-title="Recorrido" id="recorrido" hidden>
+          <h2>Recorrido</h2>
+          <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+          <ol><li>Añade un scan de secretos (gitleaks o similar) al pipeline.</li><li>Escanea tu imagen Docker.</li><li>Mueve un secreto de un archivo a una variable de entorno.</li><li>Lee un informe SAST aunque sea de un linter de seguridad básico.</li></ol>
+        </article>
+        <article class="folio" data-folio="pset" data-folio-title="Problem set" id="pset" hidden>
+          <h2>Problem set</h2>
+          <p class="muted">Rúbrica: <strong>correctitud</strong> — El pipeline detecta al menos una clase de problema de seguridad. · <strong>diseño</strong> — Hay política escrita y un lugar donde se aplica. · <strong>estilo</strong> — Los secretos de lab no son reales; los reales no están en el repo.</p>
+          <div class="tabs">
+            <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+            <button class="tab" type="button" data-tab="hacker">Hacker</button>
+          </div>
+          <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Secretos</strong><p>Demuestra un repo limpio: pre-commit o pipeline que falle si hay AWS keys de ejemplo.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>CVE</strong><p>Escanea la imagen y documenta un hallazgo: ¿lo aceptas, lo parchas o lo mitigas?</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Amenaza corta</strong><p>Tres amenazas de tu app de lab y un control para cada una.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Política</strong><p>Escribe en prosa la política: no root, no :latest, no puertos abiertos de más.</p></span></label></div>
+          <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Firma</strong><p>Firma una imagen (cosign) y verifica antes de desplegar.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Policy as code</strong><p>Una regla de Kyverno/OPA que rechace privileged: true.</p></span></label></div>
+        </article>
+        <article class="folio" data-folio="quiz" data-folio-title="Recuerdo" id="quiz" hidden>
+          <h2>Recuerdo activo</h2>
+          <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+          <div class="quiz"><article class="q-card" data-answer="1"><h3>DevSecOps busca:</h3><div class="choices"><button class="choice" type="button">Dejar la seguridad para el último martes del año</button><button class="choice" type="button">Integrar seguridad en el flujo DevOps</button><button class="choice" type="button">Eliminar firewalls</button><button class="choice" type="button">Prohibir la nube</button></div><p class="explain" hidden>Seguridad continua.</p></article><article class="q-card" data-answer="1"><h3>SAST es:</h3><div class="choices"><button class="choice" type="button">Atacar la app en ejecución</button><button class="choice" type="button">Analizar código en reposo</button><button class="choice" type="button">Un load balancer</button><button class="choice" type="button">Un ritual Scrum</button></div><p class="explain" hidden>Static Application Security Testing.</p></article><article class="q-card" data-answer="1"><h3>Un secreto en Git es:</h3><div class="choices"><button class="choice" type="button">Buena documentación</button><button class="choice" type="button">Un incidente en potencia, aunque lo borres después</button><button class="choice" type="button">Un tipo de pod</button><button class="choice" type="button">Un SLO</button></div><p class="explain" hidden>El historial lo conserva.</p></article><article class="q-card" data-answer="1"><h3>Shift-left bien hecho:</h3><div class="choices"><button class="choice" type="button">Bloquea todo y detiene al equipo</button><button class="choice" type="button">Automatiza controles tempranos con umbrales razonables</button><button class="choice" type="button">Elimina producción</button><button class="choice" type="button">Sustituye a IAM</button></div><p class="explain" hidden>Juicio + automatización.</p></article></div>
+        </article>
+        <article class="folio" data-folio="feynman" data-folio-title="Feynman" id="feynman" hidden>
+          <h2>Cerrar y enseñar</h2>
+          <p class="muted">Explícale a un product manager por qué un scanner en el PR es más barato que un titular de filtración.</p>
+          <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+          <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+        </article>
+        <article class="folio" data-folio="tarjetas" data-folio-title="Tarjetas" id="tarjetas" hidden>
+          <h2>Tarjetas espaciadas</h2>
+          <p class="muted">Toca la carta para voltearla. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+          <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;DevSecOps&quot;, &quot;a&quot;: &quot;Seguridad integrada al ciclo DevOps.&quot;}, {&quot;q&quot;: &quot;SAST vs DAST&quot;, &quot;a&quot;: &quot;Código vs app en ejecución.&quot;}, {&quot;q&quot;: &quot;SCA&quot;, &quot;a&quot;: &quot;Riesgo en dependencias.&quot;}, {&quot;q&quot;: &quot;SBOM&quot;, &quot;a&quot;: &quot;Inventario del artefacto.&quot;}, {&quot;q&quot;: &quot;Regla de secretos&quot;, &quot;a&quot;: &quot;Nunca en Git, siempre rotables.&quot;}]">
+            <div class="flash-inner">
+              <div class="flash-face flash-front">
+                <p data-q></p>
+                <p class="hint">Toca para voltear · <span data-box></span></p>
+              </div>
+              <div class="flash-face flash-back">
+                <p data-a></p>
+              </div>
+            </div>
+          </div>
+          <div class="rate">
+            <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+            <button class="btn" type="button" data-rate="ok">La sé</button>
+          </div>
+        </article>
+        <article class="folio" data-folio="recursos" data-folio-title="Recursos" id="recursos" hidden>
+          <h2>Recursos del roadmap</h2>
+          <div class="resources"><a href="https://github.com/milanm/DevOps-Roadmap" rel="noopener" target="_blank">Repo original del roadmap<small>Fuente</small></a><a href="https://owasp.org/www-project-top-ten/" rel="noopener" target="_blank">OWASP Top 10<small>Gratis</small></a><a href="https://howhttps.works/" rel="noopener" target="_blank">How HTTPS works<small>Gratis</small></a></div>
+        </article>
       </div>
-      <div class="bar"><i data-week-bar></i></div>
-      <p style="margin-top:18px">El bonus del roadmap original: integrar seguridad en DevOps. Automatizar análisis de código y de apps en ejecución, cuidar secretos y fijar políticas.</p>
-    </section>
-
-    <section id="conferencia">
-      <h2>Conferencia</h2>
-      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="izquierda-pero-con-juicio">Izquierda, pero con juicio</h2><p>Shift-left no significa que desarrollo se vuelva un equipo de pentesting. Significa: secretos fuera, dependencias parcheadas, SAST en el PR, DAST en staging, imágenes firmadas, políticas (OPA, Kyverno) en el clúster.</p><ul><li>SAST: mira el código sin ejecutarlo.</li><li>DAST: ataca la app corriendo.</li><li>SCA: las librerías de terceros también son tu código.</li><li>Secrets management: rotación, no un .env eterno.</li></ul><div class="callout"><strong>El tubo como aduana</strong><span>Un hallazgo crítico detiene el merge. Uno medio abre un ticket. Si todo es bloqueo, el equipo apaga el scanner.</span></div></div>
-    </section>
-
-    <section id="cortos">
-      <h2>Cortos</h2>
-      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
-      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
-      <div class="shorts" style="margin-top:12px"><article class="short"><h3>Secretos</h3><p>Vault, SOPS, secrets del CI, managers de la nube. Nunca el chat.</p></article><article class="short"><h3>SBOM</h3><p>Lista de ingredientes del artefacto. Útil cuando sale el próximo CVE.</p></article><article class="short"><h3>Imagen</h3><p>Escanea (Trivy, Grype). No corras latest ciego.</p></article><article class="short"><h3>Política</h3><p>Como código. El clúster rechaza pods privilegiados.</p></article></div>
-    </section>
-
-    <section id="recorrido">
-      <h2>Recorrido</h2>
-      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
-      <ol><li>Añade un scan de secretos (gitleaks o similar) al pipeline.</li><li>Escanea tu imagen Docker.</li><li>Mueve un secreto de un archivo a una variable de entorno.</li><li>Lee un informe SAST aunque sea de un linter de seguridad básico.</li></ol>
-    </section>
-
-    <section id="pset">
-      <h2>Problem set</h2>
-      <p class="muted">Rúbrica: <strong>correctitud</strong> — El pipeline detecta al menos una clase de problema de seguridad. · <strong>diseño</strong> — Hay política escrita y un lugar donde se aplica. · <strong>estilo</strong> — Los secretos de lab no son reales; los reales no están en el repo.</p>
-      <div class="tabs">
-        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
-        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      <div class="folio-foot">
+        <button class="btn btn-ghost" type="button" data-folio-prev>Anterior</button>
+        <p class="folio-count"><span data-folio-n>1 / 9</span><span class="tiny"> ← → </span></p>
+        <button class="btn" type="button" data-folio-next>Siguiente</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Secretos</strong><p>Demuestra un repo limpio: pre-commit o pipeline que falle si hay AWS keys de ejemplo.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>CVE</strong><p>Escanea la imagen y documenta un hallazgo: ¿lo aceptas, lo parchas o lo mitigas?</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Amenaza corta</strong><p>Tres amenazas de tu app de lab y un control para cada una.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Política</strong><p>Escribe en prosa la política: no root, no :latest, no puertos abiertos de más.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Firma</strong><p>Firma una imagen (cosign) y verifica antes de desplegar.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Policy as code</strong><p>Una regla de Kyverno/OPA que rechace privileged: true.</p></span></label></div>
-    </section>
-
-    <section id="quiz">
-      <h2>Recuerdo activo</h2>
-      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
-      <div class="quiz"><article class="q-card" data-answer="1"><h3>DevSecOps busca:</h3><div class="choices"><button class="choice" type="button">Dejar la seguridad para el último martes del año</button><button class="choice" type="button">Integrar seguridad en el flujo DevOps</button><button class="choice" type="button">Eliminar firewalls</button><button class="choice" type="button">Prohibir la nube</button></div><p class="explain" hidden>Seguridad continua.</p></article><article class="q-card" data-answer="1"><h3>SAST es:</h3><div class="choices"><button class="choice" type="button">Atacar la app en ejecución</button><button class="choice" type="button">Analizar código en reposo</button><button class="choice" type="button">Un load balancer</button><button class="choice" type="button">Un ritual Scrum</button></div><p class="explain" hidden>Static Application Security Testing.</p></article><article class="q-card" data-answer="1"><h3>Un secreto en Git es:</h3><div class="choices"><button class="choice" type="button">Buena documentación</button><button class="choice" type="button">Un incidente en potencia, aunque lo borres después</button><button class="choice" type="button">Un tipo de pod</button><button class="choice" type="button">Un SLO</button></div><p class="explain" hidden>El historial lo conserva.</p></article><article class="q-card" data-answer="1"><h3>Shift-left bien hecho:</h3><div class="choices"><button class="choice" type="button">Bloquea todo y detiene al equipo</button><button class="choice" type="button">Automatiza controles tempranos con umbrales razonables</button><button class="choice" type="button">Elimina producción</button><button class="choice" type="button">Sustituye a IAM</button></div><p class="explain" hidden>Juicio + automatización.</p></article></div>
-    </section>
-
-    <section id="feynman">
-      <h2>Cerrar y enseñar</h2>
-      <p class="muted">Explícale a un product manager por qué un scanner en el PR es más barato que un titular de filtración.</p>
-      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
-      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
-    </section>
-
-    <section id="tarjetas">
-      <h2>Tarjetas espaciadas</h2>
-      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
-      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;DevSecOps&quot;, &quot;a&quot;: &quot;Seguridad integrada al ciclo DevOps.&quot;}, {&quot;q&quot;: &quot;SAST vs DAST&quot;, &quot;a&quot;: &quot;Código vs app en ejecución.&quot;}, {&quot;q&quot;: &quot;SCA&quot;, &quot;a&quot;: &quot;Riesgo en dependencias.&quot;}, {&quot;q&quot;: &quot;SBOM&quot;, &quot;a&quot;: &quot;Inventario del artefacto.&quot;}, {&quot;q&quot;: &quot;Regla de secretos&quot;, &quot;a&quot;: &quot;Nunca en Git, siempre rotables.&quot;}]">
-        <div>
-          <p data-q></p>
-          <p data-a hidden></p>
-          <p class="hint">Toca para revelar · <span data-box></span></p>
-        </div>
-      </div>
-      <div class="rate">
-        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
-        <button class="btn" type="button" data-rate="ok">La sé</button>
-      </div>
-    </section>
-
-    <section id="recursos">
-      <h2>Recursos del roadmap</h2>
-      <div class="resources"><a href="https://github.com/milanm/DevOps-Roadmap" rel="noopener" target="_blank">Repo original del roadmap<small>Fuente</small></a><a href="https://owasp.org/www-project-top-ten/" rel="noopener" target="_blank">OWASP Top 10<small>Gratis</small></a><a href="https://howhttps.works/" rel="noopener" target="_blank">How HTTPS works<small>Gratis</small></a></div>
-    </section>
-
-    <div class="week-nav"><a class="btn btn-ghost" href="semana-12.html">Semana anterior</a><a class="btn" href="proyecto.html">Proyecto final</a></div>
+      <button class="page-turn" type="button" data-folio-next aria-label="Pasar página"></button>
+    </div>
   </div>
 </div>
 </main>
@@ -845,11 +844,11 @@
         <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan).</p>
       </div>
       <nav class="footer-nav" aria-label="Sitio">
-        <a href="index.html">Inicio</a>
+        <a href="index.html">Portada</a>
         <a href="temario.html">Índice</a>
         <a href="temario.html#herramientas">Herramientas</a>
         <a href="temario.html#glosario">Glosario</a>
-        <a href="metodo.html">Método</a>
+        <a href="metodo.html">Prólogo</a>
         <a href="repaso.html">Repaso</a>
         <a href="proyecto.html">Proyecto</a>
       </nav>

@@ -63,6 +63,7 @@ html, body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
+  overflow-x: clip;
 }
 
 body {
@@ -77,6 +78,9 @@ button, [role="button"] { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: 0.55; }
 
 [hidden] { display: none !important; }
+
+.skip {
+  position: absolute;
   left: -999px;
   top: 8px;
   background: var(--paper);
@@ -144,7 +148,24 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  position: relative;
+  transition: color var(--motion-quick) var(--ease), background var(--motion-fast) var(--ease), transform var(--motion-quick) var(--ease);
 }
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 1.5px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--motion-fast) var(--ease);
+}
+.nav a:hover::after,
+.nav a.is-active::after { transform: scaleX(1); }
+.nav a.is-pressed { transform: scale(0.96); }
 
 .nav a:hover,
 .nav a.is-active {
@@ -212,7 +233,7 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 }
 
 .btn:hover { transform: translateY(-1px); }
-.btn:active { transform: scale(0.98); }
+.btn:active, .btn.is-pressed { transform: scale(0.96); }
 
 .btn-ghost {
   background: transparent;
@@ -285,6 +306,10 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .week-card:hover {
   border-color: var(--border-strong);
   transform: translateY(-2px);
+}
+.week-card:active,
+.week-card.is-pressed {
+  transform: scale(0.96);
 }
 
 .week-card .n {
@@ -1148,4 +1173,403 @@ a.atlas-link:hover {
     animation: none !important;
   }
 }
+
+/* —— Libro interactivo —— */
+.cover {
+  padding: clamp(28px, 6vw, 72px) 0 12px;
+}
+.cover-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
+  gap: 32px;
+  align-items: center;
+}
+.cover-book {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 48px 44px 36px 56px;
+  border-radius: 4px 18px 18px 4px;
+  box-shadow:
+    16px 22px 48px color-mix(in oklab, #000 42%, transparent),
+    inset 12px 0 18px -14px color-mix(in oklab, #000 28%, transparent);
+  transform: rotate(-1.15deg);
+  transform-origin: left center;
+  transition: transform var(--motion-fast) var(--ease);
+}
+.cover-book:hover { transform: rotate(0deg) translateY(-4px); }
+.cover-book:active, .cover-book.is-pressed { transform: rotate(0deg) scale(0.985); }
+.cover-spine {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 10px;
+  background: var(--accent);
+  border-radius: 4px 0 0 4px;
+}
+.cover-book h1 {
+  color: var(--ink);
+  max-width: none;
+}
+.cover-book .lede {
+  color: color-mix(in oklab, var(--ink) 60%, transparent);
+}
+.cover-book .btn-ghost {
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 22%, transparent);
+}
+.cover-vol {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ink) 48%, transparent);
+  margin: 0 0 12px;
+}
+.cover-meta {
+  margin: 28px 0 0;
+  font-size: var(--text-sm);
+  color: color-mix(in oklab, var(--ink) 48%, transparent);
+  max-width: 48ch;
+}
+.cover-side .stats {
+  grid-template-columns: 1fr;
+  max-width: none;
+  margin-top: 0;
+}
+.cover-side .comfort { margin-top: 4px; }
+
+.book {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 28px 0 72px;
+  min-width: 0;
+  max-width: 100%;
+}
+.book > * { min-width: 0; max-width: 100%; }
+.book-rail {
+  position: sticky;
+  top: 84px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 14px;
+}
+.rail-title {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-display);
+}
+.folio-nav, .chapter-nav {
+  display: grid;
+  gap: 2px;
+  margin-top: 10px;
+}
+.folio-nav button,
+.chapter-nav a {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 650;
+  min-height: 40px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--motion-quick) var(--ease), background var(--motion-fast) var(--ease), transform var(--motion-quick) var(--ease);
+}
+.folio-nav button::after,
+.chapter-nav a::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  width: 3px;
+  top: 8px;
+  bottom: 8px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: scaleY(0);
+  transform-origin: center top;
+  transition: transform var(--motion-fast) var(--ease);
+}
+.folio-nav button.is-active,
+.chapter-nav a.is-active,
+.folio-nav button:hover,
+.chapter-nav a:hover {
+  color: var(--fg);
+  background: var(--bg-subtle);
+}
+.folio-nav button.is-active::after,
+.chapter-nav a.is-active::after { transform: scaleY(1); }
+.folio-nav button.is-pressed,
+.chapter-nav a.is-pressed { transform: scale(0.96); }
+
+.book-stage { min-width: 0; }
+.book-paper {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 3px 18px 18px 3px;
+  min-height: 68vh;
+  padding: 28px 36px 22px 44px;
+  box-shadow:
+    0 22px 48px color-mix(in oklab, #000 38%, transparent),
+    inset 10px 0 16px -12px color-mix(in oklab, #000 22%, transparent);
+}
+.book-paper::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 7px;
+  background: var(--accent);
+  border-radius: 3px 0 0 3px;
+}
+.folio-running {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--ink) 48%, transparent);
+}
+.folio-sig { color: var(--accent); }
+.book-folios { position: relative; min-height: 48vh; }
+.folio { color: var(--ink); }
+.folio.is-on { animation: folioIn var(--motion-fast) var(--ease); }
+.folio.from-prev { animation-name: folioInPrev; }
+.folio.is-leaving {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: folioOut var(--motion-quick) var(--ease) forwards;
+}
+@keyframes folioIn {
+  from { opacity: 0; transform: translateX(16px); filter: blur(2px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes folioInPrev {
+  from { opacity: 0; transform: translateX(-16px); filter: blur(2px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes folioOut {
+  to { opacity: 0; transform: translateX(-10px); }
+}
+.book-paper h1,
+.book-paper h2,
+.book-paper h3 { color: var(--ink); }
+.book-paper .lede,
+.book-paper .muted,
+.book-paper .tiny,
+.book-paper .why {
+  color: color-mix(in oklab, var(--ink) 58%, transparent);
+}
+.book-paper .why { margin-top: 18px; max-width: var(--read); }
+.book-paper .folio-hint { margin-top: 28px; }
+.book-paper .chip {
+  background: color-mix(in oklab, var(--ink) 6%, var(--paper));
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 14%, transparent);
+}
+.book-paper .bar { background: color-mix(in oklab, var(--ink) 10%, transparent); }
+.book-paper .callout {
+  background: color-mix(in oklab, var(--accent) 9%, var(--paper));
+  border-color: color-mix(in oklab, var(--accent) 32%, transparent);
+}
+.book-paper .callout strong { color: var(--accent); }
+.book-paper .short,
+.book-paper .q-card {
+  background: color-mix(in oklab, var(--ink) 4%, var(--paper));
+  border-color: color-mix(in oklab, var(--ink) 12%, transparent);
+}
+.book-paper .short p,
+.book-paper .q-card h3 { color: var(--ink); }
+.book-paper .choice {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 16%, transparent);
+  position: relative;
+  padding-left: 18px;
+  transition: transform var(--motion-quick) var(--ease), border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease);
+}
+.book-paper .choice::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 8px; bottom: 8px;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: scaleY(0);
+  transform-origin: center top;
+  transition: transform var(--motion-fast) var(--ease);
+}
+.book-paper .choice:hover::before,
+.book-paper .choice.is-ok::before,
+.book-paper .choice.is-pressed::before { transform: scaleY(1); }
+.book-paper .choice.is-pressed { transform: scale(0.96); }
+.book-paper .tab {
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 22%, transparent);
+}
+.book-paper .tab.is-on {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: transparent;
+}
+.book-paper .btn-ghost {
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 22%, transparent);
+}
+.book-paper textarea {
+  background: color-mix(in oklab, var(--ink) 4%, var(--paper));
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 16%, transparent);
+}
+.book-paper .task { border-bottom-color: color-mix(in oklab, var(--ink) 10%, transparent); }
+.book-paper .task p { color: color-mix(in oklab, var(--ink) 55%, transparent); }
+.book-paper .resources a {
+  color: var(--ink);
+  border-bottom-color: color-mix(in oklab, var(--ink) 10%, transparent);
+}
+.book-paper .resources a:hover { color: var(--accent); }
+.book-paper .lecture > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.1em;
+  float: left;
+  line-height: 0.78;
+  padding: 6px 10px 0 0;
+  color: var(--accent);
+  font-weight: 500;
+}
+.folio-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+}
+.folio-count {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: color-mix(in oklab, var(--ink) 50%, transparent);
+}
+.page-turn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background:
+    linear-gradient(225deg, color-mix(in oklab, var(--ink) 10%, var(--paper)) 50%, transparent 50%);
+  border-radius: 0 18px 0 0;
+  cursor: pointer;
+  transition: filter var(--motion-quick) var(--ease), transform var(--motion-quick) var(--ease);
+}
+.page-turn:hover { filter: brightness(0.96); }
+.page-turn:active { transform: scale(0.96); transform-origin: top right; }
+
+.flash {
+  perspective: 900px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  min-height: 0;
+}
+.flash-inner {
+  position: relative;
+  min-height: 240px;
+  transform-style: preserve-3d;
+  transition: transform 480ms var(--ease);
+}
+.flash.is-flipped .flash-inner { transform: rotateY(180deg); }
+.flash-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 28px;
+  backface-visibility: hidden;
+  background: color-mix(in oklab, var(--ink) 4%, var(--paper));
+  border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 24px color-mix(in oklab, #000 8%, transparent);
+}
+.flash-back { transform: rotateY(180deg); }
+.flash-face p { margin: 0; font-size: var(--text-lg); max-width: 40ch; color: var(--ink); }
+.flash-face .hint { margin-top: 10px; font-size: var(--text-sm); color: color-mix(in oklab, var(--ink) 48%, transparent); }
+body:not(.is-book) .flash {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 0;
+  min-height: 240px;
+}
+body:not(.is-book) .flash-face {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+}
+body:not(.is-book) .flash-face p { color: var(--fg); }
+
+.chip, .atlas-card, .spine-body, .doc-toc a, .comfort button, .tab, .menu-btn {
+  transition: transform var(--motion-quick) var(--ease), border-color var(--motion-fast) var(--ease), background var(--motion-fast) var(--ease), color var(--motion-fast) var(--ease);
+}
+.chip.is-pressed,
+.atlas-card.is-pressed,
+.spine-body.is-pressed,
+.doc-toc a.is-pressed,
+.comfort button.is-pressed,
+.tab.is-pressed,
+.menu-btn.is-pressed,
+.choice.is-pressed { transform: scale(0.96); }
+.doc-toc a:hover {
+  background: color-mix(in oklab, var(--accent) 8%, var(--paper));
+}
+.doc-toc a:active,
+.doc-toc a.is-pressed {
+  background: color-mix(in oklab, var(--accent) 14%, var(--paper));
+}
+
+.is-front .doc-toc,
+.is-front .page-head h1 { }
+
+@media (max-width: 840px) {
+  .cover-wrap, .book { grid-template-columns: 1fr; }
+  .cover-book { transform: none; padding: 32px 24px 28px 32px; }
+  .book-rail { position: static; max-width: 100%; overflow: hidden; }
+  .folio-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 4px;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+  .folio-nav button { flex: none; white-space: nowrap; }
+  .chapter-nav { display: none; }
+  .book-paper { padding: 22px 18px 18px 22px; }
+  .folio-foot { flex-wrap: wrap; }
+  .page-turn { width: 44px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-book, .folio, .flash-inner { transform: none !important; }
+  .folio.is-on, .folio.is-leaving { animation: none !important; }
+}
+
 

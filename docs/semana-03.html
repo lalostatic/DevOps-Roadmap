@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Semana 3: Linux y scripting · DevOps Roadmap</title>
+  <title>Capítulo 3: Linux y scripting · DevOps Roadmap</title>
   <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
   <meta name="theme-color" content="#0b0f14"/>
-  <meta property="og:title" content="Semana 3: Linux y scripting · DevOps Roadmap"/>
+  <meta property="og:title" content="Capítulo 3: Linux y scripting · DevOps Roadmap"/>
   <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="assets/og.jpg"/>
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/app.css"/>
   
 </head>
-<body>
+<body class="is-book">
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <div class="wrap">
@@ -27,7 +27,7 @@
   <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
 </svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
       <div class="header-tools">
-        <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+        <nav class="nav" id="nav"><a href="index.html">Portada</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Prólogo</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
         <button class="menu-btn" type="button" data-index-open aria-controls="indice" aria-expanded="false" aria-label="Abrir índice y buscar en el temario">
           <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <svg class="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -63,9 +63,9 @@
       </div>
       <p class="tiny index-count" data-index-count></p>
       <nav class="index-pages index-pages-mobile" aria-label="Páginas">
-      <a href="index.html">Inicio</a>
+      <a href="index.html">Portada</a>
       <a href="temario.html">Índice completo</a>
-      <a href="metodo.html">Método</a>
+      <a href="metodo.html">Prólogo</a>
       <a href="repaso.html">Repaso</a>
       <a href="proyecto.html">Proyecto</a>
       <a href="temario.html#modulos">Módulos</a>
@@ -740,105 +740,104 @@
 </div>
 
   <main id="contenido">
-<div class="wrap week-layout" data-week="03" data-tasks="6">
-  <aside class="toc">
-    <p class="n">En esta semana</p>
-    <a href="#resumen">Resumen</a>
-    <a href="#conferencia">Conferencia</a>
-    <a class="toc-sub" href="#el-sistema-operativo-como-puente">El sistema operativo como puente</a><a class="toc-sub" href="#el-sistema-de-archivos-no-es-una-carpeta-bonita">El sistema de archivos no es una carpeta bonita</a><a class="toc-sub" href="#scripting">Scripting</a>
-    <a href="#cortos">Cortos</a>
-    <a href="#recorrido">Recorrido</a>
-    <a href="#pset">Problem set</a>
-    <a href="#quiz">Recuerdo</a>
-    <a href="#feynman">Feynman</a>
-    <a href="#tarjetas">Tarjetas</a>
-    <a href="#recursos">Recursos</a>
-    <p class="n toc-k">Curso</p>
-    <a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html" class="is-active">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a>
+<div class="wrap book" data-book data-week="03" data-tasks="6" data-prev-chapter="semana-02.html" data-next-chapter="semana-04.html" data-prev-label="Capítulo anterior" data-next-label="Capítulo siguiente">
+  <aside class="book-rail">
+    <p class="n">Capítulo 03</p>
+    <p class="rail-title">Linux y scripting</p>
+    <p class="tiny">Semana 3 · 10–14 h</p>
+    <nav class="folio-nav" aria-label="Folios de este capítulo"><button type="button" data-folio-go="portada">Portada</button><button type="button" data-folio-go="conferencia">Conferencia</button><button type="button" data-folio-go="cortos">Cortos</button><button type="button" data-folio-go="recorrido">Recorrido</button><button type="button" data-folio-go="pset">Problem set</button><button type="button" data-folio-go="quiz">Recuerdo</button><button type="button" data-folio-go="feynman">Feynman</button><button type="button" data-folio-go="tarjetas">Tarjetas</button><button type="button" data-folio-go="recursos">Recursos</button></nav>
+    <p class="n toc-k">Libro</p>
+    <nav class="chapter-nav" aria-label="Capítulos"><a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html" class="is-active">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a></nav>
   </aside>
-  <div>
-    <section class="page-head" id="resumen">
-      <p class="kicker">Semana 3 · 10–14 h</p>
-      <h1>Linux y scripting</h1>
-      <p class="lede">Sentirte en casa en un servidor Ubuntu. La terminal deja de ser un lugar hostil.</p>
-      <div class="chip-row"><span class="chip">Comandos de shell</span><span class="chip">Sistema de archivos</span><span class="chip">Red</span><span class="chip">Virtualización</span><span class="chip">POSIX</span></div>
-      <div class="progress-box">
-        <span class="tiny" data-week-pct>0% completado</span>
-      </div>
-      <div class="bar"><i data-week-bar></i></div>
-      <p style="margin-top:18px">La mayoría de los servidores del mundo no tienen escritorio. Si no puedes moverte en Linux, DevOps se convierte en apuntar y rezar en una consola web.</p>
-    </section>
-
-    <section id="conferencia">
-      <h2>Conferencia</h2>
-      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="el-sistema-operativo-como-puente">El sistema operativo como puente</h2><p>Un sistema operativo media entre tú y el hardware: procesos, memoria, disco, red. En este oficio ese puente casi siempre se llama Linux. Ubuntu es un buen primer destino porque documenta mucho y perdona más.</p><p>POSIX es el contrato de cómo se comportan shells, archivos y procesos en sistemas tipo Unix. Por eso un script bien escrito corre en Ubuntu, Debian y, con matices, en macOS.</p><h2 id="el-sistema-de-archivos-no-es-una-carpeta-bonita">El sistema de archivos no es una carpeta bonita</h2><p>En Linux todo es un archivo: discos, sockets, pipes. /etc guarda configuración. /var logs y estado. /home a las personas. /proc y /sys son ventanas al kernel. Aprende a leer rutas antes de instalar el siguiente panel.</p><pre><code>pwd; ls -la
+  <div class="book-stage">
+    <div class="book-paper">
+      <p class="folio-running"><span data-running>Portada</span><span class="folio-sig">Linux y scripting</span></p>
+      <div class="book-folios">
+        <article class="folio is-on" data-folio="portada" data-folio-title="Portada" id="resumen">
+          <p class="kicker">Semana 3 · 10–14 h</p>
+          <h1>Linux y scripting</h1>
+          <p class="lede">Sentirte en casa en un servidor Ubuntu. La terminal deja de ser un lugar hostil.</p>
+          <div class="chip-row"><span class="chip">Comandos de shell</span><span class="chip">Sistema de archivos</span><span class="chip">Red</span><span class="chip">Virtualización</span><span class="chip">POSIX</span></div>
+          <div class="progress-box">
+            <span class="tiny" data-week-pct>0% completado</span>
+          </div>
+          <div class="bar"><i data-week-bar></i></div>
+          <p class="why">La mayoría de los servidores del mundo no tienen escritorio. Si no puedes moverte en Linux, DevOps se convierte en apuntar y rezar en una consola web.</p>
+          <p class="tiny folio-hint">Hojear con las flechas · toca la esquina o Siguiente</p>
+        </article>
+        <article class="folio" data-folio="conferencia" data-folio-title="Conferencia" id="conferencia" hidden>
+          <h2>Conferencia</h2>
+          <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+          <div class="lecture"><h2 id="el-sistema-operativo-como-puente">El sistema operativo como puente</h2><p>Un sistema operativo media entre tú y el hardware: procesos, memoria, disco, red. En este oficio ese puente casi siempre se llama Linux. Ubuntu es un buen primer destino porque documenta mucho y perdona más.</p><p>POSIX es el contrato de cómo se comportan shells, archivos y procesos en sistemas tipo Unix. Por eso un script bien escrito corre en Ubuntu, Debian y, con matices, en macOS.</p><h2 id="el-sistema-de-archivos-no-es-una-carpeta-bonita">El sistema de archivos no es una carpeta bonita</h2><p>En Linux todo es un archivo: discos, sockets, pipes. /etc guarda configuración. /var logs y estado. /home a las personas. /proc y /sys son ventanas al kernel. Aprende a leer rutas antes de instalar el siguiente panel.</p><pre><code>pwd; ls -la
 cd /var/log &amp;&amp; less syslog
 ps aux | head
 ss -tulpn
 chmod 640 secret.env
 sudo systemctl status ssh</code></pre><h2 id="scripting">Scripting</h2><p>Bash (o PowerShell en Windows) convierte una receta en un programa. Python y Go también sirven y a menudo escalan mejor. Empieza por Bash para la gramática del sistema; pasa a Python cuando el script crezca.</p><div class="callout"><strong>Práctica</strong><span>No memorices 200 comandos. Memoriza navegación, permisos, procesos, red básica, y cómo pedir ayuda: man, --help, tldr.</span></div></div>
-    </section>
-
-    <section id="cortos">
-      <h2>Cortos</h2>
-      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
-      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
-      <div class="shorts" style="margin-top:12px"><article class="short"><h3>Shell</h3><p>Un intérprete que lee tu texto y habla con el kernel. Bash es el más común en servidores.</p></article><article class="short"><h3>Permisos</h3><p>rwx para usuario, grupo y otros. 644 y 755 no son magia: son bits.</p></article><article class="short"><h3>Procesos</h3><p>PID, señales, systemd. Si no sabes matar un proceso, no sabes operar.</p></article><article class="short"><h3>Virtualización</h3><p>Una máquina virtual simula hardware. Un contenedor comparte el kernel. No son lo mismo.</p></article></div>
-    </section>
-
-    <section id="recorrido">
-      <h2>Recorrido</h2>
-      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
-      <ol><li>Instala Ubuntu en una VM (VirtualBox, UTM o cloud gratuito) o usa WSL2.</li><li>Crea un usuario, una carpeta en /opt y un script que haga backup de un directorio.</li><li>Usa chmod, ps, grep y journalctl una vez cada uno, con propósito.</li><li>Escribe un Bash de 20 líneas con set -euo pipefail.</li></ol>
-    </section>
-
-    <section id="pset">
-      <h2>Problem set</h2>
-      <p class="muted">Rúbrica: <strong>correctitud</strong> — El script corre en una VM limpia sin pasos secretos. · <strong>diseño</strong> — Permisos mínimos; no todo es 777. · <strong>estilo</strong> — El Bash tiene set -euo pipefail y nombres claros.</p>
-      <div class="tabs">
-        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
-        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+        </article>
+        <article class="folio" data-folio="cortos" data-folio-title="Cortos" id="cortos" hidden>
+          <h2>Cortos</h2>
+          <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+          <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+          <div class="shorts"><article class="short"><h3>Shell</h3><p>Un intérprete que lee tu texto y habla con el kernel. Bash es el más común en servidores.</p></article><article class="short"><h3>Permisos</h3><p>rwx para usuario, grupo y otros. 644 y 755 no son magia: son bits.</p></article><article class="short"><h3>Procesos</h3><p>PID, señales, systemd. Si no sabes matar un proceso, no sabes operar.</p></article><article class="short"><h3>Virtualización</h3><p>Una máquina virtual simula hardware. Un contenedor comparte el kernel. No son lo mismo.</p></article></div>
+        </article>
+        <article class="folio" data-folio="recorrido" data-folio-title="Recorrido" id="recorrido" hidden>
+          <h2>Recorrido</h2>
+          <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+          <ol><li>Instala Ubuntu en una VM (VirtualBox, UTM o cloud gratuito) o usa WSL2.</li><li>Crea un usuario, una carpeta en /opt y un script que haga backup de un directorio.</li><li>Usa chmod, ps, grep y journalctl una vez cada uno, con propósito.</li><li>Escribe un Bash de 20 líneas con set -euo pipefail.</li></ol>
+        </article>
+        <article class="folio" data-folio="pset" data-folio-title="Problem set" id="pset" hidden>
+          <h2>Problem set</h2>
+          <p class="muted">Rúbrica: <strong>correctitud</strong> — El script corre en una VM limpia sin pasos secretos. · <strong>diseño</strong> — Permisos mínimos; no todo es 777. · <strong>estilo</strong> — El Bash tiene set -euo pipefail y nombres claros.</p>
+          <div class="tabs">
+            <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+            <button class="tab" type="button" data-tab="hacker">Hacker</button>
+          </div>
+          <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Casa nueva</strong><p>En una VM Ubuntu, crea usuarios, grupos y un directorio compartido con permisos correctos.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Mapa</strong><p>Dibuja (en texto) qué hay en /, /etc, /var, /home y /tmp y para qué sirve cada uno.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Salud</strong><p>Script que reporte disco, memoria y carga. Salida legible para humanos.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Cron</strong><p>Programa una tarea cada hora que rote o copie un log de ejemplo.</p></span></label></div>
+          <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>POSIX estricto</strong><p>Escribe el script para que pase shellcheck y funcione en dash, no solo en bash.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Caja</strong><p>Levanta dos VMs y conéctalas por SSH con llaves, sin contraseña, con usuario no root.</p></span></label></div>
+        </article>
+        <article class="folio" data-folio="quiz" data-folio-title="Recuerdo" id="quiz" hidden>
+          <h2>Recuerdo activo</h2>
+          <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+          <div class="quiz"><article class="q-card" data-answer="1"><h3>¿Por qué Linux en DevOps?</h3><div class="choices"><button class="choice" type="button">Porque es el único SO</button><button class="choice" type="button">Porque la mayoría de servidores lo usan y se operan por CLI</button><button class="choice" type="button">Porque no tiene red</button><button class="choice" type="button">Porque reemplaza Git</button></div><p class="explain" hidden>La CLI es el idioma de los servidores.</p></article><article class="q-card" data-answer="1"><h3>POSIX es:</h3><div class="choices"><button class="choice" type="button">Un proveedor cloud</button><button class="choice" type="button">Una familia de estándares Unix para APIs y shells</button><button class="choice" type="button">Un firewall</button><button class="choice" type="button">Un tipo de contenedor</button></div><p class="explain" hidden>El contrato que hace portables muchos scripts.</p></article><article class="q-card" data-answer="1"><h3>¿Qué hace chmod?</h3><div class="choices"><button class="choice" type="button">Cambia el dueño de la red</button><button class="choice" type="button">Cambia permisos de un archivo</button><button class="choice" type="button">Compila el kernel</button><button class="choice" type="button">Crea un pod</button></div><p class="explain" hidden>Permisos: leer, escribir, ejecutar.</p></article><article class="q-card" data-answer="1"><h3>Una VM y un contenedor se diferencian porque:</h3><div class="choices"><button class="choice" type="button">La VM comparte el kernel del anfitrión</button><button class="choice" type="button">El contenedor comparte el kernel; la VM emula o virtualiza hardware</button><button class="choice" type="button">No hay diferencia</button><button class="choice" type="button">El contenedor siempre es Windows</button></div><p class="explain" hidden>Esa diferencia explica aislamiento y arranque.</p></article></div>
+        </article>
+        <article class="folio" data-folio="feynman" data-folio-title="Feynman" id="feynman" hidden>
+          <h2>Cerrar y enseñar</h2>
+          <p class="muted">Describe un sistema operativo como si fuera el gerente de un edificio: quién entra, quién usa el elevador, quién escribe en la pizarra.</p>
+          <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+          <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+        </article>
+        <article class="folio" data-folio="tarjetas" data-folio-title="Tarjetas" id="tarjetas" hidden>
+          <h2>Tarjetas espaciadas</h2>
+          <p class="muted">Toca la carta para voltearla. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+          <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;Distro amigable para empezar&quot;, &quot;a&quot;: &quot;Ubuntu.&quot;}, {&quot;q&quot;: &quot;Lenguajes de scripting típicos&quot;, &quot;a&quot;: &quot;Bash, PowerShell, Python, Go.&quot;}, {&quot;q&quot;: &quot;¿Qué es POSIX?&quot;, &quot;a&quot;: &quot;Estándar de interfaces Unix portables.&quot;}, {&quot;q&quot;: &quot;Comando para listar procesos&quot;, &quot;a&quot;: &quot;ps, o systemctl para servicios.&quot;}, {&quot;q&quot;: &quot;¿Dónde suele vivir la configuración?&quot;, &quot;a&quot;: &quot;/etc&quot;}]">
+            <div class="flash-inner">
+              <div class="flash-face flash-front">
+                <p data-q></p>
+                <p class="hint">Toca para voltear · <span data-box></span></p>
+              </div>
+              <div class="flash-face flash-back">
+                <p data-a></p>
+              </div>
+            </div>
+          </div>
+          <div class="rate">
+            <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+            <button class="btn" type="button" data-rate="ok">La sé</button>
+          </div>
+        </article>
+        <article class="folio" data-folio="recursos" data-folio-title="Recursos" id="recursos" hidden>
+          <h2>Recursos del roadmap</h2>
+          <div class="resources"><a href="https://www.tutorialspoint.com/operating_system/os_overview.htm" rel="noopener" target="_blank">Operating System Overview<small>Gratis</small></a><a href="https://www.shellscript.sh/" rel="noopener" target="_blank">Shell Scripting Tutorial<small>Gratis</small></a><a href="https://www.guru99.com/powershell-tutorial.html" rel="noopener" target="_blank">PowerShell tutorial<small>Gratis</small></a><a href="https://www.freecodecamp.org/news/the-linux-commands-handbook/" rel="noopener" target="_blank">Linux Commands Handbook<small>Gratis</small></a><a href="https://itsfoss.com/getting-started-with-ubuntu/" rel="noopener" target="_blank">Getting started with Ubuntu<small>Gratis</small></a></div>
+        </article>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Casa nueva</strong><p>En una VM Ubuntu, crea usuarios, grupos y un directorio compartido con permisos correctos.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Mapa</strong><p>Dibuja (en texto) qué hay en /, /etc, /var, /home y /tmp y para qué sirve cada uno.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Salud</strong><p>Script que reporte disco, memoria y carga. Salida legible para humanos.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Cron</strong><p>Programa una tarea cada hora que rote o copie un log de ejemplo.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>POSIX estricto</strong><p>Escribe el script para que pase shellcheck y funcione en dash, no solo en bash.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Caja</strong><p>Levanta dos VMs y conéctalas por SSH con llaves, sin contraseña, con usuario no root.</p></span></label></div>
-    </section>
-
-    <section id="quiz">
-      <h2>Recuerdo activo</h2>
-      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
-      <div class="quiz"><article class="q-card" data-answer="1"><h3>¿Por qué Linux en DevOps?</h3><div class="choices"><button class="choice" type="button">Porque es el único SO</button><button class="choice" type="button">Porque la mayoría de servidores lo usan y se operan por CLI</button><button class="choice" type="button">Porque no tiene red</button><button class="choice" type="button">Porque reemplaza Git</button></div><p class="explain" hidden>La CLI es el idioma de los servidores.</p></article><article class="q-card" data-answer="1"><h3>POSIX es:</h3><div class="choices"><button class="choice" type="button">Un proveedor cloud</button><button class="choice" type="button">Una familia de estándares Unix para APIs y shells</button><button class="choice" type="button">Un firewall</button><button class="choice" type="button">Un tipo de contenedor</button></div><p class="explain" hidden>El contrato que hace portables muchos scripts.</p></article><article class="q-card" data-answer="1"><h3>¿Qué hace chmod?</h3><div class="choices"><button class="choice" type="button">Cambia el dueño de la red</button><button class="choice" type="button">Cambia permisos de un archivo</button><button class="choice" type="button">Compila el kernel</button><button class="choice" type="button">Crea un pod</button></div><p class="explain" hidden>Permisos: leer, escribir, ejecutar.</p></article><article class="q-card" data-answer="1"><h3>Una VM y un contenedor se diferencian porque:</h3><div class="choices"><button class="choice" type="button">La VM comparte el kernel del anfitrión</button><button class="choice" type="button">El contenedor comparte el kernel; la VM emula o virtualiza hardware</button><button class="choice" type="button">No hay diferencia</button><button class="choice" type="button">El contenedor siempre es Windows</button></div><p class="explain" hidden>Esa diferencia explica aislamiento y arranque.</p></article></div>
-    </section>
-
-    <section id="feynman">
-      <h2>Cerrar y enseñar</h2>
-      <p class="muted">Describe un sistema operativo como si fuera el gerente de un edificio: quién entra, quién usa el elevador, quién escribe en la pizarra.</p>
-      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
-      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
-    </section>
-
-    <section id="tarjetas">
-      <h2>Tarjetas espaciadas</h2>
-      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
-      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;Distro amigable para empezar&quot;, &quot;a&quot;: &quot;Ubuntu.&quot;}, {&quot;q&quot;: &quot;Lenguajes de scripting típicos&quot;, &quot;a&quot;: &quot;Bash, PowerShell, Python, Go.&quot;}, {&quot;q&quot;: &quot;¿Qué es POSIX?&quot;, &quot;a&quot;: &quot;Estándar de interfaces Unix portables.&quot;}, {&quot;q&quot;: &quot;Comando para listar procesos&quot;, &quot;a&quot;: &quot;ps, o systemctl para servicios.&quot;}, {&quot;q&quot;: &quot;¿Dónde suele vivir la configuración?&quot;, &quot;a&quot;: &quot;/etc&quot;}]">
-        <div>
-          <p data-q></p>
-          <p data-a hidden></p>
-          <p class="hint">Toca para revelar · <span data-box></span></p>
-        </div>
+      <div class="folio-foot">
+        <button class="btn btn-ghost" type="button" data-folio-prev>Anterior</button>
+        <p class="folio-count"><span data-folio-n>1 / 9</span><span class="tiny"> ← → </span></p>
+        <button class="btn" type="button" data-folio-next>Siguiente</button>
       </div>
-      <div class="rate">
-        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
-        <button class="btn" type="button" data-rate="ok">La sé</button>
-      </div>
-    </section>
-
-    <section id="recursos">
-      <h2>Recursos del roadmap</h2>
-      <div class="resources"><a href="https://www.tutorialspoint.com/operating_system/os_overview.htm" rel="noopener" target="_blank">Operating System Overview<small>Gratis</small></a><a href="https://www.shellscript.sh/" rel="noopener" target="_blank">Shell Scripting Tutorial<small>Gratis</small></a><a href="https://www.guru99.com/powershell-tutorial.html" rel="noopener" target="_blank">PowerShell tutorial<small>Gratis</small></a><a href="https://www.freecodecamp.org/news/the-linux-commands-handbook/" rel="noopener" target="_blank">Linux Commands Handbook<small>Gratis</small></a><a href="https://itsfoss.com/getting-started-with-ubuntu/" rel="noopener" target="_blank">Getting started with Ubuntu<small>Gratis</small></a></div>
-    </section>
-
-    <div class="week-nav"><a class="btn btn-ghost" href="semana-02.html">Semana anterior</a><a class="btn" href="semana-04.html">Siguiente</a></div>
+      <button class="page-turn" type="button" data-folio-next aria-label="Pasar página"></button>
+    </div>
   </div>
 </div>
 </main>
@@ -850,11 +849,11 @@ sudo systemctl status ssh</code></pre><h2 id="scripting">Scripting</h2><p>Bash (
         <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan).</p>
       </div>
       <nav class="footer-nav" aria-label="Sitio">
-        <a href="index.html">Inicio</a>
+        <a href="index.html">Portada</a>
         <a href="temario.html">Índice</a>
         <a href="temario.html#herramientas">Herramientas</a>
         <a href="temario.html#glosario">Glosario</a>
-        <a href="metodo.html">Método</a>
+        <a href="metodo.html">Prólogo</a>
         <a href="repaso.html">Repaso</a>
         <a href="proyecto.html">Proyecto</a>
       </nav>

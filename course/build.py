@@ -85,9 +85,9 @@ def week_num(w: dict) -> str:
 
 def nav(active: str) -> str:
     links = [
-        ("index.html", "Inicio", "inicio"),
+        ("index.html", "Portada", "inicio"),
         ("temario.html", "Índice", "temario"),
-        ("metodo.html", "Método", "metodo"),
+        ("metodo.html", "Prólogo", "metodo"),
         ("repaso.html", "Repaso", "repaso"),
         ("proyecto.html", "Proyecto", "proyecto"),
     ]
@@ -100,9 +100,9 @@ def nav(active: str) -> str:
 
 def pages_nav() -> str:
     return """
-      <a href="index.html">Inicio</a>
+      <a href="index.html">Portada</a>
       <a href="temario.html">Índice completo</a>
-      <a href="metodo.html">Método</a>
+      <a href="metodo.html">Prólogo</a>
       <a href="repaso.html">Repaso</a>
       <a href="proyecto.html">Proyecto</a>
       <a href="temario.html#modulos">Módulos</a>
@@ -298,11 +298,11 @@ def footer() -> str:
         <p>{e(COURSE['authors'])}</p>
       </div>
       <nav class="footer-nav" aria-label="Sitio">
-        <a href="index.html">Inicio</a>
+        <a href="index.html">Portada</a>
         <a href="temario.html">Índice</a>
         <a href="temario.html#herramientas">Herramientas</a>
         <a href="temario.html#glosario">Glosario</a>
-        <a href="metodo.html">Método</a>
+        <a href="metodo.html">Prólogo</a>
         <a href="repaso.html">Repaso</a>
         <a href="proyecto.html">Proyecto</a>
       </nav>
@@ -312,8 +312,9 @@ def footer() -> str:
 """
 
 
-def layout(title: str, active: str, body: str, extra_head: str = "") -> str:
+def layout(title: str, active: str, body: str, extra_head: str = "", body_class: str = "") -> str:
     page_title = f"{title} · {COURSE['title']}" if title != COURSE["title"] else f"{COURSE['title']} {COURSE['year']}"
+    body_attr = f' class="{e(body_class)}"' if body_class else ""
     return f"""<!doctype html>
 <html lang="es">
 <head>
@@ -333,7 +334,7 @@ def layout(title: str, active: str, body: str, extra_head: str = "") -> str:
   <link rel="stylesheet" href="assets/app.css"/>
   {extra_head}
 </head>
-<body>
+<body{body_attr}>
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <div class="wrap">
@@ -379,37 +380,39 @@ def week_cards() -> str:
 
 def home() -> str:
     return f"""
-<section class="hero">
-  <div class="wrap">
-    <p class="kicker">Curso abierto · Español</p>
-    <h1>{e(COURSE['tagline'])}</h1>
-    <p class="lede">{e(COURSE['lede'])}</p>
-    <div class="actions">
-      <a class="btn" href="semana-01.html">Empezar semana 1</a>
-      <a class="btn btn-ghost" href="temario.html">Índice del documento</a>
-    </div>
-    <div class="stats">
-      <div class="stat"><b>12+1</b><span>semanas y un bonus</span></div>
-      <div class="stat"><b>Estándar / Hacker</b><span>dos vías, un temario</span></div>
-      <div class="stat"><b data-total-progress>0%</b><span>tu progreso en este navegador</span></div>
+<section class="cover">
+  <div class="wrap cover-wrap">
+    <article class="cover-book">
+      <span class="cover-spine" aria-hidden="true"></span>
+      <p class="kicker">Vol. I · {e(COURSE['year'])}</p>
+      <p class="cover-vol">Doce capítulos y un bonus</p>
+      <h1>{e(COURSE['tagline'])}</h1>
+      <p class="lede">{e(COURSE['lede'])}</p>
+      <div class="actions">
+        <a class="btn" href="semana-01.html">Abrir el capítulo 1</a>
+        <a class="btn btn-ghost" href="temario.html">Leer el índice</a>
+      </div>
+      <p class="cover-meta">{e(COURSE['authors'])}</p>
+    </article>
+    <div class="cover-side">
+      <div class="stats">
+        <div class="stat"><b>12+1</b><span>capítulos</span></div>
+        <div class="stat"><b>Estándar / Hacker</b><span>dos vías, un temario</span></div>
+        <div class="stat"><b data-total-progress>0%</b><span>tu progreso en este navegador</span></div>
+      </div>
+      <p class="muted" style="margin:22px 0 10px">Antes de entrar, como en CS50: elige comodidad. No bloquea páginas; sugiere la vía del problem set.</p>
+      <div class="comfort">
+        <button type="button" data-comfort="standard"><strong>Menos cómodo</strong><br/><span class="tiny">Vía estándar. Pasos guiados, un concepto a la vez.</span></button>
+        <button type="button" data-comfort="hacker"><strong>Más cómodo</strong><br/><span class="tiny">Vía hacker. Más filo, menos andamio.</span></button>
+      </div>
     </div>
   </div>
 </section>
 <section class="section">
   <div class="wrap">
-    <h2>El mapa del oficio</h2>
-    <p class="muted">El mismo orden del roadmap original. Pulsa <strong>Buscar temario</strong> o la tecla <kbd>/</kbd> para abrir el índice completo.</p>
+    <h2>Capítulos</h2>
+    <p class="muted">El mismo orden del roadmap original. Cada placa abre un capítulo; dentro, se hojear como un libro. Pulsa <strong>Buscar temario</strong> o <kbd>/</kbd> para el índice.</p>
     {week_cards()}
-  </div>
-</section>
-<section class="section">
-  <div class="wrap">
-    <h2>Antes de entrar</h2>
-    <p class="muted">Como en CS50, elige tu comodidad. No bloquea contenido: solo sugiere la vía del problem set.</p>
-    <div class="comfort" style="margin-top:18px;max-width:720px">
-      <button type="button" data-comfort="standard"><strong>Menos cómodo</strong><br/><span class="tiny">Vía estándar. Pasos guiados, un concepto a la vez.</span></button>
-      <button type="button" data-comfort="hacker"><strong>Más cómodo</strong><br/><span class="tiny">Vía hacker. Más filo, menos andamio.</span></button>
-    </div>
   </div>
 </section>
 """
@@ -516,7 +519,7 @@ def metodo() -> str:
     )
     return f"""
 <section class="page-head"><div class="wrap">
-  <p class="kicker">Pedagogía</p>
+  <p class="kicker">Prólogo · pedagogía</p>
   <h1>Cómo se enseña aquí</h1>
   <p class="lede">Harvard CS50 baja el piso y conserva el rigor. La ciencia del aprendizaje añade recuerdo activo y repetición espaciada. Juntos, evitan el mural de herramientas que se olvida en una semana.</p>
 </div></section>
@@ -540,11 +543,6 @@ def week_page(w: dict) -> str:
     shorts = "".join(f'<article class="short"><h3>{e(t)}</h3><p>{e(b)}</p></article>' for t, b in w["shorts"])
     walk = "".join(f"<li>{e(s)}</li>" for s in w["walkthrough"])
     skills = "".join(f'<span class="chip">{e(s)}</span>' for s in w["skills"])
-    heads = "".join(
-        f'<a class="toc-sub" href="#{slugify(b[1])}">{e(b[1])}</a>'
-        for b in w["lecture"]
-        if b[0] == "h2"
-    )
 
     std = []
     for i, (t, b) in enumerate(w["pset_std"]):
@@ -573,121 +571,126 @@ def week_page(w: dict) -> str:
     label = week_label(w)
     prev_n = w["num"] - 1
     next_n = w["num"] + 1
-    prev = ""
-    nxt = ""
-    if prev_n >= 1:
-        pid = f"{prev_n:02d}"
-        prev = f'<a class="btn btn-ghost" href="semana-{pid}.html">Semana anterior</a>'
-    if next_n <= 13:
-        nid = f"{next_n:02d}"
-        nxt = f'<a class="btn" href="semana-{nid}.html">Siguiente</a>'
-    else:
-        nxt = '<a class="btn" href="proyecto.html">Proyecto final</a>'
+    prev_ch = f"semana-{prev_n:02d}.html" if prev_n >= 1 else "temario.html"
+    next_ch = f"semana-{next_n:02d}.html" if next_n <= 13 else "proyecto.html"
+    prev_label = "Capítulo anterior" if prev_n >= 1 else "Volver al índice"
+    next_label = "Capítulo siguiente" if next_n <= 13 else "Proyecto final"
 
-    course_weeks = []
+    folio_defs = [
+        ("portada", "Portada"),
+        ("conferencia", "Conferencia"),
+        ("cortos", "Cortos"),
+        ("recorrido", "Recorrido"),
+        ("pset", "Problem set"),
+        ("quiz", "Recuerdo"),
+        ("feynman", "Feynman"),
+        ("tarjetas", "Tarjetas"),
+        ("recursos", "Recursos"),
+    ]
+    folio_nav = "".join(
+        f'<button type="button" data-folio-go="{k}">{e(t)}</button>' for k, t in folio_defs
+    )
+    chapters = []
     for x in WEEKS:
         cls = ' class="is-active"' if x["id"] == w["id"] else ""
-        course_weeks.append(
+        chapters.append(
             f'<a href="semana-{x["id"]}.html"{cls}>{e(week_num(x))} {e(x["title"])}</a>'
         )
-    course_weeks = "".join(course_weeks)
-
     c, d, s = w["rubric"]
     return f"""
-<div class="wrap week-layout" data-week="{w['id']}" data-tasks="{len(w['pset_std']) + len(w['pset_hack'])}">
-  <aside class="toc">
-    <p class="n">En esta semana</p>
-    <a href="#resumen">Resumen</a>
-    <a href="#conferencia">Conferencia</a>
-    {heads}
-    <a href="#cortos">Cortos</a>
-    <a href="#recorrido">Recorrido</a>
-    <a href="#pset">Problem set</a>
-    <a href="#quiz">Recuerdo</a>
-    <a href="#feynman">Feynman</a>
-    <a href="#tarjetas">Tarjetas</a>
-    <a href="#recursos">Recursos</a>
-    <p class="n toc-k">Curso</p>
-    {course_weeks}
+<div class="wrap book" data-book data-week="{w['id']}" data-tasks="{len(w['pset_std']) + len(w['pset_hack'])}" data-prev-chapter="{prev_ch}" data-next-chapter="{next_ch}" data-prev-label="{e(prev_label)}" data-next-label="{e(next_label)}">
+  <aside class="book-rail">
+    <p class="n">Capítulo {e(week_num(w))}</p>
+    <p class="rail-title">{e(w['title'])}</p>
+    <p class="tiny">{e(label)} · {e(w['hours'])}</p>
+    <nav class="folio-nav" aria-label="Folios de este capítulo">{folio_nav}</nav>
+    <p class="n toc-k">Libro</p>
+    <nav class="chapter-nav" aria-label="Capítulos">{''.join(chapters)}</nav>
   </aside>
-  <div>
-    <section class="page-head" id="resumen">
-      <p class="kicker">{e(label)} · {e(w['hours'])}</p>
-      <h1>{e(w['title'])}</h1>
-      <p class="lede">{e(w['goal'])}</p>
-      <div class="chip-row">{skills}</div>
-      <div class="progress-box">
-        <span class="tiny" data-week-pct>0% completado</span>
+  <div class="book-stage">
+    <div class="book-paper">
+      <p class="folio-running"><span data-running>Portada</span><span class="folio-sig">{e(w['title'])}</span></p>
+      <div class="book-folios">
+        <article class="folio is-on" data-folio="portada" data-folio-title="Portada" id="resumen">
+          <p class="kicker">{e(label)} · {e(w['hours'])}</p>
+          <h1>{e(w['title'])}</h1>
+          <p class="lede">{e(w['goal'])}</p>
+          <div class="chip-row">{skills}</div>
+          <div class="progress-box">
+            <span class="tiny" data-week-pct>0% completado</span>
+          </div>
+          <div class="bar"><i data-week-bar></i></div>
+          <p class="why">{e(w['why'])}</p>
+          <p class="tiny folio-hint">Hojear con las flechas · toca la esquina o Siguiente</p>
+        </article>
+        <article class="folio" data-folio="conferencia" data-folio-title="Conferencia" id="conferencia" hidden>
+          <h2>Conferencia</h2>
+          <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+          <div class="lecture">{lecture}</div>
+        </article>
+        <article class="folio" data-folio="cortos" data-folio-title="Cortos" id="cortos" hidden>
+          <h2>Cortos</h2>
+          <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+          <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+          <div class="shorts">{shorts}</div>
+        </article>
+        <article class="folio" data-folio="recorrido" data-folio-title="Recorrido" id="recorrido" hidden>
+          <h2>Recorrido</h2>
+          <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+          <ol>{walk}</ol>
+        </article>
+        <article class="folio" data-folio="pset" data-folio-title="Problem set" id="pset" hidden>
+          <h2>Problem set</h2>
+          <p class="muted">Rúbrica: <strong>correctitud</strong> — {e(c)} · <strong>diseño</strong> — {e(d)} · <strong>estilo</strong> — {e(s)}</p>
+          <div class="tabs">
+            <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+            <button class="tab" type="button" data-tab="hacker">Hacker</button>
+          </div>
+          <div data-pane="std">{''.join(std)}</div>
+          <div data-pane="hacker" hidden>{''.join(hack)}</div>
+        </article>
+        <article class="folio" data-folio="quiz" data-folio-title="Recuerdo" id="quiz" hidden>
+          <h2>Recuerdo activo</h2>
+          <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+          <div class="quiz">{''.join(quiz)}</div>
+        </article>
+        <article class="folio" data-folio="feynman" data-folio-title="Feynman" id="feynman" hidden>
+          <h2>Cerrar y enseñar</h2>
+          <p class="muted">{e(w['feynman'])}</p>
+          <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+          <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+        </article>
+        <article class="folio" data-folio="tarjetas" data-folio-title="Tarjetas" id="tarjetas" hidden>
+          <h2>Tarjetas espaciadas</h2>
+          <p class="muted">Toca la carta para voltearla. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+          <div class="flash" data-flash data-cards="{cards_json}">
+            <div class="flash-inner">
+              <div class="flash-face flash-front">
+                <p data-q></p>
+                <p class="hint">Toca para voltear · <span data-box></span></p>
+              </div>
+              <div class="flash-face flash-back">
+                <p data-a></p>
+              </div>
+            </div>
+          </div>
+          <div class="rate">
+            <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+            <button class="btn" type="button" data-rate="ok">La sé</button>
+          </div>
+        </article>
+        <article class="folio" data-folio="recursos" data-folio-title="Recursos" id="recursos" hidden>
+          <h2>Recursos del roadmap</h2>
+          <div class="resources">{res}</div>
+        </article>
       </div>
-      <div class="bar"><i data-week-bar></i></div>
-      <p style="margin-top:18px">{e(w['why'])}</p>
-    </section>
-
-    <section id="conferencia">
-      <h2>Conferencia</h2>
-      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture">{lecture}</div>
-    </section>
-
-    <section id="cortos">
-      <h2>Cortos</h2>
-      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
-      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
-      <div class="shorts" style="margin-top:12px">{shorts}</div>
-    </section>
-
-    <section id="recorrido">
-      <h2>Recorrido</h2>
-      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
-      <ol>{walk}</ol>
-    </section>
-
-    <section id="pset">
-      <h2>Problem set</h2>
-      <p class="muted">Rúbrica: <strong>correctitud</strong> — {e(c)} · <strong>diseño</strong> — {e(d)} · <strong>estilo</strong> — {e(s)}</p>
-      <div class="tabs">
-        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
-        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      <div class="folio-foot">
+        <button class="btn btn-ghost" type="button" data-folio-prev>Anterior</button>
+        <p class="folio-count"><span data-folio-n>1 / 9</span><span class="tiny"> ← → </span></p>
+        <button class="btn" type="button" data-folio-next>Siguiente</button>
       </div>
-      <div data-pane="std">{''.join(std)}</div>
-      <div data-pane="hacker" hidden>{''.join(hack)}</div>
-    </section>
-
-    <section id="quiz">
-      <h2>Recuerdo activo</h2>
-      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
-      <div class="quiz">{''.join(quiz)}</div>
-    </section>
-
-    <section id="feynman">
-      <h2>Cerrar y enseñar</h2>
-      <p class="muted">{e(w['feynman'])}</p>
-      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
-      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
-    </section>
-
-    <section id="tarjetas">
-      <h2>Tarjetas espaciadas</h2>
-      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
-      <div class="flash" data-flash data-cards="{cards_json}">
-        <div>
-          <p data-q></p>
-          <p data-a hidden></p>
-          <p class="hint">Toca para revelar · <span data-box></span></p>
-        </div>
-      </div>
-      <div class="rate">
-        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
-        <button class="btn" type="button" data-rate="ok">La sé</button>
-      </div>
-    </section>
-
-    <section id="recursos">
-      <h2>Recursos del roadmap</h2>
-      <div class="resources">{res}</div>
-    </section>
-
-    <div class="week-nav">{prev}{nxt}</div>
+      <button class="page-turn" type="button" data-folio-next aria-label="Pasar página"></button>
+    </div>
   </div>
 </div>
 """
@@ -708,11 +711,15 @@ def repaso() -> str:
 </div></section>
 <section class="section"><div class="wrap" style="max-width:720px">
   <div class="flash" data-global-flash data-cards="{payload}">
-    <div>
-      <p class="tiny" data-src></p>
-      <p data-q></p>
-      <p data-a hidden></p>
-      <p class="hint">Toca para revelar</p>
+    <div class="flash-inner">
+      <div class="flash-face flash-front">
+        <p class="tiny" data-src></p>
+        <p data-q></p>
+        <p class="hint">Toca para voltear</p>
+      </div>
+      <div class="flash-face flash-back">
+        <p data-a></p>
+      </div>
     </div>
   </div>
   <p style="margin-top:16px"><button class="btn" type="button" data-next-card>Siguiente carta</button></p>
@@ -778,14 +785,14 @@ def main() -> None:
             shutil.copyfile(og, assets / "og.jpg")
             break
     write(OUT / ".nojekyll", "")
-    write(OUT / "index.html", layout(COURSE["title"], "inicio", home()))
-    write(OUT / "temario.html", layout("Índice", "temario", temario()))
-    write(OUT / "metodo.html", layout("Método", "metodo", metodo()))
+    write(OUT / "index.html", layout(COURSE["title"], "inicio", home(), body_class="is-cover"))
+    write(OUT / "temario.html", layout("Índice", "temario", temario(), body_class="is-front"))
+    write(OUT / "metodo.html", layout("Prólogo", "metodo", metodo(), body_class="is-front"))
     write(OUT / "repaso.html", layout("Repaso", "repaso", repaso()))
-    write(OUT / "proyecto.html", layout("Proyecto final", "proyecto", proyecto()))
+    write(OUT / "proyecto.html", layout("Proyecto final", "proyecto", proyecto(), body_class="is-front"))
     for w in WEEKS:
-        title = f"Semana {w['num']}: {w['title']}" if w["num"] != 13 else w["title"]
-        write(OUT / f"semana-{w['id']}.html", layout(title, "temario", week_page(w)))
+        title = f"Capítulo {w['num']}: {w['title']}" if w["num"] != 13 else w["title"]
+        write(OUT / f"semana-{w['id']}.html", layout(title, "temario", week_page(w), body_class="is-book"))
     print(f"Wrote {len(list(OUT.rglob('*')))} paths to {OUT}")
 
 

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/app.css"/>
   
 </head>
-<body>
+<body class="is-cover">
   <a class="skip" href="#contenido">Saltar al contenido</a>
   <header class="site-header">
     <div class="wrap">
@@ -27,7 +27,7 @@
   <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
 </svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
       <div class="header-tools">
-        <nav class="nav" id="nav"><a href="index.html" class="is-active">Inicio</a><a href="temario.html">Índice</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+        <nav class="nav" id="nav"><a href="index.html" class="is-active">Portada</a><a href="temario.html">Índice</a><a href="metodo.html">Prólogo</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
         <button class="menu-btn" type="button" data-index-open aria-controls="indice" aria-expanded="false" aria-label="Abrir índice y buscar en el temario">
           <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <svg class="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -63,9 +63,9 @@
       </div>
       <p class="tiny index-count" data-index-count></p>
       <nav class="index-pages index-pages-mobile" aria-label="Páginas">
-      <a href="index.html">Inicio</a>
+      <a href="index.html">Portada</a>
       <a href="temario.html">Índice completo</a>
-      <a href="metodo.html">Método</a>
+      <a href="metodo.html">Prólogo</a>
       <a href="repaso.html">Repaso</a>
       <a href="proyecto.html">Proyecto</a>
       <a href="temario.html#modulos">Módulos</a>
@@ -740,26 +740,38 @@
 </div>
 
   <main id="contenido">
-<section class="hero">
-  <div class="wrap">
-    <p class="kicker">Curso abierto · Español</p>
-    <h1>Esto es DevOps.</h1>
-    <p class="lede">Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas.</p>
-    <div class="actions">
-      <a class="btn" href="semana-01.html">Empezar semana 1</a>
-      <a class="btn btn-ghost" href="temario.html">Índice del documento</a>
-    </div>
-    <div class="stats">
-      <div class="stat"><b>12+1</b><span>semanas y un bonus</span></div>
-      <div class="stat"><b>Estándar / Hacker</b><span>dos vías, un temario</span></div>
-      <div class="stat"><b data-total-progress>0%</b><span>tu progreso en este navegador</span></div>
+<section class="cover">
+  <div class="wrap cover-wrap">
+    <article class="cover-book">
+      <span class="cover-spine" aria-hidden="true"></span>
+      <p class="kicker">Vol. I · 2026</p>
+      <p class="cover-vol">Doce capítulos y un bonus</p>
+      <h1>Esto es DevOps.</h1>
+      <p class="lede">Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas.</p>
+      <div class="actions">
+        <a class="btn" href="semana-01.html">Abrir el capítulo 1</a>
+        <a class="btn btn-ghost" href="temario.html">Leer el índice</a>
+      </div>
+      <p class="cover-meta">Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan).</p>
+    </article>
+    <div class="cover-side">
+      <div class="stats">
+        <div class="stat"><b>12+1</b><span>capítulos</span></div>
+        <div class="stat"><b>Estándar / Hacker</b><span>dos vías, un temario</span></div>
+        <div class="stat"><b data-total-progress>0%</b><span>tu progreso en este navegador</span></div>
+      </div>
+      <p class="muted" style="margin:22px 0 10px">Antes de entrar, como en CS50: elige comodidad. No bloquea páginas; sugiere la vía del problem set.</p>
+      <div class="comfort">
+        <button type="button" data-comfort="standard"><strong>Menos cómodo</strong><br/><span class="tiny">Vía estándar. Pasos guiados, un concepto a la vez.</span></button>
+        <button type="button" data-comfort="hacker"><strong>Más cómodo</strong><br/><span class="tiny">Vía hacker. Más filo, menos andamio.</span></button>
+      </div>
     </div>
   </div>
 </section>
 <section class="section">
   <div class="wrap">
-    <h2>El mapa del oficio</h2>
-    <p class="muted">El mismo orden del roadmap original. Pulsa <strong>Buscar temario</strong> o la tecla <kbd>/</kbd> para abrir el índice completo.</p>
+    <h2>Capítulos</h2>
+    <p class="muted">El mismo orden del roadmap original. Cada placa abre un capítulo; dentro, se hojear como un libro. Pulsa <strong>Buscar temario</strong> o <kbd>/</kbd> para el índice.</p>
     <div class="week-grid"><a class="week-card" href="semana-01.html">
   <span class="week-num">01</span>
   <span class="n">Semana 1 · 6–10 h</span>
@@ -867,16 +879,6 @@
 </a></div>
   </div>
 </section>
-<section class="section">
-  <div class="wrap">
-    <h2>Antes de entrar</h2>
-    <p class="muted">Como en CS50, elige tu comodidad. No bloquea contenido: solo sugiere la vía del problem set.</p>
-    <div class="comfort" style="margin-top:18px;max-width:720px">
-      <button type="button" data-comfort="standard"><strong>Menos cómodo</strong><br/><span class="tiny">Vía estándar. Pasos guiados, un concepto a la vez.</span></button>
-      <button type="button" data-comfort="hacker"><strong>Más cómodo</strong><br/><span class="tiny">Vía hacker. Más filo, menos andamio.</span></button>
-    </div>
-  </div>
-</section>
 </main>
   
   <footer class="site-footer">
@@ -886,11 +888,11 @@
         <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan).</p>
       </div>
       <nav class="footer-nav" aria-label="Sitio">
-        <a href="index.html">Inicio</a>
+        <a href="index.html">Portada</a>
         <a href="temario.html">Índice</a>
         <a href="temario.html#herramientas">Herramientas</a>
         <a href="temario.html#glosario">Glosario</a>
-        <a href="metodo.html">Método</a>
+        <a href="metodo.html">Prólogo</a>
         <a href="repaso.html">Repaso</a>
         <a href="proyecto.html">Proyecto</a>
       </nav>

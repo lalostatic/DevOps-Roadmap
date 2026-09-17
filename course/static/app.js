@@ -245,15 +245,6 @@ function bindWeek() {
   bindFeynman(id);
   bindFlash(id);
   paintWeekBar(id);
-
-  const tocLinks = [...document.querySelectorAll(".toc a")];
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      tocLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
-    });
-  }, { rootMargin: "-40% 0px -50% 0px" });
-  document.querySelectorAll(".week-layout section[id], .lecture [id]").forEach((sec) => observer.observe(sec));
 }
 
 function paintWeekBar(id) {
@@ -329,7 +320,6 @@ function bindFlash(weekId) {
   saveState(st);
 
   let i = 0;
-  let showA = false;
 
   function dueIndex() {
     const now = Date.now();
@@ -340,20 +330,17 @@ function bindFlash(weekId) {
 
   function render() {
     i = dueIndex();
-    showA = false;
+    stage.classList.remove("is-flipped");
     const card = cards[i];
     stage.querySelector("[data-q]").textContent = card.q;
-    stage.querySelector("[data-a]").hidden = true;
     stage.querySelector("[data-a]").textContent = card.a;
-    stage.querySelector(".hint").hidden = false;
     const meta = loadState().cards[weekId][i];
-    stage.querySelector("[data-box]").textContent = "Caja " + meta.box;
+    const box = stage.querySelector("[data-box]");
+    if (box) box.textContent = "Caja " + meta.box;
   }
 
   stage.addEventListener("click", () => {
-    showA = true;
-    stage.querySelector("[data-a]").hidden = false;
-    stage.querySelector(".hint").hidden = true;
+    stage.classList.toggle("is-flipped");
   });
 
   document.querySelectorAll("[data-rate]").forEach((btn) => {
@@ -378,18 +365,15 @@ function bindGlobalFlash() {
   if (!cards.length) return;
   let i = 0;
   function render() {
+    stage.classList.remove("is-flipped");
     const card = cards[i % cards.length];
     stage.querySelector("[data-q]").textContent = card.q;
-    const a = stage.querySelector("[data-a]");
-    a.hidden = true;
-    a.textContent = card.a;
-    stage.querySelector(".hint").hidden = false;
+    stage.querySelector("[data-a]").textContent = card.a;
     const src = stage.querySelector("[data-src]");
     if (src) src.textContent = card.src || "";
   }
   stage.addEventListener("click", () => {
-    stage.querySelector("[data-a]").hidden = false;
-    stage.querySelector(".hint").hidden = true;
+    stage.classList.toggle("is-flipped");
   });
   document.querySelector("[data-next-card]")?.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -399,8 +383,145 @@ function bindGlobalFlash() {
   render();
 }
 
+function bindBook() {
+  const book = document.querySelector("[data-book]");
+  if (!book) return;
+  const folios = [...book.querySelectorAll("[data-folio]")];
+  const keys = folios.map((f) => f.getAttribute("data-folio"));
+  let i = 0;
+  let primed = false;
+  let leavingTimer = 0;
+
+  function paintChrome() {
+    const key = keys[i];
+    book.querySelectorAll("[data-folio-go]").forEach((b) => {
+      b.classList.toggle("is-active", b.getAttribute("data-folio-go") === key);
+    });
+    const running = book.querySelector("[data-running]");
+    const title = folios[i].getAttribute("data-folio-title") || key;
+    if (running) running.textContent = title;
+    const counter = book.querySelector("[data-folio-n]");
+    if (counter) counter.textContent = i + 1 + " / " + folios.length;
+    const prevBtn = book.querySelector("[data-folio-prev]");
+    if (prevBtn) {
+      prevBtn.textContent = i === 0 ? book.getAttribute("data-prev-label") || "Anterior" : "Anterior";
+    }
+    book.querySelectorAll("[data-folio-next]").forEach((b) => {
+      if (b.classList.contains("page-turn")) return;
+      b.textContent = i === folios.length - 1 ? book.getAttribute("data-next-label") || "Siguiente" : "Siguiente";
+    });
+  }
+
+  function show(next, dir) {
+    if (next < 0) {
+      const href = book.getAttribute("data-prev-chapter");
+      if (href) location.href = href;
+      return;
+    }
+    if (next >= folios.length) {
+      const href = book.getAttribute("data-next-chapter");
+      if (href) location.href = href;
+      return;
+    }
+    if (next === i && primed) return;
+    const from = folios[i];
+    const to = folios[next];
+    i = next;
+    window.clearTimeout(leavingTimer);
+    folios.forEach((f) => {
+      if (f !== to && f !== from) {
+        f.hidden = true;
+        f.classList.remove("is-on", "is-leaving", "from-next", "from-prev");
+      }
+    });
+    to.hidden = false;
+    to.classList.remove("is-leaving");
+    if (primed && from && from !== to) {
+      from.classList.remove("is-on");
+      from.classList.add("is-leaving");
+      to.classList.add("is-on", dir > 0 ? "from-next" : "from-prev");
+      leavingTimer = window.setTimeout(() => {
+        from.hidden = true;
+        from.classList.remove("is-leaving", "from-next", "from-prev");
+      }, 280);
+    } else {
+      to.classList.add("is-on");
+      if (from && from !== to) {
+        from.hidden = true;
+        from.classList.remove("is-on");
+      }
+    }
+    primed = true;
+    paintChrome();
+    const hash = keys[i] === "portada" ? "" : "#" + keys[i];
+    const file = location.pathname.split("/").pop() || "index.html";
+    history.replaceState(null, "", file + hash);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  const hash = (location.hash || "").replace("#", "");
+  const start = keys.indexOf(hash);
+  show(start >= 0 ? start : 0, 1);
+
+  book.querySelector("[data-folio-prev]")?.addEventListener("click", () => show(i - 1, -1));
+  book.querySelectorAll("[data-folio-next]").forEach((b) => {
+    b.addEventListener("click", () => show(i + 1, 1));
+  });
+  book.querySelectorAll("[data-folio-go]").forEach((b) => {
+    b.addEventListener("click", () => {
+      const idx = keys.indexOf(b.getAttribute("data-folio-go"));
+      if (idx >= 0) show(idx, idx > i ? 1 : -1);
+    });
+  });
+
+  document.addEventListener("keydown", (ev) => {
+    if (isTypingTarget(ev.target)) return;
+    const overlay = document.getElementById("indice");
+    if (overlay && !overlay.hidden) return;
+    if (ev.key === "ArrowRight") {
+      ev.preventDefault();
+      show(i + 1, 1);
+    }
+    if (ev.key === "ArrowLeft") {
+      ev.preventDefault();
+      show(i - 1, -1);
+    }
+  });
+
+  let x0 = null;
+  book.addEventListener("touchstart", (ev) => {
+    x0 = ev.changedTouches[0].clientX;
+  }, { passive: true });
+  book.addEventListener("touchend", (ev) => {
+    if (x0 == null) return;
+    const dx = ev.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) < 56) return;
+    if (dx < 0) show(i + 1, 1);
+    else show(i - 1, -1);
+  });
+}
+
+function bindSelectFx() {
+  const sel = ".week-card, .chip, .choice, .atlas-card, .spine-body, .doc-toc a, .btn, .tab, .menu-btn, .folio-nav button, .comfort button, .nav a";
+  document.addEventListener("pointerdown", (ev) => {
+    const el = ev.target.closest(sel);
+    if (!el) return;
+    el.classList.add("is-pressed");
+  });
+  const clear = () => document.querySelectorAll(".is-pressed").forEach((el) => el.classList.remove("is-pressed"));
+  document.addEventListener("pointerup", clear);
+  document.addEventListener("pointercancel", clear);
+  document.addEventListener("pointerleave", (ev) => {
+    if (ev.target === document.documentElement) clear();
+  });
+}
+
 setNav();
 paintHomeProgress();
 bindComfort();
 bindWeek();
+bindBook();
 bindGlobalFlash();
+bindSelectFx();
+

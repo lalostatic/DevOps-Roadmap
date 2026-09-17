@@ -31,8 +31,10 @@ La salida queda en `docs/`. No hay dependencias: solo Python 3 de la biblioteca 
 
 ## Método
 
+El curso se lee como un **libro**: portada, índice, prólogo y capítulos. Dentro de cada capítulo se hojear (flechas, esquina o Siguiente).
+
 1. Elige comodidad (menos / más cómodo).
-2. Lee la conferencia (caja negra primero).
+2. Abre el capítulo y pasa folios: conferencia → cortos → recorrido → problem set → recuerdo → Feynman → tarjetas.
 3. Cortos de un concepto.
 4. Recorrido para arrancar.
 5. Problem set estándar o hacker.
