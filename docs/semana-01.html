@@ -26,15 +26,726 @@
   <path d="M8 16c0-4 3-7 8-7s8 3 8 7-3 7-8 7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round"/>
   <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
 </svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
-      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-      <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Temario</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+      <div class="header-tools">
+        <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Índice</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+        <button class="menu-btn" type="button" data-index-open aria-controls="indice" aria-expanded="false" aria-label="Abrir índice y buscar en el temario">
+          <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span class="menu-short">Menú</span>
+          <span class="menu-long">Buscar temario</span>
+          <kbd>/</kbd>
+        </button>
+      </div>
     </div>
   </header>
+  
+<div class="index-overlay" id="indice" hidden>
+  <div class="index-sheet" role="dialog" aria-modal="true" aria-labelledby="indice-title">
+    <div class="index-masthead">
+      <div>
+        <p class="kicker">Documento · 12 semanas + bonus</p>
+        <h2 id="indice-title">Índice del curso</h2>
+      </div>
+      <button class="btn btn-ghost" type="button" data-index-close>Cerrar</button>
+    </div>
+    <div class="index-sheet-body">
+      <label class="index-search">
+        <span class="sr-only">Buscar en el índice</span>
+        <input type="search" data-index-q placeholder="Buscar Git, DNS, Terraform, Scrum, Prometheus…" autocomplete="off"/>
+      </label>
+      <div class="index-tabs" role="tablist" aria-label="Filtrar el índice">
+        <button type="button" role="tab" data-index-tab="todo" class="is-on" aria-selected="true">Todo</button>
+        <button type="button" role="tab" data-index-tab="semana" aria-selected="false">Semanas</button>
+        <button type="button" role="tab" data-index-tab="herramienta" aria-selected="false">Herramientas</button>
+        <button type="button" role="tab" data-index-tab="libro" aria-selected="false">Libros</button>
+        <button type="button" role="tab" data-index-tab="glosario" aria-selected="false">Glosario</button>
+        <button type="button" role="tab" data-index-tab="recurso" aria-selected="false">Recursos</button>
+      </div>
+      <p class="tiny index-count" data-index-count></p>
+      <nav class="index-pages index-pages-mobile" aria-label="Páginas">
+      <a href="index.html">Inicio</a>
+      <a href="temario.html">Índice completo</a>
+      <a href="metodo.html">Método</a>
+      <a href="repaso.html">Repaso</a>
+      <a href="proyecto.html">Proyecto</a>
+      <a href="temario.html#modulos">Módulos</a>
+      <a href="temario.html#herramientas">Herramientas</a>
+      <a href="temario.html#biblioteca">Biblioteca</a>
+      <a href="temario.html#glosario">Glosario</a>
+      <a href="temario.html#recursos">Recursos</a>
+    </nav>
+      <div class="index-body">
+        <section data-index-section="semana">
+          <h3 class="index-sec">Semanas</h3>
+          <div class="spine"><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="01" data-tasks="4" data-hay="git dejar de temerle al historial. toda tu aplicación y tu infraestructura vivirán en un repositorio. comandos base pull request ramas fusión commit rama pull request conflicto atlassian git tutorials learn git branching pro git (libro) codecademy learn git git immersion la caja negra lo que debes saber hacer comandos que sí vas a usar ramas, fusión y pull requests errores comunes ¿git es lo mismo que github? ¿qué es un commit? ¿qué es una rama? nombra tres comandos base ¿por qué un pr?">
+  <a class="spine-dot" href="semana-01.html" aria-hidden="true"><span>01</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 1 · 6–10 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-01.html">Git</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-01.html#conferencia">Comandos base</a><a class="chip" href="semana-01.html#conferencia">Pull request</a><a class="chip" href="semana-01.html#conferencia">Ramas</a><a class="chip" href="semana-01.html#conferencia">Fusión</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="02" data-tasks="4" data-hay="un lenguaje de programación escribir automatización, no solo pulsar botones. elige un lenguaje y llévalo a la fluidez básica. python go javascript python go javascript prueba pequeña automate the boring stuff python crash course extras eloquent javascript go by example learn go with tests elige uno. domínalo. conceptos que no son opcionales automatizar lo aburrido lenguajes típicos en devops ¿qué aprender primero? ¿para qué se usa? ¿qué es idempotencia? ¿dónde van los secretos?">
+  <a class="spine-dot" href="semana-02.html" aria-hidden="true"><span>02</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 2 · 10–16 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-02.html">Un lenguaje de programación</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-02.html#conferencia">Python</a><a class="chip" href="semana-02.html#conferencia">Go</a><a class="chip" href="semana-02.html#conferencia">JavaScript</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="03" data-tasks="4" data-hay="linux y scripting sentirte en casa en un servidor ubuntu. la terminal deja de ser un lugar hostil. comandos de shell sistema de archivos red virtualización posix shell permisos procesos virtualización operating system overview shell scripting tutorial powershell tutorial linux commands handbook getting started with ubuntu el sistema operativo como puente el sistema de archivos no es una carpeta bonita scripting distro amigable para empezar lenguajes de scripting típicos ¿qué es posix? comando para listar procesos ¿dónde suele vivir la configuración?">
+  <a class="spine-dot" href="semana-03.html" aria-hidden="true"><span>03</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 3 · 10–14 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-03.html">Linux y scripting</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-03.html#conferencia">Comandos de shell</a><a class="chip" href="semana-03.html#conferencia">Sistema de archivos</a><a class="chip" href="semana-03.html#conferencia">Red</a><a class="chip" href="semana-03.html#conferencia">Virtualización</a><a class="chip" href="semana-03.html#conferencia">POSIX</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="04" data-tasks="4" data-hay="redes y seguridad dejar de tratar la red como magia. empaquetar, nombrar, cifrar y filtrar con intención. modelo osi dns http ssh herramientas de seguridad dns puertos ssh firewall osi model (cloudflare) how dns works how https works computer networking: a top-down approach professor messer network+ protocolo: un contrato de conversación lo que debes poder explicar seguridad como hábito ¿qué es un protocolo? capas que debes dominar puerto de https herramienta de shell remoto modelo de referencia clásico">
+  <a class="spine-dot" href="semana-04.html" aria-hidden="true"><span>04</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 4 · 10–14 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-04.html">Redes y seguridad</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-04.html#conferencia">Modelo OSI</a><a class="chip" href="semana-04.html#conferencia">DNS</a><a class="chip" href="semana-04.html#conferencia">HTTP</a><a class="chip" href="semana-04.html#conferencia">SSH</a><a class="chip" href="semana-04.html#conferencia">Herramientas de seguridad</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="05" data-tasks="4" data-hay="administración de servidores mantener un servidor rápido, vivo y aburrido — lo aburrido es un cumplido en operaciones. reverse proxy servidor de caché firewall servidor web reverse proxy caché firewall load balancing what is a reverse proxy? what is load balancing? the nginx handbook tres objetivos proxies, cachés y servidores web operar metas de server management reverse vs forward proxy ejemplos de servidor web ¿qué es un caché? señal típica de backend caído">
+  <a class="spine-dot" href="semana-05.html" aria-hidden="true"><span>05</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 5 · 8–12 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-05.html">Administración de servidores</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-05.html#conferencia">Reverse proxy</a><a class="chip" href="semana-05.html#conferencia">Servidor de caché</a><a class="chip" href="semana-05.html#conferencia">Firewall</a><a class="chip" href="semana-05.html#conferencia">Servidor web</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="06" data-tasks="4" data-hay="contenedores empaquetar una app para que corra igual en tu laptop y en un servidor. correr contenedores dockerfiles red docker compose imagen vs contenedor volumen red bridge usuario no root what are containers? (google) container learning path docker tutorial (youtube) qué es un contenedor lo que debes practicar definición de contenedor herramienta dominante qué incluye una imagen compose volumen">
+  <a class="spine-dot" href="semana-06.html" aria-hidden="true"><span>06</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 6 · 10–14 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-06.html">Contenedores</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-06.html#conferencia">Correr contenedores</a><a class="chip" href="semana-06.html#conferencia">Dockerfiles</a><a class="chip" href="semana-06.html#conferencia">Red</a><a class="chip" href="semana-06.html#conferencia">Docker Compose</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="07" data-tasks="4" data-hay="orquestación de contenedores dejar de cuidar contenedores a mano. kubernetes (o similar) declara el estado deseado y el clúster se esfuerza por cumplirlo. componentes cli namespaces administrar despliegue estado deseado kubectl namespace rollout kubernetes in 4 hours (video) how kubernetes came to be kodekloud kubernetes path qué orquesta un orquestador kubernetes, sin mito qué automatiza la orquestación sistema dominante átomo de k8s cli namespace">
+  <a class="spine-dot" href="semana-07.html" aria-hidden="true"><span>07</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 7 · 12–18 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-07.html">Orquestación de contenedores</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-07.html#conferencia">Componentes</a><a class="chip" href="semana-07.html#conferencia">CLI</a><a class="chip" href="semana-07.html#conferencia">Namespaces</a><a class="chip" href="semana-07.html#conferencia">Administrar</a><a class="chip" href="semana-07.html#conferencia">Despliegue</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="08" data-tasks="4" data-hay="infraestructura como código crear y destruir entornos con un comando, no con una checklist de la wiki. aprovisionamiento gestión de configuración service mesh declarativo estado módulos drift basic terms of iac comprehensive guide to terraform dos oficios que se confunden service mesh, en una idea iac herramienta de provisioning más citada configuration management service mesh plan vs apply">
+  <a class="spine-dot" href="semana-08.html" aria-hidden="true"><span>08</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 8 · 10–16 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-08.html">Infraestructura como código</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-08.html#conferencia">Aprovisionamiento</a><a class="chip" href="semana-08.html#conferencia">Gestión de configuración</a><a class="chip" href="semana-08.html#conferencia">Service mesh</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="09" data-tasks="4" data-hay="ci/cd cada cambio en main se construye, se prueba y puede llegar a un entorno sin un ritual heroico. montar el servidor integración herramientas de pipeline artefacto gates ambientes secrets del ci what is a ci/cd pipeline? jenkins from zero to hero gitlab ci tutorials el tubo lo que debes montar ci cd pipeline herramientas típicas regla de oro del artefacto">
+  <a class="spine-dot" href="semana-09.html" aria-hidden="true"><span>09</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 9 · 10–14 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-09.html">CI/CD</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-09.html#conferencia">Montar el servidor</a><a class="chip" href="semana-09.html#conferencia">Integración</a><a class="chip" href="semana-09.html#conferencia">Herramientas de pipeline</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="10" data-tasks="4" data-hay="monitoreo y observabilidad ver el sistema en tiempo real. si duele, que duela con datos, no con intuición. infraestructura aplicación logs opentelemetry prometheus grafana logs opentelemetry what is observability? devops monitoring (atlassian) basic vs advanced monitoring de verde/rojo a las tres señales qué montar monitoreo prometheus grafana tres pilares opentelemetry">
+  <a class="spine-dot" href="semana-10.html" aria-hidden="true"><span>10</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 10 · 8–12 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-10.html">Monitoreo y observabilidad</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-10.html#conferencia">Infraestructura</a><a class="chip" href="semana-10.html#conferencia">Aplicación</a><a class="chip" href="semana-10.html#conferencia">Logs</a><a class="chip" href="semana-10.html#conferencia">OpenTelemetry</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="11" data-tasks="4" data-hay="un proveedor cloud pensar en apis de infraestructura, no en un único servidor bajo el escritorio. iaas, paas, saas disponibilidad administración diseño e implementación iam región y zona security group cuenta y organización az-900 (microsoft) aws cloud practitioner (udemy) a cloud guru aws path elige uno y baja a tierra lo que debes practicar nubes más comunes iaas / paas / saas qué practicar región regla de oro">
+  <a class="spine-dot" href="semana-11.html" aria-hidden="true"><span>11</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 11 · 12–20 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-11.html">Un proveedor cloud</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-11.html#conferencia">IaaS, PaaS, SaaS</a><a class="chip" href="semana-11.html#conferencia">Disponibilidad</a><a class="chip" href="semana-11.html#conferencia">Administración</a><a class="chip" href="semana-11.html#conferencia">Diseño e implementación</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="12" data-tasks="4" data-hay="prácticas de ingeniería de software trabajar en un equipo ágil sin ser el cuello de botella ni el héroe solitario. scrum backlog calidad integrada comunicación troubleshooting backlog definición de terminado pirámide de tests postmortem ways to learn scrum sdlc tutorial automation testing for beginners el ciclo y el ritual comunicación y troubleshooting scrum sdlc built-in quality ci y tests postmortem">
+  <a class="spine-dot" href="semana-12.html" aria-hidden="true"><span>12</span></a>
+  <div class="spine-body">
+    <p class="n">Semana 12 · 6–10 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-12.html">Prácticas de ingeniería de software</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-12.html#conferencia">Scrum</a><a class="chip" href="semana-12.html#conferencia">Backlog</a><a class="chip" href="semana-12.html#conferencia">Calidad integrada</a><a class="chip" href="semana-12.html#conferencia">Comunicación</a><a class="chip" href="semana-12.html#conferencia">Troubleshooting</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article><article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="13" data-tasks="4" data-hay="bonus: devsecops meter la seguridad en el tubo, no al final como un veto sorpresa. sast/dast secretos políticas supply chain secretos sbom imagen política repo original del roadmap owasp top 10 how https works izquierda, pero con juicio devsecops sast vs dast sca sbom regla de secretos">
+  <a class="spine-dot" href="semana-13.html" aria-hidden="true"><span>B</span></a>
+  <div class="spine-body">
+    <p class="n">Bonus · 6–10 h · <span data-pct>0%</span></p>
+    <h3><a href="semana-13.html">Bonus: DevSecOps</a></h3>
+    
+    <div class="chip-row"><a class="chip" href="semana-13.html#conferencia">SAST/DAST</a><a class="chip" href="semana-13.html#conferencia">Secretos</a><a class="chip" href="semana-13.html#conferencia">Políticas</a><a class="chip" href="semana-13.html#conferencia">Supply chain</a></div>
+    
+    <div class="bar"><i></i></div>
+  </div>
+</article></div>
+        </section>
+        <section data-index-section="herramienta">
+          <h3 class="index-sec">Caja de herramientas</h3>
+          <div class="atlas-grid"><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="seguimiento del trabajo asana jira prácticas">
+  <p class="n">Herramienta · Prácticas</p>
+  <h3><a href="semana-12.html">Seguimiento del trabajo</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-12.html">Asana</a><a class="chip" href="semana-12.html">Jira</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="control de versiones git github gitlab git">
+  <p class="n">Herramienta · Git</p>
+  <h3><a href="semana-01.html">Control de versiones</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-01.html">Git</a><a class="chip" href="semana-01.html">GitHub</a><a class="chip" href="semana-01.html">GitLab</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="ci/cd jenkins github actions gitlab ci ci/cd">
+  <p class="n">Herramienta · CI/CD</p>
+  <h3><a href="semana-09.html">CI/CD</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-09.html">Jenkins</a><a class="chip" href="semana-09.html">GitHub Actions</a><a class="chip" href="semana-09.html">GitLab CI</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="análisis de código sonarqube devsecops">
+  <p class="n">Herramienta · DevSecOps</p>
+  <h3><a href="semana-13.html">Análisis de código</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-13.html">SonarQube</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="artefactos artifactory registro de imágenes ci/cd">
+  <p class="n">Herramienta · CI/CD</p>
+  <h3><a href="semana-09.html">Artefactos</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-09.html">Artifactory</a><a class="chip" href="semana-09.html">Registro de imágenes</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="infraestructura como código terraform ansible puppet chef iac">
+  <p class="n">Herramienta · IaC</p>
+  <h3><a href="semana-08.html">Infraestructura como código</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-08.html">Terraform</a><a class="chip" href="semana-08.html">Ansible</a><a class="chip" href="semana-08.html">Puppet</a><a class="chip" href="semana-08.html">Chef</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="contenedores y orquestación docker kubernetes helm contenedores">
+  <p class="n">Herramienta · Contenedores</p>
+  <h3><a href="semana-06.html">Contenedores y orquestación</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-06.html">Docker</a><a class="chip" href="semana-06.html">Kubernetes</a><a class="chip" href="semana-06.html">Helm</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="observabilidad prometheus grafana opentelemetry monitoreo">
+  <p class="n">Herramienta · Monitoreo</p>
+  <h3><a href="semana-10.html">Observabilidad</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-10.html">Prometheus</a><a class="chip" href="semana-10.html">Grafana</a><a class="chip" href="semana-10.html">OpenTelemetry</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="nube aws azure google cloud cloud">
+  <p class="n">Herramienta · Cloud</p>
+  <h3><a href="semana-11.html">Nube</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-11.html">AWS</a><a class="chip" href="semana-11.html">Azure</a><a class="chip" href="semana-11.html">Google Cloud</a></div>
+</article><article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="seguridad sast dast vault trivy devsecops">
+  <p class="n">Herramienta · DevSecOps</p>
+  <h3><a href="semana-13.html">Seguridad</a></h3>
+  <div class="chip-row"><a class="chip" href="semana-13.html">SAST</a><a class="chip" href="semana-13.html">DAST</a><a class="chip" href="semana-13.html">Vault</a><a class="chip" href="semana-13.html">Trivy</a></div>
+</article></div>
+        </section>
+        <section data-index-section="libro">
+          <h3 class="index-sec">Biblioteca corta</h3>
+          <div class="atlas-grid"><article class="atlas-card" data-index-item data-index-kind="libro" data-hay="the devops handbook kim, humble, debois, willis">
+  <p class="n">Biblioteca</p>
+  <h3>The DevOps Handbook</h3>
+  <p>Kim, Humble, Debois, Willis</p>
+</article><article class="atlas-card" data-index-item data-index-kind="libro" data-hay="accelerate forsgren, humble, kim">
+  <p class="n">Biblioteca</p>
+  <h3>Accelerate</h3>
+  <p>Forsgren, Humble, Kim</p>
+</article><article class="atlas-card" data-index-item data-index-kind="libro" data-hay="the phoenix project kim, behr, spafford">
+  <p class="n">Biblioteca</p>
+  <h3>The Phoenix Project</h3>
+  <p>Kim, Behr, Spafford</p>
+</article><article class="atlas-card" data-index-item data-index-kind="libro" data-hay="site reliability engineering google / beyer et al.">
+  <p class="n">Biblioteca</p>
+  <h3>Site Reliability Engineering</h3>
+  <p>Google / Beyer et al.</p>
+</article><article class="atlas-card" data-index-item data-index-kind="libro" data-hay="continuous delivery humble, farley">
+  <p class="n">Biblioteca</p>
+  <h3>Continuous Delivery</h3>
+  <p>Humble, Farley</p>
+</article><article class="atlas-card" data-index-item data-index-kind="libro" data-hay="team topologies skelton, pais">
+  <p class="n">Biblioteca</p>
+  <h3>Team Topologies</h3>
+  <p>Skelton, Pais</p>
+</article></div>
+        </section>
+        <section data-index-section="glosario">
+          <h3 class="index-sec">Glosario</h3>
+          <div class="gloss-list"><article class="gloss" data-index-item data-index-kind="glosario" data-hay="built-in quality la calidad no se inspecciona al final: se construye.">
+  <h3>Built-in quality</h3>
+  <p>La calidad no se inspecciona al final: se construye.</p>
+  <a class="tiny" href="semana-12.html">Semana 12</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="capas que debes dominar ip, puertos, tcp/udp, dns, http, ssh, firewall.">
+  <h3>Capas que debes dominar</h3>
+  <p>IP, puertos, TCP/UDP, DNS, HTTP, SSH, firewall.</p>
+  <a class="tiny" href="semana-04.html">Semana 4</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="cd entregar o desplegar de forma continua.">
+  <h3>CD</h3>
+  <p>Entregar o desplegar de forma continua.</p>
+  <a class="tiny" href="semana-09.html">Semana 9</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="ci integrar y probar en cada cambio.">
+  <h3>CI</h3>
+  <p>Integrar y probar en cada cambio.</p>
+  <a class="tiny" href="semana-09.html">Semana 9</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="ci y tests la automatización de pruebas vive en el pipeline.">
+  <h3>CI y tests</h3>
+  <p>La automatización de pruebas vive en el pipeline.</p>
+  <a class="tiny" href="semana-12.html">Semana 12</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="cli kubectl.">
+  <h3>CLI</h3>
+  <p>kubectl.</p>
+  <a class="tiny" href="semana-07.html">Semana 7</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="comando para listar procesos ps, o systemctl para servicios.">
+  <h3>Comando para listar procesos</h3>
+  <p>ps, o systemctl para servicios.</p>
+  <a class="tiny" href="semana-03.html">Semana 3</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="compose varios contenedores, una definición yaml.">
+  <h3>Compose</h3>
+  <p>Varios contenedores, una definición YAML.</p>
+  <a class="tiny" href="semana-06.html">Semana 6</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="configuration management ansible, chef, puppet, y similares.">
+  <h3>Configuration management</h3>
+  <p>Ansible, Chef, Puppet, y similares.</p>
+  <a class="tiny" href="semana-08.html">Semana 8</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="definición de contenedor unidad que empaca código y dependencias para correr igual en cualquier sitio.">
+  <h3>Definición de contenedor</h3>
+  <p>Unidad que empaca código y dependencias para correr igual en cualquier sitio.</p>
+  <a class="tiny" href="semana-06.html">Semana 6</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="devsecops seguridad integrada al ciclo devops.">
+  <h3>DevSecOps</h3>
+  <p>Seguridad integrada al ciclo DevOps.</p>
+  <a class="tiny" href="semana-13.html">Bonus</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="distro amigable para empezar ubuntu.">
+  <h3>Distro amigable para empezar</h3>
+  <p>Ubuntu.</p>
+  <a class="tiny" href="semana-03.html">Semana 3</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="ejemplos de servidor web nginx, apache, iis.">
+  <h3>Ejemplos de servidor web</h3>
+  <p>Nginx, Apache, IIS.</p>
+  <a class="tiny" href="semana-05.html">Semana 5</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="grafana visualización de datos.">
+  <h3>Grafana</h3>
+  <p>Visualización de datos.</p>
+  <a class="tiny" href="semana-10.html">Semana 10</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="herramienta de provisioning más citada terraform.">
+  <h3>Herramienta de provisioning más citada</h3>
+  <p>Terraform.</p>
+  <a class="tiny" href="semana-08.html">Semana 8</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="herramienta de shell remoto ssh.">
+  <h3>Herramienta de shell remoto</h3>
+  <p>SSH.</p>
+  <a class="tiny" href="semana-04.html">Semana 4</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="herramienta dominante docker.">
+  <h3>Herramienta dominante</h3>
+  <p>Docker.</p>
+  <a class="tiny" href="semana-06.html">Semana 6</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="herramientas típicas jenkins, github actions, gitlab ci.">
+  <h3>Herramientas típicas</h3>
+  <p>Jenkins, GitHub Actions, GitLab CI.</p>
+  <a class="tiny" href="semana-09.html">Semana 9</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="iaas / paas / saas infraestructura, plataforma, software.">
+  <h3>IaaS / PaaS / SaaS</h3>
+  <p>Infraestructura, plataforma, software.</p>
+  <a class="tiny" href="semana-11.html">Semana 11</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="iac técnicas y herramientas para definir infraestructura en código.">
+  <h3>IaC</h3>
+  <p>Técnicas y herramientas para definir infraestructura en código.</p>
+  <a class="tiny" href="semana-08.html">Semana 8</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="lenguajes de scripting típicos bash, powershell, python, go.">
+  <h3>Lenguajes de scripting típicos</h3>
+  <p>Bash, PowerShell, Python, Go.</p>
+  <a class="tiny" href="semana-03.html">Semana 3</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="lenguajes típicos en devops python, go, javascript.">
+  <h3>Lenguajes típicos en DevOps</h3>
+  <p>Python, Go, JavaScript.</p>
+  <a class="tiny" href="semana-02.html">Semana 2</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="metas de server management confiabilidad, seguridad, escala.">
+  <h3>Metas de server management</h3>
+  <p>Confiabilidad, seguridad, escala.</p>
+  <a class="tiny" href="semana-05.html">Semana 5</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="modelo de referencia clásico osi, útil como mapa; tcp/ip es lo que corre.">
+  <h3>Modelo de referencia clásico</h3>
+  <p>OSI, útil como mapa; TCP/IP es lo que corre.</p>
+  <a class="tiny" href="semana-04.html">Semana 4</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="monitoreo vigilar apps, servicios e infra en tiempo real.">
+  <h3>Monitoreo</h3>
+  <p>Vigilar apps, servicios e infra en tiempo real.</p>
+  <a class="tiny" href="semana-10.html">Semana 10</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="namespace partición lógica del clúster.">
+  <h3>Namespace</h3>
+  <p>Partición lógica del clúster.</p>
+  <a class="tiny" href="semana-07.html">Semana 7</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="nombra tres comandos base clone, add/commit, switch/branch, merge, push/pull.">
+  <h3>Nombra tres comandos base</h3>
+  <p>clone, add/commit, switch/branch, merge, push/pull.</p>
+  <a class="tiny" href="semana-01.html">Semana 1</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="nubes más comunes aws, azure, google cloud.">
+  <h3>Nubes más comunes</h3>
+  <p>AWS, Azure, Google Cloud.</p>
+  <a class="tiny" href="semana-11.html">Semana 11</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="opentelemetry estándar para emitir telemetría.">
+  <h3>OpenTelemetry</h3>
+  <p>Estándar para emitir telemetría.</p>
+  <a class="tiny" href="semana-10.html">Semana 10</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="pipeline cadena automatizada de esas etapas.">
+  <h3>Pipeline</h3>
+  <p>Cadena automatizada de esas etapas.</p>
+  <a class="tiny" href="semana-09.html">Semana 9</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="plan vs apply ver el diff; luego mutar el mundo.">
+  <h3>plan vs apply</h3>
+  <p>Ver el diff; luego mutar el mundo.</p>
+  <a class="tiny" href="semana-08.html">Semana 8</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="postmortem aprender del incidente sin cazar brujas.">
+  <h3>Postmortem</h3>
+  <p>Aprender del incidente sin cazar brujas.</p>
+  <a class="tiny" href="semana-12.html">Semana 12</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="prometheus sistema de métricas por pull.">
+  <h3>Prometheus</h3>
+  <p>Sistema de métricas por pull.</p>
+  <a class="tiny" href="semana-10.html">Semana 10</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="puerto de https 443.">
+  <h3>Puerto de HTTPS</h3>
+  <p>443.</p>
+  <a class="tiny" href="semana-04.html">Semana 4</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="qué automatiza la orquestación despliegue, gestión, escala y red.">
+  <h3>Qué automatiza la orquestación</h3>
+  <p>Despliegue, gestión, escala y red.</p>
+  <a class="tiny" href="semana-07.html">Semana 7</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="qué incluye una imagen código, runtime, herramientas, librerías y ajustes.">
+  <h3>Qué incluye una imagen</h3>
+  <p>Código, runtime, herramientas, librerías y ajustes.</p>
+  <a class="tiny" href="semana-06.html">Semana 6</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="qué practicar iam, redes, vms, disponibilidad.">
+  <h3>Qué practicar</h3>
+  <p>IAM, redes, VMs, disponibilidad.</p>
+  <a class="tiny" href="semana-11.html">Semana 11</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="región conjunto de zonas en una geografía.">
+  <h3>Región</h3>
+  <p>Conjunto de zonas en una geografía.</p>
+  <a class="tiny" href="semana-11.html">Semana 11</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="regla de oro mfa, no-root diario, apaga el lab.">
+  <h3>Regla de oro</h3>
+  <p>MFA, no-root diario, apaga el lab.</p>
+  <a class="tiny" href="semana-11.html">Semana 11</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="regla de oro del artefacto construye una vez, despliega muchas.">
+  <h3>Regla de oro del artefacto</h3>
+  <p>Construye una vez, despliega muchas.</p>
+  <a class="tiny" href="semana-09.html">Semana 9</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="regla de secretos nunca en git, siempre rotables.">
+  <h3>Regla de secretos</h3>
+  <p>Nunca en Git, siempre rotables.</p>
+  <a class="tiny" href="semana-13.html">Bonus</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="reverse vs forward proxy inverso: fachada de tus servicios. directo: salida de clientes.">
+  <h3>Reverse vs forward proxy</h3>
+  <p>Inverso: fachada de tus servicios. Directo: salida de clientes.</p>
+  <a class="tiny" href="semana-05.html">Semana 5</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="sast vs dast código vs app en ejecución.">
+  <h3>SAST vs DAST</h3>
+  <p>Código vs app en ejecución.</p>
+  <a class="tiny" href="semana-13.html">Bonus</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="sbom inventario del artefacto.">
+  <h3>SBOM</h3>
+  <p>Inventario del artefacto.</p>
+  <a class="tiny" href="semana-13.html">Bonus</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="sca riesgo en dependencias.">
+  <h3>SCA</h3>
+  <p>Riesgo en dependencias.</p>
+  <a class="tiny" href="semana-13.html">Bonus</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="scrum marco ágil: backlog, sprints, inspección y adaptación.">
+  <h3>Scrum</h3>
+  <p>Marco ágil: backlog, sprints, inspección y adaptación.</p>
+  <a class="tiny" href="semana-12.html">Semana 12</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="sdlc fases del ciclo de vida del software.">
+  <h3>SDLC</h3>
+  <p>Fases del ciclo de vida del software.</p>
+  <a class="tiny" href="semana-12.html">Semana 12</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="service mesh capa para mtls, tráfico y telemetría entre servicios.">
+  <h3>Service mesh</h3>
+  <p>Capa para mTLS, tráfico y telemetría entre servicios.</p>
+  <a class="tiny" href="semana-08.html">Semana 8</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="señal típica de backend caído 502/504 en el proxy.">
+  <h3>Señal típica de backend caído</h3>
+  <p>502/504 en el proxy.</p>
+  <a class="tiny" href="semana-05.html">Semana 5</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="sistema dominante kubernetes.">
+  <h3>Sistema dominante</h3>
+  <p>Kubernetes.</p>
+  <a class="tiny" href="semana-07.html">Semana 7</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="tres pilares métricas, logs, trazas.">
+  <h3>Tres pilares</h3>
+  <p>Métricas, logs, trazas.</p>
+  <a class="tiny" href="semana-10.html">Semana 10</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="volumen persistencia fuera del ciclo de vida del contenedor.">
+  <h3>Volumen</h3>
+  <p>Persistencia fuera del ciclo de vida del contenedor.</p>
+  <a class="tiny" href="semana-06.html">Semana 6</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿dónde suele vivir la configuración? /etc">
+  <h3>¿Dónde suele vivir la configuración?</h3>
+  <p>/etc</p>
+  <a class="tiny" href="semana-03.html">Semana 3</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿dónde van los secretos? en un gestor de secretos o variables de entorno, nunca en el repo.">
+  <h3>¿Dónde van los secretos?</h3>
+  <p>En un gestor de secretos o variables de entorno, nunca en el repo.</p>
+  <a class="tiny" href="semana-02.html">Semana 2</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿git es lo mismo que github? no. git es el motor local. github/gitlab son plataformas de colaboración.">
+  <h3>¿Git es lo mismo que GitHub?</h3>
+  <p>No. Git es el motor local. GitHub/GitLab son plataformas de colaboración.</p>
+  <a class="tiny" href="semana-01.html">Semana 1</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿para qué se usa? automatizar tareas de desarrollo y operaciones.">
+  <h3>¿Para qué se usa?</h3>
+  <p>Automatizar tareas de desarrollo y operaciones.</p>
+  <a class="tiny" href="semana-02.html">Semana 2</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿por qué un pr? para revisar correctitud, diseño y estilo antes de tocar la rama principal.">
+  <h3>¿Por qué un PR?</h3>
+  <p>Para revisar correctitud, diseño y estilo antes de tocar la rama principal.</p>
+  <a class="tiny" href="semana-01.html">Semana 1</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué aprender primero? sintaxis, if/else, bucles, estructuras de datos, funciones.">
+  <h3>¿Qué aprender primero?</h3>
+  <p>Sintaxis, if/else, bucles, estructuras de datos, funciones.</p>
+  <a class="tiny" href="semana-02.html">Semana 2</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué es idempotencia? ejecutar de nuevo no rompe ni duplica el estado deseado.">
+  <h3>¿Qué es idempotencia?</h3>
+  <p>Ejecutar de nuevo no rompe ni duplica el estado deseado.</p>
+  <a class="tiny" href="semana-02.html">Semana 2</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué es posix? estándar de interfaces unix portables.">
+  <h3>¿Qué es POSIX?</h3>
+  <p>Estándar de interfaces Unix portables.</p>
+  <a class="tiny" href="semana-03.html">Semana 3</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué es un caché? copia temporal de respuestas caras para ir más rápido.">
+  <h3>¿Qué es un caché?</h3>
+  <p>Copia temporal de respuestas caras para ir más rápido.</p>
+  <a class="tiny" href="semana-05.html">Semana 5</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué es un commit? una instantánea inmutable del proyecto, con mensaje, autor y padre.">
+  <h3>¿Qué es un commit?</h3>
+  <p>Una instantánea inmutable del proyecto, con mensaje, autor y padre.</p>
+  <a class="tiny" href="semana-01.html">Semana 1</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué es un protocolo? reglas para transmitir datos entre dispositivos distintos.">
+  <h3>¿Qué es un protocolo?</h3>
+  <p>Reglas para transmitir datos entre dispositivos distintos.</p>
+  <a class="tiny" href="semana-04.html">Semana 4</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="¿qué es una rama? un puntero móvil a un commit.">
+  <h3>¿Qué es una rama?</h3>
+  <p>Un puntero móvil a un commit.</p>
+  <a class="tiny" href="semana-01.html">Semana 1</a>
+</article><article class="gloss" data-index-item data-index-kind="glosario" data-hay="átomo de k8s el pod.">
+  <h3>Átomo de K8s</h3>
+  <p>El Pod.</p>
+  <a class="tiny" href="semana-07.html">Semana 7</a>
+</article></div>
+        </section>
+        <section data-index-section="recurso">
+          <h3 class="index-sec">Recursos del documento</h3>
+          <div class="atlas-grid"><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="atlassian git tutorials gratis git" href="https://www.atlassian.com/git" rel="noopener" target="_blank">
+  <p class="n">Semana 1 · Gratis</p>
+  <h3>Atlassian Git tutorials</h3>
+  <p>Git</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="learn git branching interactivo git" href="https://learngitbranching.js.org/" rel="noopener" target="_blank">
+  <p class="n">Semana 1 · Interactivo</p>
+  <h3>Learn Git Branching</h3>
+  <p>Git</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="pro git (libro) gratis git" href="https://git-scm.com/book/en/v2" rel="noopener" target="_blank">
+  <p class="n">Semana 1 · Gratis</p>
+  <h3>Pro Git (libro)</h3>
+  <p>Git</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="codecademy learn git curso git" href="https://www.codecademy.com/learn/learn-git" rel="noopener" target="_blank">
+  <p class="n">Semana 1 · Curso</p>
+  <h3>Codecademy Learn Git</h3>
+  <p>Git</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="git immersion gratis git" href="https://gitimmersion.com/index.html" rel="noopener" target="_blank">
+  <p class="n">Semana 1 · Gratis</p>
+  <h3>Git Immersion</h3>
+  <p>Git</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="automate the boring stuff python, gratis un lenguaje de programación" href="https://automatetheboringstuff.com/" rel="noopener" target="_blank">
+  <p class="n">Semana 2 · Python, gratis</p>
+  <h3>Automate the Boring Stuff</h3>
+  <p>Un lenguaje de programación</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="python crash course extras gratis un lenguaje de programación" href="https://ehmatthes.github.io/pcc/" rel="noopener" target="_blank">
+  <p class="n">Semana 2 · Gratis</p>
+  <h3>Python Crash Course extras</h3>
+  <p>Un lenguaje de programación</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="eloquent javascript libro un lenguaje de programación" href="https://eloquentjavascript.net/" rel="noopener" target="_blank">
+  <p class="n">Semana 2 · Libro</p>
+  <h3>Eloquent JavaScript</h3>
+  <p>Un lenguaje de programación</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="go by example gratis un lenguaje de programación" href="https://gobyexample.com/" rel="noopener" target="_blank">
+  <p class="n">Semana 2 · Gratis</p>
+  <h3>Go by Example</h3>
+  <p>Un lenguaje de programación</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="learn go with tests gratis un lenguaje de programación" href="https://quii.gitbook.io/learn-go-with-tests" rel="noopener" target="_blank">
+  <p class="n">Semana 2 · Gratis</p>
+  <h3>Learn Go with Tests</h3>
+  <p>Un lenguaje de programación</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="operating system overview gratis linux y scripting" href="https://www.tutorialspoint.com/operating_system/os_overview.htm" rel="noopener" target="_blank">
+  <p class="n">Semana 3 · Gratis</p>
+  <h3>Operating System Overview</h3>
+  <p>Linux y scripting</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="shell scripting tutorial gratis linux y scripting" href="https://www.shellscript.sh/" rel="noopener" target="_blank">
+  <p class="n">Semana 3 · Gratis</p>
+  <h3>Shell Scripting Tutorial</h3>
+  <p>Linux y scripting</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="powershell tutorial gratis linux y scripting" href="https://www.guru99.com/powershell-tutorial.html" rel="noopener" target="_blank">
+  <p class="n">Semana 3 · Gratis</p>
+  <h3>PowerShell tutorial</h3>
+  <p>Linux y scripting</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="linux commands handbook gratis linux y scripting" href="https://www.freecodecamp.org/news/the-linux-commands-handbook/" rel="noopener" target="_blank">
+  <p class="n">Semana 3 · Gratis</p>
+  <h3>Linux Commands Handbook</h3>
+  <p>Linux y scripting</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="getting started with ubuntu gratis linux y scripting" href="https://itsfoss.com/getting-started-with-ubuntu/" rel="noopener" target="_blank">
+  <p class="n">Semana 3 · Gratis</p>
+  <h3>Getting started with Ubuntu</h3>
+  <p>Linux y scripting</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="osi model (cloudflare) gratis redes y seguridad" href="https://www.cloudflare.com/en-gb/learning/ddos/glossary/open-systems-interconnection-model-osi/" rel="noopener" target="_blank">
+  <p class="n">Semana 4 · Gratis</p>
+  <h3>OSI Model (Cloudflare)</h3>
+  <p>Redes y seguridad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="how dns works gratis redes y seguridad" href="https://howdns.works/" rel="noopener" target="_blank">
+  <p class="n">Semana 4 · Gratis</p>
+  <h3>How DNS works</h3>
+  <p>Redes y seguridad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="how https works gratis redes y seguridad" href="https://howhttps.works/" rel="noopener" target="_blank">
+  <p class="n">Semana 4 · Gratis</p>
+  <h3>How HTTPS works</h3>
+  <p>Redes y seguridad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="computer networking: a top-down approach libro redes y seguridad" href="https://www.amazon.com/Computer-Networking-Top-Down-Approach-7th/dp/0133594149" rel="noopener" target="_blank">
+  <p class="n">Semana 4 · Libro</p>
+  <h3>Computer Networking: A Top-Down Approach</h3>
+  <p>Redes y seguridad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="professor messer network+ gratis redes y seguridad" href="https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/" rel="noopener" target="_blank">
+  <p class="n">Semana 4 · Gratis</p>
+  <h3>Professor Messer Network+</h3>
+  <p>Redes y seguridad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="what is a reverse proxy? gratis administración de servidores" href="https://www.cloudflare.com/en-gb/learning/cdn/glossary/reverse-proxy/" rel="noopener" target="_blank">
+  <p class="n">Semana 5 · Gratis</p>
+  <h3>What is a reverse proxy?</h3>
+  <p>Administración de servidores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="what is load balancing? gratis administración de servidores" href="https://www.cloudflare.com/en-gb/learning/performance/what-is-load-balancing/" rel="noopener" target="_blank">
+  <p class="n">Semana 5 · Gratis</p>
+  <h3>What is load balancing?</h3>
+  <p>Administración de servidores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="the nginx handbook gratis administración de servidores" href="https://www.freecodecamp.org/news/the-nginx-handbook/" rel="noopener" target="_blank">
+  <p class="n">Semana 5 · Gratis</p>
+  <h3>The Nginx Handbook</h3>
+  <p>Administración de servidores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="what are containers? (google) gratis contenedores" href="https://cloud.google.com/learn/what-are-containers" rel="noopener" target="_blank">
+  <p class="n">Semana 6 · Gratis</p>
+  <h3>What are containers? (Google)</h3>
+  <p>Contenedores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="container learning path gratis contenedores" href="https://iximiuz.com/en/posts/container-learning-path/" rel="noopener" target="_blank">
+  <p class="n">Semana 6 · Gratis</p>
+  <h3>Container learning path</h3>
+  <p>Contenedores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="docker tutorial (youtube) video contenedores" href="https://www.youtube.com/watch?v=3c-iBn73dDE" rel="noopener" target="_blank">
+  <p class="n">Semana 6 · Video</p>
+  <h3>Docker tutorial (YouTube)</h3>
+  <p>Contenedores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="kubernetes in 4 hours (video) video orquestación de contenedores" href="https://www.youtube.com/watch?v=s_o8dwzRIu4" rel="noopener" target="_blank">
+  <p class="n">Semana 7 · Video</p>
+  <h3>Kubernetes in 4 hours (video)</h3>
+  <p>Orquestación de contenedores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="how kubernetes came to be artículo orquestación de contenedores" href="https://thenewstack.io/primer-how-kubernetes-came-to-be-what-it-is-and-why-you-should-care/" rel="noopener" target="_blank">
+  <p class="n">Semana 7 · Artículo</p>
+  <h3>How Kubernetes came to be</h3>
+  <p>Orquestación de contenedores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="kodekloud kubernetes path curso orquestación de contenedores" href="https://kodekloud.com/learning-path-kubernetes/" rel="noopener" target="_blank">
+  <p class="n">Semana 7 · Curso</p>
+  <h3>KodeKloud Kubernetes path</h3>
+  <p>Orquestación de contenedores</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="basic terms of iac artículo infraestructura como código" href="https://thenewstack.io/guis-cli-apis-learn-basic-terms-of-infrastructure-as-code/" rel="noopener" target="_blank">
+  <p class="n">Semana 8 · Artículo</p>
+  <h3>Basic terms of IaC</h3>
+  <p>Infraestructura como código</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="comprehensive guide to terraform guía infraestructura como código" href="https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca" rel="noopener" target="_blank">
+  <p class="n">Semana 8 · Guía</p>
+  <h3>Comprehensive guide to Terraform</h3>
+  <p>Infraestructura como código</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="what is a ci/cd pipeline? artículo ci/cd" href="https://semaphoreci.com/blog/cicd-pipeline" rel="noopener" target="_blank">
+  <p class="n">Semana 9 · Artículo</p>
+  <h3>What is a CI/CD pipeline?</h3>
+  <p>CI/CD</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="jenkins from zero to hero curso ci/cd" href="https://www.udemy.com/course/jenkins-from-zero-to-hero" rel="noopener" target="_blank">
+  <p class="n">Semana 9 · Curso</p>
+  <h3>Jenkins from zero to hero</h3>
+  <p>CI/CD</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="gitlab ci tutorials docs ci/cd" href="https://docs.gitlab.com/ee/tutorials/" rel="noopener" target="_blank">
+  <p class="n">Semana 9 · Docs</p>
+  <h3>GitLab CI tutorials</h3>
+  <p>CI/CD</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="what is observability? artículo monitoreo y observabilidad" href="https://devopscube.com/what-is-observability/" rel="noopener" target="_blank">
+  <p class="n">Semana 10 · Artículo</p>
+  <h3>What is observability?</h3>
+  <p>Monitoreo y observabilidad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="devops monitoring (atlassian) artículo monitoreo y observabilidad" href="https://www.atlassian.com/devops/devops-tools/devops-monitoring" rel="noopener" target="_blank">
+  <p class="n">Semana 10 · Artículo</p>
+  <h3>DevOps monitoring (Atlassian)</h3>
+  <p>Monitoreo y observabilidad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="basic vs advanced monitoring artículo monitoreo y observabilidad" href="https://thenewstack.io/applying-basic-vs-advanced-monitoring-techniques/" rel="noopener" target="_blank">
+  <p class="n">Semana 10 · Artículo</p>
+  <h3>Basic vs advanced monitoring</h3>
+  <p>Monitoreo y observabilidad</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="az-900 (microsoft) certificación intro un proveedor cloud" href="https://learn.microsoft.com/en-us/certifications/exams/az-900" rel="noopener" target="_blank">
+  <p class="n">Semana 11 · Certificación intro</p>
+  <h3>AZ-900 (Microsoft)</h3>
+  <p>Un proveedor cloud</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="aws cloud practitioner (udemy) curso un proveedor cloud" href="https://www.udemy.com/course/aws-certified-cloud-practitioner-new" rel="noopener" target="_blank">
+  <p class="n">Semana 11 · Curso</p>
+  <h3>AWS Cloud Practitioner (Udemy)</h3>
+  <p>Un proveedor cloud</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="a cloud guru aws path path un proveedor cloud" href="https://acloudguru.com/learning-paths/aws-developer" rel="noopener" target="_blank">
+  <p class="n">Semana 11 · Path</p>
+  <h3>A Cloud Guru AWS path</h3>
+  <p>Un proveedor cloud</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="ways to learn scrum gratis prácticas de ingeniería de software" href="https://www.scrum.org/resources/ways-learn-about-scrum" rel="noopener" target="_blank">
+  <p class="n">Semana 12 · Gratis</p>
+  <h3>Ways to learn Scrum</h3>
+  <p>Prácticas de ingeniería de software</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="sdlc tutorial gratis prácticas de ingeniería de software" href="https://www.guru99.com/software-development-life-cycle-tutorial.html" rel="noopener" target="_blank">
+  <p class="n">Semana 12 · Gratis</p>
+  <h3>SDLC tutorial</h3>
+  <p>Prácticas de ingeniería de software</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="automation testing for beginners guía prácticas de ingeniería de software" href="https://blog.testproject.io/2020/03/26/automation-testing-for-beginners-ultimate-guide/" rel="noopener" target="_blank">
+  <p class="n">Semana 12 · Guía</p>
+  <h3>Automation testing for beginners</h3>
+  <p>Prácticas de ingeniería de software</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="repo original del roadmap fuente bonus: devsecops" href="https://github.com/milanm/DevOps-Roadmap" rel="noopener" target="_blank">
+  <p class="n">Bonus · Fuente</p>
+  <h3>Repo original del roadmap</h3>
+  <p>Bonus: DevSecOps</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="owasp top 10 gratis bonus: devsecops" href="https://owasp.org/www-project-top-ten/" rel="noopener" target="_blank">
+  <p class="n">Bonus · Gratis</p>
+  <h3>OWASP Top 10</h3>
+  <p>Bonus: DevSecOps</p>
+</a><a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="how https works gratis bonus: devsecops" href="https://howhttps.works/" rel="noopener" target="_blank">
+  <p class="n">Bonus · Gratis</p>
+  <h3>How HTTPS works</h3>
+  <p>Bonus: DevSecOps</p>
+</a></div>
+        </section>
+      </div>
+      <p class="index-empty" data-index-empty hidden>Nada coincide con esa búsqueda.</p>
+    </div>
+  </div>
+</div>
+
   <main id="contenido">
 <div class="wrap week-layout" data-week="01" data-tasks="6">
   <aside class="toc">
+    <p class="n">En esta semana</p>
     <a href="#resumen">Resumen</a>
     <a href="#conferencia">Conferencia</a>
+    <a class="toc-sub" href="#la-caja-negra">La caja negra</a><a class="toc-sub" href="#lo-que-debes-saber-hacer">Lo que debes saber hacer</a><a class="toc-sub" href="#comandos-que-si-vas-a-usar">Comandos que sí vas a usar</a><a class="toc-sub" href="#ramas-fusion-y-pull-requests">Ramas, fusión y pull requests</a><a class="toc-sub" href="#errores-comunes">Errores comunes</a>
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
@@ -42,6 +753,8 @@
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
     <a href="#recursos">Recursos</a>
+    <p class="n toc-k">Curso</p>
+    <a href="semana-01.html" class="is-active">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a>
   </aside>
   <div>
     <section class="page-head" id="resumen">
@@ -59,13 +772,13 @@
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2>La caja negra</h2><p>Git no es GitHub. Git es un motor local de instantáneas. GitHub, GitLab y similares son plazas públicas donde esas instantáneas se revisan, se discuten y se despliegan. Primero entiende el motor; después la plaza.</p><p>Cada commit es una foto del proyecto en un instante, con un autor, un mensaje y un padre. Una rama es solo un puntero móvil a un commit. Fusionar es hacer que dos historias vuelvan a ser una.</p><div class="callout"><strong>Abstracción CS50</strong><span>Trata Git como una máquina de tiempo con nombres. clone copia el universo. branch crea una línea de tiempo paralela. merge las reconcilia. pull request es el ritual social para no fusionar a ciegas.</span></div><h2>Lo que debes saber hacer</h2><ul><li>Clonar, ver el estado, agregar, confirmar y enviar cambios.</li><li>Crear ramas con propósito: una idea, una rama.</li><li>Abrir una solicitud de cambio (pull request) y responder revisión.</li><li>Fusionar, rebasear con cuidado y resolver conflictos sin pánico.</li><li>Entender que la infraestructura también es código versionado.</li></ul><h2>Comandos que sí vas a usar</h2><pre><code>git clone &lt;url&gt;
+      <div class="lecture"><h2 id="la-caja-negra">La caja negra</h2><p>Git no es GitHub. Git es un motor local de instantáneas. GitHub, GitLab y similares son plazas públicas donde esas instantáneas se revisan, se discuten y se despliegan. Primero entiende el motor; después la plaza.</p><p>Cada commit es una foto del proyecto en un instante, con un autor, un mensaje y un padre. Una rama es solo un puntero móvil a un commit. Fusionar es hacer que dos historias vuelvan a ser una.</p><div class="callout"><strong>Abstracción CS50</strong><span>Trata Git como una máquina de tiempo con nombres. clone copia el universo. branch crea una línea de tiempo paralela. merge las reconcilia. pull request es el ritual social para no fusionar a ciegas.</span></div><h2 id="lo-que-debes-saber-hacer">Lo que debes saber hacer</h2><ul><li>Clonar, ver el estado, agregar, confirmar y enviar cambios.</li><li>Crear ramas con propósito: una idea, una rama.</li><li>Abrir una solicitud de cambio (pull request) y responder revisión.</li><li>Fusionar, rebasear con cuidado y resolver conflictos sin pánico.</li><li>Entender que la infraestructura también es código versionado.</li></ul><h2 id="comandos-que-si-vas-a-usar">Comandos que sí vas a usar</h2><pre><code>git clone &lt;url&gt;
 git status
 git add .
 git commit -m &quot;Explica el porqué, no el qué&quot;
 git switch -c feature/dns-ttl
 git push -u origin HEAD
-git log --oneline --graph</code></pre><h2>Ramas, fusión y pull requests</h2><p>Una rama barata te permite experimentar. El pull request no es burocracia: es el momento en que otro cerebro lee tu cambio antes de que toque main. Ahí se discute correctitud, diseño y estilo — la misma rúbrica de este curso.</p><p>Fusionar (merge) conserva la historia de la rama. Rebasear reescribe para que parezca lineal. En equipos, prefiere merge o squash según la convención del repositorio; no improvises en main.</p><h2>Errores comunes</h2><ul><li>Commits gigantes que mezclan formato, lógica y secretos.</li><li>Subir .env, llaves SSH o kubeconfig. Eso no se borra del historial con un commit nuevo.</li><li>Trabajar directo en main y luego pelear con todo el mundo.</li></ul></div>
+git log --oneline --graph</code></pre><h2 id="ramas-fusion-y-pull-requests">Ramas, fusión y pull requests</h2><p>Una rama barata te permite experimentar. El pull request no es burocracia: es el momento en que otro cerebro lee tu cambio antes de que toque main. Ahí se discute correctitud, diseño y estilo — la misma rúbrica de este curso.</p><p>Fusionar (merge) conserva la historia de la rama. Rebasear reescribe para que parezca lineal. En equipos, prefiere merge o squash según la convención del repositorio; no improvises en main.</p><h2 id="errores-comunes">Errores comunes</h2><ul><li>Commits gigantes que mezclan formato, lógica y secretos.</li><li>Subir .env, llaves SSH o kubeconfig. Eso no se borra del historial con un commit nuevo.</li><li>Trabajar directo en main y luego pelear con todo el mundo.</li></ul></div>
     </section>
 
     <section id="cortos">
@@ -130,12 +843,26 @@ git log --oneline --graph</code></pre><h2>Ramas, fusión y pull requests</h2><p>
   </div>
 </div>
 </main>
+  
   <footer class="site-footer">
-    <div class="wrap">
-      <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan). Sitio generado con Python. Compatible con GitHub Pages.</p>
-      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
+    <div class="wrap footer-grid">
+      <div>
+        <p class="brand-name">DevOps Roadmap <span>2026</span></p>
+        <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan).</p>
+      </div>
+      <nav class="footer-nav" aria-label="Sitio">
+        <a href="index.html">Inicio</a>
+        <a href="temario.html">Índice</a>
+        <a href="temario.html#herramientas">Herramientas</a>
+        <a href="temario.html#glosario">Glosario</a>
+        <a href="metodo.html">Método</a>
+        <a href="repaso.html">Repaso</a>
+        <a href="proyecto.html">Proyecto</a>
+      </nav>
+      <nav class="footer-weeks" aria-label="Semanas"><a href="semana-01.html">01 Git</a><a href="semana-02.html">02 Un lenguaje de programación</a><a href="semana-03.html">03 Linux y scripting</a><a href="semana-04.html">04 Redes y seguridad</a><a href="semana-05.html">05 Administración de servidores</a><a href="semana-06.html">06 Contenedores</a><a href="semana-07.html">07 Orquestación de contenedores</a><a href="semana-08.html">08 Infraestructura como código</a><a href="semana-09.html">09 CI/CD</a><a href="semana-10.html">10 Monitoreo y observabilidad</a><a href="semana-11.html">11 Un proveedor cloud</a><a href="semana-12.html">12 Prácticas de ingeniería de software</a><a href="semana-13.html">B Bonus: DevSecOps</a></nav>
     </div>
   </footer>
+
   <script src="assets/app.js" defer></script>
 </body>
 </html>

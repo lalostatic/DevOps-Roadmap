@@ -42,17 +42,105 @@ function percentFor(id, meta) {
   return Math.min(100, score);
 }
 
+function isTypingTarget(el) {
+  if (!el) return false;
+  const tag = el.tagName;
+  return tag === "INPUT" || tag === "TEXTAREA" || el.isContentEditable;
+}
+
+function applyIndexFilter(root) {
+  const input = root.querySelector("[data-index-q]");
+  const q = (input?.value || "").trim().toLowerCase();
+  const tabBtn = root.querySelector("[data-index-tab].is-on");
+  const tab = tabBtn?.getAttribute("data-index-tab") || "todo";
+  let n = 0;
+  root.querySelectorAll("[data-index-item]").forEach((el) => {
+    const hay = (el.getAttribute("data-hay") || el.textContent).toLowerCase();
+    const kind = el.getAttribute("data-index-kind") || "";
+    const matchQ = !q || hay.includes(q);
+    const matchTab = tab === "todo" || !kind || kind === tab;
+    const show = matchQ && matchTab;
+    el.hidden = !show;
+    if (show) n += 1;
+  });
+  root.querySelectorAll("[data-index-section]").forEach((sec) => {
+    const kind = sec.getAttribute("data-index-section");
+    const any = [...sec.querySelectorAll("[data-index-item]")].some((el) => !el.hidden);
+    const matchTab = tab === "todo" || kind === tab;
+    sec.hidden = !(any && matchTab);
+  });
+  const empty = root.querySelector("[data-index-empty]");
+  if (empty) empty.hidden = n > 0;
+  const count = root.querySelector("[data-index-count]");
+  if (count) {
+    count.textContent = q ? (n ? n + " coincidencias" : "") : "";
+  }
+}
+
+function bindIndex() {
+  const overlay = document.getElementById("indice");
+  const openBtn = document.querySelector("[data-index-open]");
+  const close = () => {
+    if (!overlay) return;
+    overlay.hidden = true;
+    document.body.style.overflow = "";
+    if (openBtn) openBtn.setAttribute("aria-expanded", "false");
+  };
+  const open = () => {
+    if (!overlay) return;
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    if (openBtn) openBtn.setAttribute("aria-expanded", "true");
+    const q = overlay.querySelector("[data-index-q]");
+    q?.focus({ preventScroll: true });
+    applyIndexFilter(overlay);
+  };
+  openBtn?.addEventListener("click", () => {
+    if (!overlay) return;
+    if (overlay.hidden) open();
+    else close();
+  });
+  overlay?.querySelectorAll("[data-index-close]").forEach((b) => b.addEventListener("click", close));
+  overlay?.addEventListener("click", (ev) => {
+    if (ev.target === overlay) close();
+  });
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape" && overlay && !overlay.hidden) {
+      close();
+      return;
+    }
+    if (isTypingTarget(ev.target)) return;
+    if (ev.key === "/" || ((ev.metaKey || ev.ctrlKey) && ev.key.toLowerCase() === "k")) {
+      ev.preventDefault();
+      open();
+    }
+  });
+
+  document.querySelectorAll(".index-overlay, main").forEach((root) => {
+    root.querySelectorAll("[data-index-q]").forEach((input) => {
+      input.addEventListener("input", () => applyIndexFilter(root));
+    });
+    root.querySelectorAll("[data-index-tab]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        root.querySelectorAll("[data-index-tab]").forEach((t) => {
+          const on = t === btn;
+          t.classList.toggle("is-on", on);
+          t.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        applyIndexFilter(root);
+      });
+    });
+    if (root.querySelector("[data-index-q], [data-index-tab]")) applyIndexFilter(root);
+  });
+}
+
 function setNav() {
   const here = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav a").forEach((a) => {
     const href = a.getAttribute("href");
     if (href === here || (here === "" && href === "index.html")) a.classList.add("is-active");
   });
-  const btn = document.querySelector(".menu-btn");
-  const nav = document.querySelector(".nav");
-  if (btn && nav) {
-    btn.addEventListener("click", () => nav.classList.toggle("is-open"));
-  }
+  bindIndex();
 }
 
 function paintHomeProgress() {
@@ -68,9 +156,15 @@ function paintHomeProgress() {
   const total = document.querySelector("[data-total-progress]");
   if (total) {
     const cards = [...document.querySelectorAll("[data-week-progress]")];
-    const avg = cards.length
-      ? Math.round(cards.reduce((n, el) => n + percentFor(el.getAttribute("data-week-progress"), { tasks: Number(el.getAttribute("data-tasks") || 4) }), 0) / cards.length)
-      : 0;
+    const seen = new Set();
+    const vals = [];
+    cards.forEach((el) => {
+      const id = el.getAttribute("data-week-progress");
+      if (!id || seen.has(id)) return;
+      seen.add(id);
+      vals.push(percentFor(id, { tasks: Number(el.getAttribute("data-tasks") || 4) }));
+    });
+    const avg = vals.length ? Math.round(vals.reduce((n, v) => n + v, 0) / vals.length) : 0;
     total.textContent = avg + "%";
   }
 }
@@ -159,7 +253,7 @@ function bindWeek() {
       tocLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
     });
   }, { rootMargin: "-40% 0px -50% 0px" });
-  document.querySelectorAll(".week-layout section[id]").forEach((sec) => observer.observe(sec));
+  document.querySelectorAll(".week-layout section[id], .lecture [id]").forEach((sec) => observer.observe(sec));
 }
 
 function paintWeekBar(id) {

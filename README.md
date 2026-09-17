@@ -15,6 +15,10 @@ La primera vez hay que encender Pages (GitHub no lo permite por API con este tok
 3. Branch: **main** · carpeta: **/docs**
 4. Save. En uno o dos minutos el curso queda en el enlace de arriba.
 
+## Índice
+
+En cualquier página, **Buscar temario** (o la tecla `/`) abre el índice del documento: 12 semanas + bonus, herramientas, libros, glosario y recursos. La página [Índice](https://lalostatic.github.io/DevOps-Roadmap/temario.html) es la tabla de contenidos completa.
+
 ## Cómo está hecho
 
 GitHub Pages no ejecuta Python en el navegador. Python **genera** HTML/CSS/JS estáticos:

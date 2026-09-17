@@ -7,21 +7,49 @@ import json
 import shutil
 from pathlib import Path
 
-from content import BOOKS, COURSE, PEDAGOGY, WEEKS
+from content import BOOKS, COURSE, PEDAGOGY, TOOLS, WEEKS
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT.parent / "docs"
 STATIC = ROOT / "static"
+
+TOOL_CAT = {
+    "Seguimiento del trabajo": ("semana-12.html", "Prácticas"),
+    "Control de versiones": ("semana-01.html", "Git"),
+    "CI/CD": ("semana-09.html", "CI/CD"),
+    "Análisis de código": ("semana-13.html", "DevSecOps"),
+    "Artefactos": ("semana-09.html", "CI/CD"),
+    "Infraestructura como código": ("semana-08.html", "IaC"),
+    "Contenedores y orquestación": ("semana-06.html", "Contenedores"),
+    "Observabilidad": ("semana-10.html", "Monitoreo"),
+    "Nube": ("semana-11.html", "Cloud"),
+    "Seguridad": ("semana-13.html", "DevSecOps"),
+}
 
 
 def e(text: str) -> str:
     return html.escape(text, quote=True)
 
 
+def slugify(text: str) -> str:
+    trans = str.maketrans("áéíóúüñÁÉÍÓÚÜÑ", "aeiouunAEIOUUN")
+    s = text.translate(trans).lower()
+    out: list[str] = []
+    dash = False
+    for ch in s:
+        if ch.isalnum():
+            out.append(ch)
+            dash = False
+        elif not dash:
+            out.append("-")
+            dash = True
+    return "".join(out).strip("-") or "s"
+
+
 def render_block(block: tuple) -> str:
     kind = block[0]
     if kind == "h2":
-        return f"<h2>{e(block[1])}</h2>"
+        return f'<h2 id="{e(slugify(block[1]))}">{e(block[1])}</h2>'
     if kind == "h3":
         return f"<h3>{e(block[1])}</h3>"
     if kind == "p":
@@ -47,10 +75,18 @@ def mark() -> str:
 </svg>"""
 
 
+def week_label(w: dict) -> str:
+    return "Bonus" if w["num"] == 13 else f"Semana {w['num']}"
+
+
+def week_num(w: dict) -> str:
+    return "B" if w["num"] == 13 else f"{w['num']:02d}"
+
+
 def nav(active: str) -> str:
     links = [
         ("index.html", "Inicio", "inicio"),
-        ("temario.html", "Temario", "temario"),
+        ("temario.html", "Índice", "temario"),
         ("metodo.html", "Método", "metodo"),
         ("repaso.html", "Repaso", "repaso"),
         ("proyecto.html", "Proyecto", "proyecto"),
@@ -60,6 +96,220 @@ def nav(active: str) -> str:
         cls = ' class="is-active"' if key == active else ""
         items.append(f'<a href="{href}"{cls}>{e(label)}</a>')
     return f'<nav class="nav" id="nav">{"".join(items)}</nav>'
+
+
+def pages_nav() -> str:
+    return """
+      <a href="index.html">Inicio</a>
+      <a href="temario.html">Índice completo</a>
+      <a href="metodo.html">Método</a>
+      <a href="repaso.html">Repaso</a>
+      <a href="proyecto.html">Proyecto</a>
+      <a href="temario.html#modulos">Módulos</a>
+      <a href="temario.html#herramientas">Herramientas</a>
+      <a href="temario.html#biblioteca">Biblioteca</a>
+      <a href="temario.html#glosario">Glosario</a>
+      <a href="temario.html#recursos">Recursos</a>
+    """
+
+
+def index_items_html(compact: bool = False) -> str:
+    rows = []
+    for w in WEEKS:
+        href = f"semana-{w['id']}.html"
+        skills = "".join(
+            f'<a class="chip" href="{href}#conferencia">{e(s)}</a>' for s in w["skills"]
+        )
+        shorts = ""
+        if not compact:
+            shorts = "".join(
+                f'<a class="index-sub" href="{href}#cortos">{e(t)}</a>' for t, _ in w["shorts"]
+            )
+            shorts = f"""<p class="index-subs">{shorts}
+      <a class="index-sub" href="{href}#pset">Problem set</a>
+      <a class="index-sub" href="{href}#quiz">Quiz</a>
+      <a class="index-sub" href="{href}#recursos">Recursos</a>
+    </p>"""
+        heads = [b[1] for b in w["lecture"] if b[0] == "h2"]
+        hay = " ".join(
+            [
+                w["title"],
+                w["goal"],
+                *w["skills"],
+                *[t for t, _ in w["shorts"]],
+                *[t for t, _, _ in w["resources"]],
+                *heads,
+                *[q for q, _ in w["flash"]],
+            ]
+        )
+        goal = "" if compact else f"<p>{e(w['goal'])}</p>"
+        rows.append(
+            f"""<article class="spine-item" data-index-item data-index-kind="semana" data-week-progress="{w['id']}" data-tasks="{len(w['pset_std'])}" data-hay="{e(hay.lower())}">
+  <a class="spine-dot" href="{href}" aria-hidden="true"><span>{e(week_num(w))}</span></a>
+  <div class="spine-body">
+    <p class="n">{e(week_label(w))} · {e(w['hours'])} · <span data-pct>0%</span></p>
+    <h3><a href="{href}">{e(w['title'])}</a></h3>
+    {goal}
+    <div class="chip-row">{skills}</div>
+    {shorts}
+    <div class="bar"><i></i></div>
+  </div>
+</article>"""
+        )
+    return "".join(rows)
+
+
+def tool_items_html() -> str:
+    parts = []
+    for cat, items in TOOLS:
+        href, label = TOOL_CAT.get(cat, ("temario.html#herramientas", cat))
+        chips = "".join(f'<a class="chip" href="{href}">{e(t)}</a>' for t in items)
+        hay = " ".join([cat, *items, label])
+        parts.append(
+            f"""<article class="atlas-card" data-index-item data-index-kind="herramienta" data-hay="{e(hay.lower())}">
+  <p class="n">Herramienta · {e(label)}</p>
+  <h3><a href="{href}">{e(cat)}</a></h3>
+  <div class="chip-row">{chips}</div>
+</article>"""
+        )
+    return "".join(parts)
+
+
+def book_items_html() -> str:
+    parts = []
+    for title, author in BOOKS:
+        hay = f"{title} {author}"
+        parts.append(
+            f"""<article class="atlas-card" data-index-item data-index-kind="libro" data-hay="{e(hay.lower())}">
+  <p class="n">Biblioteca</p>
+  <h3>{e(title)}</h3>
+  <p>{e(author)}</p>
+</article>"""
+        )
+    return "".join(parts)
+
+
+def glossary_items() -> list[tuple[str, str, str, str]]:
+    rows = []
+    for w in WEEKS:
+        for q, a in w["flash"]:
+            rows.append((q, a, week_label(w), w["id"]))
+    rows.sort(key=lambda x: x[0].lower())
+    return rows
+
+
+def glossary_items_html(compact: bool = False) -> str:
+    parts = []
+    last_letter = ""
+    for q, a, src, wid in glossary_items():
+        letter = q[:1].upper()
+        if not compact and letter != last_letter:
+            parts.append(f'<p class="letter" aria-hidden="true">{e(letter)}</p>')
+            last_letter = letter
+        parts.append(
+            f"""<article class="gloss" data-index-item data-index-kind="glosario" data-hay="{e((q + " " + a).lower())}">
+  <h3>{e(q)}</h3>
+  <p>{e(a)}</p>
+  <a class="tiny" href="semana-{wid}.html">{e(src)}</a>
+</article>"""
+        )
+    return "".join(parts)
+
+
+def resource_items_html() -> str:
+    parts = []
+    for w in WEEKS:
+        for title, url, kind in w["resources"]:
+            hay = f"{title} {kind} {w['title']}"
+            parts.append(
+                f"""<a class="atlas-card atlas-link" data-index-item data-index-kind="recurso" data-hay="{e(hay.lower())}" href="{e(url)}" rel="noopener" target="_blank">
+  <p class="n">{e(week_label(w))} · {e(kind)}</p>
+  <h3>{e(title)}</h3>
+  <p>{e(w['title'])}</p>
+</a>"""
+            )
+    return "".join(parts)
+
+
+def index_panel() -> str:
+    return f"""
+<div class="index-overlay" id="indice" hidden>
+  <div class="index-sheet" role="dialog" aria-modal="true" aria-labelledby="indice-title">
+    <div class="index-masthead">
+      <div>
+        <p class="kicker">Documento · 12 semanas + bonus</p>
+        <h2 id="indice-title">Índice del curso</h2>
+      </div>
+      <button class="btn btn-ghost" type="button" data-index-close>Cerrar</button>
+    </div>
+    <div class="index-sheet-body">
+      <label class="index-search">
+        <span class="sr-only">Buscar en el índice</span>
+        <input type="search" data-index-q placeholder="Buscar Git, DNS, Terraform, Scrum, Prometheus…" autocomplete="off"/>
+      </label>
+      <div class="index-tabs" role="tablist" aria-label="Filtrar el índice">
+        <button type="button" role="tab" data-index-tab="todo" class="is-on" aria-selected="true">Todo</button>
+        <button type="button" role="tab" data-index-tab="semana" aria-selected="false">Semanas</button>
+        <button type="button" role="tab" data-index-tab="herramienta" aria-selected="false">Herramientas</button>
+        <button type="button" role="tab" data-index-tab="libro" aria-selected="false">Libros</button>
+        <button type="button" role="tab" data-index-tab="glosario" aria-selected="false">Glosario</button>
+        <button type="button" role="tab" data-index-tab="recurso" aria-selected="false">Recursos</button>
+      </div>
+      <p class="tiny index-count" data-index-count></p>
+      <nav class="index-pages index-pages-mobile" aria-label="Páginas">{pages_nav()}</nav>
+      <div class="index-body">
+        <section data-index-section="semana">
+          <h3 class="index-sec">Semanas</h3>
+          <div class="spine">{index_items_html(compact=True)}</div>
+        </section>
+        <section data-index-section="herramienta">
+          <h3 class="index-sec">Caja de herramientas</h3>
+          <div class="atlas-grid">{tool_items_html()}</div>
+        </section>
+        <section data-index-section="libro">
+          <h3 class="index-sec">Biblioteca corta</h3>
+          <div class="atlas-grid">{book_items_html()}</div>
+        </section>
+        <section data-index-section="glosario">
+          <h3 class="index-sec">Glosario</h3>
+          <div class="gloss-list">{glossary_items_html(compact=True)}</div>
+        </section>
+        <section data-index-section="recurso">
+          <h3 class="index-sec">Recursos del documento</h3>
+          <div class="atlas-grid">{resource_items_html()}</div>
+        </section>
+      </div>
+      <p class="index-empty" data-index-empty hidden>Nada coincide con esa búsqueda.</p>
+    </div>
+  </div>
+</div>
+"""
+
+
+def footer() -> str:
+    weeks = "".join(
+        f'<a href="semana-{w["id"]}.html">{e(week_num(w))} {e(w["title"])}</a>' for w in WEEKS
+    )
+    return f"""
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="brand-name">{e(COURSE['title'])} <span>{COURSE['year']}</span></p>
+        <p>{e(COURSE['authors'])}</p>
+      </div>
+      <nav class="footer-nav" aria-label="Sitio">
+        <a href="index.html">Inicio</a>
+        <a href="temario.html">Índice</a>
+        <a href="temario.html#herramientas">Herramientas</a>
+        <a href="temario.html#glosario">Glosario</a>
+        <a href="metodo.html">Método</a>
+        <a href="repaso.html">Repaso</a>
+        <a href="proyecto.html">Proyecto</a>
+      </nav>
+      <nav class="footer-weeks" aria-label="Semanas">{weeks}</nav>
+    </div>
+  </footer>
+"""
 
 
 def layout(title: str, active: str, body: str, extra_head: str = "") -> str:
@@ -88,17 +338,21 @@ def layout(title: str, active: str, body: str, extra_head: str = "") -> str:
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="index.html">{mark()}<span class="brand-name">{e(COURSE['title'])} <span>{COURSE['year']}</span></span></a>
-      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
-      {nav(active)}
+      <div class="header-tools">
+        {nav(active)}
+        <button class="menu-btn" type="button" data-index-open aria-controls="indice" aria-expanded="false" aria-label="Abrir índice y buscar en el temario">
+          <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="icon-search" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.6"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span class="menu-short">Menú</span>
+          <span class="menu-long">Buscar temario</span>
+          <kbd>/</kbd>
+        </button>
+      </div>
     </div>
   </header>
+  {index_panel()}
   <main id="contenido">{body}</main>
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>{e(COURSE['authors'])} Sitio generado con Python. Compatible con GitHub Pages.</p>
-      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
-    </div>
-  </footer>
+  {footer()}
   <script src="assets/app.js" defer></script>
 </body>
 </html>
@@ -108,13 +362,14 @@ def layout(title: str, active: str, body: str, extra_head: str = "") -> str:
 def week_cards() -> str:
     cards = []
     for w in WEEKS:
-        n = f"{w['num']:02d}" if w["num"] < 13 else "B"
-        label = "Bonus" if w["num"] == 13 else f"Semana {w['num']}"
+        skills = "".join(f'<span class="chip">{e(s)}</span>' for s in w["skills"][:3])
         cards.append(
             f"""<a class="week-card" href="semana-{w['id']}.html">
-  <span class="n">{e(label)}</span>
+  <span class="week-num">{e(week_num(w))}</span>
+  <span class="n">{e(week_label(w))} · {e(w['hours'])}</span>
   <h3>{e(w['title'])}</h3>
   <p>{e(w['goal'])}</p>
+  <div class="chip-row">{skills}</div>
   <div class="bar" data-week-progress="{w['id']}" data-tasks="{len(w['pset_std'])}"><i></i></div>
   <span class="tiny" data-pct>0%</span>
 </a>"""
@@ -131,7 +386,7 @@ def home() -> str:
     <p class="lede">{e(COURSE['lede'])}</p>
     <div class="actions">
       <a class="btn" href="semana-01.html">Empezar semana 1</a>
-      <a class="btn btn-ghost" href="metodo.html">Cómo se enseña</a>
+      <a class="btn btn-ghost" href="temario.html">Índice del documento</a>
     </div>
     <div class="stats">
       <div class="stat"><b>12+1</b><span>semanas y un bonus</span></div>
@@ -142,8 +397,8 @@ def home() -> str:
 </section>
 <section class="section">
   <div class="wrap">
-    <h2>El año, semana a semana</h2>
-    <p class="muted">No es un mural de logos. Es un curso: cada módulo tiene conferencia, cortos, recorrido, problem set, recuerdo activo y tarjetas espaciadas.</p>
+    <h2>El mapa del oficio</h2>
+    <p class="muted">El mismo orden del roadmap original. Pulsa <strong>Buscar temario</strong> o la tecla <kbd>/</kbd> para abrir el índice completo.</p>
     {week_cards()}
   </div>
 </section>
@@ -160,30 +415,97 @@ def home() -> str:
 """
 
 
-def temario() -> str:
-    rows = []
+def document_toc() -> str:
+    items = []
     for w in WEEKS:
-        skills = " · ".join(w["skills"])
-        label = "Bonus" if w["num"] == 13 else f"Semana {w['num']:02d}"
-        rows.append(
-            f"""<a class="week-card" href="semana-{w['id']}.html">
-  <span class="n">{e(label)} · {e(w['hours'])}</span>
-  <h3>{e(w['title'])}</h3>
-  <p>{e(skills)}</p>
-</a>"""
+        chips = " · ".join(w["skills"][:4])
+        items.append(
+            f'<li><a href="semana-{w["id"]}.html"><b>{e(week_num(w))}</b><span><strong>{e(w["title"])}</strong> <em>{e(chips)}</em></span></a></li>'
         )
-    books = "".join(f"<li><strong>{e(t)}</strong> — {e(a)}</li>" for t, a in BOOKS)
+    extras = [
+        ("H", "temario.html#herramientas", "Caja de herramientas", "Git, Docker, Terraform, Prometheus…"),
+        ("L", "temario.html#biblioteca", "Biblioteca corta", "Handbook, Accelerate, SRE, Phoenix…"),
+        ("G", "temario.html#glosario", "Glosario", "Todas las ideas de las tarjetas"),
+        ("R", "temario.html#recursos", "Recursos", "Enlaces del documento original"),
+        ("M", "metodo.html", "Método", "CS50 + recuerdo activo + Leitner"),
+        ("P", "proyecto.html", "Proyecto final", "Un sistema pequeño que existe"),
+    ]
+    for num, href, title, hint in extras:
+        items.append(
+            f'<li><a href="{href}"><b>{num}</b><span><strong>{e(title)}</strong> <em>{e(hint)}</em></span></a></li>'
+        )
+    return f'<ol class="doc-toc">{"".join(items)}</ol>'
+
+
+def temario() -> str:
+    jump = """
+    <nav class="jump" aria-label="Secciones del índice">
+      <a href="#documento">Documento</a>
+      <a href="#modulos">Módulos</a>
+      <a href="#herramientas">Herramientas</a>
+      <a href="#biblioteca">Biblioteca</a>
+      <a href="#glosario">Glosario</a>
+      <a href="#recursos">Todos los recursos</a>
+    </nav>
+    """
+    tools = "".join(
+        f"""<article class="panel" data-index-item data-index-kind="herramienta" data-hay="{e((cat + ' ' + ' '.join(items)).lower())}">
+  <h3>{e(cat)}</h3>
+  <div class="chip-row">{''.join(f'<a class="chip" href="{TOOL_CAT.get(cat, ("temario.html#herramientas",))[0]}">{e(t)}</a>' for t in items)}</div>
+</article>"""
+        for cat, items in TOOLS
+    )
+    books = book_items_html()
+    gloss = glossary_items_html()
+    res_blocks = []
+    for w in WEEKS:
+        links = "".join(
+            f'<a href="{e(u)}" rel="noopener" target="_blank" data-index-item data-index-kind="recurso" data-hay="{e((t + " " + k + " " + w["title"]).lower())}">{e(t)}<small>{e(k)}</small></a>'
+            for t, u, k in w["resources"]
+        )
+        res_blocks.append(
+            f'<div class="resource-group"><h3>{e(week_label(w))}. {e(w["title"])}</h3><div class="resources">{links}</div></div>'
+        )
     return f"""
 <section class="page-head"><div class="wrap">
-  <p class="kicker">Syllabus</p>
-  <h1>Temario</h1>
-  <p class="lede">Doce oficios y un bonus de seguridad. El orden importa: Git y un lenguaje antes de orquestar el mundo.</p>
+  <p class="kicker">Documento original · traducido</p>
+  <h1>Índice</h1>
+  <p class="lede">Toda la información del DevOps Roadmap 2026: módulos, temas, herramientas, libros, glosario y recursos. El orden es el del documento.</p>
+  {jump}
+  <label class="index-search page-search">
+    <span class="sr-only">Filtrar el índice</span>
+    <input type="search" data-index-q placeholder="Filtrar: DNS, Docker, Scrum, Prometheus…"/>
+  </label>
 </div></section>
-<section class="section"><div class="wrap">{''.join(rows)}</div></section>
-<section class="section"><div class="wrap">
+<section class="section" id="documento"><div class="wrap">
+  <h2>El documento, de un vistazo</h2>
+  <p class="muted">Tabla de contenidos del curso. Cada fila abre el módulo o la sección.</p>
+  {document_toc()}
+</div></section>
+<section class="section" id="modulos"><div class="wrap">
+  <h2>Módulos</h2>
+  <p class="muted">Cada nodo es una semana. Los chips son los temas del mapa mental original.</p>
+  <div class="spine">{index_items_html()}</div>
+</div></section>
+<section class="section" id="herramientas"><div class="wrap">
+  <h2>Caja de herramientas</h2>
+  <p class="muted">El catálogo que cita el roadmap: no hace falta instalarlas todas el primer día. Cada chip abre la semana donde se enseña.</p>
+  <div class="three-col">{tools}</div>
+</div></section>
+<section class="section" id="biblioteca"><div class="wrap">
   <h2>Biblioteca corta</h2>
-  <p class="muted">No son obligatorios. Sí son el canon que el roadmap original recomienda alrededor del oficio.</p>
-  <ul>{books}</ul>
+  <p class="muted">Canon alrededor del oficio. No son obligatorios para completar el curso.</p>
+  <div class="atlas-grid">{books}</div>
+</div></section>
+<section class="section" id="glosario"><div class="wrap">
+  <h2>Glosario</h2>
+  <p class="muted">Las mismas ideas de las tarjetas, en orden alfabético. Toca la semana para volver al contexto.</p>
+  <div class="gloss-list">{gloss}</div>
+</div></section>
+<section class="section" id="recursos"><div class="wrap">
+  <h2>Recursos del documento</h2>
+  <p class="muted">Enlaces de aprendizaje que trae el roadmap, agrupados por semana.</p>
+  {''.join(res_blocks)}
 </div></section>
 """
 
@@ -218,16 +540,12 @@ def week_page(w: dict) -> str:
     shorts = "".join(f'<article class="short"><h3>{e(t)}</h3><p>{e(b)}</p></article>' for t, b in w["shorts"])
     walk = "".join(f"<li>{e(s)}</li>" for s in w["walkthrough"])
     skills = "".join(f'<span class="chip">{e(s)}</span>' for s in w["skills"])
+    heads = "".join(
+        f'<a class="toc-sub" href="#{slugify(b[1])}">{e(b[1])}</a>'
+        for b in w["lecture"]
+        if b[0] == "h2"
+    )
 
-    def tasks(items, prefix):
-        out = []
-        for i, (t, b) in enumerate(items):
-            out.append(
-                f'<label class="task"><input type="checkbox" data-task="{prefix}{i}"/><span><strong>{e(t)}</strong><p>{e(b)}</p></span></label>'
-            )
-        return "".join(out)
-
-    # unique task indexes: standard 0..n-1, hacker continues
     std = []
     for i, (t, b) in enumerate(w["pset_std"]):
         std.append(
@@ -252,7 +570,7 @@ def week_page(w: dict) -> str:
         f'<a href="{e(u)}" rel="noopener" target="_blank">{e(t)}<small>{e(k)}</small></a>'
         for t, u, k in w["resources"]
     )
-    label = "Bonus" if w["num"] == 13 else f"Semana {w['num']}"
+    label = week_label(w)
     prev_n = w["num"] - 1
     next_n = w["num"] + 1
     prev = ""
@@ -266,12 +584,22 @@ def week_page(w: dict) -> str:
     else:
         nxt = '<a class="btn" href="proyecto.html">Proyecto final</a>'
 
+    course_weeks = []
+    for x in WEEKS:
+        cls = ' class="is-active"' if x["id"] == w["id"] else ""
+        course_weeks.append(
+            f'<a href="semana-{x["id"]}.html"{cls}>{e(week_num(x))} {e(x["title"])}</a>'
+        )
+    course_weeks = "".join(course_weeks)
+
     c, d, s = w["rubric"]
     return f"""
 <div class="wrap week-layout" data-week="{w['id']}" data-tasks="{len(w['pset_std']) + len(w['pset_hack'])}">
   <aside class="toc">
+    <p class="n">En esta semana</p>
     <a href="#resumen">Resumen</a>
     <a href="#conferencia">Conferencia</a>
+    {heads}
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
@@ -279,6 +607,8 @@ def week_page(w: dict) -> str:
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
     <a href="#recursos">Recursos</a>
+    <p class="n toc-k">Curso</p>
+    {course_weeks}
   </aside>
   <div>
     <section class="page-head" id="resumen">
@@ -449,7 +779,7 @@ def main() -> None:
             break
     write(OUT / ".nojekyll", "")
     write(OUT / "index.html", layout(COURSE["title"], "inicio", home()))
-    write(OUT / "temario.html", layout("Temario", "temario", temario()))
+    write(OUT / "temario.html", layout("Índice", "temario", temario()))
     write(OUT / "metodo.html", layout("Método", "metodo", metodo()))
     write(OUT / "repaso.html", layout("Repaso", "repaso", repaso()))
     write(OUT / "proyecto.html", layout("Proyecto final", "proyecto", proyecto()))

@@ -1015,6 +1015,19 @@ BOOKS = [
     ("Team Topologies", "Skelton, Pais"),
 ]
 
+TOOLS = [
+    ("Seguimiento del trabajo", ["Asana", "Jira"]),
+    ("Control de versiones", ["Git", "GitHub", "GitLab"]),
+    ("CI/CD", ["Jenkins", "GitHub Actions", "GitLab CI"]),
+    ("Análisis de código", ["SonarQube"]),
+    ("Artefactos", ["Artifactory", "Registro de imágenes"]),
+    ("Infraestructura como código", ["Terraform", "Ansible", "Puppet", "Chef"]),
+    ("Contenedores y orquestación", ["Docker", "Kubernetes", "Helm"]),
+    ("Observabilidad", ["Prometheus", "Grafana", "OpenTelemetry"]),
+    ("Nube", ["AWS", "Azure", "Google Cloud"]),
+    ("Seguridad", ["SAST", "DAST", "Vault", "Trivy"]),
+]
+
 PEDAGOGY = [
     ("Piso bajo, techo alto", "Como CS50: se entra sin experiencia y se sale con rigor. Hay vía estándar y vía hacker."),
     ("Conferencia → cortos → práctica", "Primero la idea, luego piezas de 2 minutos, luego un problem set. No al revés."),
