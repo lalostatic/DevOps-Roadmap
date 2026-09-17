@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Semana 11: Un proveedor cloud · DevOps Roadmap</title>
+  <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta name="theme-color" content="#0b0f14"/>
+  <meta property="og:title" content="Semana 11: Un proveedor cloud · DevOps Roadmap"/>
+  <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/og.jpg"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/app.css"/>
+  
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+  <rect width="32" height="32" rx="8" fill="#c8102e"/>
+  <path d="M8 16c0-4 3-7 8-7s8 3 8 7-3 7-8 7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+</svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
+      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Temario</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+    </div>
+  </header>
+  <main id="contenido">
+<div class="wrap week-layout" data-week="11" data-tasks="6">
+  <aside class="toc">
+    <a href="#resumen">Resumen</a>
+    <a href="#conferencia">Conferencia</a>
+    <a href="#cortos">Cortos</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#pset">Problem set</a>
+    <a href="#quiz">Recuerdo</a>
+    <a href="#feynman">Feynman</a>
+    <a href="#tarjetas">Tarjetas</a>
+    <a href="#recursos">Recursos</a>
+  </aside>
+  <div>
+    <section class="page-head" id="resumen">
+      <p class="kicker">Semana 11 · 12–20 h</p>
+      <h1>Un proveedor cloud</h1>
+      <p class="lede">Pensar en APIs de infraestructura, no en un único servidor bajo el escritorio.</p>
+      <div class="chip-row"><span class="chip">IaaS, PaaS, SaaS</span><span class="chip">Disponibilidad</span><span class="chip">Administración</span><span class="chip">Diseño e implementación</span></div>
+      <div class="progress-box">
+        <span class="tiny" data-week-pct>0% completado</span>
+      </div>
+      <div class="bar"><i data-week-bar></i></div>
+      <p style="margin-top:18px">Los proveedores exponen APIs para crear recursos con fronteras de seguridad y de cobro. La nube corre en centros de datos, pero se siente como una plataforma. Saber provisionar, configurar y asegurar es el corazón del DevOps moderno — y de su complejidad.</p>
+    </section>
+
+    <section id="conferencia">
+      <h2>Conferencia</h2>
+      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+      <div class="lecture"><h2>Elige uno y baja a tierra</h2><p>AWS, Azure y Google Cloud dominan el mercado. Elige el que te abra más puertas en tu región o empleo objetivo. Los conceptos viajan: identidad, red, cómputo, almacenamiento, observabilidad, IAM.</p><p>IaaS: alquilas VMs y discos. PaaS: te dan la plataforma (app service, Cloud Run, Elastic Beanstalk). SaaS: usas el software. DevOps vive sobre todo entre IaaS y PaaS.</p><h2>Lo que debes practicar</h2><ul><li>Usuarios, roles, políticas. Nunca uses la cuenta root para el día a día.</li><li>VPC/VNet, subnets públicas/privadas, NAT, security groups.</li><li>Máquinas virtuales, discos, snapshots.</li><li>Disponibilidad: zonas, regiones, backups, RPO/RTO en lenguaje humano.</li></ul><div class="callout"><strong>La nube no perdona el olvido</strong><span>Todo recurso tiene precio. Un laboratorio sin destroy es una factura. Etiqueta, presupuesto, alarma de costo.</span></div></div>
+    </section>
+
+    <section id="cortos">
+      <h2>Cortos</h2>
+      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+      <div class="shorts" style="margin-top:12px"><article class="short"><h3>IAM</h3><p>Quién puede qué sobre cuál recurso. El error más caro es una llave de admin en un repo.</p></article><article class="short"><h3>Región y zona</h3><p>La región es un geografía; la zona es un edificio (casi). Multi-AZ no es multi-región.</p></article><article class="short"><h3>Security group</h3><p>Firewall de instancias. Egress también importa.</p></article><article class="short"><h3>Cuenta y organización</h3><p>Separa prod de sandbox. El blast radius es un diseño, no un accidente.</p></article></div>
+    </section>
+
+    <section id="recorrido">
+      <h2>Recorrido</h2>
+      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+      <ol><li>Crea una cuenta de laboratorio (free tier) y activa MFA.</li><li>Crea un usuario/rol de trabajo, no uses root.</li><li>Levanta una VM mínima, entra por SSH, apágala.</li><li>Mira la factura. Configura una alerta de costo.</li></ol>
+    </section>
+
+    <section id="pset">
+      <h2>Problem set</h2>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — El lab se puede crear y destruir con instrucciones claras. · <strong>diseño</strong> — IAM mínimo, red justificada, sin 0.0.0.0/0 en SSH si puedes evitarlo. · <strong>estilo</strong> — Etiquetas y alerta de costo.</p>
+      <div class="tabs">
+        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      </div>
+      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Identidad</strong><p>Diagrama de cuentas/roles de tu lab. Root con MFA. Usuario de diario sin admin global.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Red</strong><p>Una VPC con subnet pública y otra privada. Explica el flujo.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Cómputo</strong><p>Una VM o un servicio PaaS sirviendo &#x27;hola&#x27;. Se puede destruir con una guía de 5 pasos.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Costo</strong><p>Lista lo que dejaste encendido y cuánto estima el proveedor.</p></span></label></div>
+      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>IaC en la nube</strong><p>El laboratorio de la semana 8 ahora crea la VM/red en el proveedor real.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Alta disponibilidad</strong><p>Dos zonas, un balanceador. Mata una instancia y observa.</p></span></label></div>
+    </section>
+
+    <section id="quiz">
+      <h2>Recuerdo activo</h2>
+      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+      <div class="quiz"><article class="q-card" data-answer="1"><h3>Un cloud provider ofrece:</h3><div class="choices"><button class="choice" type="button">Solo laptops</button><button class="choice" type="button">APIs que abstraen infraestructura con límites de seguridad y facturación</button><button class="choice" type="button">Únicamente DNS doméstico</button><button class="choice" type="button">Compiladores de C</button></div><p class="explain" hidden>Plataforma con cobro y frontera.</p></article><article class="q-card" data-answer="0"><h3>Los más citados en el temario:</h3><div class="choices"><button class="choice" type="button">AWS, Azure y Google Cloud</button><button class="choice" type="button">Solo Heroku</button><button class="choice" type="button">Solo Raspberry Pi</button><button class="choice" type="button">Solo Dropbox</button></div><p class="explain" hidden>Los tres grandes.</p></article><article class="q-card" data-answer="1"><h3>Debes saber gestionar:</h3><div class="choices"><button class="choice" type="button">Solo CSS</button><button class="choice" type="button">Usuarios, redes, servidores virtuales</button><button class="choice" type="button">Solo Jira</button><button class="choice" type="button">Solo Figma</button></div><p class="explain" hidden>IAM, red, cómputo.</p></article><article class="q-card" data-answer="1"><h3>IaaS vs PaaS:</h3><div class="choices"><button class="choice" type="button">IaaS es software de oficina</button><button class="choice" type="button">IaaS alquila infraestructura; PaaS ofrece plataforma para correr apps</button><button class="choice" type="button">No hay diferencia</button><button class="choice" type="button">PaaS es un firewall</button></div><p class="explain" hidden>Quién parchea el SO marca la diferencia.</p></article></div>
+    </section>
+
+    <section id="feynman">
+      <h2>Cerrar y enseñar</h2>
+      <p class="muted">Explica la nube como un hotel: IaaS es alquilar la cocina, PaaS es pedir el menú, SaaS es sentarte a comer.</p>
+      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+    </section>
+
+    <section id="tarjetas">
+      <h2>Tarjetas espaciadas</h2>
+      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;Nubes más comunes&quot;, &quot;a&quot;: &quot;AWS, Azure, Google Cloud.&quot;}, {&quot;q&quot;: &quot;IaaS / PaaS / SaaS&quot;, &quot;a&quot;: &quot;Infraestructura, plataforma, software.&quot;}, {&quot;q&quot;: &quot;Qué practicar&quot;, &quot;a&quot;: &quot;IAM, redes, VMs, disponibilidad.&quot;}, {&quot;q&quot;: &quot;Región&quot;, &quot;a&quot;: &quot;Conjunto de zonas en una geografía.&quot;}, {&quot;q&quot;: &quot;Regla de oro&quot;, &quot;a&quot;: &quot;MFA, no-root diario, apaga el lab.&quot;}]">
+        <div>
+          <p data-q></p>
+          <p data-a hidden></p>
+          <p class="hint">Toca para revelar · <span data-box></span></p>
+        </div>
+      </div>
+      <div class="rate">
+        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+        <button class="btn" type="button" data-rate="ok">La sé</button>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos del roadmap</h2>
+      <div class="resources"><a href="https://learn.microsoft.com/en-us/certifications/exams/az-900" rel="noopener" target="_blank">AZ-900 (Microsoft)<small>Certificación intro</small></a><a href="https://www.udemy.com/course/aws-certified-cloud-practitioner-new" rel="noopener" target="_blank">AWS Cloud Practitioner (Udemy)<small>Curso</small></a><a href="https://acloudguru.com/learning-paths/aws-developer" rel="noopener" target="_blank">A Cloud Guru AWS path<small>Path</small></a></div>
+    </section>
+
+    <div class="week-nav"><a class="btn btn-ghost" href="semana-10.html">Semana anterior</a><a class="btn" href="semana-12.html">Siguiente</a></div>
+  </div>
+</div>
+</main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan). Sitio generado con Python. Compatible con GitHub Pages.</p>
+      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
+    </div>
+  </footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

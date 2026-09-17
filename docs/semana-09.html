@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Semana 9: CI/CD · DevOps Roadmap</title>
+  <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta name="theme-color" content="#0b0f14"/>
+  <meta property="og:title" content="Semana 9: CI/CD · DevOps Roadmap"/>
+  <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/og.jpg"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/app.css"/>
+  
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+  <rect width="32" height="32" rx="8" fill="#c8102e"/>
+  <path d="M8 16c0-4 3-7 8-7s8 3 8 7-3 7-8 7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+</svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
+      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Temario</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+    </div>
+  </header>
+  <main id="contenido">
+<div class="wrap week-layout" data-week="09" data-tasks="6">
+  <aside class="toc">
+    <a href="#resumen">Resumen</a>
+    <a href="#conferencia">Conferencia</a>
+    <a href="#cortos">Cortos</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#pset">Problem set</a>
+    <a href="#quiz">Recuerdo</a>
+    <a href="#feynman">Feynman</a>
+    <a href="#tarjetas">Tarjetas</a>
+    <a href="#recursos">Recursos</a>
+  </aside>
+  <div>
+    <section class="page-head" id="resumen">
+      <p class="kicker">Semana 9 · 10–14 h</p>
+      <h1>CI/CD</h1>
+      <p class="lede">Cada cambio en main se construye, se prueba y puede llegar a un entorno sin un ritual heroico.</p>
+      <div class="chip-row"><span class="chip">Montar el servidor</span><span class="chip">Integración</span><span class="chip">Herramientas de pipeline</span></div>
+      <div class="progress-box">
+        <span class="tiny" data-week-pct>0% completado</span>
+      </div>
+      <div class="bar"><i data-week-bar></i></div>
+      <p style="margin-top:18px">CI/CD introduce automatización y monitoreo continuo desde la integración hasta el despliegue. Es la respuesta al miedo de juntar código el viernes.</p>
+    </section>
+
+    <section id="conferencia">
+      <h2>Conferencia</h2>
+      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+      <div class="lecture"><h2>El tubo</h2><p>Continuous Integration: cada commit (o PR) dispara una construcción y pruebas. Continuous Delivery: el artefacto queda listo para producción. Continuous Deployment: además, se publica solo si el tubo está verde.</p><p>Un pipeline típico: obtener código → construir → analizar → probar → empaquetar → desplegar → verificar. Jenkins, GitHub Actions, GitLab CI, Circle, Azure DevOps: distinto YAML, misma idea.</p><h2>Lo que debes montar</h2><ul><li>Un servidor o servicio de CI.</li><li>Integración: el push dispara el tubo.</li><li>Herramientas de build y empaquetado.</li></ul><pre><code>name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m compileall .</code></pre><div class="callout"><strong>El tubo es producto</strong><span>Si el pipeline es flaky, el equipo deja de creerlo. Un test inestable es un incidente cultural.</span></div></div>
+    </section>
+
+    <section id="cortos">
+      <h2>Cortos</h2>
+      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+      <div class="shorts" style="margin-top:12px"><article class="short"><h3>Artefacto</h3><p>El binario, imagen o paquete que desplegarás. No redespliegues &#x27;lo que había en la laptop&#x27;.</p></article><article class="short"><h3>Gates</h3><p>No despliegues si fallan tests, linters o el escaneo de secretos.</p></article><article class="short"><h3>Ambientes</h3><p>dev → staging → prod. Promueve el mismo artefacto; no reconstruyas en prod.</p></article><article class="short"><h3>Secrets del CI</h3><p>El CI es un tesoro: tiene llaves de nube. Mínimo privilegio, rotación, logs sin secretos.</p></article></div>
+    </section>
+
+    <section id="recorrido">
+      <h2>Recorrido</h2>
+      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+      <ol><li>Elige GitHub Actions o GitLab CI (gratis y suficiente).</li><li>Pipeline que corre en cada push: lint o tests mínimos.</li><li>Guarda un artefacto (un .tar o una imagen en un registry de laboratorio).</li><li>Añade un job de deploy a un entorno falso (una rama gh-pages o un directorio).</li></ol>
+    </section>
+
+    <section id="pset">
+      <h2>Problem set</h2>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — El tubo corre en un clone limpio, no en tu laptop. · <strong>diseño</strong> — Jobs cortos, cacheados con sentido, secretos en el almacén del CI. · <strong>estilo</strong> — YAML legible; nombres de jobs que un extraño entiende.</p>
+      <div class="tabs">
+        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      </div>
+      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Verde</strong><p>Pipeline que falla si el código no compila o un test unitario cae.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>PR check</strong><p>El merge a main queda bloqueado si el check está rojo (o documenta cómo se haría).</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Artefacto</strong><p>Publica un build (imagen Docker o zip) con un tag del commit.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>README del tubo</strong><p>Explica cada job en lenguaje humano.</p></span></label></div>
+      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Matriz</strong><p>Corre tests en dos versiones de runtime.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Deploy por ambientes</strong><p>manual approval para producción. El mismo artefacto que staging.</p></span></label></div>
+    </section>
+
+    <section id="quiz">
+      <h2>Recuerdo activo</h2>
+      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+      <div class="quiz"><article class="q-card" data-answer="1"><h3>CI/CD introduce, sobre todo:</h3><div class="choices"><button class="choice" type="button">Más reuniones</button><button class="choice" type="button">Automatización en las etapas de desarrollo y entrega</button><button class="choice" type="button">Un nuevo lenguaje</button><button class="choice" type="button">Menos tests</button></div><p class="explain" hidden>Automatizar el camino a producción.</p></article><article class="q-card" data-answer="1"><h3>Un pipeline conecta:</h3><div class="choices"><button class="choice" type="button">Solo el diseño</button><button class="choice" type="button">Integración, pruebas, entrega y despliegue</button><button class="choice" type="button">Únicamente el firewall</button><button class="choice" type="button">Solo el DNS</button></div><p class="explain" hidden>El temario habla de un tubo continuo.</p></article><article class="q-card" data-answer="0"><h3>Debes aprender a:</h3><div class="choices"><button class="choice" type="button">Montar el CI, integrar código y disparar pipelines, más herramientas de build</button><button class="choice" type="button">Solo Jira</button><button class="choice" type="button">Solo Figma</button><button class="choice" type="button">Solo Excel</button></div><p class="explain" hidden>Servidor, integración, tools.</p></article><article class="q-card" data-answer="1"><h3>¿Por qué no reconstruir en producción?</h3><div class="choices"><button class="choice" type="button">Por moda</button><button class="choice" type="button">Para desplegar el mismo artefacto que ya se probó</button><button class="choice" type="button">Porque YAML lo prohíbe</button><button class="choice" type="button">Porque Docker no puede</button></div><p class="explain" hidden>Reproducibilidad.</p></article></div>
+    </section>
+
+    <section id="feynman">
+      <h2>Cerrar y enseñar</h2>
+      <p class="muted">Cuenta la historia de un commit desde el teclado hasta un servidor, como si fuera un paquete en una fábrica con scanners en cada cinta.</p>
+      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+    </section>
+
+    <section id="tarjetas">
+      <h2>Tarjetas espaciadas</h2>
+      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;CI&quot;, &quot;a&quot;: &quot;Integrar y probar en cada cambio.&quot;}, {&quot;q&quot;: &quot;CD&quot;, &quot;a&quot;: &quot;Entregar o desplegar de forma continua.&quot;}, {&quot;q&quot;: &quot;Pipeline&quot;, &quot;a&quot;: &quot;Cadena automatizada de esas etapas.&quot;}, {&quot;q&quot;: &quot;Herramientas típicas&quot;, &quot;a&quot;: &quot;Jenkins, GitHub Actions, GitLab CI.&quot;}, {&quot;q&quot;: &quot;Regla de oro del artefacto&quot;, &quot;a&quot;: &quot;Construye una vez, despliega muchas.&quot;}]">
+        <div>
+          <p data-q></p>
+          <p data-a hidden></p>
+          <p class="hint">Toca para revelar · <span data-box></span></p>
+        </div>
+      </div>
+      <div class="rate">
+        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+        <button class="btn" type="button" data-rate="ok">La sé</button>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos del roadmap</h2>
+      <div class="resources"><a href="https://semaphoreci.com/blog/cicd-pipeline" rel="noopener" target="_blank">What is a CI/CD pipeline?<small>Artículo</small></a><a href="https://www.udemy.com/course/jenkins-from-zero-to-hero" rel="noopener" target="_blank">Jenkins from zero to hero<small>Curso</small></a><a href="https://docs.gitlab.com/ee/tutorials/" rel="noopener" target="_blank">GitLab CI tutorials<small>Docs</small></a></div>
+    </section>
+
+    <div class="week-nav"><a class="btn btn-ghost" href="semana-08.html">Semana anterior</a><a class="btn" href="semana-10.html">Siguiente</a></div>
+  </div>
+</div>
+</main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan). Sitio generado con Python. Compatible con GitHub Pages.</p>
+      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
+    </div>
+  </footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

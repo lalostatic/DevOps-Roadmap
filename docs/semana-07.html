@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Semana 7: Orquestación de contenedores · DevOps Roadmap</title>
+  <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta name="theme-color" content="#0b0f14"/>
+  <meta property="og:title" content="Semana 7: Orquestación de contenedores · DevOps Roadmap"/>
+  <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/og.jpg"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/app.css"/>
+  
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+  <rect width="32" height="32" rx="8" fill="#c8102e"/>
+  <path d="M8 16c0-4 3-7 8-7s8 3 8 7-3 7-8 7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+</svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
+      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Temario</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+    </div>
+  </header>
+  <main id="contenido">
+<div class="wrap week-layout" data-week="07" data-tasks="6">
+  <aside class="toc">
+    <a href="#resumen">Resumen</a>
+    <a href="#conferencia">Conferencia</a>
+    <a href="#cortos">Cortos</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#pset">Problem set</a>
+    <a href="#quiz">Recuerdo</a>
+    <a href="#feynman">Feynman</a>
+    <a href="#tarjetas">Tarjetas</a>
+    <a href="#recursos">Recursos</a>
+  </aside>
+  <div>
+    <section class="page-head" id="resumen">
+      <p class="kicker">Semana 7 · 12–18 h</p>
+      <h1>Orquestación de contenedores</h1>
+      <p class="lede">Dejar de cuidar contenedores a mano. Kubernetes (o similar) declara el estado deseado y el clúster se esfuerza por cumplirlo.</p>
+      <div class="chip-row"><span class="chip">Componentes</span><span class="chip">CLI</span><span class="chip">Namespaces</span><span class="chip">Administrar</span><span class="chip">Despliegue</span></div>
+      <div class="progress-box">
+        <span class="tiny" data-week-pct>0% completado</span>
+      </div>
+      <div class="bar"><i data-week-bar></i></div>
+      <p style="margin-top:18px">Un contenedor es un proceso. Diez contenedores son un sistema. Cuando hay que reiniciar, escalar, sanar y exponer servicios, aparece el orquestador.</p>
+    </section>
+
+    <section id="conferencia">
+      <h2>Conferencia</h2>
+      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+      <div class="lecture"><h2>Qué orquesta un orquestador</h2><p>La orquestación automatiza despliegue, gestión, escala y red de contenedores. Sirve en cualquier entorno donde ya usas contenedores: el mismo manifiesto puede acercarte a desarrollo, staging y producción.</p><p>Los microservicios en contenedores se vuelven manejables cuando el orquestador se ocupa del almacenamiento, la red y parte de la seguridad.</p><h2>Kubernetes, sin mito</h2><p>Un clúster tiene plano de control (API server, scheduler, etcd, controllers) y nodos de trabajo. Tú declaras: &#x27;quiero 3 réplicas de esta imagen, con este puerto&#x27;. El control loop compara el mundo real con el declarado.</p><ul><li>Pod: el átomo. Uno o más contenedores que viajan juntos.</li><li>Deployment: cómo se actualizan los pods.</li><li>Service: un nombre estable frente a pods que nacen y mueren.</li><li>Namespace: paredes de papel para equipos y ambientes.</li></ul><pre><code>kubectl get nodes
+kubectl create deployment web --image=nginx
+kubectl expose deployment web --port=80 --type=ClusterIP
+kubectl get pods -A</code></pre><div class="callout"><strong>No empieces en un EKS de 20 nodos</strong><span>Kind, k3d o minikube bastan para aprender el idioma. El cloud es la semana 11.</span></div></div>
+    </section>
+
+    <section id="cortos">
+      <h2>Cortos</h2>
+      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+      <div class="shorts" style="margin-top:12px"><article class="short"><h3>Estado deseado</h3><p>Tú no &#x27;arrancas&#x27; tanto como &#x27;declaras&#x27;. El clúster reconcilia.</p></article><article class="short"><h3>kubectl</h3><p>El CLI. Habla con el API server. Casi todo es un objeto YAML.</p></article><article class="short"><h3>Namespace</h3><p>No es un firewall mágico, pero organiza y aplica cuotas y RBAC.</p></article><article class="short"><h3>Rollout</h3><p>Un Deployment cambia pods poco a poco. Un crashloop es información, no un misterio.</p></article></div>
+    </section>
+
+    <section id="recorrido">
+      <h2>Recorrido</h2>
+      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+      <ol><li>Instala kubectl y un clúster local (kind/k3d/minikube).</li><li>Despliega nginx y expónlo.</li><li>Escala a 3 réplicas y observa los pods.</li><li>Aplica un cambio de imagen y sigue el rollout.</li></ol>
+    </section>
+
+    <section id="pset">
+      <h2>Problem set</h2>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — El YAML aplica en un clúster limpio. · <strong>diseño</strong> — Probes, recursos (CPU/RAM) y nombres con sentido. · <strong>estilo</strong> — Sin kubectl apply de objetos sueltos sin etiqueta ni namespace.</p>
+      <div class="tabs">
+        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      </div>
+      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Declarar</strong><p>Escribe un Deployment + Service en YAML. Nada de comandos imperativos en la entrega final.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Sanar</strong><p>Rompe la imagen a propósito y documenta los eventos del pod.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Namespace</strong><p>Crea un namespace dev y despliega ahí. kubectl -n dev get all.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Sonda</strong><p>Añade liveness o readiness y explica la diferencia en una frase cada una.</p></span></label></div>
+      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Helm o Kustomize</strong><p>Parametriza el manifiesto. Un valor cambia el tag de imagen.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>RBAC mínimo</strong><p>Una ServiceAccount que solo puede leer pods. Demuéstralo.</p></span></label></div>
+    </section>
+
+    <section id="quiz">
+      <h2>Recuerdo activo</h2>
+      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+      <div class="quiz"><article class="q-card" data-answer="1"><h3>La orquestación automatiza:</h3><div class="choices"><button class="choice" type="button">Solo el diseño gráfico</button><button class="choice" type="button">Despliegue, gestión, escala y red de contenedores</button><button class="choice" type="button">Únicamente DNS público</button><button class="choice" type="button">La escritura de Python</button></div><p class="explain" hidden>Esa es la definición del temario.</p></article><article class="q-card" data-answer="1"><h3>Kubernetes te pide, sobre todo:</h3><div class="choices"><button class="choice" type="button">Hacer clic en 40 pantallas cada viernes</button><button class="choice" type="button">Administrar el clúster y desplegar aplicaciones en él</button><button class="choice" type="button">Reemplazar Linux</button><button class="choice" type="button">Evitar YAML</button></div><p class="explain" hidden>Aprender a operar y a desplegar.</p></article><article class="q-card" data-answer="1"><h3>Un namespace sirve para:</h3><div class="choices"><button class="choice" type="button">Cifrar discos</button><button class="choice" type="button">Aislar lógicamente objetos dentro del clúster</button><button class="choice" type="button">Comprar dominios</button><button class="choice" type="button">Hacer merge</button></div><p class="explain" hidden>Multitenancy ligera y orden.</p></article><article class="q-card" data-answer="1"><h3>El CLI principal es:</h3><div class="choices"><button class="choice" type="button">psql</button><button class="choice" type="button">kubectl</button><button class="choice" type="button">ffmpeg</button><button class="choice" type="button">npm</button></div><p class="explain" hidden>Habla con el API server.</p></article></div>
+    </section>
+
+    <section id="feynman">
+      <h2>Cerrar y enseñar</h2>
+      <p class="muted">Compara un orquestador con un director de escena: tú escribes el libreto (YAML); el director se asegura de que siempre haya tres actores en el escenario.</p>
+      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+    </section>
+
+    <section id="tarjetas">
+      <h2>Tarjetas espaciadas</h2>
+      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;Qué automatiza la orquestación&quot;, &quot;a&quot;: &quot;Despliegue, gestión, escala y red.&quot;}, {&quot;q&quot;: &quot;Sistema dominante&quot;, &quot;a&quot;: &quot;Kubernetes.&quot;}, {&quot;q&quot;: &quot;Átomo de K8s&quot;, &quot;a&quot;: &quot;El Pod.&quot;}, {&quot;q&quot;: &quot;CLI&quot;, &quot;a&quot;: &quot;kubectl.&quot;}, {&quot;q&quot;: &quot;Namespace&quot;, &quot;a&quot;: &quot;Partición lógica del clúster.&quot;}]">
+        <div>
+          <p data-q></p>
+          <p data-a hidden></p>
+          <p class="hint">Toca para revelar · <span data-box></span></p>
+        </div>
+      </div>
+      <div class="rate">
+        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+        <button class="btn" type="button" data-rate="ok">La sé</button>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos del roadmap</h2>
+      <div class="resources"><a href="https://www.youtube.com/watch?v=s_o8dwzRIu4" rel="noopener" target="_blank">Kubernetes in 4 hours (video)<small>Video</small></a><a href="https://thenewstack.io/primer-how-kubernetes-came-to-be-what-it-is-and-why-you-should-care/" rel="noopener" target="_blank">How Kubernetes came to be<small>Artículo</small></a><a href="https://kodekloud.com/learning-path-kubernetes/" rel="noopener" target="_blank">KodeKloud Kubernetes path<small>Curso</small></a></div>
+    </section>
+
+    <div class="week-nav"><a class="btn btn-ghost" href="semana-06.html">Semana anterior</a><a class="btn" href="semana-08.html">Siguiente</a></div>
+  </div>
+</div>
+</main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan). Sitio generado con Python. Compatible con GitHub Pages.</p>
+      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
+    </div>
+  </footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Semana 2: Un lenguaje de programación · DevOps Roadmap</title>
+  <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta name="theme-color" content="#0b0f14"/>
+  <meta property="og:title" content="Semana 2: Un lenguaje de programación · DevOps Roadmap"/>
+  <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/og.jpg"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/app.css"/>
+  
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+  <rect width="32" height="32" rx="8" fill="#c8102e"/>
+  <path d="M8 16c0-4 3-7 8-7s8 3 8 7-3 7-8 7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+</svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
+      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Temario</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+    </div>
+  </header>
+  <main id="contenido">
+<div class="wrap week-layout" data-week="02" data-tasks="6">
+  <aside class="toc">
+    <a href="#resumen">Resumen</a>
+    <a href="#conferencia">Conferencia</a>
+    <a href="#cortos">Cortos</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#pset">Problem set</a>
+    <a href="#quiz">Recuerdo</a>
+    <a href="#feynman">Feynman</a>
+    <a href="#tarjetas">Tarjetas</a>
+    <a href="#recursos">Recursos</a>
+  </aside>
+  <div>
+    <section class="page-head" id="resumen">
+      <p class="kicker">Semana 2 · 10–16 h</p>
+      <h1>Un lenguaje de programación</h1>
+      <p class="lede">Escribir automatización, no solo pulsar botones. Elige un lenguaje y llévalo a la fluidez básica.</p>
+      <div class="chip-row"><span class="chip">Python</span><span class="chip">Go</span><span class="chip">JavaScript</span></div>
+      <div class="progress-box">
+        <span class="tiny" data-week-pct>0% completado</span>
+      </div>
+      <div class="bar"><i data-week-bar></i></div>
+      <p style="margin-top:18px">DevOps sin código es un operador eterno. Con un lenguaje puedes convertir un ritual de 40 clics en un script revisable, testeable y versionado.</p>
+    </section>
+
+    <section id="conferencia">
+      <h2>Conferencia</h2>
+      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+      <div class="lecture"><h2>Elige uno. Domínalo.</h2><p>Python, Go y JavaScript son los más comunes en este oficio. Python brilla en scripts, APIs y pegamento. Go en CLIs, agentes y servicios concurrentes. JavaScript/TypeScript en tooling de front, GitHub Actions y lambdas. El curso no te pide los tres: te pide uno con criterio.</p><p>Python es el más recomendable para empezar: se lee casi como prosa, se interpreta al momento y hay librerías para SSH, HTTP, YAML y nubes.</p><div class="callout"><strong>Correctitud, diseño, estilo</strong><span>Un script de 30 líneas también se diseña. Nombres claros, funciones cortas, cero secretos en el código, y un README que explique cómo correrlo.</span></div><h2>Conceptos que no son opcionales</h2><ul><li>Sintaxis, variables, tipos.</li><li>Condicionales y bucles.</li><li>Funciones y módulos.</li><li>Listas, diccionarios y manejo de errores.</li><li>Leer archivos, JSON/YAML y hacer una petición HTTP.</li></ul><h2>Automatizar lo aburrido</h2><p>El primer programa útil de DevOps no es un algoritmo elegante: es el que lista instancias, rota un log, valida un manifiesto o abre un ticket. Si ahorra trabajo humano repetible, ya es ingeniería.</p><pre><code>import json, urllib.request
+url = &quot;https://httpbin.org/get&quot;
+with urllib.request.urlopen(url) as r:
+    data = json.load(r)
+print(data[&quot;url&quot;])</code></pre></div>
+    </section>
+
+    <section id="cortos">
+      <h2>Cortos</h2>
+      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+      <div class="shorts" style="margin-top:12px"><article class="short"><h3>Python</h3><p>Legible, enorme ecosistema, ideal para pegar APIs y archivos. Empieza aquí si no tienes preferencia.</p></article><article class="short"><h3>Go</h3><p>Binario único, excelente concurrencia, muy usado en Kubernetes y CLIs. Curva más estricta, pago después.</p></article><article class="short"><h3>JavaScript</h3><p>El lenguaje del navegador y de Node. Útil si ya vives en el ecosistema web o en GitHub Actions.</p></article><article class="short"><h3>Prueba pequeña</h3><p>Si no puedes explicar un if, un for y una función, aún no automatices producción.</p></article></div>
+    </section>
+
+    <section id="recorrido">
+      <h2>Recorrido</h2>
+      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+      <ol><li>Instala el runtime (Python 3 recomendado).</li><li>Escribe un script que imprima el día y liste archivos de un directorio.</li><li>Añade un argumento de línea de comandos.</li><li>Maneja un error (archivo que no existe) sin trazar un pánico ilegible.</li></ol>
+    </section>
+
+    <section id="pset">
+      <h2>Problem set</h2>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — El script hace lo que promete el README. · <strong>diseño</strong> — Funciones cortas, una responsabilidad, errores manejados. · <strong>estilo</strong> — Nombres honestos, sin secretos, formato consistente.</p>
+      <div class="tabs">
+        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      </div>
+      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Inventario</strong><p>Escribe un script que lea un JSON de servidores ficticios y imprima cuáles están &#x27;down&#x27;.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Repetición</strong><p>Convierte un proceso manual de 5 pasos (renombrar archivos, por ejemplo) en un script.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Contrato</strong><p>Tu script debe aceptar --help y no crashear con entrada vacía.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Bitácora</strong><p>Registra lo que hace el script en un archivo app.log.</p></span></label></div>
+      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Idempotencia</strong><p>Haz que correr el script dos veces no duplique efectos. Eso es DevOps de verdad.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Tests</strong><p>Si elegiste Go, sigue &#x27;Learn Go with Tests&#x27;. Si Python, añade pytest a una función pura.</p></span></label></div>
+    </section>
+
+    <section id="quiz">
+      <h2>Recuerdo activo</h2>
+      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+      <div class="quiz"><article class="q-card" data-answer="1"><h3>¿Por qué un lenguaje en DevOps?</h3><div class="choices"><button class="choice" type="button">Para diseñar logos</button><button class="choice" type="button">Para automatizar y versionar operaciones</button><button class="choice" type="button">Para reemplazar Linux</button><button class="choice" type="button">Para evitar Git</button></div><p class="explain" hidden>El código convierte ritos en sistemas.</p></article><article class="q-card" data-answer="1"><h3>¿Cuál es una buena primera lengua según este temario?</h3><div class="choices"><button class="choice" type="button">COBOL</button><button class="choice" type="button">Python</button><button class="choice" type="button">Malbolge</button><button class="choice" type="button">Ensamblador del 6502</button></div><p class="explain" hidden>Python prioriza lectura y velocidad de llegada.</p></article><article class="q-card" data-answer="1"><h3>¿Qué debe vivir fuera del código?</h3><div class="choices"><button class="choice" type="button">Los nombres de funciones</button><button class="choice" type="button">Los secretos y contraseñas</button><button class="choice" type="button">Los bucles</button><button class="choice" type="button">Los comentarios</button></div><p class="explain" hidden>Secretos en Git son incidentes esperando fecha.</p></article><article class="q-card" data-answer="1"><h3>Idempotencia significa:</h3><div class="choices"><button class="choice" type="button">Que el script es rápido</button><button class="choice" type="button">Que repetirlo no cambia el resultado ya alcanzado</button><button class="choice" type="button">Que usa hilos</button><button class="choice" type="button">Que imprime JSON</button></div><p class="explain" hidden>La automatización segura se puede reejecutar.</p></article></div>
+    </section>
+
+    <section id="feynman">
+      <h2>Cerrar y enseñar</h2>
+      <p class="muted">Enseña qué es un script de automatización a una persona de negocio: entrada, proceso, salida, y por qué es mejor que un documento de 20 pasos.</p>
+      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+    </section>
+
+    <section id="tarjetas">
+      <h2>Tarjetas espaciadas</h2>
+      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;Lenguajes típicos en DevOps&quot;, &quot;a&quot;: &quot;Python, Go, JavaScript.&quot;}, {&quot;q&quot;: &quot;¿Qué aprender primero?&quot;, &quot;a&quot;: &quot;Sintaxis, if/else, bucles, estructuras de datos, funciones.&quot;}, {&quot;q&quot;: &quot;¿Para qué se usa?&quot;, &quot;a&quot;: &quot;Automatizar tareas de desarrollo y operaciones.&quot;}, {&quot;q&quot;: &quot;¿Qué es idempotencia?&quot;, &quot;a&quot;: &quot;Ejecutar de nuevo no rompe ni duplica el estado deseado.&quot;}, {&quot;q&quot;: &quot;¿Dónde van los secretos?&quot;, &quot;a&quot;: &quot;En un gestor de secretos o variables de entorno, nunca en el repo.&quot;}]">
+        <div>
+          <p data-q></p>
+          <p data-a hidden></p>
+          <p class="hint">Toca para revelar · <span data-box></span></p>
+        </div>
+      </div>
+      <div class="rate">
+        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+        <button class="btn" type="button" data-rate="ok">La sé</button>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos del roadmap</h2>
+      <div class="resources"><a href="https://automatetheboringstuff.com/" rel="noopener" target="_blank">Automate the Boring Stuff<small>Python, gratis</small></a><a href="https://ehmatthes.github.io/pcc/" rel="noopener" target="_blank">Python Crash Course extras<small>Gratis</small></a><a href="https://eloquentjavascript.net/" rel="noopener" target="_blank">Eloquent JavaScript<small>Libro</small></a><a href="https://gobyexample.com/" rel="noopener" target="_blank">Go by Example<small>Gratis</small></a><a href="https://quii.gitbook.io/learn-go-with-tests" rel="noopener" target="_blank">Learn Go with Tests<small>Gratis</small></a></div>
+    </section>
+
+    <div class="week-nav"><a class="btn btn-ghost" href="semana-01.html">Semana anterior</a><a class="btn" href="semana-03.html">Siguiente</a></div>
+  </div>
+</div>
+</main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan). Sitio generado con Python. Compatible con GitHub Pages.</p>
+      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
+    </div>
+  </footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>

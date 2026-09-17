@@ -1,2 +1,38 @@
-# DevOps-Roadmap
-Curso interactivo DevOps Roadmap 2026 en español. Pedagogía tipo Harvard CS50. Sitio estático generado con Python, listo para GitHub Pages.
+# DevOps Roadmap 2026
+
+Curso abierto en español, generado con **Python** y publicado como sitio estático para **GitHub Pages**.
+
+Temario basado en el [DevOps Roadmap 2026](https://github.com/milanm/DevOps-Roadmap) de Dr. Milan Milanović y Romano Roth. La pedagogía sigue el espíritu de CS50 (Harvard): piso bajo y techo alto, conferencia → cortos → problem set, vías estándar y hacker, rúbrica de correctitud / diseño / estilo, recuerdo activo y repetición espaciada.
+
+## Sitio
+
+Tras activar GitHub Pages:
+
+**https://lalostatic.github.io/DevOps-Roadmap/**
+
+## Cómo está hecho
+
+GitHub Pages no ejecuta Python en el navegador. Python **genera** HTML/CSS/JS estáticos:
+
+```bash
+python3 course/build.py
+```
+
+La salida queda en `docs/`. El flujo de Actions publica esa carpeta.
+
+No hay dependencias: solo Python 3 estándar.
+
+## Método
+
+1. Elige comodidad (menos / más cómodo).
+2. Lee la conferencia (caja negra primero).
+3. Cortos de un concepto.
+4. Recorrido para arrancar.
+5. Problem set estándar o hacker.
+6. Quiz de recuerdo, Feynman y tarjetas Leitner.
+
+El progreso se guarda en `localStorage` de tu navegador.
+
+## Créditos
+
+Roadmap original: TechWorld With Milan. Este repositorio es un curso derivado en español, no un reemplazo del PDF original.

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Semana 6: Contenedores · DevOps Roadmap</title>
+  <meta name="description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta name="theme-color" content="#0b0f14"/>
+  <meta property="og:title" content="Semana 6: Contenedores · DevOps Roadmap"/>
+  <meta property="og:description" content="Un curso para aprender a construir, publicar y operar software con criterio. Piso bajo, techo alto: se puede empezar sin experiencia y terminar pensando como ingeniera o ingeniero de plataformas."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/og.jpg"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/app.css"/>
+  
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+  <rect width="32" height="32" rx="8" fill="#c8102e"/>
+  <path d="M8 16c0-4 3-7 8-7s8 3 8 7-3 7-8 7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M24 16c0 4-3 7-8 7s-8-3-8-7 3-7 8-7" fill="none" stroke="#f4efe6" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+</svg><span class="brand-name">DevOps Roadmap <span>2026</span></span></a>
+      <button class="menu-btn" type="button" aria-label="Abrir menú"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      <nav class="nav" id="nav"><a href="index.html">Inicio</a><a href="temario.html" class="is-active">Temario</a><a href="metodo.html">Método</a><a href="repaso.html">Repaso</a><a href="proyecto.html">Proyecto</a></nav>
+    </div>
+  </header>
+  <main id="contenido">
+<div class="wrap week-layout" data-week="06" data-tasks="6">
+  <aside class="toc">
+    <a href="#resumen">Resumen</a>
+    <a href="#conferencia">Conferencia</a>
+    <a href="#cortos">Cortos</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#pset">Problem set</a>
+    <a href="#quiz">Recuerdo</a>
+    <a href="#feynman">Feynman</a>
+    <a href="#tarjetas">Tarjetas</a>
+    <a href="#recursos">Recursos</a>
+  </aside>
+  <div>
+    <section class="page-head" id="resumen">
+      <p class="kicker">Semana 6 · 10–14 h</p>
+      <h1>Contenedores</h1>
+      <p class="lede">Empaquetar una app para que corra igual en tu laptop y en un servidor.</p>
+      <div class="chip-row"><span class="chip">Correr contenedores</span><span class="chip">Dockerfiles</span><span class="chip">Red</span><span class="chip">Docker Compose</span></div>
+      <div class="progress-box">
+        <span class="tiny" data-week-pct>0% completado</span>
+      </div>
+      <div class="bar"><i data-week-bar></i></div>
+      <p style="margin-top:18px">El clásico &#x27;en mi máquina funciona&#x27; se acaba cuando el artefacto incluye el runtime, las libs y la configuración mínima. Docker es, hoy, el empaque estándar.</p>
+    </section>
+
+    <section id="conferencia">
+      <h2>Conferencia</h2>
+      <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
+      <div class="lecture"><h2>Qué es un contenedor</h2><p>Un contenedor es una unidad estándar de software que empaca código y dependencias para que la aplicación corra igual de un entorno a otro. No es una VM: comparte el kernel del anfitrión y aísla procesos, sistemas de archivos y red.</p><p>Una imagen es la receta inmutable. Un contenedor es la instancia en ejecución. El Dockerfile describe cómo se construye la imagen.</p><h2>Lo que debes practicar</h2><ul><li>Correr contenedores, ver logs y entrar con exec.</li><li>Escribir Dockerfiles pequeños y reproducibles.</li><li>Volúmenes para persistir datos.</li><li>Redes: cómo dos contenedores se hablan por nombre.</li><li>Docker Compose para más de un contenedor.</li></ul><pre><code>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre><div class="callout"><strong>Capa sobre capa</strong><span>Cada instrucción del Dockerfile es una capa. El orden importa: copia lo que cambia poco primero para no invalidar la caché.</span></div></div>
+    </section>
+
+    <section id="cortos">
+      <h2>Cortos</h2>
+      <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
+      <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
+      <div class="shorts" style="margin-top:12px"><article class="short"><h3>Imagen vs contenedor</h3><p>La imagen es la clase; el contenedor es el objeto. Puedes lanzar muchos de una.</p></article><article class="short"><h3>Volumen</h3><p>Sin volumen, el disco del contenedor se esfuma al borrarlo. Las bases de datos necesitan memoria persistente.</p></article><article class="short"><h3>Red bridge</h3><p>Compose crea una red. servicio-a puede resolver servicio-b por DNS interno.</p></article><article class="short"><h3>Usuario no root</h3><p>Correr como root dentro del contenedor es un atajo que se paga en incidentes.</p></article></div>
+    </section>
+
+    <section id="recorrido">
+      <h2>Recorrido</h2>
+      <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
+      <ol><li>Instala Docker Engine o Docker Desktop.</li><li>Corre nginx:alpine y ábrelo en un puerto local.</li><li>Escribe un Dockerfile para un script de la semana 2.</li><li>Crea un compose con app + un redis o postgres de laboratorio.</li></ol>
+    </section>
+
+    <section id="pset">
+      <h2>Problem set</h2>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — docker compose up --build funciona en una máquina limpia. · <strong>diseño</strong> — Capas ordenadas, .dockerignore, un proceso por contenedor. · <strong>estilo</strong> — Nombres de servicio claros, sin latest en producción si puedes fijar tags.</p>
+      <div class="tabs">
+        <button class="tab is-on" type="button" data-tab="std">Estándar</button>
+        <button class="tab" type="button" data-tab="hacker">Hacker</button>
+      </div>
+      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Empaque</strong><p>Dockeriza una app mínima. El contenedor debe arrancar con un solo comando.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Persistencia</strong><p>Añade un volumen y demuestra que los datos sobreviven a docker compose down / up.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Red</strong><p>Dos servicios en Compose; uno llama al otro por el nombre del servicio.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Higiene</strong><p>.dockerignore para no copiar .git ni secretos. Imagen &lt; 200MB si puedes.</p></span></label></div>
+      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Multi-stage</strong><p>Compila en una etapa y copia el binario/artefacto a una imagen slim.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>No root</strong><p>USER no privilegiado y filesystem de solo lectura donde se pueda.</p></span></label></div>
+    </section>
+
+    <section id="quiz">
+      <h2>Recuerdo activo</h2>
+      <p class="muted">Cierra las notas. Elige. El error también enseña.</p>
+      <div class="quiz"><article class="q-card" data-answer="1"><h3>Un contenedor empaca:</h3><div class="choices"><button class="choice" type="button">Solo el código fuente</button><button class="choice" type="button">Código y dependencias para correr igual en distintos entornos</button><button class="choice" type="button">Un hipervisor completo</button><button class="choice" type="button">Únicamente el kernel</button></div><p class="explain" hidden>Esa es la definición del temario.</p></article><article class="q-card" data-answer="1"><h3>Docker es:</h3><div class="choices"><button class="choice" type="button">Un proveedor cloud</button><button class="choice" type="button">La tecnología de contenedores más popular hoy</button><button class="choice" type="button">Un lenguaje</button><button class="choice" type="button">Un firewall</button></div><p class="explain" hidden>De facto el estándar de empaque.</p></article><article class="q-card" data-answer="1"><h3>Compose sirve para:</h3><div class="choices"><button class="choice" type="button">Orquestar clústeres de 500 nodos</button><button class="choice" type="button">Definir y correr varios contenedores juntos</button><button class="choice" type="button">Reemplazar Git</button><button class="choice" type="button">Compilar el kernel</button></div><p class="explain" hidden>El laboratorio local de microservicios.</p></article><article class="q-card" data-answer="1"><h3>Una imagen es:</h3><div class="choices"><button class="choice" type="button">Un proceso en ejecución</button><button class="choice" type="button">Un paquete inmutable y arrancable</button><button class="choice" type="button">Una IP pública</button><button class="choice" type="button">Un pull request</button></div><p class="explain" hidden>El contenedor es lo que corre.</p></article></div>
+    </section>
+
+    <section id="feynman">
+      <h2>Cerrar y enseñar</h2>
+      <p class="muted">Usa la analogía del tupper: la receta (Dockerfile), el tupper cerrado (imagen) y el tupper en la mesa (contenedor).</p>
+      <p><button class="btn btn-ghost" type="button" data-hide-lecture>Cerrar y enseñar</button></p>
+      <div class="feynman"><textarea data-feynman placeholder="Escribe la explicación como si el otro no hubiera visto jamás un servidor."></textarea></div>
+    </section>
+
+    <section id="tarjetas">
+      <h2>Tarjetas espaciadas</h2>
+      <p class="muted">Toca la carta para ver la respuesta. «Otra vez» la devuelve a la caja 1. «La sé» la aleja 1, 3, 7, 14 o 30 días.</p>
+      <div class="flash" data-flash data-cards="[{&quot;q&quot;: &quot;Definición de contenedor&quot;, &quot;a&quot;: &quot;Unidad que empaca código y dependencias para correr igual en cualquier sitio.&quot;}, {&quot;q&quot;: &quot;Herramienta dominante&quot;, &quot;a&quot;: &quot;Docker.&quot;}, {&quot;q&quot;: &quot;Qué incluye una imagen&quot;, &quot;a&quot;: &quot;Código, runtime, herramientas, librerías y ajustes.&quot;}, {&quot;q&quot;: &quot;Compose&quot;, &quot;a&quot;: &quot;Varios contenedores, una definición YAML.&quot;}, {&quot;q&quot;: &quot;Volumen&quot;, &quot;a&quot;: &quot;Persistencia fuera del ciclo de vida del contenedor.&quot;}]">
+        <div>
+          <p data-q></p>
+          <p data-a hidden></p>
+          <p class="hint">Toca para revelar · <span data-box></span></p>
+        </div>
+      </div>
+      <div class="rate">
+        <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+        <button class="btn" type="button" data-rate="ok">La sé</button>
+      </div>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos del roadmap</h2>
+      <div class="resources"><a href="https://cloud.google.com/learn/what-are-containers" rel="noopener" target="_blank">What are containers? (Google)<small>Gratis</small></a><a href="https://iximiuz.com/en/posts/container-learning-path/" rel="noopener" target="_blank">Container learning path<small>Gratis</small></a><a href="https://www.youtube.com/watch?v=3c-iBn73dDE" rel="noopener" target="_blank">Docker tutorial (YouTube)<small>Video</small></a></div>
+    </section>
+
+    <div class="week-nav"><a class="btn btn-ghost" href="semana-05.html">Semana anterior</a><a class="btn" href="semana-07.html">Siguiente</a></div>
+  </div>
+</div>
+</main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Basado en el DevOps Roadmap 2026 de Dr. Milan Milanović y Romano Roth (TechWorld With Milan). Sitio generado con Python. Compatible con GitHub Pages.</p>
+      <p>Pedagogía inspirada en CS50 (Harvard): accesibilidad con rigor, conferencias, cortos, problem sets y rúbrica de correctitud, diseño y estilo.</p>
+    </div>
+  </footer>
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
