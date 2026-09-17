@@ -319,7 +319,7 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
 <html lang="es">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>{e(page_title)}</title>
   <meta name="description" content="{e(COURSE['lede'])}"/>
   <meta name="theme-color" content="#0b0f14"/>
@@ -331,7 +331,7 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/app.css"/>
+  <link rel="stylesheet" href="assets/app.css?v=2"/>
   {extra_head}
 </head>
 <body{body_attr}>

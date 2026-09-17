@@ -58,12 +58,16 @@ html { scroll-behavior: smooth; }
 html, body {
   margin: 0;
   min-height: 100%;
+  width: 100%;
+  max-width: 100%;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
-  overflow-x: clip;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -92,8 +96,10 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .skip:focus { left: 8px; }
 
 .wrap {
-  width: min(100% - 32px, var(--max));
+  width: min(100%, var(--max));
   margin-inline: auto;
+  padding-inline: 16px;
+  box-sizing: border-box;
 }
 
 .site-header {
@@ -372,9 +378,9 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
   margin-top: 22px;
 }
 
-.method-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.two-col { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.three-col { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.method-grid { grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+.two-col { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.three-col { grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
 
 .panel {
   background: var(--bg-elevated);
@@ -401,9 +407,11 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
   align-items: start;
   padding-bottom: 80px;
   min-width: 0;
+  max-width: 100%;
+  width: 100%;
 }
 
-.week-layout > div { min-width: 0; max-width: 100%; }
+.week-layout > * { min-width: 0; max-width: 100%; }
 
 .toc {
   position: sticky;
@@ -440,7 +448,16 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
 .lecture h2 { font-size: var(--text-xl); margin: 32px 0 10px; }
 .lecture h3 { font-size: var(--text-lg); margin: 24px 0 8px; }
 
-.lecture p { max-width: var(--read); }
+.lecture p,
+.lecture ul,
+.lecture ol,
+.lecture li,
+.callout {
+  max-width: min(68ch, 100%);
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  word-break: break-word;
+}
 
 .callout {
   background: var(--accent-soft);
@@ -448,14 +465,14 @@ button:disabled { cursor: not-allowed; opacity: 0.55; }
   border-radius: var(--radius-lg);
   padding: 16px 18px;
   margin: 18px 0;
-  max-width: var(--read);
 }
 
 .callout strong { display: block; margin-bottom: 4px; color: var(--accent-fg); }
 
 .lecture ul, .lecture ol {
-  max-width: var(--read);
   padding-left: 1.2em;
+  padding-right: 0;
+  margin-inline: 0;
 }
 
 .lecture li { margin: 6px 0; }
@@ -685,19 +702,30 @@ pre code { background: none; padding: 0; }
 }
 
 @media (max-width: 840px) {
-  .week-layout { grid-template-columns: 1fr; }
+  .week-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
   .toc {
     position: static;
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
-    overflow-x: auto;
+    overflow: hidden;
     max-width: 100%;
     width: 100%;
+    min-width: 0;
   }
-  .toc a { white-space: nowrap; flex: none; }
-  .stats { grid-template-columns: 1fr; }
+  .toc a { white-space: normal; flex: none; max-width: 100%; }
+  .toc .toc-k,
+  .toc .toc-k ~ a { display: none; }
+  .stats { grid-template-columns: minmax(0, 1fr); }
   .hero h1, .page-head h1 { max-width: none; }
-  .comfort { grid-template-columns: 1fr; }
+  .comfort { grid-template-columns: minmax(0, 1fr); }
   .week-nav { flex-wrap: wrap; }
 }
 
@@ -1098,7 +1126,7 @@ a.atlas-link:hover {
 
 .gloss-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
   gap: 12px;
   margin-top: 18px;
 }
@@ -1357,6 +1385,13 @@ a.atlas-link:hover {
   border-radius: 3px 18px 18px 3px;
   padding: 32px 36px 40px 44px;
   overflow: visible;
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  word-break: break-word;
   box-shadow:
     0 22px 48px color-mix(in oklab, #000 38%, transparent),
     inset 10px 0 16px -12px color-mix(in oklab, #000 22%, transparent);
@@ -1572,11 +1607,18 @@ body:not(.is-read) .flash-face p { color: var(--fg); }
 .is-front .page-head h1 { }
 
 @media (max-width: 840px) {
-  .cover-wrap, .book { grid-template-columns: 1fr; }
-  .cover-book { transform: none; padding: 32px 24px 28px 32px; }
+  :root { --read: 100%; }
+  .cover-wrap, .book { grid-template-columns: minmax(0, 1fr); }
+  .cover-book { transform: none; padding: 32px 20px 28px 24px; }
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 12px;
+  }
   .book-rail { position: static; max-width: 100%; overflow: hidden; }
   .folio-nav {
     display: flex;
+    flex-wrap: wrap;
     overflow-x: auto;
     gap: 4px;
     max-width: 100%;
@@ -1585,9 +1627,34 @@ body:not(.is-read) .flash-face p { color: var(--fg); }
   }
   .folio-nav button { flex: none; white-space: nowrap; }
   .chapter-nav { display: none; }
-  .sheet { padding: 22px 18px 18px 22px; }
-  .folio-foot { flex-wrap: wrap; }
-  .page-turn { width: 44px; height: 44px; }
+  .sheet {
+    padding: 18px 22px 28px 16px;
+    padding-right: max(22px, env(safe-area-inset-right, 0px) + 14px);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .sheet::before { width: 5px; }
+  .toc { max-width: 100%; min-width: 0; }
+  .lecture,
+  .lecture p,
+  .lecture ul,
+  .lecture ol,
+  .lecture li,
+  .callout,
+  .sheet .why,
+  .sheet .lede,
+  .sheet h1,
+  .sheet h2,
+  .sheet h3,
+  .sheet .short,
+  .sheet .q-card,
+  .sheet .task {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
