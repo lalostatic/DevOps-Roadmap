@@ -6,9 +6,14 @@ Temario basado en el [DevOps Roadmap 2026](https://github.com/milanm/DevOps-Road
 
 ## Sitio
 
-Tras activar GitHub Pages:
-
 **https://lalostatic.github.io/DevOps-Roadmap/**
+
+La primera vez hay que encender Pages (GitHub no lo permite por API con este token):
+
+1. Abre [Settings → Pages](https://github.com/lalostatic/DevOps-Roadmap/settings/pages)
+2. **Build and deployment** → Source: **Deploy from a branch**
+3. Branch: **main** · carpeta: **/docs**
+4. Save. En uno o dos minutos el curso queda en el enlace de arriba.
 
 ## Cómo está hecho
 
@@ -18,9 +23,7 @@ GitHub Pages no ejecuta Python en el navegador. Python **genera** HTML/CSS/JS es
 python3 course/build.py
 ```
 
-La salida queda en `docs/`. El flujo de Actions publica esa carpeta.
-
-No hay dependencias: solo Python 3 estándar.
+La salida queda en `docs/`. No hay dependencias: solo Python 3 de la biblioteca estándar.
 
 ## Método
 

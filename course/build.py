@@ -442,9 +442,11 @@ def main() -> None:
     shutil.copyfile(STATIC / "app.css", assets / "app.css")
     shutil.copyfile(STATIC / "app.js", assets / "app.js")
     write(assets / "favicon.svg", favicon())
-    og = Path("/workspace/public/og.jpg")
-    if og.exists():
-        shutil.copyfile(og, assets / "og.jpg")
+    og_candidates = [STATIC / "og.jpg", Path("/workspace/public/og.jpg")]
+    for og in og_candidates:
+        if og.exists():
+            shutil.copyfile(og, assets / "og.jpg")
+            break
     write(OUT / ".nojekyll", "")
     write(OUT / "index.html", layout(COURSE["title"], "inicio", home()))
     write(OUT / "temario.html", layout("Temario", "temario", temario()))
