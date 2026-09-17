@@ -33,6 +33,8 @@ La salida queda en `docs/`. No hay dependencias: solo Python 3 de la biblioteca 
 
 El curso se lee como un **cuaderno de conferencia**: portada, índice, prólogo y semanas completas en una sola página. Hay transiciones suaves al cambiar de semana y sonidos opcionales (papel, tinta, acierto); el altavoz del encabezado los silencia.
 
+Leer, practicar, volver a leer. En cada sección hay un recuadro para escribir; al final de la semana, un refuerzo. Si te atas, **Me atoré** abre una pista. Lo que marques o escribas vive en esa pestaña del navegador y se borra al cerrarla. No hay cuentas ni servidor de progreso.
+
 1. Elige comodidad (menos / más cómodo).
 2. Abre el capítulo y pasa folios: conferencia → cortos → recorrido → problem set → recuerdo → Feynman → tarjetas.
 3. Cortos de un concepto.
@@ -40,7 +42,7 @@ El curso se lee como un **cuaderno de conferencia**: portada, índice, prólogo 
 5. Problem set estándar o hacker.
 6. Quiz de recuerdo, Feynman y tarjetas Leitner.
 
-El progreso se guarda en `localStorage` de tu navegador.
+El progreso se guarda en `sessionStorage` de esta pestaña y se reinicia al cerrar el navegador.
 
 ## Créditos
 

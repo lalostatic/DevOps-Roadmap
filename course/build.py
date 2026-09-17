@@ -7,7 +7,7 @@ import json
 import shutil
 from pathlib import Path
 
-from content import BOOKS, COURSE, PEDAGOGY, TOOLS, WEEKS
+from content import BOOKS, COURSE, DRILLS, PEDAGOGY, TOOLS, WEEKS
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT.parent / "docs"
@@ -63,8 +63,61 @@ def render_block(block: tuple) -> str:
         items = "".join(f"<li>{e(i)}</li>" for i in block[1])
         return f"<ol>{items}</ol>"
     if kind == "code":
-        return f"<pre><code>{e(block[2])}</code></pre>"
+        lang = e(block[1]) if len(block) > 1 else ""
+        lang_tag = f'<span class="code-lang">{lang}</span>' if lang else ""
+        return f'<pre class="codeblock">{lang_tag}<code>{e(block[2])}</code></pre>'
     return ""
+
+
+def drill_html(key: str, title: str, prompt: str, hint: str, kicker: str = "Practica ahora") -> str:
+    return f"""<aside class="drill" data-drill="{e(key)}">
+      <p class="n">{e(kicker)}</p>
+      <h3>{e(title)}</h3>
+      <p>{e(prompt)}</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>{e(hint)}</p>
+      </div>
+    </aside>"""
+
+
+def render_lecture(w: dict) -> str:
+    lookup = {title: (title, prompt, hint) for title, prompt, hint in DRILLS.get(w["id"], {}).get("lecture", [])}
+    parts: list[str] = []
+    current = None
+    buf: list[str] = []
+
+    def flush() -> None:
+        nonlocal buf, current
+        parts.extend(buf)
+        if current and current in lookup:
+            title, prompt, hint = lookup[current]
+            parts.append(drill_html(slugify(title), title, prompt, hint))
+        buf = []
+
+    for block in w["lecture"]:
+        if block[0] == "h2":
+            flush()
+            current = block[1]
+            buf.append(render_block(block))
+        else:
+            buf.append(render_block(block))
+    flush()
+    return "".join(parts)
+
+
+def task_html(item: tuple, index: int, hint: str = "") -> str:
+    t, b = item[0], item[1]
+    help_html = ""
+    if hint:
+        help_html = f"""<p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>{e(hint)}</p></div>"""
+    return f"""<div class="task">
+      <input type="checkbox" data-task="{index}"/>
+      <div class="task-body"><strong>{e(t)}</strong><p>{e(b)}</p>{help_html}</div>
+    </div>"""
 
 
 def mark() -> str:
@@ -332,7 +385,7 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   {extra_head}
 </head>
 <body{body_attr}>
@@ -365,7 +418,7 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
   {index_panel()}
   <main id="contenido">{body}</main>
   {footer()}
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>
 """
@@ -544,13 +597,14 @@ def metodo() -> str:
     <article class="panel"><h3>2. Cortos</h3><p>Piezas de dos minutos. Un concepto, un gancho mental. Luego el recorrido guiado.</p></article>
     <article class="panel"><h3>3. Problem set</h3><p>La vía estándar o la hacker. Rúbrica: correctitud, diseño, estilo. El aprendizaje ocurre aquí.</p></article>
   </div>
-  <p class="muted" style="margin-top:24px">Después: quiz de recuerdo, Feynman (cerrar y enseñar) y tarjetas Leitner (1-3-7-14-30 días). El progreso vive en este navegador, sin cuentas.</p>
+  <p class="muted" style="margin-top:24px">Después: quiz de recuerdo, Feynman (cerrar y enseñar) y tarjetas. Lo que marques o escribas dura mientras no cierres el navegador. No hay cuentas.</p>
 </div></section>
 """
 
 
 def week_page(w: dict) -> str:
-    lecture = "".join(render_block(b) for b in w["lecture"])
+    d = DRILLS.get(w["id"], {})
+    lecture = render_lecture(w)
     shorts = "".join(f'<article class="short"><h3>{e(t)}</h3><p>{e(b)}</p></article>' for t, b in w["shorts"])
     walk = "".join(f"<li>{e(s)}</li>" for s in w["walkthrough"])
     skills = "".join(f'<span class="chip">{e(s)}</span>' for s in w["skills"])
@@ -559,18 +613,11 @@ def week_page(w: dict) -> str:
         for b in w["lecture"]
         if b[0] == "h2"
     )
-
-    std = []
-    for i, (t, b) in enumerate(w["pset_std"]):
-        std.append(
-            f'<label class="task"><input type="checkbox" data-task="{i}"/><span><strong>{e(t)}</strong><p>{e(b)}</p></span></label>'
-        )
-    hack = []
+    std_hints = d.get("std", [])
+    hack_hints = d.get("hack", [])
+    std = [task_html(item, i, std_hints[i] if i < len(std_hints) else "") for i, item in enumerate(w["pset_std"])]
     offset = len(w["pset_std"])
-    for i, (t, b) in enumerate(w["pset_hack"]):
-        hack.append(
-            f'<label class="task"><input type="checkbox" data-task="{offset + i}"/><span><strong>{e(t)}</strong><p>{e(b)}</p></span></label>'
-        )
+    hack = [task_html(item, offset + i, hack_hints[i] if i < len(hack_hints) else "") for i, item in enumerate(w["pset_hack"])]
 
     quiz = []
     for q, opts, ans, expl in w["quiz"]:
@@ -596,7 +643,16 @@ def week_page(w: dict) -> str:
         course_weeks.append(
             f'<a href="semana-{x["id"]}.html"{cls}>{e(week_num(x))} {e(x["title"])}</a>'
         )
-    c, d, s = w["rubric"]
+    c, design, style = w["rubric"]
+
+    def as_drill(item, fallback_title: str) -> tuple[str, str, str]:
+        if len(item) == 2:
+            return fallback_title, item[0], item[1]
+        return item[0], item[1], item[2]
+
+    shorts_drill = drill_html("shorts", *as_drill(d["shorts"], "Después de los cortos")) if d.get("shorts") else ""
+    walk_drill = drill_html("walk", *as_drill(d["walk"], "Después del recorrido")) if d.get("walk") else ""
+    encore_drill = drill_html("encore", *d["encore"], kicker="Ejercicio extra") if d.get("encore") else ""
     return f"""
 <div class="read-progress" aria-hidden="true"><i data-read-bar></i></div>
 <div class="wrap week-layout" data-week="{w['id']}" data-tasks="{len(w['pset_std']) + len(w['pset_hack'])}">
@@ -608,6 +664,7 @@ def week_page(w: dict) -> str:
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -626,6 +683,7 @@ def week_page(w: dict) -> str:
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">{e(w['why'])}</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
@@ -639,23 +697,31 @@ def week_page(w: dict) -> str:
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts">{shorts}</div>
+      {shorts_drill}
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol>{walk}</ol>
+      {walk_drill}
     </section>
 
     <section id="pset">
       <h2>Problem set</h2>
-      <p class="muted">Rúbrica: <strong>correctitud</strong> — {e(c)} · <strong>diseño</strong> — {e(d)} · <strong>estilo</strong> — {e(s)}</p>
+      <p class="muted">Rúbrica: <strong>correctitud</strong> — {e(c)} · <strong>diseño</strong> — {e(design)} · <strong>estilo</strong> — {e(style)}</p>
       <div class="tabs">
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
       <div data-pane="std">{''.join(std)}</div>
       <div data-pane="hacker" hidden>{''.join(hack)}</div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      {encore_drill}
     </section>
 
     <section id="quiz">

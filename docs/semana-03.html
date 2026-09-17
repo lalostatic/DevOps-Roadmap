@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,17 +780,48 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">La mayoría de los servidores del mundo no tienen escritorio. Si no puedes moverte en Linux, DevOps se convierte en apuntar y rezar en una consola web.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="el-sistema-operativo-como-puente">El sistema operativo como puente</h2><p>Un sistema operativo media entre tú y el hardware: procesos, memoria, disco, red. En este oficio ese puente casi siempre se llama Linux. Ubuntu es un buen primer destino porque documenta mucho y perdona más.</p><p>POSIX es el contrato de cómo se comportan shells, archivos y procesos en sistemas tipo Unix. Por eso un script bien escrito corre en Ubuntu, Debian y, con matices, en macOS.</p><h2 id="el-sistema-de-archivos-no-es-una-carpeta-bonita">El sistema de archivos no es una carpeta bonita</h2><p>En Linux todo es un archivo: discos, sockets, pipes. /etc guarda configuración. /var logs y estado. /home a las personas. /proc y /sys son ventanas al kernel. Aprende a leer rutas antes de instalar el siguiente panel.</p><pre><code>pwd; ls -la
+      <div class="lecture"><h2 id="el-sistema-operativo-como-puente">El sistema operativo como puente</h2><p>Un sistema operativo media entre tú y el hardware: procesos, memoria, disco, red. En este oficio ese puente casi siempre se llama Linux. Ubuntu es un buen primer destino porque documenta mucho y perdona más.</p><p>POSIX es el contrato de cómo se comportan shells, archivos y procesos en sistemas tipo Unix. Por eso un script bien escrito corre en Ubuntu, Debian y, con matices, en macOS.</p><aside class="drill" data-drill="el-sistema-operativo-como-puente">
+      <p class="n">Practica ahora</p>
+      <h3>El sistema operativo como puente</h3>
+      <p>¿Qué es un proceso, en una frase, y cómo lo listas?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Un programa en ejecución. ps aux o ps -ef. systemctl para servicios, no para un script suelto.</p>
+      </div>
+    </aside><h2 id="el-sistema-de-archivos-no-es-una-carpeta-bonita">El sistema de archivos no es una carpeta bonita</h2><p>En Linux todo es un archivo: discos, sockets, pipes. /etc guarda configuración. /var logs y estado. /home a las personas. /proc y /sys son ventanas al kernel. Aprende a leer rutas antes de instalar el siguiente panel.</p><pre class="codeblock"><span class="code-lang">bash</span><code>pwd; ls -la
 cd /var/log &amp;&amp; less syslog
 ps aux | head
 ss -tulpn
 chmod 640 secret.env
-sudo systemctl status ssh</code></pre><h2 id="scripting">Scripting</h2><p>Bash (o PowerShell en Windows) convierte una receta en un programa. Python y Go también sirven y a menudo escalan mejor. Empieza por Bash para la gramática del sistema; pasa a Python cuando el script crezca.</p><div class="callout"><strong>Práctica</strong><span>No memorices 200 comandos. Memoriza navegación, permisos, procesos, red básica, y cómo pedir ayuda: man, --help, tldr.</span></div></div>
+sudo systemctl status ssh</code></pre><aside class="drill" data-drill="el-sistema-de-archivos-no-es-una-carpeta-bonita">
+      <p class="n">Practica ahora</p>
+      <h3>El sistema de archivos no es una carpeta bonita</h3>
+      <p>¿Qué pondrías en /etc, /var y /home? Una línea cada uno.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>/etc configuración. /var datos que cambian (logs). /home personas. No mezcles binarios de sistema en /home.</p>
+      </div>
+    </aside><h2 id="scripting">Scripting</h2><p>Bash (o PowerShell en Windows) convierte una receta en un programa. Python y Go también sirven y a menudo escalan mejor. Empieza por Bash para la gramática del sistema; pasa a Python cuando el script crezca.</p><div class="callout"><strong>Práctica</strong><span>No memorices 200 comandos. Memoriza navegación, permisos, procesos, red básica, y cómo pedir ayuda: man, --help, tldr.</span></div><aside class="drill" data-drill="scripting">
+      <p class="n">Practica ahora</p>
+      <h3>Scripting</h3>
+      <p>Escribe un one-liner mental: «si el disco pasa del 80%, avísame».</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>df -h, awk o un if en bash. Empieza por df y un umbral; el correo o el echo pueden esperar.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -797,12 +829,34 @@ sudo systemctl status ssh</code></pre><h2 id="scripting">Scripting</h2><p>Bash (
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Shell</h3><p>Un intérprete que lee tu texto y habla con el kernel. Bash es el más común en servidores.</p></article><article class="short"><h3>Permisos</h3><p>rwx para usuario, grupo y otros. 644 y 755 no son magia: son bits.</p></article><article class="short"><h3>Procesos</h3><p>PID, señales, systemd. Si no sabes matar un proceso, no sabes operar.</p></article><article class="short"><h3>Virtualización</h3><p>Una máquina virtual simula hardware. Un contenedor comparte el kernel. No son lo mismo.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Di en voz alta qué es POSIX y por qué te importa en un script.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Si escribes para bash «puro» con [[ ]] y arrays, en dash se rompe. POSIX es el subconjunto portable.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala Ubuntu en una VM (VirtualBox, UTM o cloud gratuito) o usa WSL2.</li><li>Crea un usuario, una carpeta en /opt y un script que haga backup de un directorio.</li><li>Usa chmod, ps, grep y journalctl una vez cada uno, con propósito.</li><li>Escribe un Bash de 20 líneas con set -euo pipefail.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Anota un comando de hoy (ls, chmod, journalctl…) y qué aprendiste del man.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>man &lt;comando&gt;. La sección EXAMPLES al final suele ser oro. Si no hay man, tldr o --help.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -812,8 +866,48 @@ sudo systemctl status ssh</code></pre><h2 id="scripting">Scripting</h2><p>Bash (
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Casa nueva</strong><p>En una VM Ubuntu, crea usuarios, grupos y un directorio compartido con permisos correctos.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Mapa</strong><p>Dibuja (en texto) qué hay en /, /etc, /var, /home y /tmp y para qué sirve cada uno.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Salud</strong><p>Script que reporte disco, memoria y carga. Salida legible para humanos.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Cron</strong><p>Programa una tarea cada hora que rote o copie un log de ejemplo.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>POSIX estricto</strong><p>Escribe el script para que pase shellcheck y funcione en dash, no solo en bash.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Caja</strong><p>Levanta dos VMs y conéctalas por SSH con llaves, sin contraseña, con usuario no root.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Casa nueva</strong><p>En una VM Ubuntu, crea usuarios, grupos y un directorio compartido con permisos correctos.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>adduser/usermod y chmod 2775 o similar en el directorio compartido. Documenta ls -ld.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Mapa</strong><p>Dibuja (en texto) qué hay en /, /etc, /var, /home y /tmp y para qué sirve cada uno.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un bloque de texto: ruta, para qué, quién escribe. No hace falta un diagrama bonito.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Salud</strong><p>Script que reporte disco, memoria y carga. Salida legible para humanos.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>free -h, df -h, uptime. Un script que los imprime con etiquetas ya cuenta.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Cron</strong><p>Programa una tarea cada hora que rote o copie un log de ejemplo.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>crontab -e: 0 * * * * y un script que copia un archivo. crontab -l como evidencia.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>POSIX estricto</strong><p>Escribe el script para que pase shellcheck y funcione en dash, no solo en bash.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>apt install shellcheck; shellcheck script.sh. Evita bashismos si pides dash.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Caja</strong><p>Levanta dos VMs y conéctalas por SSH con llaves, sin contraseña, con usuario no root.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>ssh-keygen, copiar .pub a authorized_keys, PermitRootLogin no. Prueba ssh user@host.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Primera casa</h3>
+      <p>En tu máquina o una VM: crea `~/lab`, un script `salud.sh` ejecutable que imprima fecha y df -h.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>chmod +x salud.sh. La primera línea: #!/bin/sh. Ejecuta ./salud.sh, no sh si ya es ejecutable.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -878,6 +972,6 @@ sudo systemctl status ssh</code></pre><h2 id="scripting">Scripting</h2><p>Bash (
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

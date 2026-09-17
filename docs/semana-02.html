@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,16 +780,47 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">DevOps sin código es un operador eterno. Con un lenguaje puedes convertir un ritual de 40 clics en un script revisable, testeable y versionado.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="elige-uno-dominalo">Elige uno. Domínalo.</h2><p>Python, Go y JavaScript son los más comunes en este oficio. Python brilla en scripts, APIs y pegamento. Go en CLIs, agentes y servicios concurrentes. JavaScript/TypeScript en tooling de front, GitHub Actions y lambdas. El curso no te pide los tres: te pide uno con criterio.</p><p>Python es el más recomendable para empezar: se lee casi como prosa, se interpreta al momento y hay librerías para SSH, HTTP, YAML y nubes.</p><div class="callout"><strong>Correctitud, diseño, estilo</strong><span>Un script de 30 líneas también se diseña. Nombres claros, funciones cortas, cero secretos en el código, y un README que explique cómo correrlo.</span></div><h2 id="conceptos-que-no-son-opcionales">Conceptos que no son opcionales</h2><ul><li>Sintaxis, variables, tipos.</li><li>Condicionales y bucles.</li><li>Funciones y módulos.</li><li>Listas, diccionarios y manejo de errores.</li><li>Leer archivos, JSON/YAML y hacer una petición HTTP.</li></ul><h2 id="automatizar-lo-aburrido">Automatizar lo aburrido</h2><p>El primer programa útil de DevOps no es un algoritmo elegante: es el que lista instancias, rota un log, valida un manifiesto o abre un ticket. Si ahorra trabajo humano repetible, ya es ingeniería.</p><pre><code>import json, urllib.request
+      <div class="lecture"><h2 id="elige-uno-dominalo">Elige uno. Domínalo.</h2><p>Python, Go y JavaScript son los más comunes en este oficio. Python brilla en scripts, APIs y pegamento. Go en CLIs, agentes y servicios concurrentes. JavaScript/TypeScript en tooling de front, GitHub Actions y lambdas. El curso no te pide los tres: te pide uno con criterio.</p><p>Python es el más recomendable para empezar: se lee casi como prosa, se interpreta al momento y hay librerías para SSH, HTTP, YAML y nubes.</p><div class="callout"><strong>Correctitud, diseño, estilo</strong><span>Un script de 30 líneas también se diseña. Nombres claros, funciones cortas, cero secretos en el código, y un README que explique cómo correrlo.</span></div><aside class="drill" data-drill="elige-uno-dominalo">
+      <p class="n">Practica ahora</p>
+      <h3>Elige uno. Domínalo.</h3>
+      <p>Elige Python, Go o JavaScript y escribe por qué te sirve en operaciones, no en abstracto.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Python: scripts y pegamento. Go: binarios y CLIs. JS: automatizar lo que ya vive en Node. Uno basta para empezar.</p>
+      </div>
+    </aside><h2 id="conceptos-que-no-son-opcionales">Conceptos que no son opcionales</h2><ul><li>Sintaxis, variables, tipos.</li><li>Condicionales y bucles.</li><li>Funciones y módulos.</li><li>Listas, diccionarios y manejo de errores.</li><li>Leer archivos, JSON/YAML y hacer una petición HTTP.</li></ul><aside class="drill" data-drill="conceptos-que-no-son-opcionales">
+      <p class="n">Practica ahora</p>
+      <h3>Conceptos que no son opcionales</h3>
+      <p>Escribe un pseudo-código de 8 líneas: leer un archivo, filtrar líneas, imprimir. Sin copiar un tutorial.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Abre, recorre, if, print. Si no recuerdas la sintaxis, anota «abrir archivo» y «filtrar» en español: ya es un algoritmo.</p>
+      </div>
+    </aside><h2 id="automatizar-lo-aburrido">Automatizar lo aburrido</h2><p>El primer programa útil de DevOps no es un algoritmo elegante: es el que lista instancias, rota un log, valida un manifiesto o abre un ticket. Si ahorra trabajo humano repetible, ya es ingeniería.</p><pre class="codeblock"><span class="code-lang">python</span><code>import json, urllib.request
 url = &quot;https://httpbin.org/get&quot;
 with urllib.request.urlopen(url) as r:
     data = json.load(r)
-print(data[&quot;url&quot;])</code></pre></div>
+print(data[&quot;url&quot;])</code></pre><aside class="drill" data-drill="automatizar-lo-aburrido">
+      <p class="n">Practica ahora</p>
+      <h3>Automatizar lo aburrido</h3>
+      <p>Nombra una tarea de 5 clics que harás más de una vez esta semana y descríbela como entrada → proceso → salida.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Entrada: lista o carpeta. Proceso: transformar. Salida: archivo o mensaje. Los secretos no van en el script.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -796,12 +828,34 @@ print(data[&quot;url&quot;])</code></pre></div>
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Python</h3><p>Legible, enorme ecosistema, ideal para pegar APIs y archivos. Empieza aquí si no tienes preferencia.</p></article><article class="short"><h3>Go</h3><p>Binario único, excelente concurrencia, muy usado en Kubernetes y CLIs. Curva más estricta, pago después.</p></article><article class="short"><h3>JavaScript</h3><p>El lenguaje del navegador y de Node. Útil si ya vives en el ecosistema web o en GitHub Actions.</p></article><article class="short"><h3>Prueba pequeña</h3><p>Si no puedes explicar un if, un for y una función, aún no automatices producción.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Explica idempotencia con un ejemplo casero (no de servidores).</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Encender la luz dos veces no funde la bombilla. Un script que crea una carpeta no debe fallar si ya existe.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala el runtime (Python 3 recomendado).</li><li>Escribe un script que imprima el día y liste archivos de un directorio.</li><li>Añade un argumento de línea de comandos.</li><li>Maneja un error (archivo que no existe) sin trazar un pánico ilegible.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Pega aquí la primera función que te compiló o ejecutó.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Si el lenguaje «no se encuentra»: instálalo y cierra la terminal. Empieza con print/fmt.Println, no con un framework.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -811,8 +865,48 @@ print(data[&quot;url&quot;])</code></pre></div>
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Inventario</strong><p>Escribe un script que lea un JSON de servidores ficticios y imprima cuáles están &#x27;down&#x27;.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Repetición</strong><p>Convierte un proceso manual de 5 pasos (renombrar archivos, por ejemplo) en un script.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Contrato</strong><p>Tu script debe aceptar --help y no crashear con entrada vacía.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Bitácora</strong><p>Registra lo que hace el script en un archivo app.log.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Idempotencia</strong><p>Haz que correr el script dos veces no duplique efectos. Eso es DevOps de verdad.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Tests</strong><p>Si elegiste Go, sigue &#x27;Learn Go with Tests&#x27;. Si Python, añade pytest a una función pura.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Inventario</strong><p>Escribe un script que lea un JSON de servidores ficticios y imprima cuáles están &#x27;down&#x27;.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un JSON con 3 servidores y un campo status. Recorre e imprime los down. En Python: json.load + un for.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Repetición</strong><p>Convierte un proceso manual de 5 pasos (renombrar archivos, por ejemplo) en un script.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Renombrar, copiar o listar. 15 líneas cuentan. No uses la GUI para el paso repetido.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Contrato</strong><p>Tu script debe aceptar --help y no crashear con entrada vacía.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>argparse o flag. Si argv está vacío, imprime uso y sal con código 0 o 1 consciente, no con traceback.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Bitácora</strong><p>Registra lo que hace el script en un archivo app.log.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>open(&#x27;app.log&#x27;,&#x27;a&#x27;) o equivalente. Una línea por acción: hora y qué hizo.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Idempotencia</strong><p>Haz que correr el script dos veces no duplique efectos. Eso es DevOps de verdad.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Si creas un archivo, comprueba que no exista o ábrelo en modo que no duplique. mkdir -p es el espíritu.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Tests</strong><p>Si elegiste Go, sigue &#x27;Learn Go with Tests&#x27;. Si Python, añade pytest a una función pura.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Una función pura + un assert o pytest. En Go, TestXxx en el mismo paquete.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Script de bolsillo</h3>
+      <p>Un script `hoy.py`/`hoy.go`/`hoy.js` que reciba un nombre y salude, y que `--help` exista.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Empieza por print. Luego un if de argumentos. El help puede ser un string. No hace falta un parser elegante.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -877,6 +971,6 @@ print(data[&quot;url&quot;])</code></pre></div>
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

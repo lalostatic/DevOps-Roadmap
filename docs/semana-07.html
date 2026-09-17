@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,15 +780,36 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">Un contenedor es un proceso. Diez contenedores son un sistema. Cuando hay que reiniciar, escalar, sanar y exponer servicios, aparece el orquestador.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="que-orquesta-un-orquestador">Qué orquesta un orquestador</h2><p>La orquestación automatiza despliegue, gestión, escala y red de contenedores. Sirve en cualquier entorno donde ya usas contenedores: el mismo manifiesto puede acercarte a desarrollo, staging y producción.</p><p>Los microservicios en contenedores se vuelven manejables cuando el orquestador se ocupa del almacenamiento, la red y parte de la seguridad.</p><h2 id="kubernetes-sin-mito">Kubernetes, sin mito</h2><p>Un clúster tiene plano de control (API server, scheduler, etcd, controllers) y nodos de trabajo. Tú declaras: &#x27;quiero 3 réplicas de esta imagen, con este puerto&#x27;. El control loop compara el mundo real con el declarado.</p><ul><li>Pod: el átomo. Uno o más contenedores que viajan juntos.</li><li>Deployment: cómo se actualizan los pods.</li><li>Service: un nombre estable frente a pods que nacen y mueren.</li><li>Namespace: paredes de papel para equipos y ambientes.</li></ul><pre><code>kubectl get nodes
+      <div class="lecture"><h2 id="que-orquesta-un-orquestador">Qué orquesta un orquestador</h2><p>La orquestación automatiza despliegue, gestión, escala y red de contenedores. Sirve en cualquier entorno donde ya usas contenedores: el mismo manifiesto puede acercarte a desarrollo, staging y producción.</p><p>Los microservicios en contenedores se vuelven manejables cuando el orquestador se ocupa del almacenamiento, la red y parte de la seguridad.</p><aside class="drill" data-drill="que-orquesta-un-orquestador">
+      <p class="n">Practica ahora</p>
+      <h3>Qué orquesta un orquestador</h3>
+      <p>¿Qué deja de hacer una persona cuando hay Kubernetes (o similar)?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Reiniciar a mano, decidir en qué máquina, abrir puertos a dedo. Tú declaras replicas: 2; el clúster se esfuerza.</p>
+      </div>
+    </aside><h2 id="kubernetes-sin-mito">Kubernetes, sin mito</h2><p>Un clúster tiene plano de control (API server, scheduler, etcd, controllers) y nodos de trabajo. Tú declaras: &#x27;quiero 3 réplicas de esta imagen, con este puerto&#x27;. El control loop compara el mundo real con el declarado.</p><ul><li>Pod: el átomo. Uno o más contenedores que viajan juntos.</li><li>Deployment: cómo se actualizan los pods.</li><li>Service: un nombre estable frente a pods que nacen y mueren.</li><li>Namespace: paredes de papel para equipos y ambientes.</li></ul><pre class="codeblock"><span class="code-lang">bash</span><code>kubectl get nodes
 kubectl create deployment web --image=nginx
 kubectl expose deployment web --port=80 --type=ClusterIP
-kubectl get pods -A</code></pre><div class="callout"><strong>No empieces en un EKS de 20 nodos</strong><span>Kind, k3d o minikube bastan para aprender el idioma. El cloud es la semana 11.</span></div></div>
+kubectl get pods -A</code></pre><div class="callout"><strong>No empieces en un EKS de 20 nodos</strong><span>Kind, k3d o minikube bastan para aprender el idioma. El cloud es la semana 11.</span></div><aside class="drill" data-drill="kubernetes-sin-mito">
+      <p class="n">Practica ahora</p>
+      <h3>Kubernetes, sin mito</h3>
+      <p>¿Qué es un Pod, en una analogía, y por qué casi nunca corres un contenedor «suelto» en K8s?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>El Pod es la caja donde viven los contenedores que se necesitan juntos. K8s programa Pods, no Docker run sueltos.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -795,12 +817,34 @@ kubectl get pods -A</code></pre><div class="callout"><strong>No empieces en un E
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Estado deseado</h3><p>Tú no &#x27;arrancas&#x27; tanto como &#x27;declaras&#x27;. El clúster reconcilia.</p></article><article class="short"><h3>kubectl</h3><p>El CLI. Habla con el API server. Casi todo es un objeto YAML.</p></article><article class="short"><h3>Namespace</h3><p>No es un firewall mágico, pero organiza y aplica cuotas y RBAC.</p></article><article class="short"><h3>Rollout</h3><p>Un Deployment cambia pods poco a poco. Un crashloop es información, no un misterio.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>kubectl en una frase: ¿qué le pides al clúster?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>«Aplica este YAML» y «enséñame el estado». get, describe, logs, apply. Poco más para empezar.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala kubectl y un clúster local (kind/k3d/minikube).</li><li>Despliega nginx y expónlo.</li><li>Escala a 3 réplicas y observa los pods.</li><li>Aplica un cambio de imagen y sigue el rollout.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Anota un apply que falló y el campo YAML que lo rompió.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>indentación. apiVersion/kind. image: que no existe. kubectl describe pod es más útil que el apply rojo.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -810,8 +854,48 @@ kubectl get pods -A</code></pre><div class="callout"><strong>No empieces en un E
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Declarar</strong><p>Escribe un Deployment + Service en YAML. Nada de comandos imperativos en la entrega final.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Sanar</strong><p>Rompe la imagen a propósito y documenta los eventos del pod.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Namespace</strong><p>Crea un namespace dev y despliega ahí. kubectl -n dev get all.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Sonda</strong><p>Añade liveness o readiness y explica la diferencia en una frase cada una.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Helm o Kustomize</strong><p>Parametriza el manifiesto. Un valor cambia el tag de imagen.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>RBAC mínimo</strong><p>Una ServiceAccount que solo puede leer pods. Demuéstralo.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Declarar</strong><p>Escribe un Deployment + Service en YAML. Nada de comandos imperativos en la entrega final.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>kind: Deployment y Service. kubectl apply -f. Nada de kubectl run en la entrega.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Sanar</strong><p>Rompe la imagen a propósito y documenta los eventos del pod.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Pon un tag de imagen inventado, apply, kubectl describe pod / get events.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Namespace</strong><p>Crea un namespace dev y despliega ahí. kubectl -n dev get all.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>kubectl create ns dev; metadata.namespace: dev. kubectl -n dev get all.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Sonda</strong><p>Añade liveness o readiness y explica la diferencia en una frase cada una.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>liveness = «¿sigo vivo?»; readiness = «¿ya puedo recibir tráfico?». Una frase cada una en el README.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Helm o Kustomize</strong><p>Parametriza el manifiesto. Un valor cambia el tag de imagen.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>values.yaml con image.tag. helm upgrade o kustomize edit set image.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>RBAC mínimo</strong><p>Una ServiceAccount que solo puede leer pods. Demuéstralo.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Role + RoleBinding + ServiceAccount. kubectl auth can-i get pods --as=system:serviceaccount:dev:sa</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Declarar, no pulsar</h3>
+      <p>Un YAML de Deployment con 2 réplicas de nginx. Aplícalo en kind, k3d o minikube.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Si no tienes clúster: instala kind. kind create cluster. kubectl apply -f. kubectl get pods.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -876,6 +960,6 @@ kubectl get pods -A</code></pre><div class="callout"><strong>No empieces en un E
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,12 +780,33 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">Monitorear es vigilar el ciclo completo: planear, desarrollar, integrar, desplegar y operar. En producción necesitas una vista viva de apps, servicios e infraestructura.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="de-verde-rojo-a-las-tres-senales">De verde/rojo a las tres señales</h2><p>Monitoreo clásico: ¿está vivo? Observabilidad: ¿puedo explicar por qué está lento sin SSH improvisado? Métricas, logs y trazas. Prometheus y Grafana son la pareja más citada para métricas y tableros. Los logs piden un almacén (Loki, ELK, cloud). Las trazas, un modelo como OpenTelemetry.</p><p>SLIs, SLOs y error budgets convierten &#x27;se siente lento&#x27; en una conversación de ingeniería. Alertar por síntoma (latencia, errores) suele ser mejor que alertar por cada CPU al 70%.</p><div class="callout"><strong>Si no está en un gráfico, no pasó</strong><span>El on-call futuro eres tú. Deja pistas: request_id, métricas RED (rate, errors, duration) y un dashboard que quepa en la cabeza.</span></div><h2 id="que-montar">Qué montar</h2><ul><li>Métricas de máquina y de aplicación.</li><li>Logs con niveles y correlación.</li><li>Un tablero. Una alerta que no sea ruido.</li></ul></div>
+      <div class="lecture"><h2 id="de-verde-rojo-a-las-tres-senales">De verde/rojo a las tres señales</h2><p>Monitoreo clásico: ¿está vivo? Observabilidad: ¿puedo explicar por qué está lento sin SSH improvisado? Métricas, logs y trazas. Prometheus y Grafana son la pareja más citada para métricas y tableros. Los logs piden un almacén (Loki, ELK, cloud). Las trazas, un modelo como OpenTelemetry.</p><p>SLIs, SLOs y error budgets convierten &#x27;se siente lento&#x27; en una conversación de ingeniería. Alertar por síntoma (latencia, errores) suele ser mejor que alertar por cada CPU al 70%.</p><div class="callout"><strong>Si no está en un gráfico, no pasó</strong><span>El on-call futuro eres tú. Deja pistas: request_id, métricas RED (rate, errors, duration) y un dashboard que quepa en la cabeza.</span></div><aside class="drill" data-drill="de-verde-rojo-a-las-tres-senales">
+      <p class="n">Practica ahora</p>
+      <h3>De verde/rojo a las tres señales</h3>
+      <p>Para tu app de lab, nombra una métrica, un log y una traza que te gustaría ver.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Métrica: peticiones/minuto. Log: error con request_id. Traza: el GET que tocó api y base de datos.</p>
+      </div>
+    </aside><h2 id="que-montar">Qué montar</h2><ul><li>Métricas de máquina y de aplicación.</li><li>Logs con niveles y correlación.</li><li>Un tablero. Una alerta que no sea ruido.</li></ul><aside class="drill" data-drill="que-montar">
+      <p class="n">Practica ahora</p>
+      <h3>Qué montar</h3>
+      <p>¿Qué pondrías en un tablero que un extraño entiende en 30 segundos?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>¿Está vivo? ¿Va lento? ¿Hay errores? Cuatro paneles, no cuarenta. La alerta tiene que decir qué hacer.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -792,12 +814,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Prometheus</h3><p>Pull de métricas. PromQL. Alertmanager.</p></article><article class="short"><h3>Grafana</h3><p>El lienzo. No es la fuente de verdad; es la vista.</p></article><article class="short"><h3>Logs</h3><p>Demasiados son basura. Demasiado pocos son ceguera. Estructura (JSON) gana a prosa.</p></article><article class="short"><h3>OpenTelemetry</h3><p>API + SDK + collectors para no casarte con un vendor de tracing.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Los tres pilares, sin la palabra «observabilidad».</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Números en el tiempo, frases que escribió la app, el camino de una petición. Eso es métrica, log, traza.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Levanta Prometheus + Grafana en Compose (hay stacks de ejemplo).</li><li>Expón una métrica de tu app o usa node_exporter en un host de lab.</li><li>Dibuja un panel de CPU y de peticiones.</li><li>Crea una alerta tonta (siempre falsa) y luego una útil.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Anota una alerta tonta pero útil y la acción humana que implica.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>«Error rate &gt; 5% 5 min» → mirar logs con request_id, no reiniciar a ciegas. Si no hay acción, no es alerta: es ruido.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -807,8 +851,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Tablero</strong><p>Un dashboard con 4 paneles: vivo/muerto, CPU, memoria, errores.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Log útil</strong><p>Tu app escribe request_id. Muestras tres líneas correlacionadas.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Alerta</strong><p>Una regla con umbral y una descripción de qué hacer si dispara.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Runbook</strong><p>Media página: si la alerta X, mira Y, luego Z.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>RED</strong><p>Instrumenta rate, errors, duration de un endpoint.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>OTel</strong><p>Una traza que cruce dos servicios locales.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Tablero</strong><p>Un dashboard con 4 paneles: vivo/muerto, CPU, memoria, errores.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Grafana o un HTML feo: 4 números. Captura de pantalla en el README.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Log útil</strong><p>Tu app escribe request_id. Muestras tres líneas correlacionadas.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un middleware que loguee id. Tres líneas con el mismo id en el pegado.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Alerta</strong><p>Una regla con umbral y una descripción de qué hacer si dispara.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>PromQL o equivalente + un párrafo «si dispara, mira…».</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Runbook</strong><p>Media página: si la alerta X, mira Y, luego Z.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Media página. Título, síntomas, primer comando, escalación.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>RED</strong><p>Instrumenta rate, errors, duration de un endpoint.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Tres métricas en un endpoint. Nombres claros: http_requests_total.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>OTel</strong><p>Una traza que cruce dos servicios locales.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Dos procesos, un traceparent. Jaeger o Tempo local.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Pulso</h3>
+      <p>Un script que haga curl a una URL cada 10 s y escriba OK/FAIL con fecha en un log.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>while true; do curl -sf URL &amp;&amp; echo OK || echo FAIL; sleep 10; done. No hace falta Prometheus para sentir el pulso.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -873,6 +957,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

@@ -1032,7 +1032,263 @@ PEDAGOGY = [
     ("Piso bajo, techo alto", "Como CS50: se entra sin experiencia y se sale con rigor. Hay vía estándar y vía hacker."),
     ("Conferencia → cortos → práctica", "Primero la idea, luego piezas de 2 minutos, luego un problem set. No al revés."),
     ("Recuerdo activo", "Cerrar las notas y responder. Releer no es aprender; recuperarlo de la memoria sí."),
-    ("Repetición espaciada", "1, 3, 7, 14 y 30 días. Las tarjetas que fallas vuelven pronto; las que sabes, tarde."),
+    ("Repetición espaciada", "En cada sesión, las que fallas vuelven ya. Al cerrar el navegador, el mazo se reinicia: es para practicar, no para coleccionar rachas."),
     ("Feynman", "Si no puedes explicarlo en voz simple, aún no lo tienes. El recuadro de cada semana existe para eso."),
     ("Correctitud, diseño, estilo", "Tres ejes, como en CS50. Que funcione no basta; que se pueda operar y leer también."),
 ]
+
+# Práctica por semana: drills de conferencia (título = h2), cortos, recorrido, pistas del pset y refuerzo final.
+DRILLS = {
+    "01": {
+        "lecture": [
+            ("La caja negra", "En una frase: ¿qué problema resuelve Git que una carpeta «final-final-v3.zip» no resuelve?", "Un commit es una foto del proyecto con autor, mensaje y padre. El zip no sabe de dónde vino ni cómo volver atrás sin romper a los demás."),
+            ("Comandos que sí vas a usar", "Escribe, en orden, los comandos para clonar un repo, cambiar un archivo y publicar el commit.", "git clone → git status → git add → git commit -m \"…\" → git push. Si es rama nueva: git switch -c nombre antes del push."),
+            ("Ramas, fusión y pull requests", "¿Cuándo harías merge y cuándo rebase? Una frase para cada uno.", "Merge conserva las dos historias. Rebase reescribe la tuya encima de main. Nunca hagas rebase de una rama que ya comparte el equipo."),
+        ],
+        "shorts": ("Elige un corto y explícalo sin mirar el texto.", "Di en voz alta: commit, rama, pull request o conflicto. Si te trabas, vuelve a leer solo ese corto."),
+        "walk": ("Anota el primer comando que te falló y el mensaje de error.", "Lee el error de abajo hacia arriba. «command not found» = instala Git y abre otra terminal. «permission denied» no se arregla siempre con sudo."),
+        "std": [
+            "git init bitacora; crea README.md; tres commits pequeños con git add y git commit -m. git log --oneline debe mostrar tres líneas.",
+            "git switch -c experimento; edita; commit; git switch main; git merge experimento. Luego git log --oneline --graph.",
+            "Crea el repo vacío en GitHub/GitLab, git remote add origin URL, git push -u origin main. El PR puede ser de una rama tonta hacia main.",
+            "Crea .gitignore con esas líneas, git add .gitignore, commit. git status debe ignorar un .env de prueba.",
+        ],
+        "hack": [
+            "Clona un repo pequeño, git blame archivo, o git bisect start y sigue las pistas de man git-bisect.",
+            "revert crea un commit nuevo que deshace; reset mueve el puntero (peligroso en main). Escríbelo en el README del lab.",
+        ],
+        "encore": ("Bitácora de un día", "Repo `hoy` con tres commits: mañana, tarde y un arreglo. Mensajes en presente: «añade», «arregla».", "git init hoy && cd hoy. Crea archivos de una línea. git add + git commit tres veces. git log --oneline."),
+    },
+    "02": {
+        "lecture": [
+            ("Elige uno. Domínalo.", "Elige Python, Go o JavaScript y escribe por qué te sirve en operaciones, no en abstracto.", "Python: scripts y pegamento. Go: binarios y CLIs. JS: automatizar lo que ya vive en Node. Uno basta para empezar."),
+            ("Conceptos que no son opcionales", "Escribe un pseudo-código de 8 líneas: leer un archivo, filtrar líneas, imprimir. Sin copiar un tutorial.", "Abre, recorre, if, print. Si no recuerdas la sintaxis, anota «abrir archivo» y «filtrar» en español: ya es un algoritmo."),
+            ("Automatizar lo aburrido", "Nombra una tarea de 5 clics que harás más de una vez esta semana y descríbela como entrada → proceso → salida.", "Entrada: lista o carpeta. Proceso: transformar. Salida: archivo o mensaje. Los secretos no van en el script."),
+        ],
+        "shorts": ("Explica idempotencia con un ejemplo casero (no de servidores).", "Encender la luz dos veces no funde la bombilla. Un script que crea una carpeta no debe fallar si ya existe."),
+        "walk": ("Pega aquí la primera función que te compiló o ejecutó.", "Si el lenguaje «no se encuentra»: instálalo y cierra la terminal. Empieza con print/fmt.Println, no con un framework."),
+        "std": [
+            "Un JSON con 3 servidores y un campo status. Recorre e imprime los down. En Python: json.load + un for.",
+            "Renombrar, copiar o listar. 15 líneas cuentan. No uses la GUI para el paso repetido.",
+            "argparse o flag. Si argv está vacío, imprime uso y sal con código 0 o 1 consciente, no con traceback.",
+            "open('app.log','a') o equivalente. Una línea por acción: hora y qué hizo.",
+        ],
+        "hack": [
+            "Si creas un archivo, comprueba que no exista o ábrelo en modo que no duplique. mkdir -p es el espíritu.",
+            "Una función pura + un assert o pytest. En Go, TestXxx en el mismo paquete.",
+        ],
+        "encore": ("Script de bolsillo", "Un script `hoy.py`/`hoy.go`/`hoy.js` que reciba un nombre y salude, y que `--help` exista.", "Empieza por print. Luego un if de argumentos. El help puede ser un string. No hace falta un parser elegante."),
+    },
+    "03": {
+        "lecture": [
+            ("El sistema operativo como puente", "¿Qué es un proceso, en una frase, y cómo lo listas?", "Un programa en ejecución. ps aux o ps -ef. systemctl para servicios, no para un script suelto."),
+            ("El sistema de archivos no es una carpeta bonita", "¿Qué pondrías en /etc, /var y /home? Una línea cada uno.", "/etc configuración. /var datos que cambian (logs). /home personas. No mezcles binarios de sistema en /home."),
+            ("Scripting", "Escribe un one-liner mental: «si el disco pasa del 80%, avísame».", "df -h, awk o un if en bash. Empieza por df y un umbral; el correo o el echo pueden esperar."),
+        ],
+        "shorts": ("Di en voz alta qué es POSIX y por qué te importa en un script.", "Si escribes para bash «puro» con [[ ]] y arrays, en dash se rompe. POSIX es el subconjunto portable."),
+        "walk": ("Anota un comando de hoy (ls, chmod, journalctl…) y qué aprendiste del man.", "man <comando>. La sección EXAMPLES al final suele ser oro. Si no hay man, tldr o --help."),
+        "std": [
+            "adduser/usermod y chmod 2775 o similar en el directorio compartido. Documenta ls -ld.",
+            "Un bloque de texto: ruta, para qué, quién escribe. No hace falta un diagrama bonito.",
+            "free -h, df -h, uptime. Un script que los imprime con etiquetas ya cuenta.",
+            "crontab -e: 0 * * * * y un script que copia un archivo. crontab -l como evidencia.",
+        ],
+        "hack": [
+            "apt install shellcheck; shellcheck script.sh. Evita bashismos si pides dash.",
+            "ssh-keygen, copiar .pub a authorized_keys, PermitRootLogin no. Prueba ssh user@host.",
+        ],
+        "encore": ("Primera casa", "En tu máquina o una VM: crea `~/lab`, un script `salud.sh` ejecutable que imprima fecha y df -h.", "chmod +x salud.sh. La primera línea: #!/bin/sh. Ejecuta ./salud.sh, no sh si ya es ejecutable."),
+    },
+    "04": {
+        "lecture": [
+            ("Protocolo: un contrato de conversación", "Inventa un protocolo de 4 reglas para pedir café por mensaje. Luego nombra el análogo en HTTP.", "Verbo (GET/POST), recurso (/cafe), encabezados (leche, tamaño), código de respuesta (200, 404, 503)."),
+            ("Lo que debes poder explicar", "Alguien dice «no carga la web». Escribe las tres primeras preguntas que harías.", "¿Resuelve DNS? ¿El puerto 443 responde? ¿TLS/certificado? ping no basta; curl -v y dig sí."),
+            ("Seguridad como hábito", "Nombra dos hábitos de SSH que no cuestan dinero.", "Llaves, no contraseñas. No root remoto. Actualizar. Fail2ban si quieres, pero las llaves primero."),
+        ],
+        "shorts": ("Explica DNS a alguien que cree que «internet es Google».", "DNS traduce nombres a números. Si falla el traductor, la web «no existe» aunque el servidor esté vivo."),
+        "walk": ("Pega tres líneas de `curl -v` que te hayan servido y qué significan.", "Busca HTTP/1.1 o HTTP/2, el código (200/301/403) y server:. El certificado aparece en las líneas SSL."),
+        "std": [
+            "Capa 7 HTTP, 6 TLS, 4 TCP, 3 IP, 2 Ethernet. Una fila por capa con un ejemplo que uses de verdad.",
+            "No resuelve: dig/nslookup falla. Resuelve pero 443 cerrado: nc/curl timeout tras tener IP. Anótalo.",
+            "sshd_config: PasswordAuthentication no. Recarga sshd. Ten otra sesión abierta antes de cortar.",
+            "curl -v: date, server, cache-control o strict-transport-security. Explícalos en español.",
+        ],
+        "hack": [
+            "Cliente saluda, servidor certificado, claves, cifrado, datos, cierre. 6 frases numeradas.",
+            "ufw allow from TU_IP to any port 22 y 443. ufw enable con cuidado: no te bloquees.",
+        ],
+        "encore": ("Diagnóstico de café", "Escribe un runbook de 8 líneas: «la web no carga». Orden: DNS, puerto, TLS, app.", "1. ping o dig. 2. curl -I. 3. ¿certificado?. 4. logs. No empieces por reinstalar Nginx."),
+    },
+    "05": {
+        "lecture": [
+            ("Tres objetivos", "Para tu lab, define «confiabilidad» en una métrica tonta pero medible.", "«Responde 200 en /salud 99 de cada 100 curl». Mejor una métrica chica que «que no se caiga»."),
+            ("Proxies, cachés y servidores web", "Dibuja en texto: cliente → proxy → app. ¿Dónde vive el TLS?", "Casi siempre en el proxy (Nginx). La app habla HTTP en localhost. 502 = el proxy no logra hablar con la app."),
+            ("Operar", "Si ves 502, ¿qué miras primero: el proxy o la app?", "El proxy está vivo (si ves 502). Mira si el upstream escucha, el socket, los permisos y el error.log."),
+        ],
+        "shorts": ("Reverse vs forward proxy, con una analogía de edificio.", "Reverse: recepción del edificio (tus servicios). Forward: el portero que sale a la calle por ti (la oficina)."),
+        "walk": ("Anota el server block mínimo que harías copiar/pegar y qué línea no entiendes.", "listen 80; server_name; location / { proxy_pass http://127.0.0.1:PUERTO; }. El trailing slash importa."),
+        "std": [
+            "Un server { listen 80; location / { proxy_pass http://127.0.0.1:3000; } }. nginx -t y recarga.",
+            "proxy_cache o expires para un CSS. curl -I dos veces: busca Age o X-Cache-Status.",
+            "error.log del proxy + ¿escucha el puerto? ss -lptn. 502 no es «reinicia el mundo».",
+            "server_tokens off; autoindex off. nginx -t. Evidencia: curl -I ya no grita la versión.",
+        ],
+        "hack": [
+            "upstream { server 127.0.0.1:3001; server 127.0.0.1:3002; } Mata uno; curl sigue 200.",
+            "limit_req_zone. Demuéstralo con un bucle de curl hasta 429.",
+        ],
+        "encore": ("Una fachada", "Sirve un archivo estático con Nginx en el 8080 de tu máquina (o un contenedor). curl localhost:8080 debe 200.", "Un server { listen 8080; root /ruta; index index.html; }. nginx -t. Si el puerto está ocupado, cambia 8080."),
+    },
+    "06": {
+        "lecture": [
+            ("Qué es un contenedor", "¿En qué se parece un contenedor a un proceso y en qué no a una VM?", "Comparte el kernel (como un proceso). Aísla archivos y red (como una VM chica). No arranca otro sistema operativo completo."),
+            ("Lo que debes practicar", "Escribe un Dockerfile de 6 líneas para una app que solo imprime hola.", "FROM, WORKDIR, COPY, RUN si hace falta, USER no root si puedes, CMD. .dockerignore con .git."),
+        ],
+        "shorts": ("Imagen vs contenedor, en una analogía de cocina.", "Imagen = receta congelada. Contenedor = el plato sirviéndose. Varios platos de la misma receta."),
+        "walk": ("Pega el error de tu primer docker build y qué línea del Dockerfile lo causó.", "«file not found» suele ser COPY + contexto. El Dockerfile ve el directorio desde donde corres build, no magia."),
+        "std": [
+            "Dockerfile + docker compose up --build. Un puerto publicado. README con el comando único.",
+            "volumes: - data:/ruta. Escribe un archivo dentro, down, up, el archivo sigue.",
+            "services: api y web. web hace GET a http://api:puerto. El nombre del servicio es el DNS interno.",
+            ".dockerignore: .git, .env, node_modules. docker images; el tamaño importa.",
+        ],
+        "hack": [
+            "FROM golang AS build … y FROM scratch o distroless con el binario. Dos FROM.",
+            "USER 65532 o un user creado. read_only: true en compose si la app lo aguanta.",
+        ],
+        "encore": ("Hola en una caja", "Contenedor que responde «hola» en un puerto. Un comando para arrancar, uno para parar.", "Si no tienes app: nginx:alpine y un index.html copiado. docker run --rm -p 8080:80 imagen."),
+    },
+    "07": {
+        "lecture": [
+            ("Qué orquesta un orquestador", "¿Qué deja de hacer una persona cuando hay Kubernetes (o similar)?", "Reiniciar a mano, decidir en qué máquina, abrir puertos a dedo. Tú declaras replicas: 2; el clúster se esfuerza."),
+            ("Kubernetes, sin mito", "¿Qué es un Pod, en una analogía, y por qué casi nunca corres un contenedor «suelto» en K8s?", "El Pod es la caja donde viven los contenedores que se necesitan juntos. K8s programa Pods, no Docker run sueltos."),
+        ],
+        "shorts": ("kubectl en una frase: ¿qué le pides al clúster?", "«Aplica este YAML» y «enséñame el estado». get, describe, logs, apply. Poco más para empezar."),
+        "walk": ("Anota un apply que falló y el campo YAML que lo rompió.", "indentación. apiVersion/kind. image: que no existe. kubectl describe pod es más útil que el apply rojo."),
+        "std": [
+            "kind: Deployment y Service. kubectl apply -f. Nada de kubectl run en la entrega.",
+            "Pon un tag de imagen inventado, apply, kubectl describe pod / get events.",
+            "kubectl create ns dev; metadata.namespace: dev. kubectl -n dev get all.",
+            "liveness = «¿sigo vivo?»; readiness = «¿ya puedo recibir tráfico?». Una frase cada una en el README.",
+        ],
+        "hack": [
+            "values.yaml con image.tag. helm upgrade o kustomize edit set image.",
+            "Role + RoleBinding + ServiceAccount. kubectl auth can-i get pods --as=system:serviceaccount:dev:sa",
+        ],
+        "encore": ("Declarar, no pulsar", "Un YAML de Deployment con 2 réplicas de nginx. Aplícalo en kind, k3d o minikube.", "Si no tienes clúster: instala kind. kind create cluster. kubectl apply -f. kubectl get pods."),
+    },
+    "08": {
+        "lecture": [
+            ("Dos oficios que se confunden", "¿Qué hace Terraform que Ansible no hace (y al revés), en una frase cada uno?", "Terraform crea/destruye la nube (provisioning). Ansible configura lo que ya existe (configuration management). Se pueden usar juntos."),
+            ("Service mesh, en una idea", "¿Qué problema de mTLS/tráfico resolvería un mesh que no quieres meter en cada app?", "Certificados entre servicios, reintentos, observabilidad. El sidecar habla; tu código sigue siendo HTTP."),
+        ],
+        "shorts": ("plan vs apply, como si firmaras un contrato.", "plan = lees el contrato. apply = firmas. Nunca firmes sin leer. terraform plan -out y luego apply ese archivo."),
+        "walk": ("Escribe el recurso más pequeño que te atreverías a crear y cómo lo destruirías.", "Un local_file o un droplet de 5 dólares. terraform destroy es parte de la demo, no un apéndice."),
+        "std": [
+            "Un .tf mínimo, terraform init, terraform plan. Pega el plan (sin secretos) en el README.",
+            "terraform apply dos veces. La segunda: 0 to add, 0 to destroy.",
+            "variable \"nombre\" {}. tfvars de ejemplo. Cero IPs o passwords en el .tf.",
+            "terraform destroy y captura la salida. Si da miedo, el diseño es de mascota, no de ganado.",
+        ],
+        "hack": [
+            "hosts.ini + playbook.yml con apt: name=nginx state=present. ansible-playbook dos veces.",
+            "El state es el mapa del mundo. Si dos personas apply a la vez, se pisan. Locking = un candado en el mapa.",
+        ],
+        "encore": ("Plan de juguete", "Un terraform que cree un archivo local. plan, apply, destroy. Tres capturas en el README.", "resource \"local_file\" \"hola\" { content = \"hola\\n\" filename = \"${path.module}/hola.txt\" } terraform init && plan && apply."),
+    },
+    "09": {
+        "lecture": [
+            ("El tubo", "Dibuja CI y CD en dos cajas. ¿Qué cruza de una a la otra?", "CI: test + build. CD: ese mismo artefacto a un entorno. El zip o la imagen es el puente. No se recompila «a mano» en prod."),
+            ("Lo que debes montar", "Nombra tres jobs de un pipeline mínimo y qué los pone rojos.", "lint/test, build, publicar. Rojo: test fallido, no compila, no hay artefacto. Un job que «siempre verde» no sirve."),
+        ],
+        "shorts": ("«Construye una vez, despliega muchas»: ¿por qué duele reconstruir en producción?", "El binario de staging y el de prod deben ser el mismo. Si recompilas, ya no sabes qué probaste."),
+        "walk": ("Pega el YAML de un job (aunque sea de ejemplo) y marca con un comentario qué no entiendes.", "on: push. jobs: pasos. runs-on. Si falla «permission denied» en GitHub Actions, mira permissions: contents."),
+        "std": [
+            "Un workflow o .gitlab-ci.yml con un test que puedas romper a propósito. El rojo debe ser visible.",
+            "Branch protection o una nota: «así se bloquearía». Settings → Branches si usas GitHub.",
+            "docker build -t org/app:$GITHUB_SHA o artefactos. El tag es el commit, no latest.",
+            "Tres frases: este job hace X porque Y. Sin jerga de adorno.",
+        ],
+        "hack": [
+            "matrix: python-version: [3.11, 3.12] o similar.",
+            "environment: production con required reviewers. El artefacto es el de staging, no un rebuild.",
+        ],
+        "encore": ("Un verde que miente menos", "Pipeline que corre un test unitario de 5 líneas. Hazlo fallar una vez a propósito y pega la captura roja y la verde.", "En Actions: on push, un step que ejecuta pytest o go test. El test puede ser assert 1+1==2 y luego lo rompes."),
+    },
+    "10": {
+        "lecture": [
+            ("De verde/rojo a las tres señales", "Para tu app de lab, nombra una métrica, un log y una traza que te gustaría ver.", "Métrica: peticiones/minuto. Log: error con request_id. Traza: el GET que tocó api y base de datos."),
+            ("Qué montar", "¿Qué pondrías en un tablero que un extraño entiende en 30 segundos?", "¿Está vivo? ¿Va lento? ¿Hay errores? Cuatro paneles, no cuarenta. La alerta tiene que decir qué hacer."),
+        ],
+        "shorts": ("Los tres pilares, sin la palabra «observabilidad».", "Números en el tiempo, frases que escribió la app, el camino de una petición. Eso es métrica, log, traza."),
+        "walk": ("Anota una alerta tonta pero útil y la acción humana que implica.", "«Error rate > 5% 5 min» → mirar logs con request_id, no reiniciar a ciegas. Si no hay acción, no es alerta: es ruido."),
+        "std": [
+            "Grafana o un HTML feo: 4 números. Captura de pantalla en el README.",
+            "Un middleware que loguee id. Tres líneas con el mismo id en el pegado.",
+            "PromQL o equivalente + un párrafo «si dispara, mira…».",
+            "Media página. Título, síntomas, primer comando, escalación.",
+        ],
+        "hack": [
+            "Tres métricas en un endpoint. Nombres claros: http_requests_total.",
+            "Dos procesos, un traceparent. Jaeger o Tempo local.",
+        ],
+        "encore": ("Pulso", "Un script que haga curl a una URL cada 10 s y escriba OK/FAIL con fecha en un log.", "while true; do curl -sf URL && echo OK || echo FAIL; sleep 10; done. No hace falta Prometheus para sentir el pulso."),
+    },
+    "11": {
+        "lecture": [
+            ("Elige uno y baja a tierra", "Elige AWS, Azure o GCP y escribe el equivalente de: identidad, red, máquina.", "AWS: IAM, VPC, EC2. Azure: Entra ID, VNet, VM. GCP: IAM, VPC, GCE. El mapa se parece; los nombres no."),
+            ("Lo que debes practicar", "Nombra tres cosas que apagarías hoy para no llevarte una factura sorpresa.", "VMs, IPs elásticas, load balancers, clusters. El lab no es prod. Budget alert el día 1."),
+        ],
+        "shorts": ("IaaS vs PaaS vs SaaS con el ejemplo de «quiero una web».", "IaaS: tú la VM. PaaS: tú el código, ellos el runtime. SaaS: usas el producto (el correo, el board)."),
+        "walk": ("Escribe los 5 pasos para destruir tu lab. Si no puedes, el lab es una mascota.", "1. snapshot si hace falta. 2. borrar VM. 3. disco. 4. IP. 5. VPC. terraform destroy si llegaste con IaC."),
+        "std": [
+            "Caja: root/global admin con MFA. Usuario diario. Un rol de lab. Dibujo en texto.",
+            "Pública: el balanceador o un bastion. Privada: la app. Una flecha de tráfico.",
+            "Una VM o App Service/Cloud Run. 5 pasos de destroy en el README.",
+            "Pega el estimador o la consola de costos. Cero «no sé».",
+        ],
+        "hack": [
+            "El .tf de la semana 8 ahora tiene un provider real. plan en el README, apply con presupuesto.",
+            "Dos zonas, un LB. Para una instancia: el health check debe fallar y el tráfico irse.",
+        ],
+        "encore": ("Cuenta de lab", "Activa MFA en la cuenta raíz/global y crea un usuario de diario. Escríbelo en tres líneas.", "No uses la raíz para practicar. Si el proveedor insiste en tarjeta, pon un presupuesto de 1 USD y una alarma."),
+    },
+    "12": {
+        "lecture": [
+            ("El ciclo y el ritual", "¿Dónde entra DevOps en tu SDLC, no como slogan, sino en una fase concreta?", "En construcción: CI. En operación: monitoreo y postmortem. En diseño: historias que se pueden probar. No «en todas partes» sin ejemplo."),
+            ("Comunicación y troubleshooting", "Escribe el título de un postmortem sin culpas.", "«Caída de 20 min en checkout por timeout a pagos, 17 sep». Nombres de sistemas, no de personas."),
+        ],
+        "shorts": ("Built-in quality: un ejemplo que no sea «hay que testear más».", "El test corre en el PR. El linter bloquea el merge. La calidad no es una fase del viernes."),
+        "walk": ("Convierte una tarea vaga («mejorar el login») en una historia con criterio de aceptación.", "Como usuario, quiero X para Y. Aceptación: dado/cuando/entonces comprobable. Si no se puede probar, no es historia: es un deseo."),
+        "std": [
+            "Una tabla: fase | práctica DevOps. Cinco filas bastan.",
+            "Tres historias. Cada una con un entonces medible (código 200, mail enviado, etc.).",
+            "Un test de CI y por qué ahí y no en la laptop del martes.",
+            "Timeline, impacto, qué salió bien, acciones con dueño. Cero «fulano se equivocó».",
+        ],
+        "hack": [
+            "Cajas: idea → prod. Marca esperas. Una espera recortable con un número.",
+            "Objetivo, hipótesis, inyección de fallo, quién observa, cómo se para. 1 hora, no un simulacro de guerra.",
+        ],
+        "encore": ("Historia de verdad", "Escribe UNA historia de usuario de tu lab con criterio de aceptación que un test podría fallar.", "«Dado un README vacío, cuando corro el script, entonces sale uso y código 1». Eso se puede automatizar."),
+    },
+    "13": {
+        "lecture": [
+            ("Izquierda, pero con juicio", "¿Qué control meterías en el PR y cuál dejarías para staging? Uno de cada.", "PR: secretos y SAST barato. Staging: DAST, imagen firmada. No bloquees el merge con un scan de 40 minutos el día 1."),
+        ],
+        "shorts": ("SAST vs DAST vs SCA, una línea cada uno.", "SAST: el código quieto. DAST: la app corriendo. SCA: lo que importaste (dependencias)."),
+        "walk": ("Pega un hallazgo de un scan (aunque sea de ejemplo) y decide: ¿aceptar, parchar o mitigar?", "CVE en una lib de test ≠ CVE en la imagen de prod. Escribe por qué. «Lo ignoro» no es una decisión: es un olvido."),
+        "std": [
+            "gitleaks o un regex de AKIA… en CI. Un archivo de ejemplo que debe fallar (sin claves reales).",
+            "trivy image … Pega un CVE y tu decisión en una frase.",
+            "Amenaza | control. Tres filas. Ejemplo: secreto en repo | pre-commit + rotación.",
+            "Un párrafo. «No root, no :latest, no 0.0.0.0:22 abierto al mundo».",
+        ],
+        "hack": [
+            "cosign sign y cosign verify. Si no hay registry, documenta el flujo con comandos.",
+            "Un YAML de Kyverno/OPA: privileged: true → deny. kubectl apply y un pod que rebote.",
+        ],
+        "encore": ("El secreto que no se sube", "Crea un .env de mentira, añádelo a .gitignore, y demuestra que git status no lo ve. Luego un hook o CI que falle si aparece AWS_SECRET.", "echo .env >> .gitignore. git check-ignore -v .env. El CI puede ser un grep en el pipeline, no un producto caro."),
+    },
+}
+

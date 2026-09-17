@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,12 +780,43 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">Cada despliegue es una conversación entre máquinas. Si no entiendes DNS, puertos, TLS y firewalls, vas a depurar a ciegas cuando &#x27;la app no carga&#x27;.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="protocolo-un-contrato-de-conversacion">Protocolo: un contrato de conversación</h2><p>Un protocolo de red es un conjunto de reglas para transmitir datos entre dispositivos distintos. No importa que un lado sea Go y el otro Python: ambos hablan HTTP, DNS o SSH.</p><p>El modelo OSI (7 capas) es un mapa mental, no un aparato. TCP/IP es lo que realmente corre. Tú, en la práctica, vives en: IP, TCP/UDP, TLS, HTTP y DNS.</p><h2 id="lo-que-debes-poder-explicar">Lo que debes poder explicar</h2><ul><li>Qué es una IP, una máscara y un puerto.</li><li>La diferencia entre TCP (confiable) y UDP (rápido y olvida).</li><li>Cómo un nombre (example.com) se convierte en IP (DNS).</li><li>Qué hace SSH y por qué las llaves ganan a las contraseñas.</li><li>Cómo un firewall decide qué entra y qué no.</li></ul><div class="callout"><strong>HTTP no es &#x27;internet&#x27;</strong><span>HTTP es un protocolo de aplicación. Viaja sobre TCP (o QUIC). HTTPS es HTTP sobre TLS. Si mezclas estos términos en una incidente, el equipo pierde tiempo.</span></div><h2 id="seguridad-como-habito">Seguridad como hábito</h2><p>Principio de mínimo privilegio, superficies pequeñas, secretos fuera del código, y no exponer paneles a 0.0.0.0 sin autenticación. DevSecOps no empieza en la semana bonus: empieza cuando abres el primer puerto.</p></div>
+      <div class="lecture"><h2 id="protocolo-un-contrato-de-conversacion">Protocolo: un contrato de conversación</h2><p>Un protocolo de red es un conjunto de reglas para transmitir datos entre dispositivos distintos. No importa que un lado sea Go y el otro Python: ambos hablan HTTP, DNS o SSH.</p><p>El modelo OSI (7 capas) es un mapa mental, no un aparato. TCP/IP es lo que realmente corre. Tú, en la práctica, vives en: IP, TCP/UDP, TLS, HTTP y DNS.</p><aside class="drill" data-drill="protocolo-un-contrato-de-conversacion">
+      <p class="n">Practica ahora</p>
+      <h3>Protocolo: un contrato de conversación</h3>
+      <p>Inventa un protocolo de 4 reglas para pedir café por mensaje. Luego nombra el análogo en HTTP.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Verbo (GET/POST), recurso (/cafe), encabezados (leche, tamaño), código de respuesta (200, 404, 503).</p>
+      </div>
+    </aside><h2 id="lo-que-debes-poder-explicar">Lo que debes poder explicar</h2><ul><li>Qué es una IP, una máscara y un puerto.</li><li>La diferencia entre TCP (confiable) y UDP (rápido y olvida).</li><li>Cómo un nombre (example.com) se convierte en IP (DNS).</li><li>Qué hace SSH y por qué las llaves ganan a las contraseñas.</li><li>Cómo un firewall decide qué entra y qué no.</li></ul><div class="callout"><strong>HTTP no es &#x27;internet&#x27;</strong><span>HTTP es un protocolo de aplicación. Viaja sobre TCP (o QUIC). HTTPS es HTTP sobre TLS. Si mezclas estos términos en una incidente, el equipo pierde tiempo.</span></div><aside class="drill" data-drill="lo-que-debes-poder-explicar">
+      <p class="n">Practica ahora</p>
+      <h3>Lo que debes poder explicar</h3>
+      <p>Alguien dice «no carga la web». Escribe las tres primeras preguntas que harías.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>¿Resuelve DNS? ¿El puerto 443 responde? ¿TLS/certificado? ping no basta; curl -v y dig sí.</p>
+      </div>
+    </aside><h2 id="seguridad-como-habito">Seguridad como hábito</h2><p>Principio de mínimo privilegio, superficies pequeñas, secretos fuera del código, y no exponer paneles a 0.0.0.0 sin autenticación. DevSecOps no empieza en la semana bonus: empieza cuando abres el primer puerto.</p><aside class="drill" data-drill="seguridad-como-habito">
+      <p class="n">Practica ahora</p>
+      <h3>Seguridad como hábito</h3>
+      <p>Nombra dos hábitos de SSH que no cuestan dinero.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Llaves, no contraseñas. No root remoto. Actualizar. Fail2ban si quieres, pero las llaves primero.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -792,12 +824,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>DNS</h3><p>Jerarquía de nombres. El resolvers pregunta, los nameservers responden. TTL decide cuánto cacheas.</p></article><article class="short"><h3>Puertos</h3><p>22 SSH, 53 DNS, 80 HTTP, 443 HTTPS. Un puerto cerrado es una puerta sin timbre.</p></article><article class="short"><h3>SSH</h3><p>Shell remoto cifrado. Autenticación por llave. Túneles y port forwarding son superpoderes.</p></article><article class="short"><h3>Firewall</h3><p>Reglas: de dónde, a dónde, qué protocolo. Deny by default es más sano que allow all.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Explica DNS a alguien que cree que «internet es Google».</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>DNS traduce nombres a números. Si falla el traductor, la web «no existe» aunque el servidor esté vivo.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Resuelve un dominio con dig o nslookup y lee la cadena de registros.</li><li>Abre una conexión HTTP con curl -v y nombra cada fase.</li><li>Genera un par de llaves SSH y entra a tu VM sin contraseña.</li><li>Lista puertos abiertos con ss -tulpn.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Pega tres líneas de `curl -v` que te hayan servido y qué significan.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Busca HTTP/1.1 o HTTP/2, el código (200/301/403) y server:. El certificado aparece en las líneas SSL.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -807,8 +861,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Mapa OSI</strong><p>Escribe en una tabla un ejemplo real por cada capa que uses (HTTP, TLS, TCP, IP, Ethernet).</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Diagnóstico</strong><p>Simula &#x27;no resuelve el dominio&#x27; vs &#x27;resuelve pero el puerto 443 está cerrado&#x27;. Documenta cómo lo distingues.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Fortaleza mínima</strong><p>En tu VM, desactiva login SSH por contraseña y deja solo llaves.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>HTTP visible</strong><p>Usa curl -v https://example.com y explica tres encabezados de la respuesta.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>TLS a mano</strong><p>Explica el apretón de manos TLS como una obra de teatro de 6 actos.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Mini firewall</strong><p>Escribe reglas ufw o iptables que solo permitan 22 y 443 desde tu IP.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Mapa OSI</strong><p>Escribe en una tabla un ejemplo real por cada capa que uses (HTTP, TLS, TCP, IP, Ethernet).</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Capa 7 HTTP, 6 TLS, 4 TCP, 3 IP, 2 Ethernet. Una fila por capa con un ejemplo que uses de verdad.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Diagnóstico</strong><p>Simula &#x27;no resuelve el dominio&#x27; vs &#x27;resuelve pero el puerto 443 está cerrado&#x27;. Documenta cómo lo distingues.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>No resuelve: dig/nslookup falla. Resuelve pero 443 cerrado: nc/curl timeout tras tener IP. Anótalo.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Fortaleza mínima</strong><p>En tu VM, desactiva login SSH por contraseña y deja solo llaves.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>sshd_config: PasswordAuthentication no. Recarga sshd. Ten otra sesión abierta antes de cortar.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>HTTP visible</strong><p>Usa curl -v https://example.com y explica tres encabezados de la respuesta.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>curl -v: date, server, cache-control o strict-transport-security. Explícalos en español.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>TLS a mano</strong><p>Explica el apretón de manos TLS como una obra de teatro de 6 actos.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Cliente saluda, servidor certificado, claves, cifrado, datos, cierre. 6 frases numeradas.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Mini firewall</strong><p>Escribe reglas ufw o iptables que solo permitan 22 y 443 desde tu IP.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>ufw allow from TU_IP to any port 22 y 443. ufw enable con cuidado: no te bloquees.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Diagnóstico de café</h3>
+      <p>Escribe un runbook de 8 líneas: «la web no carga». Orden: DNS, puerto, TLS, app.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>1. ping o dig. 2. curl -I. 3. ¿certificado?. 4. logs. No empieces por reinstalar Nginx.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -873,6 +967,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

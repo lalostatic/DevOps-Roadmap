@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,12 +780,33 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">Vas a convivir con desarrollo en un mundo Scrum (o similar). Necesitas el ciclo de vida del software, las herramientas de ese ciclo, y cómo se prueba en automático para poder meterlo al pipeline.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="el-ciclo-y-el-ritual">El ciclo y el ritual</h2><p>SDLC: idea, análisis, diseño, implementación, prueba, despliegue, operación, mejora. Ágil no elimina el ciclo: lo hace corto y visible. Scrum propone backlog, sprint, daily, review, retro. Kanban visualiza el flujo. Elige el que el equipo ya usa y mejóralo con datos, no con dogmas.</p><p>Calidad integrada (built-in quality): tests automáticos, revisiones, contratos de API, feature flags. El QA no es una casta al final; es una propiedad del tubo.</p><h2 id="comunicacion-y-troubleshooting">Comunicación y troubleshooting</h2><p>Incidentes se narran: qué vimos, cuándo, qué hipótesis, qué se hizo, qué se aprendió. Blameless no es &#x27;nadie es responsable&#x27;: es &#x27;el sistema permitió el error y el sistema se repara&#x27;.</p><div class="callout"><strong>Eres parte del producto</strong><span>Un pipeline inestable, un entorno que nadie puede recrear o un canal de Slack sin runbooks son deuda de ingeniería, no &#x27;cosas de ops&#x27;.</span></div></div>
+      <div class="lecture"><h2 id="el-ciclo-y-el-ritual">El ciclo y el ritual</h2><p>SDLC: idea, análisis, diseño, implementación, prueba, despliegue, operación, mejora. Ágil no elimina el ciclo: lo hace corto y visible. Scrum propone backlog, sprint, daily, review, retro. Kanban visualiza el flujo. Elige el que el equipo ya usa y mejóralo con datos, no con dogmas.</p><p>Calidad integrada (built-in quality): tests automáticos, revisiones, contratos de API, feature flags. El QA no es una casta al final; es una propiedad del tubo.</p><aside class="drill" data-drill="el-ciclo-y-el-ritual">
+      <p class="n">Practica ahora</p>
+      <h3>El ciclo y el ritual</h3>
+      <p>¿Dónde entra DevOps en tu SDLC, no como slogan, sino en una fase concreta?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>En construcción: CI. En operación: monitoreo y postmortem. En diseño: historias que se pueden probar. No «en todas partes» sin ejemplo.</p>
+      </div>
+    </aside><h2 id="comunicacion-y-troubleshooting">Comunicación y troubleshooting</h2><p>Incidentes se narran: qué vimos, cuándo, qué hipótesis, qué se hizo, qué se aprendió. Blameless no es &#x27;nadie es responsable&#x27;: es &#x27;el sistema permitió el error y el sistema se repara&#x27;.</p><div class="callout"><strong>Eres parte del producto</strong><span>Un pipeline inestable, un entorno que nadie puede recrear o un canal de Slack sin runbooks son deuda de ingeniería, no &#x27;cosas de ops&#x27;.</span></div><aside class="drill" data-drill="comunicacion-y-troubleshooting">
+      <p class="n">Practica ahora</p>
+      <h3>Comunicación y troubleshooting</h3>
+      <p>Escribe el título de un postmortem sin culpas.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>«Caída de 20 min en checkout por timeout a pagos, 17 sep». Nombres de sistemas, no de personas.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -792,12 +814,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Backlog</h3><p>Lista ordenada de valor. Si todo es P0, nada es P0.</p></article><article class="short"><h3>Definición de Terminado</h3><p>En producción, observable, con rollback. No &#x27;en mi rama&#x27;.</p></article><article class="short"><h3>Pirámide de tests</h3><p>Muchos unitarios, menos de integración, pocos E2E caros.</p></article><article class="short"><h3>Postmortem</h3><p>Timeline, causa contribuyente, acciones. Sin villanos.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Built-in quality: un ejemplo que no sea «hay que testear más».</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>El test corre en el PR. El linter bloquea el merge. La calidad no es una fase del viernes.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Lee una guía corta de Scrum y anota rituales vs principios.</li><li>Toma un bug ficticio y escribe un reporte reproducible.</li><li>Diseña una pirámide de tests para la app de la semana 6.</li><li>Escribe un postmortem de un incidente inventado pero realista (certificado vencido).</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Convierte una tarea vaga («mejorar el login») en una historia con criterio de aceptación.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Como usuario, quiero X para Y. Aceptación: dado/cuando/entonces comprobable. Si no se puede probar, no es historia: es un deseo.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -807,8 +851,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Mapa SDLC</strong><p>Una página: dónde entra DevOps en cada fase.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Historia de usuario</strong><p>Escribe 3 historias con criterio de aceptación comprobable.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Calidad en el tubo</strong><p>Nombra qué test automático meterías en CI y por qué.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Incidente</strong><p>Postmortem de una caída de 20 minutos. Sin culpas, con acciones.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Value stream</strong><p>Dibuja el camino de un ticket hasta prod y marca esperas. Propón recortar una.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Chaos narrado</strong><p>Diseña un game day de una hora para tu equipo imaginario.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Mapa SDLC</strong><p>Una página: dónde entra DevOps en cada fase.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Una tabla: fase | práctica DevOps. Cinco filas bastan.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Historia de usuario</strong><p>Escribe 3 historias con criterio de aceptación comprobable.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Tres historias. Cada una con un entonces medible (código 200, mail enviado, etc.).</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Calidad en el tubo</strong><p>Nombra qué test automático meterías en CI y por qué.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un test de CI y por qué ahí y no en la laptop del martes.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Incidente</strong><p>Postmortem de una caída de 20 minutos. Sin culpas, con acciones.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Timeline, impacto, qué salió bien, acciones con dueño. Cero «fulano se equivocó».</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Value stream</strong><p>Dibuja el camino de un ticket hasta prod y marca esperas. Propón recortar una.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Cajas: idea → prod. Marca esperas. Una espera recortable con un número.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Chaos narrado</strong><p>Diseña un game day de una hora para tu equipo imaginario.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Objetivo, hipótesis, inyección de fallo, quién observa, cómo se para. 1 hora, no un simulacro de guerra.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Historia de verdad</h3>
+      <p>Escribe UNA historia de usuario de tu lab con criterio de aceptación que un test podría fallar.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>«Dado un README vacío, cuando corro el script, entonces sale uso y código 1». Eso se puede automatizar.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -873,6 +957,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

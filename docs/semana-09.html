@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,19 +780,40 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">CI/CD introduce automatización y monitoreo continuo desde la integración hasta el despliegue. Es la respuesta al miedo de juntar código el viernes.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="el-tubo">El tubo</h2><p>Continuous Integration: cada commit (o PR) dispara una construcción y pruebas. Continuous Delivery: el artefacto queda listo para producción. Continuous Deployment: además, se publica solo si el tubo está verde.</p><p>Un pipeline típico: obtener código → construir → analizar → probar → empaquetar → desplegar → verificar. Jenkins, GitHub Actions, GitLab CI, Circle, Azure DevOps: distinto YAML, misma idea.</p><h2 id="lo-que-debes-montar">Lo que debes montar</h2><ul><li>Un servidor o servicio de CI.</li><li>Integración: el push dispara el tubo.</li><li>Herramientas de build y empaquetado.</li></ul><pre><code>name: ci
+      <div class="lecture"><h2 id="el-tubo">El tubo</h2><p>Continuous Integration: cada commit (o PR) dispara una construcción y pruebas. Continuous Delivery: el artefacto queda listo para producción. Continuous Deployment: además, se publica solo si el tubo está verde.</p><p>Un pipeline típico: obtener código → construir → analizar → probar → empaquetar → desplegar → verificar. Jenkins, GitHub Actions, GitLab CI, Circle, Azure DevOps: distinto YAML, misma idea.</p><aside class="drill" data-drill="el-tubo">
+      <p class="n">Practica ahora</p>
+      <h3>El tubo</h3>
+      <p>Dibuja CI y CD en dos cajas. ¿Qué cruza de una a la otra?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>CI: test + build. CD: ese mismo artefacto a un entorno. El zip o la imagen es el puente. No se recompila «a mano» en prod.</p>
+      </div>
+    </aside><h2 id="lo-que-debes-montar">Lo que debes montar</h2><ul><li>Un servidor o servicio de CI.</li><li>Integración: el push dispara el tubo.</li><li>Herramientas de build y empaquetado.</li></ul><pre class="codeblock"><span class="code-lang">yaml</span><code>name: ci
 on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python -m compileall .</code></pre><div class="callout"><strong>El tubo es producto</strong><span>Si el pipeline es flaky, el equipo deja de creerlo. Un test inestable es un incidente cultural.</span></div></div>
+      - run: python -m compileall .</code></pre><div class="callout"><strong>El tubo es producto</strong><span>Si el pipeline es flaky, el equipo deja de creerlo. Un test inestable es un incidente cultural.</span></div><aside class="drill" data-drill="lo-que-debes-montar">
+      <p class="n">Practica ahora</p>
+      <h3>Lo que debes montar</h3>
+      <p>Nombra tres jobs de un pipeline mínimo y qué los pone rojos.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>lint/test, build, publicar. Rojo: test fallido, no compila, no hay artefacto. Un job que «siempre verde» no sirve.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -799,12 +821,34 @@ jobs:
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Artefacto</h3><p>El binario, imagen o paquete que desplegarás. No redespliegues &#x27;lo que había en la laptop&#x27;.</p></article><article class="short"><h3>Gates</h3><p>No despliegues si fallan tests, linters o el escaneo de secretos.</p></article><article class="short"><h3>Ambientes</h3><p>dev → staging → prod. Promueve el mismo artefacto; no reconstruyas en prod.</p></article><article class="short"><h3>Secrets del CI</h3><p>El CI es un tesoro: tiene llaves de nube. Mínimo privilegio, rotación, logs sin secretos.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>«Construye una vez, despliega muchas»: ¿por qué duele reconstruir en producción?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>El binario de staging y el de prod deben ser el mismo. Si recompilas, ya no sabes qué probaste.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Elige GitHub Actions o GitLab CI (gratis y suficiente).</li><li>Pipeline que corre en cada push: lint o tests mínimos.</li><li>Guarda un artefacto (un .tar o una imagen en un registry de laboratorio).</li><li>Añade un job de deploy a un entorno falso (una rama gh-pages o un directorio).</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Pega el YAML de un job (aunque sea de ejemplo) y marca con un comentario qué no entiendes.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>on: push. jobs: pasos. runs-on. Si falla «permission denied» en GitHub Actions, mira permissions: contents.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -814,8 +858,48 @@ jobs:
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Verde</strong><p>Pipeline que falla si el código no compila o un test unitario cae.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>PR check</strong><p>El merge a main queda bloqueado si el check está rojo (o documenta cómo se haría).</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Artefacto</strong><p>Publica un build (imagen Docker o zip) con un tag del commit.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>README del tubo</strong><p>Explica cada job en lenguaje humano.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Matriz</strong><p>Corre tests en dos versiones de runtime.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Deploy por ambientes</strong><p>manual approval para producción. El mismo artefacto que staging.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Verde</strong><p>Pipeline que falla si el código no compila o un test unitario cae.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un workflow o .gitlab-ci.yml con un test que puedas romper a propósito. El rojo debe ser visible.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>PR check</strong><p>El merge a main queda bloqueado si el check está rojo (o documenta cómo se haría).</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Branch protection o una nota: «así se bloquearía». Settings → Branches si usas GitHub.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Artefacto</strong><p>Publica un build (imagen Docker o zip) con un tag del commit.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>docker build -t org/app:$GITHUB_SHA o artefactos. El tag es el commit, no latest.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>README del tubo</strong><p>Explica cada job en lenguaje humano.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Tres frases: este job hace X porque Y. Sin jerga de adorno.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Matriz</strong><p>Corre tests en dos versiones de runtime.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>matrix: python-version: [3.11, 3.12] o similar.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Deploy por ambientes</strong><p>manual approval para producción. El mismo artefacto que staging.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>environment: production con required reviewers. El artefacto es el de staging, no un rebuild.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Un verde que miente menos</h3>
+      <p>Pipeline que corre un test unitario de 5 líneas. Hazlo fallar una vez a propósito y pega la captura roja y la verde.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>En Actions: on push, un step que ejecuta pytest o go test. El test puede ser assert 1+1==2 y luego lo rompes.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -880,6 +964,6 @@ jobs:
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

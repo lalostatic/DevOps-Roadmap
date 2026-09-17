@@ -6,18 +6,19 @@ const defaultState = () => ({
   weeks: {},
   cards: {},
   feynman: {},
+  drills: {},
 });
 
 function loadState() {
   try {
-    return { ...defaultState(), ...JSON.parse(localStorage.getItem(STORE_KEY) || "{}") };
+    return { ...defaultState(), ...JSON.parse(sessionStorage.getItem(STORE_KEY) || "{}") };
   } catch {
     return defaultState();
   }
 }
 
 function saveState(state) {
-  localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  sessionStorage.setItem(STORE_KEY, JSON.stringify(state));
   window.dispatchEvent(new Event("progress-change"));
 }
 
@@ -427,6 +428,7 @@ function bindWeek() {
   bindQuiz(id);
   bindFeynman(id);
   bindFlash(id);
+  bindDrills(id);
   paintWeekBar(id);
 }
 
@@ -485,6 +487,36 @@ function bindFeynman(id) {
       hide.textContent = lecture.hidden ? "Mostrar conferencia" : "Cerrar y enseñar";
     });
   }
+}
+
+function bindDrills(weekId) {
+  document.querySelectorAll("[data-drill]").forEach((el, i) => {
+    const key = `${weekId}:${el.getAttribute("data-drill") || i}`;
+    const area = el.querySelector("[data-drill-note]");
+    if (area) {
+      const st = loadState();
+      area.value = (st.drills || {})[key] || "";
+      area.addEventListener("input", () => {
+        const next = loadState();
+        next.drills = next.drills || {};
+        next.drills[key] = area.value;
+        saveState(next);
+      });
+    }
+  });
+  document.querySelectorAll("[data-hint-open]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const box = btn.closest("[data-drill], .task, .help-block");
+      const body = box?.querySelector(".hint-body");
+      if (!body) return;
+      const open = body.hasAttribute("hidden");
+      if (open) body.removeAttribute("hidden");
+      else body.setAttribute("hidden", "");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "Ocultar pista" : "Me atoré";
+      Sfx.play(open ? "open" : "close");
+    });
+  });
 }
 
 function daysFromBox(box) {

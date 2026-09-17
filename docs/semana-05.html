@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,12 +780,43 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">El código no sirve si el proceso se cae, el disco se llena o el certificado caduca. Administrar servidores es el oficio de la confiabilidad cotidiana.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="tres-objetivos">Tres objetivos</h2><ul><li>Minimizar lentitud y caídas; maximizar confiabilidad.</li><li>Construir entornos seguros.</li><li>Escalar servidores y operaciones cuando la organización crece.</li></ul><h2 id="proxies-caches-y-servidores-web">Proxies, cachés y servidores web</h2><p>Un proxy inverso (Nginx, Caddy, HAProxy, IIS ARR) recibe el tráfico del mundo y lo reparte a tus aplicaciones. Termina TLS, compacta, limita, enruta. Un proxy directo es el que usan los clientes para salir; no los confundas.</p><p>Un servidor de caché guarda respuestas caras cerca de quien las pide. Un servidor web (Nginx, Apache, IIS) habla HTTP. En la práctica, Nginx suele ser las tres cosas: web, proxy inverso y, con un poco de configuración, caché.</p><div class="callout"><strong>Caja negra</strong><span>El usuario habla con un nombre y un puerto. Detrás puede haber 1 o 50 procesos. El proxy es la fachada. Si la fachada está mal, nada interior importa.</span></div><h2 id="operar">Operar</h2><p>systemctl, logs, rotación, actualizaciones, backups, certificados, límites de ulimit, espacio en disco. Un servidor sin backup es un prototipo.</p></div>
+      <div class="lecture"><h2 id="tres-objetivos">Tres objetivos</h2><ul><li>Minimizar lentitud y caídas; maximizar confiabilidad.</li><li>Construir entornos seguros.</li><li>Escalar servidores y operaciones cuando la organización crece.</li></ul><aside class="drill" data-drill="tres-objetivos">
+      <p class="n">Practica ahora</p>
+      <h3>Tres objetivos</h3>
+      <p>Para tu lab, define «confiabilidad» en una métrica tonta pero medible.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>«Responde 200 en /salud 99 de cada 100 curl». Mejor una métrica chica que «que no se caiga».</p>
+      </div>
+    </aside><h2 id="proxies-caches-y-servidores-web">Proxies, cachés y servidores web</h2><p>Un proxy inverso (Nginx, Caddy, HAProxy, IIS ARR) recibe el tráfico del mundo y lo reparte a tus aplicaciones. Termina TLS, compacta, limita, enruta. Un proxy directo es el que usan los clientes para salir; no los confundas.</p><p>Un servidor de caché guarda respuestas caras cerca de quien las pide. Un servidor web (Nginx, Apache, IIS) habla HTTP. En la práctica, Nginx suele ser las tres cosas: web, proxy inverso y, con un poco de configuración, caché.</p><div class="callout"><strong>Caja negra</strong><span>El usuario habla con un nombre y un puerto. Detrás puede haber 1 o 50 procesos. El proxy es la fachada. Si la fachada está mal, nada interior importa.</span></div><aside class="drill" data-drill="proxies-caches-y-servidores-web">
+      <p class="n">Practica ahora</p>
+      <h3>Proxies, cachés y servidores web</h3>
+      <p>Dibuja en texto: cliente → proxy → app. ¿Dónde vive el TLS?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Casi siempre en el proxy (Nginx). La app habla HTTP en localhost. 502 = el proxy no logra hablar con la app.</p>
+      </div>
+    </aside><h2 id="operar">Operar</h2><p>systemctl, logs, rotación, actualizaciones, backups, certificados, límites de ulimit, espacio en disco. Un servidor sin backup es un prototipo.</p><aside class="drill" data-drill="operar">
+      <p class="n">Practica ahora</p>
+      <h3>Operar</h3>
+      <p>Si ves 502, ¿qué miras primero: el proxy o la app?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>El proxy está vivo (si ves 502). Mira si el upstream escucha, el socket, los permisos y el error.log.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -792,12 +824,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Reverse proxy</h3><p>El mundo habla con Nginx; Nginx habla con tu app en 127.0.0.1:3000.</p></article><article class="short"><h3>Caché</h3><p>No recalcules lo que no cambió. Ojo: invalidar caché es el problema difícil.</p></article><article class="short"><h3>Firewall</h3><p>El servidor no necesita 65535 puertas abiertas. Abre las que el diseño pide.</p></article><article class="short"><h3>Load balancing</h3><p>Varios backends, una fachada. Salud, reintentos, afinidad: detalles que evitan dramas.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Reverse vs forward proxy, con una analogía de edificio.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Reverse: recepción del edificio (tus servicios). Forward: el portero que sale a la calle por ti (la oficina).</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala Nginx en Ubuntu.</li><li>Sirve una página estática.</li><li>Pon un proxy_pass a un proceso local (python -m http.server o similar).</li><li>Fuerza HTTPS local con mkcert o un certificado autofirmado de laboratorio.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Anota el server block mínimo que harías copiar/pegar y qué línea no entiendes.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>listen 80; server_name; location / { proxy_pass http://127.0.0.1:PUERTO; }. El trailing slash importa.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -807,8 +861,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Fachada</strong><p>Nginx como reverse proxy a una app local. Documenta el server block.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Caché</strong><p>Activa caching de un recurso estático y demuestra con curl los encabezados.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Salud</strong><p>Explica cómo verías un 502 y qué mirarías primero (backend caído, socket, permisos).</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Endurecer</strong><p>Oculta la versión del servidor y desactiva listados de directorio.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Dos backends</strong><p>Balancea dos procesos upstream y mata uno: el sitio debe sobrevivir.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Rate limit</strong><p>Limita peticiones por IP y demuestra el 429.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Fachada</strong><p>Nginx como reverse proxy a una app local. Documenta el server block.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un server { listen 80; location / { proxy_pass http://127.0.0.1:3000; } }. nginx -t y recarga.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Caché</strong><p>Activa caching de un recurso estático y demuestra con curl los encabezados.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>proxy_cache o expires para un CSS. curl -I dos veces: busca Age o X-Cache-Status.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Salud</strong><p>Explica cómo verías un 502 y qué mirarías primero (backend caído, socket, permisos).</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>error.log del proxy + ¿escucha el puerto? ss -lptn. 502 no es «reinicia el mundo».</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Endurecer</strong><p>Oculta la versión del servidor y desactiva listados de directorio.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>server_tokens off; autoindex off. nginx -t. Evidencia: curl -I ya no grita la versión.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Dos backends</strong><p>Balancea dos procesos upstream y mata uno: el sitio debe sobrevivir.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>upstream { server 127.0.0.1:3001; server 127.0.0.1:3002; } Mata uno; curl sigue 200.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Rate limit</strong><p>Limita peticiones por IP y demuestra el 429.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>limit_req_zone. Demuéstralo con un bucle de curl hasta 429.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Una fachada</h3>
+      <p>Sirve un archivo estático con Nginx en el 8080 de tu máquina (o un contenedor). curl localhost:8080 debe 200.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Un server { listen 8080; root /ruta; index index.html; }. nginx -t. Si el puerto está ocupado, cambia 8080.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -873,6 +967,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,12 +780,23 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">El bonus del roadmap original: integrar seguridad en DevOps. Automatizar análisis de código y de apps en ejecución, cuidar secretos y fijar políticas.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="izquierda-pero-con-juicio">Izquierda, pero con juicio</h2><p>Shift-left no significa que desarrollo se vuelva un equipo de pentesting. Significa: secretos fuera, dependencias parcheadas, SAST en el PR, DAST en staging, imágenes firmadas, políticas (OPA, Kyverno) en el clúster.</p><ul><li>SAST: mira el código sin ejecutarlo.</li><li>DAST: ataca la app corriendo.</li><li>SCA: las librerías de terceros también son tu código.</li><li>Secrets management: rotación, no un .env eterno.</li></ul><div class="callout"><strong>El tubo como aduana</strong><span>Un hallazgo crítico detiene el merge. Uno medio abre un ticket. Si todo es bloqueo, el equipo apaga el scanner.</span></div></div>
+      <div class="lecture"><h2 id="izquierda-pero-con-juicio">Izquierda, pero con juicio</h2><p>Shift-left no significa que desarrollo se vuelva un equipo de pentesting. Significa: secretos fuera, dependencias parcheadas, SAST en el PR, DAST en staging, imágenes firmadas, políticas (OPA, Kyverno) en el clúster.</p><ul><li>SAST: mira el código sin ejecutarlo.</li><li>DAST: ataca la app corriendo.</li><li>SCA: las librerías de terceros también son tu código.</li><li>Secrets management: rotación, no un .env eterno.</li></ul><div class="callout"><strong>El tubo como aduana</strong><span>Un hallazgo crítico detiene el merge. Uno medio abre un ticket. Si todo es bloqueo, el equipo apaga el scanner.</span></div><aside class="drill" data-drill="izquierda-pero-con-juicio">
+      <p class="n">Practica ahora</p>
+      <h3>Izquierda, pero con juicio</h3>
+      <p>¿Qué control meterías en el PR y cuál dejarías para staging? Uno de cada.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>PR: secretos y SAST barato. Staging: DAST, imagen firmada. No bloquees el merge con un scan de 40 minutos el día 1.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -792,12 +804,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Secretos</h3><p>Vault, SOPS, secrets del CI, managers de la nube. Nunca el chat.</p></article><article class="short"><h3>SBOM</h3><p>Lista de ingredientes del artefacto. Útil cuando sale el próximo CVE.</p></article><article class="short"><h3>Imagen</h3><p>Escanea (Trivy, Grype). No corras latest ciego.</p></article><article class="short"><h3>Política</h3><p>Como código. El clúster rechaza pods privilegiados.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>SAST vs DAST vs SCA, una línea cada uno.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>SAST: el código quieto. DAST: la app corriendo. SCA: lo que importaste (dependencias).</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Añade un scan de secretos (gitleaks o similar) al pipeline.</li><li>Escanea tu imagen Docker.</li><li>Mueve un secreto de un archivo a una variable de entorno.</li><li>Lee un informe SAST aunque sea de un linter de seguridad básico.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Pega un hallazgo de un scan (aunque sea de ejemplo) y decide: ¿aceptar, parchar o mitigar?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>CVE en una lib de test ≠ CVE en la imagen de prod. Escribe por qué. «Lo ignoro» no es una decisión: es un olvido.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -807,8 +841,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Secretos</strong><p>Demuestra un repo limpio: pre-commit o pipeline que falle si hay AWS keys de ejemplo.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>CVE</strong><p>Escanea la imagen y documenta un hallazgo: ¿lo aceptas, lo parchas o lo mitigas?</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Amenaza corta</strong><p>Tres amenazas de tu app de lab y un control para cada una.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Política</strong><p>Escribe en prosa la política: no root, no :latest, no puertos abiertos de más.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Firma</strong><p>Firma una imagen (cosign) y verifica antes de desplegar.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Policy as code</strong><p>Una regla de Kyverno/OPA que rechace privileged: true.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Secretos</strong><p>Demuestra un repo limpio: pre-commit o pipeline que falle si hay AWS keys de ejemplo.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>gitleaks o un regex de AKIA… en CI. Un archivo de ejemplo que debe fallar (sin claves reales).</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>CVE</strong><p>Escanea la imagen y documenta un hallazgo: ¿lo aceptas, lo parchas o lo mitigas?</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>trivy image … Pega un CVE y tu decisión en una frase.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Amenaza corta</strong><p>Tres amenazas de tu app de lab y un control para cada una.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Amenaza | control. Tres filas. Ejemplo: secreto en repo | pre-commit + rotación.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Política</strong><p>Escribe en prosa la política: no root, no :latest, no puertos abiertos de más.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un párrafo. «No root, no :latest, no 0.0.0.0:22 abierto al mundo».</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Firma</strong><p>Firma una imagen (cosign) y verifica antes de desplegar.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>cosign sign y cosign verify. Si no hay registry, documenta el flujo con comandos.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Policy as code</strong><p>Una regla de Kyverno/OPA que rechace privileged: true.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un YAML de Kyverno/OPA: privileged: true → deny. kubectl apply y un pod que rebote.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>El secreto que no se sube</h3>
+      <p>Crea un .env de mentira, añádelo a .gitignore, y demuestra que git status no lo ve. Luego un hook o CI que falle si aparece AWS_SECRET.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>echo .env &gt;&gt; .gitignore. git check-ignore -v .env. El CI puede ser un grep en el pipeline, no un producto caro.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -873,6 +947,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

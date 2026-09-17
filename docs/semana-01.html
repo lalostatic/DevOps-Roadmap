@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,18 +780,49 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">En DevOps no hay magia fuera del repositorio. El código de la app, los pipelines, los manifiestos y Terraform son archivos. Si no controlas el cambio, no controlas la producción.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="la-caja-negra">La caja negra</h2><p>Git no es GitHub. Git es un motor local de instantáneas. GitHub, GitLab y similares son plazas públicas donde esas instantáneas se revisan, se discuten y se despliegan. Primero entiende el motor; después la plaza.</p><p>Cada commit es una foto del proyecto en un instante, con un autor, un mensaje y un padre. Una rama es solo un puntero móvil a un commit. Fusionar es hacer que dos historias vuelvan a ser una.</p><div class="callout"><strong>Abstracción CS50</strong><span>Trata Git como una máquina de tiempo con nombres. clone copia el universo. branch crea una línea de tiempo paralela. merge las reconcilia. pull request es el ritual social para no fusionar a ciegas.</span></div><h2 id="lo-que-debes-saber-hacer">Lo que debes saber hacer</h2><ul><li>Clonar, ver el estado, agregar, confirmar y enviar cambios.</li><li>Crear ramas con propósito: una idea, una rama.</li><li>Abrir una solicitud de cambio (pull request) y responder revisión.</li><li>Fusionar, rebasear con cuidado y resolver conflictos sin pánico.</li><li>Entender que la infraestructura también es código versionado.</li></ul><h2 id="comandos-que-si-vas-a-usar">Comandos que sí vas a usar</h2><pre><code>git clone &lt;url&gt;
+      <div class="lecture"><h2 id="la-caja-negra">La caja negra</h2><p>Git no es GitHub. Git es un motor local de instantáneas. GitHub, GitLab y similares son plazas públicas donde esas instantáneas se revisan, se discuten y se despliegan. Primero entiende el motor; después la plaza.</p><p>Cada commit es una foto del proyecto en un instante, con un autor, un mensaje y un padre. Una rama es solo un puntero móvil a un commit. Fusionar es hacer que dos historias vuelvan a ser una.</p><div class="callout"><strong>Abstracción CS50</strong><span>Trata Git como una máquina de tiempo con nombres. clone copia el universo. branch crea una línea de tiempo paralela. merge las reconcilia. pull request es el ritual social para no fusionar a ciegas.</span></div><aside class="drill" data-drill="la-caja-negra">
+      <p class="n">Practica ahora</p>
+      <h3>La caja negra</h3>
+      <p>En una frase: ¿qué problema resuelve Git que una carpeta «final-final-v3.zip» no resuelve?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Un commit es una foto del proyecto con autor, mensaje y padre. El zip no sabe de dónde vino ni cómo volver atrás sin romper a los demás.</p>
+      </div>
+    </aside><h2 id="lo-que-debes-saber-hacer">Lo que debes saber hacer</h2><ul><li>Clonar, ver el estado, agregar, confirmar y enviar cambios.</li><li>Crear ramas con propósito: una idea, una rama.</li><li>Abrir una solicitud de cambio (pull request) y responder revisión.</li><li>Fusionar, rebasear con cuidado y resolver conflictos sin pánico.</li><li>Entender que la infraestructura también es código versionado.</li></ul><h2 id="comandos-que-si-vas-a-usar">Comandos que sí vas a usar</h2><pre class="codeblock"><span class="code-lang">bash</span><code>git clone &lt;url&gt;
 git status
 git add .
 git commit -m &quot;Explica el porqué, no el qué&quot;
 git switch -c feature/dns-ttl
 git push -u origin HEAD
-git log --oneline --graph</code></pre><h2 id="ramas-fusion-y-pull-requests">Ramas, fusión y pull requests</h2><p>Una rama barata te permite experimentar. El pull request no es burocracia: es el momento en que otro cerebro lee tu cambio antes de que toque main. Ahí se discute correctitud, diseño y estilo — la misma rúbrica de este curso.</p><p>Fusionar (merge) conserva la historia de la rama. Rebasear reescribe para que parezca lineal. En equipos, prefiere merge o squash según la convención del repositorio; no improvises en main.</p><h2 id="errores-comunes">Errores comunes</h2><ul><li>Commits gigantes que mezclan formato, lógica y secretos.</li><li>Subir .env, llaves SSH o kubeconfig. Eso no se borra del historial con un commit nuevo.</li><li>Trabajar directo en main y luego pelear con todo el mundo.</li></ul></div>
+git log --oneline --graph</code></pre><aside class="drill" data-drill="comandos-que-si-vas-a-usar">
+      <p class="n">Practica ahora</p>
+      <h3>Comandos que sí vas a usar</h3>
+      <p>Escribe, en orden, los comandos para clonar un repo, cambiar un archivo y publicar el commit.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>git clone → git status → git add → git commit -m &quot;…&quot; → git push. Si es rama nueva: git switch -c nombre antes del push.</p>
+      </div>
+    </aside><h2 id="ramas-fusion-y-pull-requests">Ramas, fusión y pull requests</h2><p>Una rama barata te permite experimentar. El pull request no es burocracia: es el momento en que otro cerebro lee tu cambio antes de que toque main. Ahí se discute correctitud, diseño y estilo — la misma rúbrica de este curso.</p><p>Fusionar (merge) conserva la historia de la rama. Rebasear reescribe para que parezca lineal. En equipos, prefiere merge o squash según la convención del repositorio; no improvises en main.</p><aside class="drill" data-drill="ramas-fusion-y-pull-requests">
+      <p class="n">Practica ahora</p>
+      <h3>Ramas, fusión y pull requests</h3>
+      <p>¿Cuándo harías merge y cuándo rebase? Una frase para cada uno.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Merge conserva las dos historias. Rebase reescribe la tuya encima de main. Nunca hagas rebase de una rama que ya comparte el equipo.</p>
+      </div>
+    </aside><h2 id="errores-comunes">Errores comunes</h2><ul><li>Commits gigantes que mezclan formato, lógica y secretos.</li><li>Subir .env, llaves SSH o kubeconfig. Eso no se borra del historial con un commit nuevo.</li><li>Trabajar directo en main y luego pelear con todo el mundo.</li></ul></div>
     </section>
 
     <section id="cortos">
@@ -798,12 +830,34 @@ git log --oneline --graph</code></pre><h2 id="ramas-fusion-y-pull-requests">Rama
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Commit</h3><p>Un commit es un objeto inmutable. Si cambias la historia, creas commits nuevos. Por eso force-push en ramas compartidas duele.</p></article><article class="short"><h3>Rama</h3><p>main, develop o trunk son convenciones, no magia. El servidor no sabe cuál es sagrada hasta que tú proteges la rama.</p></article><article class="short"><h3>Pull request</h3><p>Es una conversación con diff. El botón verde es un despliegue social: alguien apuesta a que esto no rompe producción.</p></article><article class="short"><h3>Conflicto</h3><p>Git te pide que elijas líneas. El conflicto no es un error de Git: es dos verdades sobre el mismo archivo.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Elige un corto y explícalo sin mirar el texto.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Di en voz alta: commit, rama, pull request o conflicto. Si te trabas, vuelve a leer solo ese corto.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala Git y configura user.name y user.email.</li><li>Crea un repositorio vacío y haz tres commits pequeños con mensajes claros.</li><li>Abre una rama, cambia un archivo, publícala y abre un pull request.</li><li>Fusiona el PR y observa el grafo con git log --graph.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Anota el primer comando que te falló y el mensaje de error.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Lee el error de abajo hacia arriba. «command not found» = instala Git y abre otra terminal. «permission denied» no se arregla siempre con sudo.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -813,8 +867,48 @@ git log --oneline --graph</code></pre><h2 id="ramas-fusion-y-pull-requests">Rama
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Hello, Git</strong><p>Crea un repositorio local llamado bitacora. Documenta en README.md qué es DevOps en cinco líneas. Tres commits, no uno.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Línea de tiempo</strong><p>Crea la rama experimento, cambia el README, vuelve a main y fusiónala. Deja evidencia del grafo.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>La plaza</strong><p>Sube el repo a GitHub o GitLab. Abre un PR aunque seas la única persona. Revísalo en la interfaz.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Higiene</strong><p>Añade un .gitignore para .env, __pycache__/, node_modules/ y *.pem. Confirma que git status queda limpio.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Arqueología</strong><p>Usa git bisect o git blame en un repo público pequeño para encontrar el commit que introdujo una línea concreta.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Historia peligrosa</strong><p>Aprende git revert frente a git reset. Escribe cuándo usar cada uno. Nunca hagas reset --hard en main compartida.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Hello, Git</strong><p>Crea un repositorio local llamado bitacora. Documenta en README.md qué es DevOps en cinco líneas. Tres commits, no uno.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>git init bitacora; crea README.md; tres commits pequeños con git add y git commit -m. git log --oneline debe mostrar tres líneas.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Línea de tiempo</strong><p>Crea la rama experimento, cambia el README, vuelve a main y fusiónala. Deja evidencia del grafo.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>git switch -c experimento; edita; commit; git switch main; git merge experimento. Luego git log --oneline --graph.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>La plaza</strong><p>Sube el repo a GitHub o GitLab. Abre un PR aunque seas la única persona. Revísalo en la interfaz.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Crea el repo vacío en GitHub/GitLab, git remote add origin URL, git push -u origin main. El PR puede ser de una rama tonta hacia main.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Higiene</strong><p>Añade un .gitignore para .env, __pycache__/, node_modules/ y *.pem. Confirma que git status queda limpio.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Crea .gitignore con esas líneas, git add .gitignore, commit. git status debe ignorar un .env de prueba.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Arqueología</strong><p>Usa git bisect o git blame en un repo público pequeño para encontrar el commit que introdujo una línea concreta.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Clona un repo pequeño, git blame archivo, o git bisect start y sigue las pistas de man git-bisect.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Historia peligrosa</strong><p>Aprende git revert frente a git reset. Escribe cuándo usar cada uno. Nunca hagas reset --hard en main compartida.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>revert crea un commit nuevo que deshace; reset mueve el puntero (peligroso en main). Escríbelo en el README del lab.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Bitácora de un día</h3>
+      <p>Repo `hoy` con tres commits: mañana, tarde y un arreglo. Mensajes en presente: «añade», «arregla».</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>git init hoy &amp;&amp; cd hoy. Crea archivos de una línea. git add + git commit tres veces. git log --oneline.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -879,6 +973,6 @@ git log --oneline --graph</code></pre><h2 id="ramas-fusion-y-pull-requests">Rama
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

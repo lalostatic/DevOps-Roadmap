@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,17 +780,38 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">El clásico &#x27;en mi máquina funciona&#x27; se acaba cuando el artefacto incluye el runtime, las libs y la configuración mínima. Docker es, hoy, el empaque estándar.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="que-es-un-contenedor">Qué es un contenedor</h2><p>Un contenedor es una unidad estándar de software que empaca código y dependencias para que la aplicación corra igual de un entorno a otro. No es una VM: comparte el kernel del anfitrión y aísla procesos, sistemas de archivos y red.</p><p>Una imagen es la receta inmutable. Un contenedor es la instancia en ejecución. El Dockerfile describe cómo se construye la imagen.</p><h2 id="lo-que-debes-practicar">Lo que debes practicar</h2><ul><li>Correr contenedores, ver logs y entrar con exec.</li><li>Escribir Dockerfiles pequeños y reproducibles.</li><li>Volúmenes para persistir datos.</li><li>Redes: cómo dos contenedores se hablan por nombre.</li><li>Docker Compose para más de un contenedor.</li></ul><pre><code>FROM python:3.12-slim
+      <div class="lecture"><h2 id="que-es-un-contenedor">Qué es un contenedor</h2><p>Un contenedor es una unidad estándar de software que empaca código y dependencias para que la aplicación corra igual de un entorno a otro. No es una VM: comparte el kernel del anfitrión y aísla procesos, sistemas de archivos y red.</p><p>Una imagen es la receta inmutable. Un contenedor es la instancia en ejecución. El Dockerfile describe cómo se construye la imagen.</p><aside class="drill" data-drill="que-es-un-contenedor">
+      <p class="n">Practica ahora</p>
+      <h3>Qué es un contenedor</h3>
+      <p>¿En qué se parece un contenedor a un proceso y en qué no a una VM?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Comparte el kernel (como un proceso). Aísla archivos y red (como una VM chica). No arranca otro sistema operativo completo.</p>
+      </div>
+    </aside><h2 id="lo-que-debes-practicar">Lo que debes practicar</h2><ul><li>Correr contenedores, ver logs y entrar con exec.</li><li>Escribir Dockerfiles pequeños y reproducibles.</li><li>Volúmenes para persistir datos.</li><li>Redes: cómo dos contenedores se hablan por nombre.</li><li>Docker Compose para más de un contenedor.</li></ul><pre class="codeblock"><span class="code-lang">dockerfile</span><code>FROM python:3.12-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre><div class="callout"><strong>Capa sobre capa</strong><span>Cada instrucción del Dockerfile es una capa. El orden importa: copia lo que cambia poco primero para no invalidar la caché.</span></div></div>
+CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre><div class="callout"><strong>Capa sobre capa</strong><span>Cada instrucción del Dockerfile es una capa. El orden importa: copia lo que cambia poco primero para no invalidar la caché.</span></div><aside class="drill" data-drill="lo-que-debes-practicar">
+      <p class="n">Practica ahora</p>
+      <h3>Lo que debes practicar</h3>
+      <p>Escribe un Dockerfile de 6 líneas para una app que solo imprime hola.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>FROM, WORKDIR, COPY, RUN si hace falta, USER no root si puedes, CMD. .dockerignore con .git.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -797,12 +819,34 @@ CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre><div class="callout"><s
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Imagen vs contenedor</h3><p>La imagen es la clase; el contenedor es el objeto. Puedes lanzar muchos de una.</p></article><article class="short"><h3>Volumen</h3><p>Sin volumen, el disco del contenedor se esfuma al borrarlo. Las bases de datos necesitan memoria persistente.</p></article><article class="short"><h3>Red bridge</h3><p>Compose crea una red. servicio-a puede resolver servicio-b por DNS interno.</p></article><article class="short"><h3>Usuario no root</h3><p>Correr como root dentro del contenedor es un atajo que se paga en incidentes.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>Imagen vs contenedor, en una analogía de cocina.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Imagen = receta congelada. Contenedor = el plato sirviéndose. Varios platos de la misma receta.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala Docker Engine o Docker Desktop.</li><li>Corre nginx:alpine y ábrelo en un puerto local.</li><li>Escribe un Dockerfile para un script de la semana 2.</li><li>Crea un compose con app + un redis o postgres de laboratorio.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Pega el error de tu primer docker build y qué línea del Dockerfile lo causó.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>«file not found» suele ser COPY + contexto. El Dockerfile ve el directorio desde donde corres build, no magia.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -812,8 +856,48 @@ CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre><div class="callout"><s
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Empaque</strong><p>Dockeriza una app mínima. El contenedor debe arrancar con un solo comando.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Persistencia</strong><p>Añade un volumen y demuestra que los datos sobreviven a docker compose down / up.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Red</strong><p>Dos servicios en Compose; uno llama al otro por el nombre del servicio.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Higiene</strong><p>.dockerignore para no copiar .git ni secretos. Imagen &lt; 200MB si puedes.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Multi-stage</strong><p>Compila en una etapa y copia el binario/artefacto a una imagen slim.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>No root</strong><p>USER no privilegiado y filesystem de solo lectura donde se pueda.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Empaque</strong><p>Dockeriza una app mínima. El contenedor debe arrancar con un solo comando.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Dockerfile + docker compose up --build. Un puerto publicado. README con el comando único.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Persistencia</strong><p>Añade un volumen y demuestra que los datos sobreviven a docker compose down / up.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>volumes: - data:/ruta. Escribe un archivo dentro, down, up, el archivo sigue.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Red</strong><p>Dos servicios en Compose; uno llama al otro por el nombre del servicio.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>services: api y web. web hace GET a http://api:puerto. El nombre del servicio es el DNS interno.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Higiene</strong><p>.dockerignore para no copiar .git ni secretos. Imagen &lt; 200MB si puedes.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>.dockerignore: .git, .env, node_modules. docker images; el tamaño importa.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Multi-stage</strong><p>Compila en una etapa y copia el binario/artefacto a una imagen slim.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>FROM golang AS build … y FROM scratch o distroless con el binario. Dos FROM.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>No root</strong><p>USER no privilegiado y filesystem de solo lectura donde se pueda.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>USER 65532 o un user creado. read_only: true en compose si la app lo aguanta.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Hola en una caja</h3>
+      <p>Contenedor que responde «hola» en un puerto. Un comando para arrancar, uno para parar.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Si no tienes app: nginx:alpine y un index.html copiado. docker run --rm -p 8080:80 imagen.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -878,6 +962,6 @@ CMD [&quot;python&quot;, &quot;app.py&quot;]</code></pre><div class="callout"><s
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

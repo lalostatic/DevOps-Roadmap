@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,15 +780,36 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">IaC (YAML, JSON, HCL) convierte el centro de datos en un repositorio. Acelera y reduce el riesgo: el entorno &#x27;dorado&#x27; se puede volver a nacer mañana.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="dos-oficios-que-se-confunden">Dos oficios que se confunden</h2><p>Aprovisionar es crear la materia: redes, VMs, buckets, clústeres. Terraform, Pulumi, CloudFormation, Bicep viven aquí. Configurar es dejar esa materia en el estado deseado: paquetes, usuarios, plantillas. Ansible, Chef, Puppet, y a veces cloud-init.</p><p>Terraform es hoy el aprovisionador más portable entre nubes. El estado (state) es sagrado: describe qué existe de verdad. Sin backend remoto y locking, dos personas se pisan.</p><div class="callout"><strong>El entorno como oro</strong><span>Si tardas una semana en recrear staging, no tienes IaC: tienes arqueología. El estándar es nacer un ambiente bajo demanda.</span></div><h2 id="service-mesh-en-una-idea">Service mesh, en una idea</h2><p>Cuando hay muchos servicios, el malla (Istio, Linkerd, Consul) mueve mTLS, reintentos y observabilidad al lado de cada pod. No lo necesitas el primer día. Sí debes saber que existe y qué problema ataca.</p><pre><code>resource &quot;local_file&quot; &quot;bitacora&quot; {
+      <div class="lecture"><h2 id="dos-oficios-que-se-confunden">Dos oficios que se confunden</h2><p>Aprovisionar es crear la materia: redes, VMs, buckets, clústeres. Terraform, Pulumi, CloudFormation, Bicep viven aquí. Configurar es dejar esa materia en el estado deseado: paquetes, usuarios, plantillas. Ansible, Chef, Puppet, y a veces cloud-init.</p><p>Terraform es hoy el aprovisionador más portable entre nubes. El estado (state) es sagrado: describe qué existe de verdad. Sin backend remoto y locking, dos personas se pisan.</p><div class="callout"><strong>El entorno como oro</strong><span>Si tardas una semana en recrear staging, no tienes IaC: tienes arqueología. El estándar es nacer un ambiente bajo demanda.</span></div><aside class="drill" data-drill="dos-oficios-que-se-confunden">
+      <p class="n">Practica ahora</p>
+      <h3>Dos oficios que se confunden</h3>
+      <p>¿Qué hace Terraform que Ansible no hace (y al revés), en una frase cada uno?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Terraform crea/destruye la nube (provisioning). Ansible configura lo que ya existe (configuration management). Se pueden usar juntos.</p>
+      </div>
+    </aside><h2 id="service-mesh-en-una-idea">Service mesh, en una idea</h2><p>Cuando hay muchos servicios, el malla (Istio, Linkerd, Consul) mueve mTLS, reintentos y observabilidad al lado de cada pod. No lo necesitas el primer día. Sí debes saber que existe y qué problema ataca.</p><pre class="codeblock"><span class="code-lang">hcl</span><code>resource &quot;local_file&quot; &quot;bitacora&quot; {
   filename = &quot;${path.module}/hola.txt&quot;
   content  = &quot;Infraestructura como código\n&quot;
-}</code></pre></div>
+}</code></pre><aside class="drill" data-drill="service-mesh-en-una-idea">
+      <p class="n">Practica ahora</p>
+      <h3>Service mesh, en una idea</h3>
+      <p>¿Qué problema de mTLS/tráfico resolvería un mesh que no quieres meter en cada app?</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Certificados entre servicios, reintentos, observabilidad. El sidecar habla; tu código sigue siendo HTTP.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -795,12 +817,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>Declarativo</h3><p>Dices el qué, no el cómo. El motor calcula el diff.</p></article><article class="short"><h3>Estado</h3><p>El archivo de state es el mapa. Cuídalo como una base de datos.</p></article><article class="short"><h3>Módulos</h3><p>No copies 400 líneas. Empaqueta patrones reutilizables.</p></article><article class="short"><h3>Drift</h3><p>Alguien cambió algo a mano en la consola. El próximo plan lo va a pelear.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>plan vs apply, como si firmaras un contrato.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>plan = lees el contrato. apply = firmas. Nunca firmes sin leer. terraform plan -out y luego apply ese archivo.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Instala Terraform.</li><li>Haz un laboratorio local (local_file o Docker provider) para entender init/plan/apply/destroy.</li><li>Lee un plan antes de aplicar. Siempre.</li><li>Destruye todo. El teardown es parte del oficio.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Escribe el recurso más pequeño que te atreverías a crear y cómo lo destruirías.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>Un local_file o un droplet de 5 dólares. terraform destroy es parte de la demo, no un apéndice.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -810,8 +854,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Plan primero</strong><p>Un módulo mínimo con terraform plan que cree un recurso inofensivo. Adjunta el plan en el README.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Idempotente</strong><p>Aplica dos veces. La segunda no debe recrear de más.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Variables</strong><p>Ningún valor mágico. variables.tf + terraform.tfvars de ejemplo (sin secretos).</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Destroy</strong><p>Documenta el destroy. Un entorno que no se puede apagar no es IaC, es una mascota.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>Ansible corto</strong><p>Un playbook que instale Nginx en tu VM y quede reejecutable.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Remote state</strong><p>Explica cómo guardar el state en S3/GitLab/Terraform Cloud y por qué el locking importa.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Plan primero</strong><p>Un módulo mínimo con terraform plan que cree un recurso inofensivo. Adjunta el plan en el README.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Un .tf mínimo, terraform init, terraform plan. Pega el plan (sin secretos) en el README.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Idempotente</strong><p>Aplica dos veces. La segunda no debe recrear de más.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>terraform apply dos veces. La segunda: 0 to add, 0 to destroy.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Variables</strong><p>Ningún valor mágico. variables.tf + terraform.tfvars de ejemplo (sin secretos).</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>variable &quot;nombre&quot; {}. tfvars de ejemplo. Cero IPs o passwords en el .tf.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Destroy</strong><p>Documenta el destroy. Un entorno que no se puede apagar no es IaC, es una mascota.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>terraform destroy y captura la salida. Si da miedo, el diseño es de mascota, no de ganado.</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>Ansible corto</strong><p>Un playbook que instale Nginx en tu VM y quede reejecutable.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>hosts.ini + playbook.yml con apt: name=nginx state=present. ansible-playbook dos veces.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Remote state</strong><p>Explica cómo guardar el state en S3/GitLab/Terraform Cloud y por qué el locking importa.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>El state es el mapa del mundo. Si dos personas apply a la vez, se pisan. Locking = un candado en el mapa.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Plan de juguete</h3>
+      <p>Un terraform que cree un archivo local. plan, apply, destroy. Tres capturas en el README.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>resource &quot;local_file&quot; &quot;hola&quot; { content = &quot;hola\n&quot; filename = &quot;${path.module}/hola.txt&quot; } terraform init &amp;&amp; plan &amp;&amp; apply.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -876,6 +960,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>

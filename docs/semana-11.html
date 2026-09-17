@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
-  <link rel="stylesheet" href="assets/app.css?v=3"/>
+  <link rel="stylesheet" href="assets/app.css?v=4"/>
   
 </head>
 <body class="is-read">
@@ -761,6 +761,7 @@
     <a href="#cortos">Cortos</a>
     <a href="#recorrido">Recorrido</a>
     <a href="#pset">Problem set</a>
+    <a href="#refuerzo">Refuerzo</a>
     <a href="#quiz">Recuerdo</a>
     <a href="#feynman">Feynman</a>
     <a href="#tarjetas">Tarjetas</a>
@@ -779,12 +780,33 @@
       </div>
       <div class="bar"><i data-week-bar></i></div>
       <p class="why">Los proveedores exponen APIs para crear recursos con fronteras de seguridad y de cobro. La nube corre en centros de datos, pero se siente como una plataforma. Saber provisionar, configurar y asegurar es el corazón del DevOps moderno — y de su complejidad.</p>
+      <p class="session-note">Leer, practicar, volver a leer. Lo que escribas se queda en esta pestaña hasta que cierres el navegador. No hay cuentas.</p>
     </section>
 
     <section id="conferencia">
       <h2>Conferencia</h2>
       <label class="tiny"><input type="checkbox" data-mark="lecture"/> Marcar conferencia como leída</label>
-      <div class="lecture"><h2 id="elige-uno-y-baja-a-tierra">Elige uno y baja a tierra</h2><p>AWS, Azure y Google Cloud dominan el mercado. Elige el que te abra más puertas en tu región o empleo objetivo. Los conceptos viajan: identidad, red, cómputo, almacenamiento, observabilidad, IAM.</p><p>IaaS: alquilas VMs y discos. PaaS: te dan la plataforma (app service, Cloud Run, Elastic Beanstalk). SaaS: usas el software. DevOps vive sobre todo entre IaaS y PaaS.</p><h2 id="lo-que-debes-practicar">Lo que debes practicar</h2><ul><li>Usuarios, roles, políticas. Nunca uses la cuenta root para el día a día.</li><li>VPC/VNet, subnets públicas/privadas, NAT, security groups.</li><li>Máquinas virtuales, discos, snapshots.</li><li>Disponibilidad: zonas, regiones, backups, RPO/RTO en lenguaje humano.</li></ul><div class="callout"><strong>La nube no perdona el olvido</strong><span>Todo recurso tiene precio. Un laboratorio sin destroy es una factura. Etiqueta, presupuesto, alarma de costo.</span></div></div>
+      <div class="lecture"><h2 id="elige-uno-y-baja-a-tierra">Elige uno y baja a tierra</h2><p>AWS, Azure y Google Cloud dominan el mercado. Elige el que te abra más puertas en tu región o empleo objetivo. Los conceptos viajan: identidad, red, cómputo, almacenamiento, observabilidad, IAM.</p><p>IaaS: alquilas VMs y discos. PaaS: te dan la plataforma (app service, Cloud Run, Elastic Beanstalk). SaaS: usas el software. DevOps vive sobre todo entre IaaS y PaaS.</p><aside class="drill" data-drill="elige-uno-y-baja-a-tierra">
+      <p class="n">Practica ahora</p>
+      <h3>Elige uno y baja a tierra</h3>
+      <p>Elige AWS, Azure o GCP y escribe el equivalente de: identidad, red, máquina.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>AWS: IAM, VPC, EC2. Azure: Entra ID, VNet, VM. GCP: IAM, VPC, GCE. El mapa se parece; los nombres no.</p>
+      </div>
+    </aside><h2 id="lo-que-debes-practicar">Lo que debes practicar</h2><ul><li>Usuarios, roles, políticas. Nunca uses la cuenta root para el día a día.</li><li>VPC/VNet, subnets públicas/privadas, NAT, security groups.</li><li>Máquinas virtuales, discos, snapshots.</li><li>Disponibilidad: zonas, regiones, backups, RPO/RTO en lenguaje humano.</li></ul><div class="callout"><strong>La nube no perdona el olvido</strong><span>Todo recurso tiene precio. Un laboratorio sin destroy es una factura. Etiqueta, presupuesto, alarma de costo.</span></div><aside class="drill" data-drill="lo-que-debes-practicar">
+      <p class="n">Practica ahora</p>
+      <h3>Lo que debes practicar</h3>
+      <p>Nombra tres cosas que apagarías hoy para no llevarte una factura sorpresa.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>VMs, IPs elásticas, load balancers, clusters. El lab no es prod. Budget alert el día 1.</p>
+      </div>
+    </aside></div>
     </section>
 
     <section id="cortos">
@@ -792,12 +814,34 @@
       <p class="muted">Un concepto por tarjeta. Léelos en voz alta si puedes.</p>
       <label class="tiny"><input type="checkbox" data-mark="shorts"/> Ya repasé los cortos</label>
       <div class="shorts"><article class="short"><h3>IAM</h3><p>Quién puede qué sobre cuál recurso. El error más caro es una llave de admin en un repo.</p></article><article class="short"><h3>Región y zona</h3><p>La región es un geografía; la zona es un edificio (casi). Multi-AZ no es multi-región.</p></article><article class="short"><h3>Security group</h3><p>Firewall de instancias. Egress también importa.</p></article><article class="short"><h3>Cuenta y organización</h3><p>Separa prod de sandbox. El blast radius es un diseño, no un accidente.</p></article></div>
+      <aside class="drill" data-drill="shorts">
+      <p class="n">Practica ahora</p>
+      <h3>Después de los cortos</h3>
+      <p>IaaS vs PaaS vs SaaS con el ejemplo de «quiero una web».</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>IaaS: tú la VM. PaaS: tú el código, ellos el runtime. SaaS: usas el producto (el correo, el board).</p>
+      </div>
+    </aside>
     </section>
 
     <section id="recorrido">
       <h2>Recorrido</h2>
       <p class="muted">Como el walkthrough de CS50: solo para arrancar, no para sustituir el problem set.</p>
       <ol><li>Crea una cuenta de laboratorio (free tier) y activa MFA.</li><li>Crea un usuario/rol de trabajo, no uses root.</li><li>Levanta una VM mínima, entra por SSH, apágala.</li><li>Mira la factura. Configura una alerta de costo.</li></ol>
+      <aside class="drill" data-drill="walk">
+      <p class="n">Practica ahora</p>
+      <h3>Después del recorrido</h3>
+      <p>Escribe los 5 pasos para destruir tu lab. Si no puedes, el lab es una mascota.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>1. snapshot si hace falta. 2. borrar VM. 3. disco. 4. IP. 5. VPC. terraform destroy si llegaste con IaC.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="pset">
@@ -807,8 +851,48 @@
         <button class="tab is-on" type="button" data-tab="std">Estándar</button>
         <button class="tab" type="button" data-tab="hacker">Hacker</button>
       </div>
-      <div data-pane="std"><label class="task"><input type="checkbox" data-task="0"/><span><strong>Identidad</strong><p>Diagrama de cuentas/roles de tu lab. Root con MFA. Usuario de diario sin admin global.</p></span></label><label class="task"><input type="checkbox" data-task="1"/><span><strong>Red</strong><p>Una VPC con subnet pública y otra privada. Explica el flujo.</p></span></label><label class="task"><input type="checkbox" data-task="2"/><span><strong>Cómputo</strong><p>Una VM o un servicio PaaS sirviendo &#x27;hola&#x27;. Se puede destruir con una guía de 5 pasos.</p></span></label><label class="task"><input type="checkbox" data-task="3"/><span><strong>Costo</strong><p>Lista lo que dejaste encendido y cuánto estima el proveedor.</p></span></label></div>
-      <div data-pane="hacker" hidden><label class="task"><input type="checkbox" data-task="4"/><span><strong>IaC en la nube</strong><p>El laboratorio de la semana 8 ahora crea la VM/red en el proveedor real.</p></span></label><label class="task"><input type="checkbox" data-task="5"/><span><strong>Alta disponibilidad</strong><p>Dos zonas, un balanceador. Mata una instancia y observa.</p></span></label></div>
+      <div data-pane="std"><div class="task">
+      <input type="checkbox" data-task="0"/>
+      <div class="task-body"><strong>Identidad</strong><p>Diagrama de cuentas/roles de tu lab. Root con MFA. Usuario de diario sin admin global.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Caja: root/global admin con MFA. Usuario diario. Un rol de lab. Dibujo en texto.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="1"/>
+      <div class="task-body"><strong>Red</strong><p>Una VPC con subnet pública y otra privada. Explica el flujo.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Pública: el balanceador o un bastion. Privada: la app. Una flecha de tráfico.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="2"/>
+      <div class="task-body"><strong>Cómputo</strong><p>Una VM o un servicio PaaS sirviendo &#x27;hola&#x27;. Se puede destruir con una guía de 5 pasos.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Una VM o App Service/Cloud Run. 5 pasos de destroy en el README.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="3"/>
+      <div class="task-body"><strong>Costo</strong><p>Lista lo que dejaste encendido y cuánto estima el proveedor.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Pega el estimador o la consola de costos. Cero «no sé».</p></div></div>
+    </div></div>
+      <div data-pane="hacker" hidden><div class="task">
+      <input type="checkbox" data-task="4"/>
+      <div class="task-body"><strong>IaC en la nube</strong><p>El laboratorio de la semana 8 ahora crea la VM/red en el proveedor real.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>El .tf de la semana 8 ahora tiene un provider real. plan en el README, apply con presupuesto.</p></div></div>
+    </div><div class="task">
+      <input type="checkbox" data-task="5"/>
+      <div class="task-body"><strong>Alta disponibilidad</strong><p>Dos zonas, un balanceador. Mata una instancia y observa.</p><p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+        <div class="hint-body" hidden><p class="n">Pista</p><p>Dos zonas, un LB. Para una instancia: el health check debe fallar y el tráfico irse.</p></div></div>
+    </div></div>
+    </section>
+
+    <section id="refuerzo">
+      <h2>Refuerzo</h2>
+      <p class="muted">Un ejercicio extra, después de haber leído y practicado. Si te atas, abre la pista. No es un examen.</p>
+      <aside class="drill" data-drill="encore">
+      <p class="n">Ejercicio extra</p>
+      <h3>Cuenta de lab</h3>
+      <p>Activa MFA en la cuenta raíz/global y crea un usuario de diario. Escríbelo en tres líneas.</p>
+      <textarea data-drill-note rows="4" placeholder="Escribe aquí. Se borra al cerrar el navegador."></textarea>
+      <p class="drill-actions"><button type="button" class="btn btn-ghost" data-hint-open aria-expanded="false">Me atoré</button></p>
+      <div class="hint-body" hidden>
+        <p class="n">Pista</p>
+        <p>No uses la raíz para practicar. Si el proveedor insiste en tarjeta, pon un presupuesto de 1 USD y una alarma.</p>
+      </div>
+    </aside>
     </section>
 
     <section id="quiz">
@@ -873,6 +957,6 @@
     </div>
   </footer>
 
-  <script src="assets/app.js?v=3" defer></script>
+  <script src="assets/app.js?v=4" defer></script>
 </body>
 </html>
