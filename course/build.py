@@ -330,8 +330,9 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/app.css?v=2"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Mono:wght@400&family=Source+Sans+3:wght@400;600;700&display=swap"/></noscript>
+  <link rel="stylesheet" href="assets/app.css?v=3"/>
   {extra_head}
 </head>
 <body{body_attr}>
@@ -364,7 +365,7 @@ def layout(title: str, active: str, body: str, extra_head: str = "", body_class:
   {index_panel()}
   <main id="contenido">{body}</main>
   {footer()}
-  <script src="assets/app.js" defer></script>
+  <script src="assets/app.js?v=3" defer></script>
 </body>
 </html>
 """
@@ -701,31 +702,56 @@ def week_page(w: dict) -> str:
 """
 def repaso() -> str:
     all_cards = []
+    week_btns = ['<button class="chip is-on" type="button" data-deck-week="all">Todas</button>']
     for w in WEEKS:
-        src = f"Semana {w['num']}: {w['title']}" if w["num"] != 13 else f"Bonus: {w['title']}"
-        for q, a in w["flash"]:
-            all_cards.append({"q": q, "a": a, "src": src})
+        label = week_label(w)
+        title = w["title"].removeprefix("Bonus:").strip()
+        src = f"{label} · {title}"
+        for i, (q, a) in enumerate(w["flash"]):
+            all_cards.append({"q": q, "a": a, "src": src, "week": w["id"], "i": i})
+        week_btns.append(
+            f'<button class="chip" type="button" data-deck-week="{e(w["id"])}">{e(week_num(w))} {e(title)}</button>'
+        )
     payload = e(json.dumps(all_cards, ensure_ascii=False))
     return f"""
 <section class="page-head"><div class="wrap">
-  <p class="kicker">Leitner</p>
-  <h1>Repaso espaciado</h1>
-  <p class="lede">Todas las tarjetas del curso en un mazo. Recuerdo activo, no relectura. El algoritmo simple: fallar acerca; acertar aleja.</p>
+  <p class="kicker">Recuerdo activo</p>
+  <h1>Repaso</h1>
+  <p class="lede">Un mazo con las ideas del curso. Cada carta es una pregunta completa, con su semana. Si fallas, vuelve enseguida; si aciertas, se aleja 1, 3, 7, 14 o 30 días.</p>
 </div></section>
-<section class="section"><div class="wrap" style="max-width:720px">
+<section class="section"><div class="wrap deck">
+  <div class="deck-stats" aria-live="polite">
+    <article><p class="n">Pendientes hoy</p><strong data-due-count>0</strong></article>
+    <article><p class="n">Cartas en el mazo</p><strong data-total-count>0</strong></article>
+    <article><p class="n">Ya alejadas</p><strong data-known-count>0</strong></article>
+  </div>
+  <div class="chip-row" role="group" aria-label="Qué practicar">
+    <button class="chip is-on" type="button" data-deck-mode="due">Pendientes de hoy</button>
+    <button class="chip" type="button" data-deck-mode="all">Mazo completo</button>
+  </div>
+  <div class="chip-row deck-weeks" role="group" aria-label="Filtrar por semana">
+    {''.join(week_btns)}
+  </div>
+  <p class="tiny" data-deck-progress></p>
   <div class="flash" data-global-flash data-cards="{payload}">
     <div class="flash-inner">
       <div class="flash-face flash-front">
         <p class="tiny" data-src></p>
         <p data-q></p>
-        <p class="hint">Toca para voltear</p>
+        <p class="hint">Toca para voltear · <span data-box></span></p>
       </div>
       <div class="flash-face flash-back">
+        <p class="tiny" data-src></p>
         <p data-a></p>
+        <p class="hint">¿La recuperaste de memoria?</p>
       </div>
     </div>
   </div>
-  <p style="margin-top:16px"><button class="btn" type="button" data-next-card>Siguiente carta</button></p>
+  <div class="rate" data-deck-tools>
+    <button class="btn btn-ghost" type="button" data-rate="again">Otra vez</button>
+    <button class="btn" type="button" data-rate="ok">La sé</button>
+  </div>
+  <p class="muted deck-empty" data-deck-empty hidden>Hoy no hay cartas pendientes en este filtro. Las que ya recuerdas vuelven más tarde. Abre el mazo completo para practicar, o sigue con una semana.</p>
 </div></section>
 """
 
@@ -791,7 +817,7 @@ def main() -> None:
     write(OUT / "index.html", layout(COURSE["title"], "inicio", home(), body_class="is-cover"))
     write(OUT / "temario.html", layout("Índice", "temario", temario(), body_class="is-front"))
     write(OUT / "metodo.html", layout("Prólogo", "metodo", metodo(), body_class="is-front"))
-    write(OUT / "repaso.html", layout("Repaso", "repaso", repaso()))
+    write(OUT / "repaso.html", layout("Repaso", "repaso", repaso(), body_class="is-front"))
     write(OUT / "proyecto.html", layout("Proyecto final", "proyecto", proyecto(), body_class="is-front"))
     for w in WEEKS:
         title = f"Semana {w['num']}: {w['title']}" if w["num"] != 13 else w["title"]

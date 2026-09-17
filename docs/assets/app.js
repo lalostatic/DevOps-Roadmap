@@ -94,11 +94,11 @@ const Sfx = {
     const t = ctx.currentTime;
     if (name === "page") {
       this.rustle(ctx, extra < 0
-        ? { from: 1100, to: 1600, dur: 0.3, peak: 0.15, q: 0.65 }
-        : { from: 2100, to: 680, dur: 0.32, peak: 0.17, q: 0.7 });
-      this.tone(ctx, extra < 0 ? 210 : 240, "triangle", t, 0.05, 0.03);
+        ? { from: 1100, to: 1600, dur: 0.16, peak: 0.12, q: 0.65 }
+        : { from: 2100, to: 680, dur: 0.18, peak: 0.13, q: 0.7 });
+      this.tone(ctx, extra < 0 ? 210 : 240, "triangle", t, 0.04, 0.025);
     } else if (name === "flip") {
-      this.rustle(ctx, { from: 2800, to: 900, dur: 0.18, peak: 0.14, q: 1.1 });
+      this.rustle(ctx, { from: 2800, to: 900, dur: 0.12, peak: 0.11, q: 1.1 });
     } else if (name === "select") {
       const now = performance.now();
       if (now - this.lastTap < 70) return;
@@ -173,7 +173,7 @@ function goTo(href, dir) {
   document.documentElement.classList.add(d < 0 ? "is-leaving-back" : "is-leaving");
   window.setTimeout(() => {
     location.href = href;
-  }, 220);
+  }, 90);
 }
 
 function bindPageTransitions() {
@@ -491,36 +491,61 @@ function daysFromBox(box) {
   return [1, 3, 7, 14, 30][Math.max(0, Math.min(4, box - 1))] || 1;
 }
 
+function ensureCardRec(st, weekId, i) {
+  st.cards[weekId] = st.cards[weekId] || {};
+  if (!st.cards[weekId][i]) st.cards[weekId][i] = { box: 1, next: 0 };
+  return st.cards[weekId][i];
+}
+
+function rateCard(weekId, i, ok) {
+  const next = loadState();
+  const rec = ensureCardRec(next, weekId, i);
+  if (ok) {
+    rec.box = Math.min(5, (rec.box || 1) + 1);
+    rec.next = Date.now() + daysFromBox(rec.box) * 86400000;
+  } else {
+    rec.box = 1;
+    rec.next = Date.now();
+  }
+  saveState(next);
+  return rec;
+}
+
 function bindFlash(weekId) {
   const stage = document.querySelector("[data-flash]");
   if (!stage) return;
   const cards = JSON.parse(stage.getAttribute("data-cards") || "[]");
   if (!cards.length) return;
   const st = loadState();
-  st.cards[weekId] = st.cards[weekId] || {};
-  cards.forEach((_, i) => {
-    if (!st.cards[weekId][i]) st.cards[weekId][i] = { box: 1, next: Date.now() };
-  });
+  cards.forEach((_, i) => ensureCardRec(st, weekId, i));
   saveState(st);
 
   let i = 0;
+  let last = -1;
 
-  function dueIndex() {
+  function dueList() {
     const now = Date.now();
-    const map = loadState().cards[weekId];
-    const due = cards.map((c, idx) => idx).filter((idx) => (map[idx]?.next || 0) <= now);
-    return due.length ? due[0] : 0;
+    const map = loadState().cards[weekId] || {};
+    return cards.map((_, idx) => idx).filter((idx) => (map[idx]?.next || 0) <= now);
+  }
+
+  function pick(list) {
+    if (!list.length) return 0;
+    const alt = list.find((idx) => idx !== last);
+    return alt === undefined ? list[0] : alt;
   }
 
   function render() {
-    i = dueIndex();
+    const due = dueList();
+    i = pick(due.length ? due : cards.map((_, idx) => idx));
+    last = i;
     stage.classList.remove("is-flipped");
     const card = cards[i];
     stage.querySelector("[data-q]").textContent = card.q;
     stage.querySelector("[data-a]").textContent = card.a;
     const meta = loadState().cards[weekId][i];
     const box = stage.querySelector("[data-box]");
-    if (box) box.textContent = "Caja " + meta.box;
+    if (box) box.textContent = "Caja " + meta.box + " · vuelve en " + daysFromBox(meta.box) + " d si aciertas";
   }
 
   stage.addEventListener("click", () => {
@@ -532,11 +557,8 @@ function bindFlash(weekId) {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       const ok = btn.getAttribute("data-rate") === "ok";
-      const next = loadState();
-      const rec = next.cards[weekId][i];
-      rec.box = ok ? Math.min(5, (rec.box || 1) + 1) : 1;
-      rec.next = Date.now() + daysFromBox(rec.box) * 86400000;
-      saveState(next);
+      rateCard(weekId, i, ok);
+      Sfx.play(ok ? "ok" : "bad");
       render();
     });
   });
@@ -548,25 +570,130 @@ function bindGlobalFlash() {
   if (!stage) return;
   const cards = JSON.parse(stage.getAttribute("data-cards") || "[]");
   if (!cards.length) return;
-  let i = 0;
-  function render() {
-    stage.classList.remove("is-flipped");
-    const card = cards[i % cards.length];
-    stage.querySelector("[data-q]").textContent = card.q;
-    stage.querySelector("[data-a]").textContent = card.a;
-    const src = stage.querySelector("[data-src]");
-    if (src) src.textContent = card.src || "";
+  const st = loadState();
+  cards.forEach((c) => ensureCardRec(st, c.week, c.i));
+  saveState(st);
+
+  let mode = "due";
+  let week = "all";
+  let queue = [];
+  let pos = 0;
+  let lastKey = "";
+
+  const empty = document.querySelector("[data-deck-empty]");
+  const tools = document.querySelector("[data-deck-tools]");
+  const progress = document.querySelector("[data-deck-progress]");
+
+  function recOf(c) {
+    return (loadState().cards[c.week] || {})[c.i] || { box: 1, next: 0 };
   }
+
+  function paintStats() {
+    const now = Date.now();
+    const pool = week === "all" ? cards : cards.filter((c) => c.week === week);
+    const due = pool.filter((c) => (recOf(c).next || 0) <= now);
+    const known = pool.filter((c) => (recOf(c).box || 1) >= 3);
+    const dueEl = document.querySelector("[data-due-count]");
+    const totEl = document.querySelector("[data-total-count]");
+    const knEl = document.querySelector("[data-known-count]");
+    if (dueEl) dueEl.textContent = String(due.length);
+    if (totEl) totEl.textContent = String(pool.length);
+    if (knEl) knEl.textContent = String(known.length);
+  }
+
+  function rebuild() {
+    const now = Date.now();
+    queue = cards.filter((c) => {
+      if (week !== "all" && c.week !== week) return false;
+      if (mode === "due") return (recOf(c).next || 0) <= now;
+      return true;
+    });
+    const idx = queue.findIndex((c) => c.week + ":" + c.i !== lastKey);
+    pos = queue.length && idx >= 0 ? idx : 0;
+    paintStats();
+    render();
+  }
+
+  function render() {
+    paintStats();
+    if (!queue.length) {
+      stage.hidden = true;
+      if (tools) tools.hidden = true;
+      if (empty) empty.hidden = false;
+      if (progress) progress.textContent = "";
+      return;
+    }
+    stage.hidden = false;
+    if (tools) tools.hidden = false;
+    if (empty) empty.hidden = true;
+    const card = queue[pos % queue.length];
+    lastKey = card.week + ":" + card.i;
+    stage.classList.remove("is-flipped");
+    const q = stage.querySelector("[data-q]");
+    const a = stage.querySelector("[data-a]");
+    if (q) q.textContent = card.q;
+    if (a) a.textContent = card.a;
+    stage.querySelectorAll("[data-src]").forEach((el) => { el.textContent = card.src || ""; });
+    const meta = recOf(card);
+    const box = stage.querySelector("[data-box]");
+    if (box) box.textContent = "Caja " + (meta.box || 1);
+    if (progress) {
+      progress.textContent = (pos % queue.length) + 1 + " de " + queue.length +
+        (mode === "due" ? " pendientes" : " en este filtro");
+    }
+  }
+
   stage.addEventListener("click", () => {
+    if (stage.hidden) return;
     stage.classList.toggle("is-flipped");
     Sfx.play("flip");
   });
-  document.querySelector("[data-next-card]")?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    i += 1;
-    render();
+
+  tools?.querySelectorAll("[data-rate]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!queue.length) return;
+      const card = queue[pos % queue.length];
+      const ok = btn.getAttribute("data-rate") === "ok";
+      rateCard(card.week, card.i, ok);
+      Sfx.play(ok ? "ok" : "bad");
+      lastKey = card.week + ":" + card.i;
+      rebuild();
+    });
   });
-  render();
+
+  document.querySelectorAll("[data-deck-mode]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      mode = btn.getAttribute("data-deck-mode") || "due";
+      document.querySelectorAll("[data-deck-mode]").forEach((b) => b.classList.toggle("is-on", b === btn));
+      lastKey = "";
+      rebuild();
+    });
+  });
+
+  document.querySelectorAll("[data-deck-week]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      week = btn.getAttribute("data-deck-week") || "all";
+      document.querySelectorAll("[data-deck-week]").forEach((b) => b.classList.toggle("is-on", b === btn));
+      lastKey = "";
+      rebuild();
+    });
+  });
+
+  document.addEventListener("keydown", (ev) => {
+    if (!stage || stage.hidden) return;
+    if (ev.target && ["INPUT", "TEXTAREA", "SELECT"].includes(ev.target.tagName)) return;
+    if (ev.key === " " || ev.key === "Enter") {
+      ev.preventDefault();
+      stage.click();
+    } else if (ev.key === "1" || ev.key === "ArrowLeft") {
+      tools?.querySelector('[data-rate="again"]')?.click();
+    } else if (ev.key === "2" || ev.key === "ArrowRight") {
+      tools?.querySelector('[data-rate="ok"]')?.click();
+    }
+  });
+
+  rebuild();
 }
 
 function bindBook() {
@@ -598,7 +725,7 @@ function bindSelectFx() {
     if (!el) return;
     el.classList.add("is-pressed");
     if (el.matches("a[href]") && el.getAttribute("href") && !el.getAttribute("href").startsWith("#")) return;
-    if (el.matches("[data-folio-next], [data-folio-prev], [data-folio-go], [data-sound-toggle], [data-index-open], [data-index-close], .choice, .flash, [data-flash], [data-global-flash]")) return;
+    if (el.matches("[data-folio-next], [data-folio-prev], [data-folio-go], [data-sound-toggle], [data-index-open], [data-index-close], .choice, .flash, [data-flash], [data-global-flash], [data-rate]")) return;
     Sfx.play("select");
   });
   const clear = () => document.querySelectorAll(".is-pressed").forEach((el) => el.classList.remove("is-pressed"));
@@ -618,4 +745,22 @@ bindGlobalFlash();
 bindSelectFx();
 bindSound();
 bindPageTransitions();
+bindPrefetch();
+
+function bindPrefetch() {
+  const seen = new Set();
+  document.addEventListener("pointerenter", (ev) => {
+    const a = ev.target.closest?.("a[href]");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    const dest = href.split("#")[0];
+    if (!dest || dest.startsWith("http") || dest.startsWith("mailto:") || dest.startsWith("javascript:")) return;
+    if (seen.has(dest)) return;
+    seen.add(dest);
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = dest;
+    document.head.appendChild(link);
+  }, true);
+}
 
